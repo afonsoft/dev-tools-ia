@@ -1,0 +1,111 @@
+version: "3.9"
+
+services:
+  runtime:
+    build:
+      context: ./runtime
+      dockerfile: Dockerfile
+    image: openhands-runtime-dotnet
+    container_name: openhands-runtime
+    stdin_open: true
+    tty: true
+    networks:
+      - openhands-net
+
+  openhands:
+    image: docker.all-hands.dev/all-hands-ai/openhands:0.51
+    container_name: openhands-app
+    environment:
+      SANDBOX_VOLUMES: ./workspace:/workspace:rw
+      LOG_ALL_EVENTS: "true"
+      LLM_MAX_INPUT_TOKENS: 90000
+      LLM_MAX_OUTPUT_TOKENS: 8192
+      SANDBOX_RUNTIME_CONTAINER_IMAGE: openhands-runtime-dotnet
+    ports:
+      - "3000:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./openhands:/.openhands
+      - ./workspace:/workspace
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      runtime:
+        condition: service_started
+      ollama:
+        condition: service_started
+    networks:
+      - openhands-net
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama:/root/.ollama
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >
+        ollama serve &
+        sleep 5 &&
+        ollama pull codellama:7b &&
+        wait
+    networks:
+      - openhands-net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+      
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./open-webui:/app/backend/data
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+      OPENWEBUI_USERNAME: admin
+      OPENWEBUI_PASSWORD: admin
+    networks:
+      - openhands-net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - ollama
+
+  vscode:
+    image: ghcr.io/linuxserver/code-server
+    container_name: vscode
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+      - DOCKER_MODS=linuxserver/mods:code-server-extensions
+      - OLLAMA_BASE_URL=http://ollama:11434
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./vscode:/config
+      - ./workspace:/workspace
+      - ./vscode/mods:/var/mod-cache/linuxserver/mods/code-server-extensions
+      - ./vscode/install-extensions.sh:/install-extensions.sh
+    command: /bin/bash /install-extensions.sh
+    depends_on:
+      - ollama
+    networks:
+      - openhands-net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    
+networks:
+  openhands-net:
+    name: openhands-net

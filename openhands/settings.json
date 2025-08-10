@@ -1,0 +1,30 @@
+{
+    "language": "pt",
+    "agent": "CodeActAgent",
+    "max_iterations": null,
+    "security_analyzer": null,
+    "confirmation_mode": false,
+    "llm_model": "ollama/codellama:7b",
+    "llm_api_key": "local-llm",
+    "llm_base_url": "http://ollama:11434",
+    "remote_runtime_resource_factor": 1,
+    "secrets_store": {
+        "provider_tokens": {}
+    },
+    "enable_default_condenser": true,
+    "enable_sound_notifications": true,
+    "enable_proactive_conversation_starters": true,
+    "user_consents_to_analytics": true,
+    "sandbox_base_container_image": null,
+    "sandbox_runtime_container_image": "openhands-runtime-dotnet",
+    "mcp_config": {
+        "sse_servers": [],
+        "stdio_servers": [],
+        "shttp_servers": []
+    },
+    "search_api_key": "",
+    "sandbox_api_key": null,
+    "max_budget_per_task": null,
+    "email": null,
+    "email_verified": null
+}
