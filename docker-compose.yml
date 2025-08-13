@@ -43,10 +43,10 @@ services:
     image: ollama/ollama:latest
     container_name: ollama
     environment:
-      - OLLAMA_CONTEXT_LENGTH=32768
+      - OLLAMA_CONTEXT_LENGTH=4096
       - OLLAMA_HOST=0.0.0.0:11434
       - OLLAMA_MAX_LOADED_MODELS=1
-      - OLLAMA_NUM_PARALLEL=1
+      - OLLAMA_NUM_PARALLEL=2
       - OLLAMA_KEEP_ALIVE=30m
       - OLLAMA_GPU_OVERHEAD=2147483648
     ports:
@@ -98,7 +98,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Sao_Paulo
-      - DOCKER_MODS=linuxserver/mods:code-server-ollama|linuxserver/mods:code-server-git-config
+      #- DOCKER_MODS=linuxserver/mods:code-server-ollama|linuxserver/mods:code-server-git-config
       - OLLAMA_BASE_URL=http://ollama:11434
       - HOST_IP=host.docker.internal
       - DOCKER_HOST_IP=host.docker.internal
@@ -109,7 +109,6 @@ services:
       - ./workspace:/workspace
       - ./vscode/mods:/var/mod-cache/linuxserver/mods/code-server-extensions
       - ./vscode/install-extensions.sh:/install-extensions.sh
-      - ./vscode/extensions.json:/config/data/User/extensions.json
     command: /bin/bash /install-extensions.sh
     depends_on:
       - ollama

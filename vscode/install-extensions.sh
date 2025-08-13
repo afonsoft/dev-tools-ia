@@ -30,4 +30,8 @@ echo "Instalando extensões..."
 /app/code-server/bin/code-server --install-extension vscode-icons-team.vscode-icons
 /app/code-server/bin/code-server --install-extension zhuangtongfa.material-theme
 
+echo "finalizando o code-server..."
+pkill -f code-server || true
+sleep 10 # Adiciona um atraso para garantir que o processo foi encerrado e os recursos liberados
 echo "Iniciando o code-server..."
+/app/code-server/bin/code-server --bind-addr 0.0.0.0:8443 /workspace
