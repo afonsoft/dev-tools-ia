@@ -20,7 +20,6 @@ echo "Instalando extensões..."
 /app/code-server/bin/code-server --install-extension editorconfig.editorconfig
 /app/code-server/bin/code-server --install-extension esbenp.prettier-vscode
 /app/code-server/bin/code-server --install-extension gformat.html-formatter
-/app/code-server/bin/code-server --install-extension github.copilot
 /app/code-server/bin/code-server --install-extension github.vscode-github-actions
 /app/code-server/bin/code-server --install-extension github.vscode-pull-request-github
 /app/code-server/bin/code-server --install-extension johnpapa.angular2

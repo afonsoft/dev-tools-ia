@@ -13,15 +13,20 @@ services:
       - ./workspace:/workspace
     networks:
       - openhands-net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   openhands:
-    image: docker.all-hands.dev/all-hands-ai/openhands:0.51
+    image: docker.all-hands.dev/all-hands-ai/openhands:0.52
     container_name: openhands-app
     pull_policy: always
+    stdin_open: true
+    tty: true
     environment:
       LOG_ALL_EVENTS: "true"
       LLM_MAX_INPUT_TOKENS: 90000
-      LLM_MAX_OUTPUT_TOKENS: 8192
+      LLM_MAX_OUTPUT_TOKENS: 4096
+      OLLAMA_CONTEXT_LENGTH: 4096
       SANDBOX_RUNTIME_CONTAINER_IMAGE: openhands-runtime-dotnet
     ports:
       - "3000:3000"
@@ -38,6 +43,13 @@ services:
         condition: service_started
     networks:
       - openhands-net
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
   ollama:
     image: ollama/ollama:latest
@@ -98,7 +110,6 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Sao_Paulo
-      #- DOCKER_MODS=linuxserver/mods:code-server-ollama|linuxserver/mods:code-server-git-config
       - OLLAMA_BASE_URL=http://ollama:11434
       - HOST_IP=host.docker.internal
       - DOCKER_HOST_IP=host.docker.internal
@@ -107,9 +118,6 @@ services:
     volumes:
       - ./vscode:/config
       - ./workspace:/workspace
-      - ./vscode/mods:/var/mod-cache/linuxserver/mods/code-server-extensions
-      - ./vscode/install-extensions.sh:/install-extensions.sh
-    command: /bin/bash /install-extensions.sh
     depends_on:
       - ollama
     networks:
