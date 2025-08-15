@@ -69,7 +69,12 @@ services:
       - ./workspace:/workspace
     restart: unless-stopped
     entrypoint: ["/bin/sh", "-c"]
-    command: ollama serve & sleep 5 && ollama pull codellama:7b && wait
+    command:
+      - >
+        ollama serve &
+        sleep 5 &&
+        ollama pull codellama:7b &&
+        wait
     networks:
       - openhands-net
     extra_hosts:
