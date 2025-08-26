@@ -22,16 +22,13 @@ echo ======================================
 echo  URLs dos Servicos
 echo ======================================
 echo OpenHands:   http://localhost:3000
-echo Open-WebUI:  http://localhost:8080
 echo Ollama API:  http://localhost:11434
-echo VS Code:     http://localhost:8443
+echo Web UI:      http://localhost:8080
 timeout /t 5 /nobreak > nul
 echo.
 echo Abrindo servicos no navegador...
 start http://localhost:3000
 start http://localhost:8080
-start http://localhost:8443
-
 echo.
 echo Ambiente iniciado com sucesso!
 echo Pressione qualquer tecla para fechar esta janela...

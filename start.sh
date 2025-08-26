@@ -22,7 +22,6 @@ echo "======================================"
 echo "OpenHands:   http://localhost:3000"
 echo "Open-WebUI:  http://localhost:8080"
 echo "Ollama API:  http://localhost:11434"
-echo "VS Code:     http://localhost:8443"
 sleep 5
 
 echo ""
@@ -32,12 +31,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Comando para Linux
     xdg-open http://localhost:3000
     xdg-open http://localhost:8080
-    xdg-open http://localhost:8443
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Comando para macOS
     open http://localhost:3000
     open http://localhost:8080
-    open http://localhost:8443
 else
     echo "Não foi possível detectar o sistema operacional para abrir URLs."
 fi
