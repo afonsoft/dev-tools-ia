@@ -1,5 +1,5 @@
 @echo off
-title Iniciando OpenHands + Ollama + VS Code
+title Iniciando OpenHands + Ollama + WebUI
 
 echo ======================================
 echo  Encerrando ambiente anterior (se existir)
