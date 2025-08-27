@@ -22,8 +22,8 @@ services:
     pull_policy: always
     environment:
       LOG_ALL_EVENTS: "true"
-      LLM_MAX_INPUT_TOKENS: 90000
-      LLM_MAX_OUTPUT_TOKENS: 8192
+      LLM_MAX_INPUT_TOKENS: 8192
+      LLM_MAX_OUTPUT_TOKENS: 4096
       OPENHANDS_LLM_PROVIDER: ollama
       OPENHANDS_LLM_MODEL: mistral:7b
       OPENHANDS_LLM_ENDPOINT: http://ollama:11434
@@ -46,10 +46,10 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2g
+          memory: 4g
           cpus: '2.0'
         reservations:
-          memory: 1g
+          memory: 2g
           cpus: '1.0'
 
   ollama:
@@ -110,7 +110,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1g
+          memory: 2g
           cpus: '1.0'
         reservations:
           memory: 512m
