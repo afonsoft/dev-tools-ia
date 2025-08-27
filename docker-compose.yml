@@ -43,10 +43,10 @@ services:
     deploy:
       resources:
         limits:
-          memory: 4g
+          memory: 2g
           cpus: '2.0'
         reservations:
-          memory: 2g
+          memory: 1g
           cpus: '1.0'
 
   ollama:

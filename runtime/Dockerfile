@@ -10,20 +10,14 @@ ENV LC_ALL=C.UTF-8
 # Consolidado para reduzir camadas e limpar o cache do apt de forma mais eficiente.
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
-    software-properties-common \
-    bash \
     ffmpeg \
-    apt-transport-https \
     ca-certificates \
-    git \
-    build-essential \
     libssl-dev \
     zlib1g-dev \
     libbz2-dev \
     libreadline-dev \
     libsqlite3-dev \
     libncursesw5-dev \
-    xz-utils \
     libxml2-dev \
     libxmlsec1-dev \
     libffi-dev \
@@ -70,7 +64,7 @@ ENV PATH="$PATH:/root/.dotnet/tools:/usr/local/bin"
 RUN echo "export NVM_DIR=\"/root/.nvm\"" >> /root/.bashrc && \
     echo "[ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"" >> /root/.bashrc && \
     echo "[ -s \"$NVM_DIR/bash_completion\" ] && . \"$NVM_DIR/bash_completion\"" >> /root/.bashrc 
-	
+
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=true
 
 ## Definição do Diretório de Trabalho e Comando Padrão
