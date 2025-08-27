@@ -24,6 +24,9 @@ services:
       LOG_ALL_EVENTS: "true"
       LLM_MAX_INPUT_TOKENS: 90000
       LLM_MAX_OUTPUT_TOKENS: 8192
+      OPENHANDS_LLM_PROVIDER: ollama
+      OPENHANDS_LLM_MODEL: mistral:7b
+      OPENHANDS_LLM_ENDPOINT: http://ollama:11434
       SANDBOX_RUNTIME_CONTAINER_IMAGE: openhands-runtime-dotnet
     ports:
       - "3000:3000"
@@ -56,6 +59,7 @@ services:
       - OLLAMA_CONTEXT_LENGTH=8192
       - OLLAMA_HOST=0.0.0.0:11434
       - OLLAMA_MAX_LOADED_MODELS=1
+      - OLLAMA_MODEL=mistral:7b
       - OLLAMA_NUM_PARALLEL=2
       - OLLAMA_KEEP_ALIVE=30m
       - OLLAMA_GPU_OVERHEAD=2147483648
@@ -70,7 +74,7 @@ services:
       - >
         ollama serve &
         sleep 5 &&
-        ollama pull phi3.5 &&
+        ollama pull mistral:7b &&
         wait
     networks:
       - openhands-net
