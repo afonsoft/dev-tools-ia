@@ -4,33 +4,88 @@ Ambiente de desenvolvimento integrado para processamento de linguagem natural e 
 
 ## Descrição do Projeto
 
-Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA, que integra várias ferramentas para desenvolvimento assistido por inteligência artificial. O ambiente inclui suporte para desenvolvimento .NET, Node.js e oferece capacidades avançadas de processamento de linguagem natural.
+Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA, integrando ferramentas avançadas para desenvolvimento assistido por inteligência artificial. O ambiente oferece uma plataforma completa para desenvolvimento em .NET e Node.js, com suporte a processamento de linguagem natural e codificação assistida.
+
+### Visão de Negócio
+- Aumento de produtividade através de assistência IA no desenvolvimento
+- Ambiente padronizado e reproduzível para toda a equipe
+- Integração contínua com ferramentas modernas de desenvolvimento
+- Suporte a múltiplos frameworks e tecnologias
+
+### Visão Técnica
+- Arquitetura baseada em containers com Docker
+- Aceleração por GPU para processamento de IA
+- Modelo de linguagem local para maior segurança e privacidade
+- Integração com ferramentas de desenvolvimento populares
 
 ## Stack Tecnológica
 
-- **Runtime Base**: Docker com suporte a NVIDIA GPU
-- **Frameworks e SDKs**:
-  - .NET SDK 8.0 e 9.0
-  - Node.js (última versão LTS via NVM)
-- **Componentes Principais**:
-  - [OpenHands](http://localhost:3000): Ambiente de desenvolvimento IA
-  - [Ollama](http://localhost:11434): API de modelo de linguagem
-  - [Web UI](http://localhost:8080): Interface gráfica para interação com modelos
+### Runtime e Infraestrutura
+- **Base**: Docker com suporte NVIDIA GPU
+- **Container Runtime**: Docker Compose
+- **GPU Support**: NVIDIA Container Toolkit
+
+### Frameworks e SDKs
+- **.NET**
+  - SDK 8.0 (LTS)
+  - SDK 9.0 (Preview)
+- **Node.js**
+  - Gerenciamento via NVM
+  - Última versão LTS
+
+### Componentes Principais
+- **[OpenHands](http://localhost:3000)**
+  - Ambiente de desenvolvimento IA
+  - Integração com VS Code
+  - Suporte a múltiplos modelos
+- **[Ollama](http://localhost:11434)**
+  - API de modelo de linguagem
+  - Modelo: Qwen 2.5 Coder (7B)
+  - Otimizado para tarefas de programação
+- **[Web UI](http://localhost:8080)**
+  - Interface gráfica amigável
+  - Autenticação integrada
+  - Customização de parâmetros
 
 ## Pré-requisitos
 
-- Docker e Docker Compose
-- Driver NVIDIA e NVIDIA Container Toolkit (para aceleração GPU)
-- Git
+### Hardware
+- CPU: 4+ cores recomendados
+- RAM: 16GB+ recomendados
+- GPU: NVIDIA com suporte a CUDA (opcional, mas recomendado)
+- Armazenamento: 20GB+ livres
 
-## Como Executar
+### Software
+- Docker Engine 24.0+
+- Docker Compose v2.20+
+- NVIDIA Driver 525+ (para GPU)
+- NVIDIA Container Toolkit
+- Git 2.40+
 
-1. Clone o repositório
-2. Execute o script de inicialização:
+## Guia de Instalação
+
+1. Clone o repositório:
+   ```bash
+   git config --global http.sslVerify false  # Se necessário
+   git clone [URL_DO_REPOSITORIO]
+   ```
+
+2. Configure o ambiente:
+   ```bash
+   # Para Windows
+   git config --global core.longpaths true
+   
+   # Para NPM (se necessário)
+   npm config set strict-ssl false
+   ```
+
+3. Execute o script de inicialização:
    - Windows: `start.bat`
    - Linux/macOS: `./start.sh`
 
-O ambiente será iniciado automaticamente e abrirá as interfaces web no navegador padrão.
+O ambiente será iniciado automaticamente e abrirá:
+- OpenHands UI: http://localhost:3000
+- Web Chat UI: http://localhost:8080
 
 ## Estrutura do Repositório
 
@@ -38,64 +93,100 @@ O ambiente será iniciado automaticamente e abrirá as interfaces web no navegad
 .
 ├── openhands/                # Configurações do OpenHands
 │   └── settings.json        # Configurações do agente e LLM
-├── runtime/                 # Configuração do ambiente de execução
-│   └── Dockerfile          # Definição do container de desenvolvimento
+├── runtime/                 # Ambiente de execução
+│   └── Dockerfile          # Configuração do container base
 ├── vscode/                 # Configurações do VS Code
 │   ├── extensions.json     # Extensões recomendadas
-│   └── install-extensions.sh # Script de instalação de extensões
+│   └── install-extensions.sh # Instalador de extensões
 ├── docker-compose.yml      # Definição dos serviços
-├── start.bat              # Script de inicialização (Windows)
-├── start.sh              # Script de inicialização (Linux/macOS)
-└── README.md             # Esta documentação
+├── start.bat              # Inicialização (Windows)
+├── start.sh              # Inicialização (Unix)
+├── .gitignore            # Exclusões do Git
+├── LICENSE              # GNU GPL v3.0
+├── CHANGELOG.md         # Registro de alterações
+└── README.md           # Esta documentação
 ```
 
-## Variáveis de Ambiente
+## Configuração e Variáveis de Ambiente
 
 ### OpenHands
-- `LOG_ALL_EVENTS`: Habilita log detalhado
-- `LLM_MAX_INPUT_TOKENS`: 16384
-- `LLM_MAX_OUTPUT_TOKENS`: 16384
-- `OPENHANDS_LLM_PROVIDER`: ollama
-- `OPENHANDS_LLM_MODEL`: qwen2.5-coder:7b
+```env
+LOG_ALL_EVENTS=true
+LLM_MAX_INPUT_TOKENS=16384
+LLM_MAX_OUTPUT_TOKENS=16384
+OPENHANDS_LLM_PROVIDER=ollama
+OPENHANDS_LLM_MODEL=qwen2.5-coder:7b
+```
 
 ### Ollama
-- `OLLAMA_CONTEXT_LENGTH`: 32768
-- `OLLAMA_HOST`: 0.0.0.0:11434
-- `OLLAMA_MODEL`: qwen2.5-coder:7b
-- `OLLAMA_NUM_PARALLEL`: 2
-- `OLLAMA_KEEP_ALIVE`: 30m
+```env
+OLLAMA_CONTEXT_LENGTH=32768
+OLLAMA_HOST=0.0.0.0:11434
+OLLAMA_MODEL=qwen2.5-coder:7b
+OLLAMA_NUM_PARALLEL=1
+OLLAMA_KEEP_ALIVE=-1
+OLLAMA_FLASH_ATTENTION=1
+```
 
 ### Web UI
-- `OPENWEBUI_USERNAME`: admin@admin.com
-- `OPENWEBUI_PASSWORD`: admin
+```env
+OPENWEBUI_USERNAME=admin@admin.com
+OPENWEBUI_PASSWORD=admin
+```
 
-## Extensões VS Code Recomendadas
+## Extensões VS Code
 
-- .NET Development
-  - C# Dev Kit
-  - C# Extensions Pack
-- Git Integration
-  - Git Extension Pack
-  - Git History
-- AI & Development
-  - GitHub Copilot
-  - Ollama VSCode
-- Formatação e Estilo
-  - EditorConfig
-  - Prettier
-  - ESLint
-- Frameworks
-  - Angular Extension Pack
-  - Tailwind CSS IntelliSense
+### Desenvolvimento .NET
+- [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
+- [C# Extensions Pack](https://marketplace.visualstudio.com/items?itemName=boundarystudio.csharp-extentions-pack)
+
+### Git e Controle de Versão
+- [Git Extension Pack](https://marketplace.visualstudio.com/items?itemName=donjayamanne.git-extension-pack)
+- [GitHub Actions](https://marketplace.visualstudio.com/items?itemName=github.vscode-github-actions)
+- [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=github.vscode-pull-request-github)
+
+### IA e Desenvolvimento
+- [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=github.copilot)
+- [Ollama VSCode](https://marketplace.visualstudio.com/items?itemName=genepiot.ollama-vscode)
+
+### Formatação e Qualidade
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=editorconfig.editorconfig)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+### Frameworks e UI
+- [Angular Extension Pack](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular2)
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+## Recursos do Sistema
+
+### Limites por Container
+- **OpenHands**
+  - Memória: 2-4GB
+  - CPU: 1-2 cores
+- **Ollama**
+  - GPU: Acesso total
+  - VRAM: 2GB overhead
+- **Web UI**
+  - Memória: 512MB-2GB
+  - CPU: 0.5-1 core
+
+## Status do Projeto
+
+- **Estado**: Concluído
+- **Versão**: 1.0.0
+- **Última Atualização**: 28 de Agosto de 2025
 
 ## Licença
 
-Este projeto está licenciado sob a [GNU General Public License v3.0](LICENSE)
+Este projeto está licenciado sob a [GNU General Public License v3.0](LICENSE).
 
 ## Links Úteis
 
 - [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/)
 - [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 - [Versionamento Semântico](https://semver.org/lang/pt-BR/)
+- [Documentação Docker](https://docs.docker.com/)
+- [Documentação .NET](https://learn.microsoft.com/dotnet/)
 
 [Ver Changelog](CHANGELOG.md)
