@@ -19,9 +19,9 @@ echo ""
 echo "======================================"
 echo " URLs dos Serviços"
 echo "======================================"
-echo "OpenHands:   http://localhost:3000"
-echo "Open-WebUI:  http://localhost:8080"
-echo "Ollama API:  http://localhost:11434"
+echo OpenHands:   http://localhost:3000
+echo Ollama API:  http://localhost:11434
+echo Web Chat UI: http://localhost:8080
 sleep 5
 
 echo ""
