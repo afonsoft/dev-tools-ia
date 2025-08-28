@@ -59,7 +59,7 @@ O ambiente será iniciado automaticamente e abrirá as interfaces web no navegad
 - `OPENHANDS_LLM_MODEL`: qwen2.5-coder:7b
 
 ### Ollama
-- `OLLAMA_CONTEXT_LENGTH`: 16384
+- `OLLAMA_CONTEXT_LENGTH`: 32768
 - `OLLAMA_HOST`: 0.0.0.0:11434
 - `OLLAMA_MODEL`: qwen2.5-coder:7b
 - `OLLAMA_NUM_PARALLEL`: 2
