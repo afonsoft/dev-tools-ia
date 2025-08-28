@@ -18,7 +18,7 @@ services:
 
   openhands:
     image: docker.all-hands.dev/all-hands-ai/openhands:0.54
-    container_name: openhands-app
+    container_name: openhands-hands-app
     pull_policy: always
     environment:
       LOG_ALL_EVENTS: "true"
@@ -60,8 +60,10 @@ services:
       - OLLAMA_HOST=0.0.0.0:11434
       - OLLAMA_MAX_LOADED_MODELS=1
       - OLLAMA_MODEL=qwen2.5-coder:7b
-      - OLLAMA_NUM_PARALLEL=2
+      - OLLAMA_NUM_PARALLEL=1
       - OLLAMA_KEEP_ALIVE=-1
+      - OLLAMA_FLASH_ATTENTION=1
+      - OLLAMA_LOAD_TIMEOUT=900
       - OLLAMA_GPU_OVERHEAD=2147483648
     ports:
       - "11434:11434"
