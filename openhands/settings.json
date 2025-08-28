@@ -4,7 +4,7 @@
     "max_iterations": null,
     "security_analyzer": null,
     "confirmation_mode": false,
-    "llm_model": "ollama/qwen2.5-coder:7b",
+    "llm_model": "ollama/devstral:latest",
     "llm_api_key": "local-llm",
     "llm_base_url": "http://ollama:11434",
     "remote_runtime_resource_factor": 1,
@@ -22,7 +22,7 @@
         "stdio_servers": [],
         "shttp_servers": []
     },
-    "search_api_key": "",
+    "search_api_key": "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",
     "sandbox_api_key": null,
     "max_budget_per_task": null,
     "email": null,
