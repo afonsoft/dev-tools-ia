@@ -20,7 +20,6 @@ echo "Instalando extensões..."
 /app/code-server/bin/code-server --install-extension editorconfig.editorconfig
 /app/code-server/bin/code-server --install-extension esbenp.prettier-vscode
 /app/code-server/bin/code-server --install-extension gformat.html-formatter
-/app/code-server/bin/code-server --install-extension github.copilot
 /app/code-server/bin/code-server --install-extension github.vscode-github-actions
 /app/code-server/bin/code-server --install-extension github.vscode-pull-request-github
 /app/code-server/bin/code-server --install-extension johnpapa.angular2
@@ -30,4 +29,8 @@ echo "Instalando extensões..."
 /app/code-server/bin/code-server --install-extension vscode-icons-team.vscode-icons
 /app/code-server/bin/code-server --install-extension zhuangtongfa.material-theme
 
+echo "finalizando o code-server..."
+pkill -f code-server || true
+sleep 10 # Adiciona um atraso para garantir que o processo foi encerrado e os recursos liberados
 echo "Iniciando o code-server..."
+/app/code-server/bin/code-server --bind-addr 0.0.0.0:8443 /workspace

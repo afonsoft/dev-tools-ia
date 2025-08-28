@@ -1,5 +1,5 @@
 # Usa a imagem base fornecida, que já inclui um runtime e possivelmente outras ferramentas.
-FROM docker.all-hands.dev/all-hands-ai/runtime:0.51-nikolaik
+FROM docker.all-hands.dev/all-hands-ai/runtime:0.54-nikolaik
 
 # Define variáveis de ambiente para o locale, ajudando a evitar avisos de locale em alguns comandos.
 ENV LANG=C.UTF-8
@@ -10,42 +10,23 @@ ENV LC_ALL=C.UTF-8
 # Consolidado para reduzir camadas e limpar o cache do apt de forma mais eficiente.
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
-    software-properties-common \
-    bash \
     ffmpeg \
-    apt-transport-https \
     ca-certificates \
-    gnupg \
-    wget \
-    dpkg \
-    git \
-    curl \
-    unzip \
-    zip \
-    vim \
-    build-essential \
     libssl-dev \
     zlib1g-dev \
     libbz2-dev \
     libreadline-dev \
     libsqlite3-dev \
-    llvm \
     libncursesw5-dev \
-    xz-utils \
-    tk-dev \
     libxml2-dev \
     libxmlsec1-dev \
     libffi-dev \
     liblzma-dev \
-    python3-pip \
-    pkg-config \
     libfontconfig1 \
-    libfreetype6 \
-    mono-complete \
-    mono-dbg \
-    python3-venv && \
-    # Limpa o cache do apt para reduzir o tamanho da imagem.
-    rm -rf /var/lib/apt/lists/*
+    libfreetype6
+
+# Limpa o cache do apt para reduzir o tamanho da imagem.
+RUN rm -rf /var/lib/apt/lists/*
 
 ## Instalação do NVM (Node Version Manager) e Node.js
 # Baixa e executa o script de instalação do NVM e instala as versões do Node.js.
@@ -54,7 +35,6 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && \
     export NVM_DIR="/root/.nvm" && \
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
-    nvm install 16 && nvm install 18 && nvm install 20 && nvm install 22 && \
     nvm install --lts && \
     nvm use --lts && \
     nvm alias default $(nvm ls --lts | head -n 1 | grep -o 'v[0-9.]*')
@@ -66,7 +46,6 @@ RUN wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-p
     rm packages-microsoft-prod.deb && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-    dotnet-sdk-6.0 \
     dotnet-sdk-8.0 \
     dotnet-sdk-9.0 && \
     # Limpa o cache do apt.
@@ -84,16 +63,11 @@ ENV PATH="$PATH:/root/.dotnet/tools:/usr/local/bin"
 # Instala as ferramentas globais do .NET no mesmo RUN.
 RUN echo "export NVM_DIR=\"/root/.nvm\"" >> /root/.bashrc && \
     echo "[ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"" >> /root/.bashrc && \
-    echo "[ -s \"$NVM_DIR/bash_completion\" ] && . \"$NVM_DIR/bash_completion\"" >> /root/.bashrc && \
-    \
-    dotnet tool install --global --ignore-failed-sources dotnet-reportgenerator-globaltool && \
-    dotnet tool install --global --ignore-failed-sources coverlet.console && \
-    dotnet tool install --global --ignore-failed-sources dotnet-sonarscanner
+    echo "[ -s \"$NVM_DIR/bash_completion\" ] && . \"$NVM_DIR/bash_completion\"" >> /root/.bashrc 
 
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=true
 
 ## Definição do Diretório de Trabalho e Comando Padrão
 # Define o diretório de trabalho padrão dentro do contêiner.
 WORKDIR /app
 
-# Define o comando padrão a ser executado quando o contêiner inicia.
-CMD ["bash"]
