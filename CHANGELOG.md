@@ -18,5 +18,5 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 - Ambiente Docker com suporte a GPU NVIDIA
 - .NET SDKs 8.0 e 9.0
 - Node.js com NVM
-- Configurações do Ollama para modelo qwen2.5-coder:7b
+- Configurações do Ollama para modelo devstral:latest
 - Autenticação básica para Web UI
