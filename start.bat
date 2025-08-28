@@ -23,7 +23,7 @@ echo  URLs dos Servicos
 echo ======================================
 echo OpenHands:   http://localhost:3000
 echo Ollama API:  http://localhost:11434
-echo Web UI:      http://localhost:8080
+echo Web Chat UI: http://localhost:8080
 timeout /t 5 /nobreak > nul
 echo.
 echo Abrindo servicos no navegador...
