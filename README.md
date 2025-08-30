@@ -172,6 +172,35 @@ environment:
 - `OLLAMA_MAX_LOADED_MODELS`: Limite de modelos carregados simultaneamente
 - `OLLAMA_GPU_OVERHEAD`: Buffer de memória GPU (default: 2GB)
 
+#### Alterando o Modelo via Script
+
+O projeto inclui um script `configure.sh` que facilita a troca do modelo LLM. Para utilizá-lo:
+
+```bash
+# Dar permissão de execução (necessário apenas uma vez)
+chmod +x configure.sh
+
+# Alterar para um modelo leve (8-16GB RAM)
+./configure.sh phi:latest
+
+# Alterar para um modelo intermediário (16-32GB RAM)
+./configure.sh codellama:7b
+
+# Alterar para um modelo mais robusto (32GB+ RAM)
+./configure.sh qwen2.5-coder:7b
+
+# Após alterar o modelo, reinicie os containers
+docker-compose down && docker-compose up -d
+```
+
+O script automaticamente:
+1. Atualiza o modelo no `docker-compose.yml`
+2. Configura o `settings.json` do OpenHands
+3. Ajusta o comando de pull do Ollama
+4. Fornece instruções para reiniciar os containers
+
+> **Dica**: Para ver os modelos disponíveis, visite o [Ollama Model Library](https://ollama.ai/library)
+
 ### OpenHands
 ```env
 LOG_ALL_EVENTS=true

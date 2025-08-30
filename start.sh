@@ -19,9 +19,9 @@ echo ""
 echo "======================================"
 echo " URLs dos Serviços"
 echo "======================================"
-echo OpenHands:   http://localhost:3000
-echo Ollama API:  http://localhost:11434
-echo Web Chat UI: http://localhost:8080
+echo "OpenHands:   http://localhost:3000"
+echo "Open-WebUI:  http://localhost:8080"
+echo "Ollama API:  http://localhost:11434"
 sleep 5
 
 echo ""
@@ -35,6 +35,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Comando para macOS
     open http://localhost:3000
     open http://localhost:8080
+elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "cygwin" ]] || [[ -n "$WINDIR" ]]; then
+    # Comando para Windows
+    start http://localhost:3000
+    start http://localhost:8080
 else
     echo "Não foi possível detectar o sistema operacional para abrir URLs."
 fi
