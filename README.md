@@ -34,18 +34,21 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
   - Última versão LTS
 
 ### Componentes Principais
-- **[OpenHands](http://localhost:3000)**
+- **[OpenHands](https://github.com/all-hands-dev/openhands)**
   - Ambiente de desenvolvimento IA
   - Integração com VS Code
   - Suporte a múltiplos modelos
-- **[Ollama](http://localhost:11434)**
+  - Interface local: http://localhost:3000
+- **[Ollama](https://github.com/ollama/ollama)**
   - API de modelo de linguagem
-  - Modelo: Qwen 2.5 Coder (7B)
+  - Modelo padrão: devstral:latest
   - Otimizado para tarefas de programação
-- **[Web UI](http://localhost:8080)**
+  - API local: http://localhost:11434
+- **[Open WebUI](https://github.com/open-webui/open-webui)**
   - Interface gráfica amigável
   - Autenticação integrada
   - Customização de parâmetros
+  - Interface local: http://localhost:8080
 
 ## Pré-requisitos
 
@@ -115,11 +118,28 @@ O ambiente suporta diferentes modelos LLM que podem ser configurados de acordo c
 
 #### Cenários de Uso
 
-1. **Recursos Limitados (8-16GB RAM, GPU < 8GB)**
+1. **Modelo Recomendado (Configuração Padrão)**
 ```json
 // openhands/settings.json
 {
-    "llm_model": "ollama/phi:latest",  // ou "ollama/mistral:latest"
+    "llm_model": "ollama/devstral:latest",
+    "llm_base_url": "http://ollama:11434"
+}
+```
+```yaml
+# docker-compose.yml (seção ollama)
+environment:
+  - OLLAMA_MODEL=devstral:latest
+  - OLLAMA_CONTEXT_LENGTH=32768
+  - OLLAMA_GPU_LAYERS=45
+  - OLLAMA_MAX_LOADED_MODELS=1
+```
+
+2. **Recursos Limitados (8-16GB RAM, GPU < 8GB)**
+```json
+// openhands/settings.json
+{
+    "llm_model": "ollama/phi:latest",  // ou "ollama/neural-chat:latest"
     "llm_base_url": "http://ollama:11434"
 }
 ```
@@ -132,24 +152,24 @@ environment:
   - OLLAMA_MAX_LOADED_MODELS=1
 ```
 
-2. **Recursos Moderados (16-32GB RAM, GPU 8-12GB)**
+3. **Recursos Moderados (16-32GB RAM, GPU 8-12GB)**
 ```json
 // openhands/settings.json
 {
-    "llm_model": "ollama/codellama:7b",  // ou "ollama/qwen:7b"
+    "llm_model": "ollama/mistral:latest",  // ou "ollama/codellama:7b"
     "llm_base_url": "http://ollama:11434"
 }
 ```
 ```yaml
 # docker-compose.yml (seção ollama)
 environment:
-  - OLLAMA_MODEL=codellama:7b
+  - OLLAMA_MODEL=mistral:latest
   - OLLAMA_CONTEXT_LENGTH=16384
   - OLLAMA_GPU_LAYERS=45
   - OLLAMA_MAX_LOADED_MODELS=1
 ```
 
-3. **Recursos Abundantes (32GB+ RAM, GPU 16GB+)**
+4. **Recursos Abundantes (32GB+ RAM, GPU 16GB+)**
 ```json
 // openhands/settings.json
 {
