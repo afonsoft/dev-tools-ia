@@ -109,20 +109,83 @@ O ambiente será iniciado automaticamente e abrirá:
 
 ## Configuração e Variáveis de Ambiente
 
+### Configuração do Modelo LLM
+
+O ambiente suporta diferentes modelos LLM que podem ser configurados de acordo com os recursos disponíveis em sua máquina. Para alterar o modelo, edite as configurações no arquivo `openhands/settings.json` e `docker-compose.yml`.
+
+#### Cenários de Uso
+
+1. **Recursos Limitados (8-16GB RAM, GPU < 8GB)**
+```json
+// openhands/settings.json
+{
+    "llm_model": "ollama/phi:latest",  // ou "ollama/mistral:latest"
+    "llm_base_url": "http://ollama:11434"
+}
+```
+```yaml
+# docker-compose.yml (seção ollama)
+environment:
+  - OLLAMA_MODEL=phi:latest
+  - OLLAMA_CONTEXT_LENGTH=8192
+  - OLLAMA_GPU_LAYERS=35  # Ajuste conforme necessário
+  - OLLAMA_MAX_LOADED_MODELS=1
+```
+
+2. **Recursos Moderados (16-32GB RAM, GPU 8-12GB)**
+```json
+// openhands/settings.json
+{
+    "llm_model": "ollama/codellama:7b",  // ou "ollama/qwen:7b"
+    "llm_base_url": "http://ollama:11434"
+}
+```
+```yaml
+# docker-compose.yml (seção ollama)
+environment:
+  - OLLAMA_MODEL=codellama:7b
+  - OLLAMA_CONTEXT_LENGTH=16384
+  - OLLAMA_GPU_LAYERS=45
+  - OLLAMA_MAX_LOADED_MODELS=1
+```
+
+3. **Recursos Abundantes (32GB+ RAM, GPU 16GB+)**
+```json
+// openhands/settings.json
+{
+    "llm_model": "ollama/qwen2.5-coder:7b",  // ou "ollama/codellama:13b"
+    "llm_base_url": "http://ollama:11434"
+}
+```
+```yaml
+# docker-compose.yml (seção ollama)
+environment:
+  - OLLAMA_MODEL=qwen2.5-coder:7b
+  - OLLAMA_CONTEXT_LENGTH=32768
+  - OLLAMA_GPU_LAYERS=80
+  - OLLAMA_MAX_LOADED_MODELS=1
+```
+
+#### Parâmetros de Otimização
+- `OLLAMA_CONTEXT_LENGTH`: Tamanho do contexto (menor = menos memória)
+- `OLLAMA_GPU_LAYERS`: Número de camadas na GPU (mais = melhor performance, mais VRAM)
+- `OLLAMA_MAX_LOADED_MODELS`: Limite de modelos carregados simultaneamente
+- `OLLAMA_GPU_OVERHEAD`: Buffer de memória GPU (default: 2GB)
+
 ### OpenHands
 ```env
 LOG_ALL_EVENTS=true
 LLM_MAX_INPUT_TOKENS=16384
 LLM_MAX_OUTPUT_TOKENS=16384
 OPENHANDS_LLM_PROVIDER=ollama
-OPENHANDS_LLM_MODEL=devstral:latest
+OPENHANDS_LLM_MODEL=qwen2.5-coder:7b
 ```
 
 ### Ollama
 ```env
 OLLAMA_CONTEXT_LENGTH=32768
 OLLAMA_HOST=0.0.0.0:11434
-OLLAMA_MODEL=devstral:latest
+OLLAMA_MODEL=qwen2.5-coder:7b
 OLLAMA_NUM_PARALLEL=1
 OLLAMA_KEEP_ALIVE=-1
 OLLAMA_FLASH_ATTENTION=1
