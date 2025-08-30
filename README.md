@@ -269,6 +269,53 @@ OPENWEBUI_PASSWORD=admin
 - **Versão**: 1.0.0
 - **Última Atualização**: 28 de Agosto de 2025
 
+## Problemas Conhecidos e Soluções
+
+### Erro de Memória Insuficiente no Ollama
+
+Se você encontrar o seguinte erro nos logs do container Ollama:
+```
+error="model requires more system memory (33.0 GiB) than is available (10.3 GiB)"
+```
+
+Este erro ocorre quando o modelo LLM selecionado requer mais memória do que está disponível no seu sistema. Para resolver:
+
+1. **Solução Imediata**: Mude para um modelo que requer menos memória
+   ```bash
+   # Pare os containers
+   docker compose down
+
+   # Edite openhands/settings.json
+   # Altere o modelo para uma opção mais leve:
+   {
+     "llm_model": "ollama/phi:latest",  # Modelo leve (~4GB RAM)
+     # ou
+     "llm_model": "ollama/mistral:latest"  # Modelo moderado (~8GB RAM)
+   }
+
+   # Edite docker-compose.yml
+   # Na seção 'ollama', atualize:
+   environment:
+     - OLLAMA_MODEL=phi:latest  # ou mistral:latest
+     - OLLAMA_CONTEXT_LENGTH=8192  # Reduzir contexto também ajuda
+   
+   # Reinicie os containers
+   docker compose up -d
+   ```
+
+2. **Modelos Recomendados por Faixa de Memória**:
+   - 8GB RAM: `phi:latest`, `neural-chat:latest`
+   - 16GB RAM: `mistral:latest`, `codellama:7b`
+   - 32GB+ RAM: `qwen2.5-coder:7b`, `codellama:13b`
+
+3. **Otimizações Adicionais**:
+   - Reduza `OLLAMA_CONTEXT_LENGTH` para 8192 ou 4096
+   - Defina `OLLAMA_MAX_LOADED_MODELS=1`
+   - Aumente o swap do sistema se possível
+   - Feche aplicações desnecessárias
+
+Para mais detalhes sobre configuração de modelos, consulte a seção "Configuração do Modelo LLM" acima.
+
 ## Licença
 
 Este projeto está licenciado sob a [GNU General Public License v3.0](LICENSE).
