@@ -11,6 +11,8 @@ ENV LC_ALL=C.UTF-8
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
     ffmpeg \
+    git \
+    curl \
     ca-certificates \
     libssl-dev \
     zlib1g-dev \
@@ -47,9 +49,21 @@ RUN wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-p
     apt-get update && \
     apt-get install -y --no-install-recommends \
     dotnet-sdk-8.0 \
-    dotnet-sdk-9.0 && \
-    # Limpa o cache do apt.
+    dotnet-sdk-9.0 
+
+# Limpa o cache do apt para reduzir o tamanho da imagem.
+RUN apt-get clean && \
+    apt-get autoremove -y && \
+    apt-get autoclean && \
     rm -rf /var/lib/apt/lists/*
+
+# Configuração do GIT
+RUN git config --global http.sslVerify false && \
+    git config --global https.sslVerify false && \
+    git config --global core.longpaths true
+
+# Configuração do NPM
+RUN npm config set strict-ssl false
 
 ## Configuração de Variáveis de Ambiente e Ferramentas Globais do .NET
 # Adiciona os caminhos ao PATH e configura as variáveis de ambiente do NVM.
@@ -66,6 +80,7 @@ RUN echo "export NVM_DIR=\"/root/.nvm\"" >> /root/.bashrc && \
     echo "[ -s \"$NVM_DIR/bash_completion\" ] && . \"$NVM_DIR/bash_completion\"" >> /root/.bashrc 
 
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=true
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
 ## Definição do Diretório de Trabalho e Comando Padrão
 # Define o diretório de trabalho padrão dentro do contêiner.

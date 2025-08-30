@@ -109,20 +109,112 @@ O ambiente será iniciado automaticamente e abrirá:
 
 ## Configuração e Variáveis de Ambiente
 
+### Configuração do Modelo LLM
+
+O ambiente suporta diferentes modelos LLM que podem ser configurados de acordo com os recursos disponíveis em sua máquina. Para alterar o modelo, edite as configurações no arquivo `openhands/settings.json` e `docker-compose.yml`.
+
+#### Cenários de Uso
+
+1. **Recursos Limitados (8-16GB RAM, GPU < 8GB)**
+```json
+// openhands/settings.json
+{
+    "llm_model": "ollama/phi:latest",  // ou "ollama/mistral:latest"
+    "llm_base_url": "http://ollama:11434"
+}
+```
+```yaml
+# docker-compose.yml (seção ollama)
+environment:
+  - OLLAMA_MODEL=phi:latest
+  - OLLAMA_CONTEXT_LENGTH=8192
+  - OLLAMA_GPU_LAYERS=35  # Ajuste conforme necessário
+  - OLLAMA_MAX_LOADED_MODELS=1
+```
+
+2. **Recursos Moderados (16-32GB RAM, GPU 8-12GB)**
+```json
+// openhands/settings.json
+{
+    "llm_model": "ollama/codellama:7b",  // ou "ollama/qwen:7b"
+    "llm_base_url": "http://ollama:11434"
+}
+```
+```yaml
+# docker-compose.yml (seção ollama)
+environment:
+  - OLLAMA_MODEL=codellama:7b
+  - OLLAMA_CONTEXT_LENGTH=16384
+  - OLLAMA_GPU_LAYERS=45
+  - OLLAMA_MAX_LOADED_MODELS=1
+```
+
+3. **Recursos Abundantes (32GB+ RAM, GPU 16GB+)**
+```json
+// openhands/settings.json
+{
+    "llm_model": "ollama/qwen2.5-coder:7b",  // ou "ollama/codellama:13b"
+    "llm_base_url": "http://ollama:11434"
+}
+```
+```yaml
+# docker-compose.yml (seção ollama)
+environment:
+  - OLLAMA_MODEL=qwen2.5-coder:7b
+  - OLLAMA_CONTEXT_LENGTH=32768
+  - OLLAMA_GPU_LAYERS=80
+  - OLLAMA_MAX_LOADED_MODELS=1
+```
+
+#### Parâmetros de Otimização
+- `OLLAMA_CONTEXT_LENGTH`: Tamanho do contexto (menor = menos memória)
+- `OLLAMA_GPU_LAYERS`: Número de camadas na GPU (mais = melhor performance, mais VRAM)
+- `OLLAMA_MAX_LOADED_MODELS`: Limite de modelos carregados simultaneamente
+- `OLLAMA_GPU_OVERHEAD`: Buffer de memória GPU (default: 2GB)
+
+#### Alterando o Modelo via Script
+
+O projeto inclui um script `configure.sh` que facilita a troca do modelo LLM. Para utilizá-lo:
+
+```bash
+# Dar permissão de execução (necessário apenas uma vez)
+chmod +x configure.sh
+
+# Alterar para um modelo leve (8-16GB RAM)
+./configure.sh phi:latest
+
+# Alterar para um modelo intermediário (16-32GB RAM)
+./configure.sh codellama:7b
+
+# Alterar para um modelo mais robusto (32GB+ RAM)
+./configure.sh qwen2.5-coder:7b
+
+# Após alterar o modelo, reinicie os containers
+docker-compose down && docker-compose up -d
+```
+
+O script automaticamente:
+1. Atualiza o modelo no `docker-compose.yml`
+2. Configura o `settings.json` do OpenHands
+3. Ajusta o comando de pull do Ollama
+4. Fornece instruções para reiniciar os containers
+
+> **Dica**: Para ver os modelos disponíveis, visite o [Ollama Model Library](https://ollama.ai/library)
+
 ### OpenHands
 ```env
 LOG_ALL_EVENTS=true
 LLM_MAX_INPUT_TOKENS=16384
 LLM_MAX_OUTPUT_TOKENS=16384
 OPENHANDS_LLM_PROVIDER=ollama
-OPENHANDS_LLM_MODEL=devstral:latest
+OPENHANDS_LLM_MODEL=qwen2.5-coder:7b
 ```
 
 ### Ollama
 ```env
 OLLAMA_CONTEXT_LENGTH=32768
 OLLAMA_HOST=0.0.0.0:11434
-OLLAMA_MODEL=devstral:latest
+OLLAMA_MODEL=qwen2.5-coder:7b
 OLLAMA_NUM_PARALLEL=1
 OLLAMA_KEEP_ALIVE=-1
 OLLAMA_FLASH_ATTENTION=1
@@ -176,6 +268,53 @@ OPENWEBUI_PASSWORD=admin
 - **Estado**: Concluído
 - **Versão**: 1.0.0
 - **Última Atualização**: 28 de Agosto de 2025
+
+## Problemas Conhecidos e Soluções
+
+### Erro de Memória Insuficiente no Ollama
+
+Se você encontrar o seguinte erro nos logs do container Ollama:
+```
+error="model requires more system memory (33.0 GiB) than is available (10.3 GiB)"
+```
+
+Este erro ocorre quando o modelo LLM selecionado requer mais memória do que está disponível no seu sistema. Para resolver:
+
+1. **Solução Imediata**: Mude para um modelo que requer menos memória
+   ```bash
+   # Pare os containers
+   docker compose down
+
+   # Edite openhands/settings.json
+   # Altere o modelo para uma opção mais leve:
+   {
+     "llm_model": "ollama/phi:latest",  # Modelo leve (~4GB RAM)
+     # ou
+     "llm_model": "ollama/mistral:latest"  # Modelo moderado (~8GB RAM)
+   }
+
+   # Edite docker-compose.yml
+   # Na seção 'ollama', atualize:
+   environment:
+     - OLLAMA_MODEL=phi:latest  # ou mistral:latest
+     - OLLAMA_CONTEXT_LENGTH=8192  # Reduzir contexto também ajuda
+   
+   # Reinicie os containers
+   docker compose up -d
+   ```
+
+2. **Modelos Recomendados por Faixa de Memória**:
+   - 8GB RAM: `phi:latest`, `neural-chat:latest`
+   - 16GB RAM: `mistral:latest`, `codellama:7b`
+   - 32GB+ RAM: `qwen2.5-coder:7b`, `codellama:13b`
+
+3. **Otimizações Adicionais**:
+   - Reduza `OLLAMA_CONTEXT_LENGTH` para 8192 ou 4096
+   - Defina `OLLAMA_MAX_LOADED_MODELS=1`
+   - Aumente o swap do sistema se possível
+   - Feche aplicações desnecessárias
+
+Para mais detalhes sobre configuração de modelos, consulte a seção "Configuração do Modelo LLM" acima.
 
 ## Licença
 

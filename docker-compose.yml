@@ -54,7 +54,7 @@ services:
 
   ollama:
     image: ollama/ollama:latest
-    container_name: ollama
+    container_name: ollama-ai
     environment:
       - OLLAMA_CONTEXT_LENGTH=32768
       - OLLAMA_HOST=0.0.0.0:11434
