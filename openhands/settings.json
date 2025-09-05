@@ -4,7 +4,7 @@
     "max_iterations": null,
     "security_analyzer": null,
     "confirmation_mode": false,
-    "llm_model": "ollama/codellama:7b",
+    "llm_model": "ollama/granite:8b",
     "llm_api_key": "local-llm",
     "llm_base_url": "http://ollama:11434",
     "remote_runtime_resource_factor": 1,

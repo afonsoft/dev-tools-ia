@@ -86,25 +86,60 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
    - Requisitos: 6GB+ RAM, 4GB+ VRAM
    - Uso: Ambientes com recursos muito limitados
 
-#### Modelos Especializados
+#### Modelos para Agentes de Código
 
-1. **Mistral-Nemo (12B)**
-   - Otimizado para contexto longo (128k)
-   - Colaboração Mistral AI + NVIDIA
+1. **GPT-OSS (20B/120B)**
+   - Especializado em tarefas de agente e raciocínio
+   - Excelente para casos de uso de desenvolvimento
+   - Requisitos: 32GB+ RAM, 16GB+ VRAM (versão 20B)
+   - Uso: Desenvolvimento complexo e automação
+
+2. **DeepSeek-R1 (7B/32B/70B)**
+   - Performance próxima a modelos líderes
+   - Excelente capacidade de raciocínio
+   - Requisitos: 16GB+ RAM, 8GB+ VRAM (versão 7B)
+   - Uso: Tarefas de agente e desenvolvimento
+
+3. **Qwen3 (8B/14B/30B)**
+   - Suite completa para desenvolvimento
+   - Suporte a MoE (Mixture of Experts)
+   - Requisitos: 16GB+ RAM, 8GB+ VRAM (versão 8B)
+   - Uso: Geração de código e automação
+
+4. **LLama3.1 Groq Tool-Use (8B/70B)**
+   - Otimizado para uso de ferramentas
+   - Excelente para function calling
+   - Requisitos: 16GB+ RAM, 8GB+ VRAM (versão 8B)
+   - Uso: Integração com ferramentas e APIs
+
+5. **Mistral-Small3.2 (24B)**
+   - Function calling aprimorado
+   - Melhor seguimento de instruções
    - Requisitos: 24GB+ RAM, 12GB+ VRAM
-   - Uso: Análise de códigos extensos
+   - Uso: Agentes de código precisos
 
-2. **DeepSeek-Coder (6.7B/33B)**
-   - Treinado em 2T tokens de código
-   - Excelente para debugging e refatoração
-   - Requisitos: 16GB+ RAM, 8GB+ VRAM (versão 6.7B)
-   - Uso: Tarefas complexas de programação
+#### Modelos Especializados em Desenvolvimento
 
-3. **StarCoder2 (3B/7B/15B)**
-   - Treinado em 80+ linguagens
-   - Ótimo para completion e geração
-   - Requisitos: 12GB+ RAM, 6GB+ VRAM (versão 3B)
-   - Uso: Desenvolvimento multilinguagem
+1. **Mistral-Large (123B)**
+   - Líder em geração de código
+   - Contexto de 128k tokens
+   - Suporte multilíngue avançado
+   - Requisitos: 48GB+ RAM, 24GB+ VRAM
+   - Uso: Projetos grandes e complexos
+
+2. **Granite3-Dense (2B/8B)**
+   - Otimizado para RAG e geração de código
+   - Bom para tradução e correção de bugs
+   - Requisitos: 8GB+ RAM, 6GB+ VRAM (versão 2B)
+   - Uso: Projetos pequenos e médios
+
+3. **Devstral (24B)**
+   - Especializado em agentes de código
+   - Ótimo para automação de desenvolvimento
+   - Requisitos: 32GB+ RAM, 16GB+ VRAM
+   - Uso: Automação de desenvolvimento
+
+> **Nota sobre Seleção de Modelos**: Para tarefas que envolvem agentes de código e automação de desenvolvimento, recomendamos começar com modelos menores como Granite3-Dense (2B) ou LLama3.1 (8B) e escalar conforme necessário. Modelos maiores como GPT-OSS (120B) e Mistral-Large (123B) oferecem melhor performance mas requerem significativamente mais recursos. Considere o trade-off entre performance e recursos disponíveis ao escolher o modelo.
 
 #### Configurações de Otimização
 
