@@ -41,14 +41,46 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
   - Interface local: http://localhost:3000
 - **[Ollama](https://github.com/ollama/ollama)**
   - API de modelo de linguagem
-  - Modelo padrão: devstral:latest
-  - Otimizado para tarefas de programação
+  - Modelo padrão: CodeLlama 7B
+  - Otimizado para programação e análise de código
   - API local: http://localhost:11434
 - **[Open WebUI](https://github.com/open-webui/open-webui)**
   - Interface gráfica amigável
   - Autenticação integrada
   - Customização de parâmetros
   - Interface local: http://localhost:8080
+
+### Modelos LLM Disponíveis
+
+#### Modelo Padrão: Devstral Latest
+O `devstral:latest` é o modelo padrão recomendado pela OpenHands, oferecendo:
+- Performance superior em tarefas de desenvolvimento
+- Compreensão avançada de contexto
+- Suporte a múltiplos paradigmas de programação
+
+**Requisitos de Hardware**:
+- RAM: 32GB+ recomendado
+- GPU: 12GB+ VRAM recomendado
+- SSD: 30GB+ livre
+
+#### Alternativa Recomendada: CodeLlama 7B
+O [CodeLlama](https://ai.meta.com/blog/code-llama-large-language-model-coding/) é uma excelente alternativa para sistemas com recursos mais limitados:
+
+- **Capacidades**:
+  - Compreensão e geração de código em múltiplas linguagens
+  - Completação de código inteligente
+  - Explicação de código existente
+  - Refatoração e documentação
+
+- **Vantagens**:
+  - Menor consumo de memória
+  - Bom desempenho em GPUs mais modestas
+  - Equilíbrio entre performance e recursos
+
+- **Requisitos Mínimos**:
+  - RAM: 16GB
+  - GPU: 8GB VRAM (ou CPU razoável)
+  - SSD: 20GB livre
 
 ## Pré-requisitos
 
@@ -118,7 +150,7 @@ O ambiente suporta diferentes modelos LLM que podem ser configurados de acordo c
 
 #### Cenários de Uso
 
-1. **Modelo Recomendado (Configuração Padrão)**
+1. **Configuração Padrão (Hardware Robusto)**
 ```json
 // openhands/settings.json
 {
@@ -131,9 +163,35 @@ O ambiente suporta diferentes modelos LLM que podem ser configurados de acordo c
 environment:
   - OLLAMA_MODEL=devstral:latest
   - OLLAMA_CONTEXT_LENGTH=32768
+  - OLLAMA_GPU_LAYERS=80
+  - OLLAMA_MAX_LOADED_MODELS=1
+  - OLLAMA_FLASH_ATTENTION=1
+  - OLLAMA_GPU_OVERHEAD=2147483648  # 2GB para buffer de GPU
+```
+
+2. **Configuração Recomendada (Hardware Moderado)**
+```json
+// openhands/settings.json
+{
+    "llm_model": "ollama/codellama:7b",
+    "llm_base_url": "http://ollama:11434"
+}
+```
+```yaml
+# docker-compose.yml (seção ollama)
+environment:
+  - OLLAMA_MODEL=codellama:7b
+  - OLLAMA_CONTEXT_LENGTH=16384
   - OLLAMA_GPU_LAYERS=45
   - OLLAMA_MAX_LOADED_MODELS=1
+  - OLLAMA_FLASH_ATTENTION=1
+  - OLLAMA_GPU_OVERHEAD=1073741824  # 1GB para buffer de GPU
 ```
+
+O CodeLlama 7B é recomendado para a maioria dos usuários por:
+- Menor consumo de recursos
+- Boa performance em hardware mais modesto
+- Excelente suporte a múltiplas linguagens
 
 2. **Recursos Limitados (8-16GB RAM, GPU < 8GB)**
 ```json
