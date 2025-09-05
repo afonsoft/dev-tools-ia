@@ -24,9 +24,9 @@ services:
       LOG_ALL_EVENTS: "true"
       # Configurações do LLM
       OPENHANDS_LLM_PROVIDER: ollama
-      OPENHANDS_LLM_MODEL: granite:8b
+      OPENHANDS_LLM_MODEL: codellama:7b
       OPENHANDS_LLM_ENDPOINT: http://ollama:11434
-      OLLAMA_MODEL: granite:8b
+      OLLAMA_MODEL: codellama:7b
       # Otimizações GPU/CPU
       CUDA_VISIBLE_DEVICES: 0
       OPENHANDS_LLM_GPU_LAYERS: 35
@@ -71,7 +71,7 @@ services:
       - OLLAMA_CONTEXT_LENGTH=32768    # Mínimo recomendado pela OpenHands
       - OLLAMA_HOST=0.0.0.0:11434
       - OLLAMA_MAX_LOADED_MODELS=1     # Otimizado para 8GB VRAM
-      - OLLAMA_MODEL=granite:8b
+      - OLLAMA_MODEL=codellama:7b
       - OLLAMA_GPU_LAYERS=35           # Ajustado para RTX 8GB
       - OLLAMA_NUM_PARALLEL=2          # Balanceado para sua CPU
       - OLLAMA_KEEP_ALIVE=-1
@@ -93,7 +93,7 @@ services:
       - >
         ollama serve &
         sleep 5 &&
-        ollama pull granite:8b &&
+        ollama pull codellama:7b &&
         wait
     networks:
       - openhands-net

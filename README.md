@@ -43,6 +43,7 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
   - API de modelo de linguagem
   - Modelo padrão: CodeLlama 7B
   - Otimizado para programação e análise de código
+  - Suporte a múltiplos modelos via API
   - API local: http://localhost:11434
 - **[Open WebUI](https://github.com/open-webui/open-webui)**
   - Interface gráfica amigável
@@ -127,11 +128,12 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
    - Requisitos: 48GB+ RAM, 24GB+ VRAM
    - Uso: Projetos grandes e complexos
 
-2. **Granite3-Dense (2B/8B)**
-   - Otimizado para RAG e geração de código
-   - Bom para tradução e correção de bugs
-   - Requisitos: 8GB+ RAM, 6GB+ VRAM (versão 2B)
+2. **CodeLlama (7B/13B)**
+   - Otimizado para desenvolvimento e análise de código
+   - Excelente suporte multilinguagem
+   - Requisitos: 8GB+ RAM, 6GB+ VRAM (versão 7B)
    - Uso: Projetos pequenos e médios
+   - Disponível em variantes: base, instruct, python
 
 3. **Devstral (24B)**
    - Especializado em agentes de código
@@ -251,9 +253,9 @@ OPENHANDS_MAX_PARALLEL_REQUESTS: 3
 > 4. Reduza `BATCH_SIZE` se encontrar instabilidades
 > 
 > **Modelos Recomendados**:
-> - Granite 8B (melhor equilíbrio)
 > - CodeLlama 7B (estável e eficiente)
 > - Mistral 7B (boa performance)
+> - Llama2 7B (base confiável)
 
 ##### Configurações Otimizadas por Quantidade de RAM
 
@@ -275,9 +277,9 @@ OLLAMA_BATCH_SIZE: 8
 OLLAMA_NUM_PARALLEL: 2
 
 # Modelos Recomendados:
-# - Granite 8B
-# - CodeLlama 7B
+# - CodeLlama 7B (padrão)
 # - Mistral 7B
+# - Llama2 7B
 ```
 
 ###### Sistema com 20GB RAM
