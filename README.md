@@ -435,8 +435,7 @@ O [CodeLlama](https://ai.meta.com/blog/code-llama-large-language-model-coding/) 
    ```
 
 3. Execute o script de inicialização:
-   - Windows: `start.bat`
-   - Linux/macOS: `./start.sh`
+   - Linux/macOS/Windows: `./start.sh`
 
 O ambiente será iniciado automaticamente e abrirá:
 - OpenHands UI: http://localhost:3000
