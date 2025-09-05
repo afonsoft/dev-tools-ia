@@ -384,6 +384,16 @@ OLLAMA_NUMA: 1                            # Habilita otimizações NUMA
 > 3. Ajuste `NUMA` apenas em servidores multi-socket
 > 4. Monitore swap com `free -h` (Linux) ou Gerenciador de Tarefas (Windows)
 > 5. Em caso de OOM, reduza `OPENHANDS_MEMORY_BUDGET` em 25%
+>
+> **Importante: Gerenciamento de Paralelismo**
+> - `OLLAMA_NUM_PARALLEL` e `OPENHANDS_MAX_PARALLEL_REQUESTS` afetam diretamente o consumo de memória
+> - Cada requisição paralela adicional aumenta significativamente o uso de RAM
+> - Recomendações por configuração de memória:
+>   - 8-12GB RAM: mantenha ambos em 1
+>   - 16GB RAM: máximo de 2 paralelos
+>   - 32GB+ RAM: pode usar 3-4 paralelos
+> - Se encontrar erros de memória, reduza estes valores para 1 primeiro
+> - Aumente apenas se tiver certeza que há memória disponível
 
 #### Alternativa Recomendada: CodeLlama 7B
 O [CodeLlama](https://ai.meta.com/blog/code-llama-large-language-model-coding/) é uma excelente alternativa para sistemas com recursos mais limitados:
