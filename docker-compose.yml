@@ -33,7 +33,7 @@ services:
       OPENHANDS_LLM_CTX_SIZE: 32768    # Aumentado para match com Ollama
       # Performance
       OPENHANDS_LOAD_TIMEOUT: 900
-      OPENHANDS_MAX_PARALLEL_REQUESTS: 2
+      OPENHANDS_MAX_PARALLEL_REQUESTS: 1  # Reduzido para economizar memória
       OPENHANDS_MEMORY_BUDGET: 8589934592  # 8GB total memory budget
       SANDBOX_RUNTIME_CONTAINER_IMAGE: openhands-runtime-dotnet
     ports:
@@ -73,7 +73,7 @@ services:
       - OLLAMA_MAX_LOADED_MODELS=1     # Otimizado para 8GB VRAM
       - OLLAMA_MODEL=codellama:7b
       - OLLAMA_GPU_LAYERS=35           # Ajustado para RTX 8GB
-      - OLLAMA_NUM_PARALLEL=2          # Balanceado para sua CPU
+      - OLLAMA_NUM_PARALLEL=1          # Reduzido para economizar memória
       - OLLAMA_KEEP_ALIVE=-1
       # Otimizações de performance
       - OLLAMA_FLASH_ATTENTION=1       # Acelera processamento
