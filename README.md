@@ -143,11 +143,56 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
 
 #### Configurações de Otimização
 
-- `OLLAMA_CONTEXT_LENGTH`: Ajuste do contexto (4K-128K)
-- `OLLAMA_GPU_LAYERS`: Camadas na GPU (mais = melhor performance)
-- `OLLAMA_MAX_LOADED_MODELS`: Controle de memória
-- `OLLAMA_GPU_OVERHEAD`: Buffer de GPU (1GB-4GB)
-- `OLLAMA_NUM_PARALLEL`: Inferências paralelas
+##### Configurações do Ollama
+- `OLLAMA_CONTEXT_LENGTH`: 32768 (recomendado para boa performance)
+- `OLLAMA_GPU_LAYERS`: Ajuste baseado na VRAM disponível
+  - 35 layers para GPUs com 8GB VRAM
+  - 45 layers para GPUs com 12GB+ VRAM
+- `OLLAMA_MAX_LOADED_MODELS`: 1 (otimizar uso de VRAM)
+- `OLLAMA_GPU_OVERHEAD`: Buffer de GPU
+  - 1GB para GPUs com 8GB VRAM
+  - 2GB para GPUs com 12GB+ VRAM
+- `OLLAMA_NUM_PARALLEL`: 2 (balanceado para maioria dos sistemas)
+- `OLLAMA_FLASH_ATTENTION`: 1 (acelera processamento)
+- `OLLAMA_F16`: 1 (economia de VRAM com FP16)
+- `OLLAMA_BATCH_SIZE`: 8 (otimizado para performance)
+- `OLLAMA_PRELOAD`: 1 (carregamento mais rápido)
+
+##### Configurações do OpenHands
+- `OPENHANDS_LLM_CTX_SIZE`: 32768 (match com Ollama)
+- `OPENHANDS_LLM_GPU_LAYERS`: Mesmo valor do Ollama
+- `OPENHANDS_MAX_PARALLEL_REQUESTS`: 2 (balanceado)
+- `OPENHANDS_MEMORY_BUDGET`: Ajuste baseado na RAM
+  - 8GB para sistemas com 12GB RAM
+  - 12GB para sistemas com 16GB+ RAM
+
+##### Configurações Recomendadas por Hardware
+
+1. **Sistema Básico (8GB RAM, GPU 6GB VRAM)**
+   ```yaml
+   OLLAMA_GPU_LAYERS: 25
+   OLLAMA_GPU_OVERHEAD: 536870912  # 512MB
+   OLLAMA_NUM_PARALLEL: 1
+   OPENHANDS_MEMORY_BUDGET: 6442450944  # 6GB
+   ```
+
+2. **Sistema Intermediário (12GB RAM, GPU 8GB VRAM)**
+   ```yaml
+   OLLAMA_GPU_LAYERS: 35
+   OLLAMA_GPU_OVERHEAD: 1073741824  # 1GB
+   OLLAMA_NUM_PARALLEL: 2
+   OPENHANDS_MEMORY_BUDGET: 8589934592  # 8GB
+   ```
+
+3. **Sistema Avançado (16GB+ RAM, GPU 12GB+ VRAM)**
+   ```yaml
+   OLLAMA_GPU_LAYERS: 45
+   OLLAMA_GPU_OVERHEAD: 2147483648  # 2GB
+   OLLAMA_NUM_PARALLEL: 3
+   OPENHANDS_MEMORY_BUDGET: 12884901888  # 12GB
+   ```
+
+> **Nota**: Estas configurações são pontos de partida recomendados. Ajuste com base no comportamento do sistema e nas necessidades específicas do seu projeto.
 
 #### Alternativa Recomendada: CodeLlama 7B
 O [CodeLlama](https://ai.meta.com/blog/code-llama-large-language-model-coding/) é uma excelente alternativa para sistemas com recursos mais limitados:
