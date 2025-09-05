@@ -52,16 +52,67 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
 
 ### Modelos LLM Disponíveis
 
-#### Modelo Padrão: Devstral Latest
-O `devstral:latest` é o modelo padrão recomendado pela OpenHands, oferecendo:
-- Performance superior em tarefas de desenvolvimento
-- Compreensão avançada de contexto
-- Suporte a múltiplos paradigmas de programação
+#### Modelos Recomendados para Desenvolvimento
 
-**Requisitos de Hardware**:
-- RAM: 32GB+ recomendado
-- GPU: 12GB+ VRAM recomendado
-- SSD: 30GB+ livre
+1. **Devstral (24B)** - Modelo Padrão
+   - Especializado em tarefas de desenvolvimento e agentes de código
+   - Performance superior em tarefas complexas
+   - Requisitos: 32GB+ RAM, 12GB+ VRAM
+   - Uso: Desenvolvimento profissional e projetos complexos
+
+2. **CodeLlama (7B/13B/34B)**
+   - Focado em geração e análise de código
+   - Suporte a múltiplas linguagens de programação
+   - Requisitos: 16GB+ RAM, 8GB+ VRAM (versão 7B)
+   - Uso: Desenvolvimento geral e análise de código
+
+3. **Qwen2.5-Coder (7B/14B/32B)**
+   - Especializado em código com contexto longo
+   - Suporte a até 128K tokens
+   - Requisitos: 16GB+ RAM, 8GB+ VRAM (versão 7B)
+   - Uso: Projetos com bases de código grandes
+
+#### Modelos para Hardware Limitado
+
+1. **Phi (2.7B/3.8B)**
+   - Modelo leve com boa performance
+   - Excelente relação tamanho/performance
+   - Requisitos: 8GB+ RAM, 4GB+ VRAM
+   - Uso: Desenvolvimento em hardware modesto
+
+2. **TinyLlama (1.1B)**
+   - Modelo ultra-leve
+   - Bom para tarefas básicas
+   - Requisitos: 6GB+ RAM, 4GB+ VRAM
+   - Uso: Ambientes com recursos muito limitados
+
+#### Modelos Especializados
+
+1. **Mistral-Nemo (12B)**
+   - Otimizado para contexto longo (128k)
+   - Colaboração Mistral AI + NVIDIA
+   - Requisitos: 24GB+ RAM, 12GB+ VRAM
+   - Uso: Análise de códigos extensos
+
+2. **DeepSeek-Coder (6.7B/33B)**
+   - Treinado em 2T tokens de código
+   - Excelente para debugging e refatoração
+   - Requisitos: 16GB+ RAM, 8GB+ VRAM (versão 6.7B)
+   - Uso: Tarefas complexas de programação
+
+3. **StarCoder2 (3B/7B/15B)**
+   - Treinado em 80+ linguagens
+   - Ótimo para completion e geração
+   - Requisitos: 12GB+ RAM, 6GB+ VRAM (versão 3B)
+   - Uso: Desenvolvimento multilinguagem
+
+#### Configurações de Otimização
+
+- `OLLAMA_CONTEXT_LENGTH`: Ajuste do contexto (4K-128K)
+- `OLLAMA_GPU_LAYERS`: Camadas na GPU (mais = melhor performance)
+- `OLLAMA_MAX_LOADED_MODELS`: Controle de memória
+- `OLLAMA_GPU_OVERHEAD`: Buffer de GPU (1GB-4GB)
+- `OLLAMA_NUM_PARALLEL`: Inferências paralelas
 
 #### Alternativa Recomendada: CodeLlama 7B
 O [CodeLlama](https://ai.meta.com/blog/code-llama-large-language-model-coding/) é uma excelente alternativa para sistemas com recursos mais limitados:
