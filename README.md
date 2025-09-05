@@ -194,6 +194,67 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
 
 > **Nota**: Estas configurações são pontos de partida recomendados. Ajuste com base no comportamento do sistema e nas necessidades específicas do seu projeto.
 
+##### Configurações Otimizadas para GPUs RTX Série 30/40
+
+###### RTX 3050 (8GB VRAM)
+```yaml
+# Configurações Ollama
+OLLAMA_GPU_LAYERS: 38              # Otimizado para arquitetura Ampere
+OLLAMA_GPU_OVERHEAD: 1073741824    # 1GB overhead
+OLLAMA_NUM_PARALLEL: 2
+OLLAMA_BATCH_SIZE: 12              # Maior batch size devido ao melhor scheduler
+OLLAMA_F16: 1                      # Habilita FP16 para economia de VRAM
+OLLAMA_FLASH_ATTENTION: 1
+OLLAMA_CONCURRENT_SLOTS: 2         # Slots de execução paralela
+
+# Configurações OpenHands
+OPENHANDS_LLM_GPU_LAYERS: 38
+OPENHANDS_MEMORY_BUDGET: 10737418240  # 10GB para sistemas com 16GB+ RAM
+OPENHANDS_MAX_PARALLEL_REQUESTS: 2
+```
+
+###### RTX 4050 (6GB/8GB VRAM)
+```yaml
+# Configurações Ollama
+OLLAMA_GPU_LAYERS: 42              # Otimizado para arquitetura Ada Lovelace
+OLLAMA_GPU_OVERHEAD: 1073741824    # 1GB overhead
+OLLAMA_NUM_PARALLEL: 2
+OLLAMA_BATCH_SIZE: 16              # Maior devido ao melhor tensor core
+OLLAMA_F16: 1                      # Habilita FP16
+OLLAMA_FLASH_ATTENTION: 1
+OLLAMA_CONCURRENT_SLOTS: 3         # Mais slots devido à melhor eficiência
+OLLAMA_TENSOR_SPLIT: 1             # Habilita tensor splitting
+
+# Configurações OpenHands
+OPENHANDS_LLM_GPU_LAYERS: 42
+OPENHANDS_MEMORY_BUDGET: 12884901888  # 12GB para sistemas com 16GB+ RAM
+OPENHANDS_MAX_PARALLEL_REQUESTS: 3
+```
+
+> **Benefícios Específicos por GPU**:
+> 
+> **RTX 3050**:
+> - Melhor suporte a FP16 com Ampere
+> - Bom desempenho em batch processing
+> - Permite até 38 camadas na GPU com segurança
+> 
+> **RTX 4050**:
+> - Arquitetura Ada mais eficiente
+> - Melhor performance em FP16
+> - Suporte a tensor splitting
+> - Permite até 42 camadas na GPU
+> 
+> **Dicas de Otimização**:
+> 1. Monitore a temperatura da GPU (ideal < 80°C)
+> 2. Use `nvidia-smi` para monitorar uso de VRAM
+> 3. Ajuste `OLLAMA_GPU_LAYERS` se observar OOM (Out of Memory)
+> 4. Reduza `BATCH_SIZE` se encontrar instabilidades
+> 
+> **Modelos Recomendados**:
+> - Granite 8B (melhor equilíbrio)
+> - CodeLlama 7B (estável e eficiente)
+> - Mistral 7B (boa performance)
+
 #### Alternativa Recomendada: CodeLlama 7B
 O [CodeLlama](https://ai.meta.com/blog/code-llama-large-language-model-coding/) é uma excelente alternativa para sistemas com recursos mais limitados:
 
