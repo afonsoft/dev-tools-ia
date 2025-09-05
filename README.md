@@ -255,6 +255,134 @@ OPENHANDS_MAX_PARALLEL_REQUESTS: 3
 > - CodeLlama 7B (estável e eficiente)
 > - Mistral 7B (boa performance)
 
+##### Configurações Otimizadas por Quantidade de RAM
+
+###### Sistema com 16GB RAM
+```yaml
+# Configurações de Memória Gerais
+OPENHANDS_MEMORY_BUDGET: 10737418240       # 10GB para OpenHands
+deploy:
+  resources:
+    limits:
+      memory: 8g                           # Limite OpenHands
+    reservations:
+      memory: 6g                           # Reserva mínima
+
+# Configurações Ollama
+OLLAMA_MAX_LOADED_MODELS: 1
+OLLAMA_GPU_OVERHEAD: 1073741824            # 1GB para GPU overhead
+OLLAMA_BATCH_SIZE: 8
+OLLAMA_NUM_PARALLEL: 2
+
+# Modelos Recomendados:
+# - Granite 8B
+# - CodeLlama 7B
+# - Mistral 7B
+```
+
+###### Sistema com 20GB RAM
+```yaml
+# Configurações de Memória Gerais
+OPENHANDS_MEMORY_BUDGET: 14737418240       # 14GB para OpenHands
+deploy:
+  resources:
+    limits:
+      memory: 12g                          # Limite OpenHands
+    reservations:
+      memory: 8g                           # Reserva mínima
+
+# Configurações Ollama
+OLLAMA_MAX_LOADED_MODELS: 1
+OLLAMA_GPU_OVERHEAD: 1610612736            # 1.5GB para GPU overhead
+OLLAMA_BATCH_SIZE: 12
+OLLAMA_NUM_PARALLEL: 2
+
+# Modelos Recomendados:
+# - Mistral 8B
+# - DeepSeek-Coder 6.7B
+# - Qwen 7B
+```
+
+###### Sistema com 32GB RAM
+```yaml
+# Configurações de Memória Gerais
+OPENHANDS_MEMORY_BUDGET: 21474836480       # 20GB para OpenHands
+deploy:
+  resources:
+    limits:
+      memory: 16g                          # Limite OpenHands
+    reservations:
+      memory: 12g                          # Reserva mínima
+
+# Configurações Ollama
+OLLAMA_MAX_LOADED_MODELS: 2                # Permite carregar 2 modelos
+OLLAMA_GPU_OVERHEAD: 2147483648            # 2GB para GPU overhead
+OLLAMA_BATCH_SIZE: 16
+OLLAMA_NUM_PARALLEL: 3
+OLLAMA_CONCURRENT_SLOTS: 4
+
+# Modelos Recomendados:
+# - Devstral 24B
+# - CodeLlama 13B
+# - DeepSeek-Coder 16B
+```
+
+###### Sistema com 64GB RAM
+```yaml
+# Configurações de Memória Gerais
+OPENHANDS_MEMORY_BUDGET: 42949672960       # 40GB para OpenHands
+deploy:
+  resources:
+    limits:
+      memory: 32g                          # Limite OpenHands
+    reservations:
+      memory: 24g                          # Reserva mínima
+
+# Configurações Ollama
+OLLAMA_MAX_LOADED_MODELS: 3                # Permite carregar 3 modelos
+OLLAMA_GPU_OVERHEAD: 4294967296            # 4GB para GPU overhead
+OLLAMA_BATCH_SIZE: 24
+OLLAMA_NUM_PARALLEL: 4
+OLLAMA_CONCURRENT_SLOTS: 6
+OLLAMA_PRELOAD: 1
+OLLAMA_NUMA: 1                            # Habilita otimizações NUMA
+
+# Modelos Recomendados:
+# - Mistral-Large 32B
+# - CodeLlama 34B
+# - Qwen 72B
+```
+
+> **Notas de Otimização por RAM**:
+>
+> **16GB RAM**:
+> - Foco em modelos até 8B
+> - Gerenciamento conservador de memória
+> - Priorize um único modelo carregado
+>
+> **20GB RAM**:
+> - Suporte a modelos até 13B
+> - Melhor capacidade de processamento paralelo
+> - Boa para desenvolvimento médio
+>
+> **32GB RAM**:
+> - Ideal para modelos até 24B
+> - Suporte a múltiplos modelos
+> - Excelente para desenvolvimento profissional
+>
+> **64GB RAM**:
+> - Suporte a modelos grandes (30B+)
+> - Múltiplos modelos em paralelo
+> - Otimizações NUMA habilitadas
+> - Ideal para ambientes de produção
+>
+> **Dicas Gerais**:
+> 1. Reserve 20-30% da RAM total para o sistema operacional
+> 2. Use `OLLAMA_PRELOAD` em sistemas com RAM abundante
+> 3. Ajuste `NUMA` apenas em servidores multi-socket
+> 4. Monitore swap com `free -h` (Linux) ou Gerenciador de Tarefas (Windows)
+> 5. Em caso de OOM, reduza `OPENHANDS_MEMORY_BUDGET` em 25%
+
 #### Alternativa Recomendada: CodeLlama 7B
 O [CodeLlama](https://ai.meta.com/blog/code-llama-large-language-model-coding/) é uma excelente alternativa para sistemas com recursos mais limitados:
 
