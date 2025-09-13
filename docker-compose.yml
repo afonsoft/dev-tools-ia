@@ -17,14 +17,14 @@ services:
       - "host.docker.internal:host-gateway"
 
   openhands:
-    image: docker.all-hands.dev/all-hands-ai/openhands:0.55
+    image: docker.all-hands.dev/all-hands-ai/openhands:0.56
     container_name: openhands-hands-app
     pull_policy: always
     environment:
       LOG_ALL_EVENTS: "true"
       # Configurações do LLM
       OPENHANDS_LLM_PROVIDER: ollama
-      OPENHANDS_LLM_MODEL: codellama:7b
+      OPENHANDS_LLM_MODEL: devstral:24b
       OPENHANDS_LLM_ENDPOINT: http://ollama:11434
       OLLAMA_MODEL: codellama:7b
       # Otimizações GPU/CPU
@@ -71,7 +71,7 @@ services:
       - OLLAMA_CONTEXT_LENGTH=32768    # Mínimo recomendado pela OpenHands
       - OLLAMA_HOST=0.0.0.0:11434
       - OLLAMA_MAX_LOADED_MODELS=1     # Otimizado para 8GB VRAM
-      - OLLAMA_MODEL=codellama:7b
+      - OLLAMA_MODEL=devstral:24b
       - OLLAMA_GPU_LAYERS=35           # Ajustado para RTX 8GB
       - OLLAMA_NUM_PARALLEL=1          # Reduzido para economizar memória
       - OLLAMA_KEEP_ALIVE=-1
@@ -93,7 +93,7 @@ services:
       - >
         ollama serve &
         sleep 5 &&
-        ollama pull codellama:7b &&
+        ollama pull devstral:24b &&
         wait
     networks:
       - openhands-net
