@@ -35,14 +35,17 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
 
 ### Componentes Principais
 - **[OpenHands](https://github.com/all-hands-dev/openhands)**
-  - Ambiente de desenvolvimento IA
+  - Versão: 0.56 (última estável)
+  - Ambiente de desenvolvimento IA aprimorado
   - Integração com VS Code
   - Suporte a múltiplos modelos
+  - Otimização de memória melhorada
   - Interface local: http://localhost:3000
 - **[Ollama](https://github.com/ollama/ollama)**
   - API de modelo de linguagem
-  - Modelo padrão: CodeLlama 7B
-  - Otimizado para programação e análise de código
+  - Modelo padrão: Devstral 24B
+  - Especializado em desenvolvimento e agentes de código
+  - Otimizado para alta performance
   - Suporte a múltiplos modelos via API
   - API local: http://localhost:11434
 - **[Open WebUI](https://github.com/open-webui/open-webui)**
@@ -384,6 +387,8 @@ OLLAMA_NUMA: 1                            # Habilita otimizações NUMA
 > 3. Ajuste `NUMA` apenas em servidores multi-socket
 > 4. Monitore swap com `free -h` (Linux) ou Gerenciador de Tarefas (Windows)
 > 5. Em caso de OOM, reduza `OPENHANDS_MEMORY_BUDGET` em 25%
+> 6. Com OpenHands 0.56+, use configurações de paralelismo conservadoras
+> 7. Para Devstral 24B, recomenda-se mínimo de 32GB RAM
 >
 > **Importante: Gerenciamento de Paralelismo**
 > - `OLLAMA_NUM_PARALLEL` e `OPENHANDS_MAX_PARALLEL_REQUESTS` afetam diretamente o consumo de memória
