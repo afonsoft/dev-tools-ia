@@ -17,7 +17,7 @@ services:
       - "host.docker.internal:host-gateway"
 
   openhands:
-    image: docker.all-hands.dev/all-hands-ai/openhands:0.56
+    image: docker.all-hands.dev/all-hands-ai/openhands:0.57
     container_name: openhands-hands-app
     pull_policy: always
     environment:

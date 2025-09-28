@@ -1,5 +1,5 @@
 # Usa a imagem base fornecida, que já inclui um runtime e possivelmente outras ferramentas.
-FROM docker.all-hands.dev/all-hands-ai/runtime:0.56-nikolaik
+FROM docker.all-hands.dev/all-hands-ai/runtime:0.57-nikolaik
 
 # Define variáveis de ambiente para o locale, ajudando a evitar avisos de locale em alguns comandos.
 ENV LANG=C.UTF-8
