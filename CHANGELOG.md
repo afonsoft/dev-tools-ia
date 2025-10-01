@@ -4,6 +4,24 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [1.2.0] - 2025-10-01
+
+### Adicionado
+- Atualização do OpenHands para versão 0.58
+- Melhorias na documentação com estrutura mais clara
+- Adição de seção detalhada de variáveis de ambiente
+- Nova estrutura hierárquica do repositório no README
+
+### Alterado
+- Otimização das configurações de contexto do LLM (32768 tokens)
+- Atualização das instruções de instalação e execução
+- Refinamento da documentação técnica
+- Melhorias na formatação e organização do README
+
+### Corrigido
+- Ajustes nos links internos da documentação
+- Correção de inconsistências na documentação
+
 ## [1.1.0] - 2025-09-12
 ### Adicionado
 - Atualização do OpenHands para versão 0.56
