@@ -4,6 +4,21 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [1.3.0] - 2025-11-11
+
+### Adicionado
+- Atualizações na documentação (README e CHANGELOG).
+- Preparação da branch `feature/update` com ajustes de documentação.
+- Melhorias na organização da estrutura do repositório.
+
+### Alterado
+- Atualização das instruções de instalação e validação dos scripts.
+- Pequenas correções de links e formatação no README.
+
+### Corrigido
+- Ajustes nas instruções de execução para Windows.
+- Correção na sintaxe de alguns blocos de código.
+
 ## [1.2.0] - 2025-10-01
 
 ### Adicionado

@@ -119,7 +119,9 @@ Para mais detalhes sobre as últimas alterações, consulte o [CHANGELOG.md](CHA
 Este projeto está sob a licença [GNU GPL v3.0](LICENSE).
 
 ---
-*Última atualização: 2025-10-01*
+*Última atualização: 2025-11-11*
+
+Atualizações: README e CHANGELOG revisados; alterações preparadas na branch `feature/update`.
 
 1. **Devstral (24B)** - Modelo Padrão
    - Especializado em tarefas de desenvolvimento e agentes de código
@@ -743,8 +745,8 @@ OPENWEBUI_PASSWORD=admin
 ## Status do Projeto
 
 - **Estado**: Concluído
-- **Versão**: 1.0.0
-- **Última Atualização**: 28 de Agosto de 2025
+- **Versão**: 1.3.0
+- **Última Atualização**: 11 de Novembro de 2025
 
 ## Problemas Conhecidos e Soluções
 
