@@ -2,23 +2,40 @@
 
 Ambiente de desenvolvimento integrado para processamento de linguagem natural e codificação assistida por IA, combinando OpenHands, Ollama e uma interface web amigável.
 
-## Descrição do Projeto
+## 📋 Descrição do Projeto
 
 Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA, integrando ferramentas avançadas para desenvolvimento assistido por inteligência artificial. O ambiente oferece uma plataforma completa para desenvolvimento em .NET e Node.js, com suporte a processamento de linguagem natural e codificação assistida.
 
-### Visão de Negócio
+### 🎯 Visão de Negócio
 - Aumento de produtividade através de assistência IA no desenvolvimento
 - Ambiente padronizado e reproduzível para toda a equipe
 - Integração contínua com ferramentas modernas de desenvolvimento
 - Suporte a múltiplos frameworks e tecnologias
 
-### Visão Técnica
+### 🔧 Visão Técnica
 - Arquitetura baseada em containers com Docker
 - Aceleração por GPU para processamento de IA
 - Modelo de linguagem local para maior segurança e privacidade
 - Integração com ferramentas de desenvolvimento populares
 
-## Stack Tecnológica
+## 📁 Estrutura do Repositório
+
+```
+.
+├── openhands/           # Configurações do OpenHands AI
+│   └── settings.json    # Configurações específicas da IA
+├── runtime/             # Ambiente de execução
+│   └── Dockerfile      # Configuração do container de runtime
+├── vscode/             # Configurações do VS Code
+│   ├── extensions.json # Extensões recomendadas
+│   └── install-extensions.sh # Script de instalação de extensões
+├── docker-compose.yml  # Configuração dos serviços
+├── configure.sh        # Script de configuração do ambiente
+├── start.sh           # Script de inicialização
+└── LICENSE            # Licença do projeto
+```
+
+## 🛠️ Stack Tecnológica
 
 ### Runtime e Infraestrutura
 - **Base**: Docker com suporte NVIDIA GPU
@@ -35,7 +52,7 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
 
 ### Componentes Principais
 - **[OpenHands](https://github.com/all-hands-dev/openhands)**
-  - Versão: 0.56 (última estável)
+  - Versão: 0.58 (última estável)
   - Ambiente de desenvolvimento IA aprimorado
   - Integração com VS Code
   - Suporte a múltiplos modelos
@@ -54,9 +71,57 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
   - Customização de parâmetros
   - Interface local: http://localhost:8080
 
-### Modelos LLM Disponíveis
+## 🚀 Como Rodar a Aplicação
 
-#### Modelos Recomendados para Desenvolvimento
+1. **Pré-requisitos**
+   - Docker com suporte a NVIDIA GPU
+   - NVIDIA Container Toolkit instalado
+   - Mínimo de 16GB RAM (32GB recomendado)
+   - GPU com 8GB+ VRAM
+
+2. **Instalação**
+   ```bash
+   # Clone o repositório
+   git clone https://github.com/afonsoft/dev-tools-ia.git
+   cd dev-tools-ia
+
+   # Configure o ambiente
+   ./configure.sh
+
+   # Inicie os serviços
+   ./start.sh
+   ```
+
+3. **Acesso às Interfaces**
+   - OpenHands UI: http://localhost:3000
+   - Web UI: http://localhost:8080
+   - Ollama API: http://localhost:11434
+
+## ⚙️ Variáveis de Ambiente
+
+| Variável | Descrição | Valor Padrão |
+|----------|-----------|--------------|
+| OPENHANDS_LLM_PROVIDER | Provedor do modelo LLM | ollama |
+| OPENHANDS_LLM_MODEL | Modelo LLM a ser usado | devstral:24b |
+| OPENHANDS_LLM_TEMPERATURE | Temperatura de geração | 0.1 |
+| OPENHANDS_LLM_CTX_SIZE | Tamanho do contexto | 32768 |
+| CUDA_VISIBLE_DEVICES | GPU a ser utilizada | 0 |
+| OPENHANDS_MAX_PARALLEL_REQUESTS | Requisições paralelas | 1 |
+
+## 📈 Status do Projeto
+
+Status: **Concluído**
+
+Para mais detalhes sobre as últimas alterações, consulte o [CHANGELOG.md](CHANGELOG.md).
+
+## 📄 Licença
+
+Este projeto está sob a licença [GNU GPL v3.0](LICENSE).
+
+---
+*Última atualização: 2025-11-11*
+
+Atualizações: README e CHANGELOG revisados; alterações preparadas na branch `feature/update`.
 
 1. **Devstral (24B)** - Modelo Padrão
    - Especializado em tarefas de desenvolvimento e agentes de código
@@ -680,8 +745,8 @@ OPENWEBUI_PASSWORD=admin
 ## Status do Projeto
 
 - **Estado**: Concluído
-- **Versão**: 1.0.0
-- **Última Atualização**: 28 de Agosto de 2025
+- **Versão**: 1.3.0
+- **Última Atualização**: 11 de Novembro de 2025
 
 ## Problemas Conhecidos e Soluções
 
