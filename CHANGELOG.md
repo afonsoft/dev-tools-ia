@@ -4,6 +4,48 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [1.3.0] - 2025-11-11
+
+## [Unreleased] - 2026-01-01
+
+### Adicionado
+- `cbad673` | 2026-01-01 | Afonso Dutra Nogueira Filho — feat: Update openhands version
+
+### Corrigido
+- `1f12141` | 2025-11-20 | Afonso Dutra Nogueira Filho — fix: update Dockerfile to enhance dependency installation and streamline .NET SDK setup
+
+
+### Adicionado
+- Atualizações na documentação (README e CHANGELOG).
+- Preparação da branch `feature/update` com ajustes de documentação.
+- Melhorias na organização da estrutura do repositório.
+
+### Alterado
+- Atualização das instruções de instalação e validação dos scripts.
+- Pequenas correções de links e formatação no README.
+
+### Corrigido
+- Ajustes nas instruções de execução para Windows.
+- Correção na sintaxe de alguns blocos de código.
+
+## [1.2.0] - 2025-10-01
+
+### Adicionado
+- Atualização do OpenHands para versão 0.58
+- Melhorias na documentação com estrutura mais clara
+- Adição de seção detalhada de variáveis de ambiente
+- Nova estrutura hierárquica do repositório no README
+
+### Alterado
+- Otimização das configurações de contexto do LLM (32768 tokens)
+- Atualização das instruções de instalação e execução
+- Refinamento da documentação técnica
+- Melhorias na formatação e organização do README
+
+### Corrigido
+- Ajustes nos links internos da documentação
+- Correção de inconsistências na documentação
+
 ## [1.1.0] - 2025-09-12
 ### Adicionado
 - Atualização do OpenHands para versão 0.56
