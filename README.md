@@ -75,30 +75,49 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
 
 Resumo técnico do arquivo `runtime/Dockerfile` (fonte: `runtime/Dockerfile`):
 
-- **Imagem base**: `docker.openhands.dev/openhands/runtime:0.62-nikolaik` — imagem preparada com runtime e ferramentas de base.
+- **Imagem base**: `docker.openhands.dev/openhands/runtime:1.1-nikolaik` — imagem base atual usada no `FROM`.
 - **Locale**: `LANG=C.UTF-8`, `LC_ALL=C.UTF-8` para evitar warnings relacionados a locale.
-- **Dependências instaladas (apt)**: `ca-certificates`, `curl`, `ffmpeg`, `git`, `libbz2-dev`, `libffi-dev`, `libfontconfig1`, `libfreetype6`, `liblzma-dev`, `libncursesw5-dev`, `libreadline-dev`, `libsqlite3-dev`, `libssl-dev`, `libxml2-dev`, `libxmlsec1-dev`, `python3-pip`, `python3-setuptools`, `python3-venv`, `zlib1g-dev`.
-- **Node.js / NVM**: instala `nvm` (v0.40.3), instala a versão LTS do Node.js via `nvm install --lts` e configura `nvm alias default`.
-- **.NET SDKs**: usa `dotnet-install.sh` para instalar os canais `8` e `10` em `/usr/share/dotnet` e cria symlink para `/usr/bin/dotnet`.
-- **Python venv e pacotes OpenHands**: cria venv em `/opt/venv`, atualiza `pip/setuptools` e instala `openhands-agent-server`, `openhands-sdk`, `openhands-tools`, `openhands-workspace`.
-- **Astral UV e ferramentas**: instala o instalador `astral.sh/uv` e registra `openhands` como ferramenta (`uv tool install openhands`).
-- **Configurações de PATH e variáveis**:
+- **Dependências apt instaladas**: ca-certificates, curl, ffmpeg, git, bibliotecas de compilação e runtime (bz2, ffi, fontconfig, freetype, lzma, ncurses, readline, sqlite3, ssl, xml, xmlsec), `python3-pip`, `python3-setuptools`, `python3-venv`, `zlib1g-dev`.
+- **NVM / Node.js**: instala `nvm` (v0.40.3) e em seguida instala e usa a versão LTS do Node.js via `nvm install --lts` / `nvm use --lts`.
+- **.NET SDKs**: usa `dotnet-install.sh` para instalar os canais `8` e `10` em `/usr/share/dotnet` e adiciona symlink para `/usr/bin/dotnet`.
+- **Python venv e OpenHands**: cria virtualenv em `/opt/venv`, atualiza `pip/setuptools` e instala `openhands-agent-server`, `openhands-sdk`, `openhands-tools`, `openhands-workspace`.
+- **Astral UV**: instala `uv` via `astral.sh` e tenta `uv tool install openhands`.
+- **Configurações e variáveis de ambiente**:
   - `NVM_DIR=/root/.nvm`
-  - `PATH` atualizado para incluir Node, .NET tools e `/opt/venv/bin` e `/root/.local/bin`
+  - `PATH` atualizado para incluir Node LTS binário, `/root/.dotnet/tools`, `/usr/share/dotnet`, `/opt/venv/bin` e `/root/.local/bin`
   - `DOTNET_ROOT=/usr/share/dotnet`
   - `DOTNET_CLI_TELEMETRY_OPTOUT=true`
-  - `NODE_TLS_REJECT_UNAUTHORIZED=0`
-- **Ajustes de Git/NPM**: desabilita verificação SSL global do Git (`git config --global http.sslVerify false`) e `npm config set strict-ssl false` (útil em ambientes controlados, NÃO recomendado para ambientes públicos sem proxy seguro).
+  - `NODE_TLS_REJECT_UNAUTHORIZED=0` (usado no container; não recomendado em produção)
+- **Configurações de Git/NPM no container**: o Dockerfile ajusta git (`http.sslVerify false`, `core.longpaths true`) e `npm config set strict-ssl false` — útil em ambientes fechados, mas não seguro para ambientes públicos.
 - **Diretório de trabalho**: `WORKDIR /app`.
-- **Boas práticas aplicadas no Dockerfile**:
-  - Agrupamento de comandos `apt-get` e limpeza (`apt-get clean`, `rm -rf /var/lib/apt/lists/*`) para reduzir tamanho da imagem.
-  - Uso de virtualenv para isolar pacotes Python e evitar PEP 668 problems.
-  - Notas no Dockerfile recomendam avaliar instalação direta do Node.js para produção em vez de `nvm`.
+
+Boas práticas e notas
+- O Dockerfile consolida comandos `apt-get` e limpa caches para reduzir o tamanho da imagem.
+- Usar `nvm` em imagens finais pode aumentar complexidade; para imagens de produção, prefira instalar Node.js diretamente ou usar uma imagem base com Node pré-instalado.
+- Evite desabilitar verificações SSL/global em ambientes públicos — prefira configurar proxies/trusted CAs ou usar secrets via `docker-compose`.
+
+## 🧰 docker-compose
+
+Resumo do `docker-compose.yml`:
+
+- Serviços principais:
+  - `runtime`: build a partir de `./runtime/Dockerfile`, imagem local `openhands-runtime-dotnet`, volume `./workspace:/workspace`, container_name `openhands-runtime`.
+  - `openhands`: imagem `docker.openhands.dev/openhands/openhands:1.1`, container_name `openhands-hands-app`, expõe `3000:3000`, volumes para Docker socket e `./openhands` e `./workspace`, depende de `runtime` e `ollama`, usa runtime `nvidia` e reserva GPU via `deploy.resources`.
+  - `ollama`: imagem `ollama/ollama:latest`, container_name `ollama-ai`, expõe `11434:11434`, variável `OLLAMA_CONTEXT_LENGTH=32768`, `OLLAMA_MODEL=devstral:24b`, configurações de GPU/performace (e.g. `OLLAMA_GPU_LAYERS=35`, `OLLAMA_F16=1`, `OLLAMA_PRELOAD=1`), faz `ollama pull devstral:24b` no `command`.
+  - `open-webui`: imagem `ghcr.io/open-webui/open-webui:main`, container_name `open-webui`, expõe `8080:8080`, volumes `./open-webui:/app/backend/data` e `./workspace:/workspace`.
+
+- Principais portas:
+  - OpenHands UI: `3000`
+  - Ollama API: `11434`
+  - Open Web UI: `8080`
+
+- Observações de runtime e recursos:
+  - Os serviços `openhands` e `ollama` configuram `runtime: nvidia` e reservam dispositivos `nvidia` via `deploy.resources.reservations`.
+  - `openhands` define `OPENHANDS_LLM_MODEL=devstral:24b`, `OPENHANDS_LLM_PROVIDER=ollama`, e `OPENHANDS_MEMORY_BUDGET=8589934592` (8GB).
 
 Recomendações rápidas
-- Revise `npm` e `git` configs para ambientes públicos (não desabilitar SSL em produção).
-- Se for publicar imagem para produção, prefira instalar Node.js direto em vez de `nvm` (evita complexidade em imagens não-interativas).
-- Considere expor variáveis sensíveis externamente via `docker-compose` ou secrets em vez de hardcode no Dockerfile.
+- Verifique as reservas de memória/CPU em `deploy.resources` antes de implantar em ambientes com restrições.
+- Armazene credenciais e variáveis sensíveis em arquivos de ambiente ou `docker-compose` secrets em vez de `docker-compose.yml` em texto plano.
 
 
 ## 🚀 Como Rodar a Aplicação
@@ -152,6 +171,13 @@ Este projeto está sob a licença [GNU GPL v3.0](LICENSE).
 *Última atualização: 2025-11-11*
 
 Atualizações: README e CHANGELOG revisados; alterações preparadas na branch `feature/update`.
+
+**Informações do Repositório**
+
+- **Nome:** afonsoft/dev-tools-ia
+- **Owner:** afonsoft
+- **Branch atual:** feature/update
+- **Branch padrão:** main
 
 1. **Devstral (24B)** - Modelo Padrão
    - Especializado em tarefas de desenvolvimento e agentes de código

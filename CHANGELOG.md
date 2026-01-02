@@ -6,6 +6,15 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ## [1.3.0] - 2025-11-11
 
+## [Unreleased] - 2026-01-01
+
+### Adicionado
+- `cbad673` | 2026-01-01 | Afonso Dutra Nogueira Filho — feat: Update openhands version
+
+### Corrigido
+- `1f12141` | 2025-11-20 | Afonso Dutra Nogueira Filho — fix: update Dockerfile to enhance dependency installation and streamline .NET SDK setup
+
+
 ### Adicionado
 - Atualizações na documentação (README e CHANGELOG).
 - Preparação da branch `feature/update` com ajustes de documentação.
