@@ -14,6 +14,12 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 ### Corrigido
 - `1f12141` | 2025-11-20 | Afonso Dutra Nogueira Filho — fix: update Dockerfile to enhance dependency installation and streamline .NET SDK setup
 
+### Dependências / Versões
+- OpenHands image: `docker.openhands.dev/openhands/openhands:1.1`
+- Runtime base image: `docker.openhands.dev/openhands/runtime:1.1-nikolaik`
+- .NET SDKs instalados no runtime: `8` e `10`
+- Ollama: `ollama/ollama:latest` (modelo padrão: `devstral:24b`)
+
 
 ### Adicionado
 - Atualizações na documentação (README e CHANGELOG).
@@ -70,7 +76,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ### Configurado
 - Ambiente Docker com suporte a GPU NVIDIA
-- .NET SDKs 8.0 e 9.0
+- .NET SDKs 8 e 10
 - Node.js com NVM
 - Configurações do Ollama para modelo devstral:latest
 - Autenticação básica para Web UI
