@@ -44,15 +44,15 @@ Este projeto fornece um ambiente de desenvolvimento containerizado focado em IA,
 
 ### Frameworks e SDKs
 - **.NET**
-  - SDK 8.0 (LTS)
-  - SDK 9.0 (Preview)
+  - SDK 8.0
+  - SDK 10.0
 - **Node.js**
   - Gerenciamento via NVM
   - Última versão LTS
 
 ### Componentes Principais
 - **[OpenHands](https://github.com/all-hands-dev/openhands)**
-  - Versão: 0.58 (última estável)
+  - Versão: 1.1 (última estável)
   - Ambiente de desenvolvimento IA aprimorado
   - Integração com VS Code
   - Suporte a múltiplos modelos
