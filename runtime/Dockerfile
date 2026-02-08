@@ -1,5 +1,5 @@
 # Usa a imagem base fornecida, que já inclui um runtime e possivelmente outras ferramentas.
-FROM docker.openhands.dev/openhands/runtime:1.1-nikolaik
+FROM docker.openhands.dev/openhands/runtime:1.3-nikolaik
 
 # Define variáveis de ambiente para o locale, ajudando a evitar avisos de locale em alguns comandos.
 ENV LANG=C.UTF-8
