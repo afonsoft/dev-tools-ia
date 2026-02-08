@@ -39,6 +39,7 @@ services:
       OPENHANDS_MAX_PARALLEL_REQUESTS: 1 # Reduzido para economizar memória
       OPENHANDS_MEMORY_BUDGET: 8589934592 # 8GB total memory budget
       SANDBOX_RUNTIME_CONTAINER_IMAGE: openhands-runtime-dotnet
+      SANDBOX_BASE_CONTAINER_IMAGE: openhands-runtime-dotnet
     ports:
       - "3000:3000"
     volumes:
