@@ -9,8 +9,18 @@ services:
     container_name: openhands-runtime
     stdin_open: true
     tty: true
+    environment:
+      # Variáveis essenciais para OpenHands Runtime
+      PYTHONUNBUFFERED: "1"
+      PYTHONPATH: "/app:/workspace"
+      PATH: "/opt/venv/bin:/usr/share/dotnet:/root/.dotnet/tools:/root/.local/bin:$PATH"
+      DOTNET_ROOT: /usr/share/dotnet
+      DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+      NVM_DIR: "/root/.nvm"
+      NODE_ENV: "production"
     volumes:
       - ./workspace:/workspace
+      - /var/run/docker.sock:/var/run/docker.sock # Necessário para sandbox
     networks:
       - openhands-net
     extra_hosts:
@@ -30,6 +40,13 @@ services:
       OPENHANDS_LLM_TOP_P: 0.9
       OPENHANDS_MAX_ITERATIONS: 50 # Limite de iterações
       OPENHANDS_ENABLE_AUTO_LINT: true # Auto-lint do código
+      # Configurações de Runtime e Sandbox
+      WORKSPACE_MOUNT_PATH: /workspace
+      WORKSPACE_BASE: /workspace
+      SANDBOX_RUNTIME_CONTAINER_IMAGE: openhands-runtime-dotnet
+      SANDBOX_BASE_CONTAINER_IMAGE: openhands-runtime-dotnet
+      SANDBOX_USER_ID: "0" # Root user para compatibilidade
+      DOCKER_HOST: unix:///var/run/docker.sock
       # Otimizações GPU/CPU
       CUDA_VISIBLE_DEVICES: 0
       OPENHANDS_LLM_GPU_LAYERS: 35
@@ -38,8 +55,6 @@ services:
       OPENHANDS_LOAD_TIMEOUT: 900
       OPENHANDS_MAX_PARALLEL_REQUESTS: 1 # Reduzido para economizar memória
       OPENHANDS_MEMORY_BUDGET: 8589934592 # 8GB total memory budget
-      SANDBOX_RUNTIME_CONTAINER_IMAGE: openhands-runtime-dotnet
-      SANDBOX_BASE_CONTAINER_IMAGE: openhands-runtime-dotnet
     ports:
       - "3000:3000"
     volumes:
