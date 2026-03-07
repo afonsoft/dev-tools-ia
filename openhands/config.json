@@ -1,0 +1,10 @@
+{
+  "llm": {
+    "provider": "ollama",
+    "base_url": "http://ollama:11434",
+    "model": "deepseek-coder"
+  },
+  "editor": {
+    "default_path": "/workspace"
+  }
+}
