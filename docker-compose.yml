@@ -34,18 +34,6 @@ services:
       # Configurações de workspace otimizadas
       WORKSPACE_TIMEOUT: 600 # 10 minutos para operações
       MAX_WORKSPACE_SIZE: "5g" # 5GB max workspace
-      # Recursos otimizados para RTX 2050
-      deploy:
-        resources:
-          limits:
-            memory: "3g" # Reduzido para 3GB total
-            cpus: "1.5" # Reduzido para 1.5 cores
-          reservations:
-            devices:
-              - driver: nvidia
-                count: all
-                capabilities: [gpu]
-      runtime: nvidia
     ports:
       - "3000:3000"
     volumes:
@@ -126,7 +114,7 @@ services:
       ENABLE_SIGNUP: false
       # Otimizações para baixa memória
       WEBUI_NAME: "OpenHands Lite"
-      DEFAULT_MODELS: ["qwen2.5-coder:7b-instruct-q4_K_M"]
+      DEFAULT_MODELS: "qwen2.5-coder:7b-instruct-q4_K_M"
       ENABLE_RAG_WEB_SEARCH: true
       ENABLE_IMAGE_GENERATION: true
     networks:
