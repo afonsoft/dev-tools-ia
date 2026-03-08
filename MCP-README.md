@@ -33,43 +33,56 @@ npm install -g @modelcontextprotocol/server-brave-search
 npm install -g @modelcontextprotocol/server-postgres
 ```
 
-## 🔧 Configuração no OpenHands
+## � Tipos de Servidores MCP
 
-1. Copie o arquivo `mcp-config.json` para o diretório do OpenHands:
-```bash
-cp mcp-config.json ./openhands/mcp-config.json
+### 🔄 **Stdio Servers** (Direto)
+- **Uso**: Desenvolvimento e testes rápidos
+- **Performance**: Alta (sem overhead de proxy)
+- **Confiabilidade**: Média (sem reconexão automática)
+- **Recomendado**: Para desenvolvimento local
+
+### 🌐 **SSE Servers** (Server-Sent Events)
+- **Uso**: Produção e serviços externos
+- **Performance**: Média (com overhead)
+- **Confiabilidade**: Alta (reconexão automática)
+- **Recomendado**: Para serviços críticos
+
+### ⚡ **SHTTP Servers** (HTTP Streamable)
+- **Uso**: Operações pesadas e streaming
+- **Performance**: Alta (com timeout configurável)
+- **Confiabilidade**: Alta (reconexão automática)
+- **Recomendado**: Para processamento de arquivos
+
+## 🔧 Configuração Oficial OpenHands
+
+A configuração segue o formato oficial do OpenHands:
+
+```json
+{
+    "mcp": {
+        "stdio_servers": [...],
+        "sse_servers": [...],
+        "shttp_servers": [...]
+    }
+}
 ```
 
-2. Adicione ao `docker-compose.yml` do OpenHands:
-```yaml
-environment:
-  OPENHANDS_MCP_CONFIG_PATH: /openhands/mcp-config.json
-```
+### 🔄 **Stdio Servers** (Configurados)
+- **memory**: Armazenamento persistente
+- **sequential-thinking**: Processamento estruturado
+- **everything**: Busca universal
+- **fetch**: Requisições HTTP
+- **filesystem**: Acesso a arquivos
+- **git**: Operações Git
+- **sqlite**: Banco de dados
+- **puppeteer**: Web automation
+- **shadcn-ui**: Componentes UI
 
-## 📊 Descrição dos Servidores
+### 🌐 **SSE Servers** (Configurados)
+- **deepwiki**: Documentação técnica
 
-### 🧠 **Core Servers** (Sempre Ativos)
-- **memory**: Armazenamento persistente de contexto e memória
-- **sequential-thinking**: Processamento estruturado de problemas
-- **everything**: Busca universal em arquivos e conteúdo
-- **fetch**: Requisições HTTP e integração web
-- **deepwiki**: Documentação e conhecimento técnico
-
-### 💻 **Development Servers** (Essenciais para C#)
-- **filesystem**: Acesso otimizado ao sistema de arquivos
-- **git**: Operações Git automatizadas e inteligentes
-- **sqlite**: Banco de dados leve para projetos
-- **docker**: Integração com containers Docker
-
-### 🌐 **Web & Automation** (Opcional)
-- **puppeteer**: Web scraping e automação de browsers
-- **shadcn-ui**: Geração de componentes UI modernos
-- **brave-search**: Busca web (requer API key gratuita)
-
-### 🗄️ **Database & Integration** (Opcional)
-- **postgres**: Conexão com PostgreSQL
-- **slack**: Integração com Slack (opcional)
-- **google-drive**: Acesso a arquivos Google Drive (opcional)
+### ⚡ **SHTTP Servers** (Exemplo)
+- **API externa**: Para processamento pesado
 
 ## 🎯 Casos de Uso para C#/.NET
 
@@ -95,75 +108,101 @@ environment:
 
 ## 🔥 Servidores Gratuitos Recomendados
 
-| Server | Uso Principal | Token Necessário | Instalação |
-|--------|---------------|------------------|------------|
-| memory | Memória persistente | ❌ Não | npm install |
-| filesystem | Arquivos locais | ❌ Não | npm install |
-| git | Controle de versão | ❌ Não | npm install |
-| sqlite | Banco de dados | ❌ Não | npm install |
-| fetch | Requisições HTTP | ❌ Não | pip install |
-| puppeteer | Web automation | ❌ Não | npm install |
-| brave-search | Busca web | ✅ Gratuito | npm install |
+| Tipo | Server | Uso Principal | Token | Performance |
+|------|--------|---------------|-------|-------------|
+| Stdio | memory | Memória persistente | ❌ Não | ⚡ Alta |
+| Stdio | filesystem | Arquivos locais | ❌ Não | ⚡ Alta |
+| Stdio | git | Controle de versão | ❌ Não | ⚡ Alta |
+| Stdio | sqlite | Banco de dados | ❌ Não | ⚡ Alta |
+| Stdio | fetch | Requisições HTTP | ❌ Não | ⚡ Alta |
+| Stdio | puppeteer | Web automation | ❌ Não | ⚡ Alta |
+| SSE | deepwiki | Documentação | ❌ Não | 🔄 Média |
+| SHTTP | custom | Processamento | ⚠️ Opcional | ⚡ Alta |
 
 ## ⚙️ Configuração Avançada
 
 ### Performance para RTX 2050
 ```json
 {
-  "servers": {
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
-      "env": {
-        "MEMORY_LIMIT": "1GB",
-        "CACHE_SIZE": "100MB"
-      }
+    "mcp": {
+        "stdio_servers": [
+            {
+                "name": "memory",
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-memory"],
+                "env": {
+                    "MEMORY_LIMIT": "1GB",
+                    "CACHE_SIZE": "100MB"
+                }
+            }
+        ],
+        "shttp_servers": [
+            {
+                "url": "https://api.example.com/mcp/shttp",
+                "timeout": 1800
+            }
+        ]
     }
-  }
 }
 ```
 
 ### Segurança
 ```json
 {
-  "servers": {
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspace"],
-      "env": {
-        "ALLOWED_PATHS": "/workspace,/workspace/src",
-        "DENIED_PATHS": "/etc,/usr/bin"
-      }
+    "mcp": {
+        "stdio_servers": [
+            {
+                "name": "filesystem",
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspace"],
+                "env": {
+                    "ALLOWED_PATHS": "/workspace,/workspace/src",
+                    "DENIED_PATHS": "/etc,/usr/bin"
+                }
+            }
+        ]
     }
-  }
 }
 ```
 
 ## 🚀 Setup Completo
 
-1. **Instale os servidores**:
+### 1. Instale os servidores
 ```bash
+# Windows
+./install-mcp-servers.bat
+
+# Linux/macOS
 ./install-mcp-servers.sh
 ```
 
-2. **Configure o OpenHands**:
+### 2. Configure o OpenHands
 ```bash
+# Copiar configuração
 cp mcp-config.json ./openhands/
+
+# Reiniciar OpenHands
 docker-compose restart openhands
 ```
 
-3. **Verifique a instalação**:
+### 3. Verifique a instalação
 ```bash
-docker-compose exec openhands npx @modelcontextprotocol/cli list-servers
+# Verificar servidores ativos
+docker-compose exec openhands curl -f http://localhost:3000/health
+
+# Verificar logs
+docker-compose logs openhands | grep -i mcp
 ```
 
 ## 📈 Benefícios
 
-✅ **Productividade 10x**: Geração automática de código C#  
+✅ **Productividade 10x**: Geração automática de código C# com stdio servers  
 ✅ **Qualidade**: Padrões SOLID e melhores práticas  
-✅ **Velocidade**: Operações Git e filesystem otimizadas  
-✅ **Inteligência**: Memória contextual e aprendizado  
+✅ **Velocidade**: Operações Git e filesystem em alta performance  
+✅ **Inteligência**: Memória contextual e aprendizado contínuo  
 ✅ **Automação**: Web scraping e CI/CD integrados  
+✅ **Confiabilidade**: Mix de stdio (dev) e SSE/SHTTP (produção)  
+✅ **Flexibilidade**: Timeout configurável para operações pesadas  
 
 ## 🔗 Links Úteis
 

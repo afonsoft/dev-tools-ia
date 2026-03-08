@@ -1,133 +1,63 @@
 {
-  "servers": {
-    "MCP_DOCKER": {
-      "command": "docker",
-      "args": [
-        "mcp",
-        "gateway",
-        "run"
-      ],
-      "env": {
-        "LOCALAPPDATA": "C:\\Users\\adnsasp\\AppData\\Local",
-        "ProgramData": "C:\\ProgramData",
-        "ProgramFiles": "C:\\Program Files"
-      },
-      "type": "stdio"
-    },
-    "deepwiki": {
-      "url": "https://mcp.deepwiki.com/mcp"
-    },
-    "memory": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-memory"
-      ]
-    },
-    "sequential-thinking": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ]
-    },
-    "everything": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-everything"
-      ]
-    },
-    "fetch": {
-      "command": "python",
-      "args": [
-        "-m",
-        "mcp_server_fetch"
-      ]
-    },
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/workspace"
-      ]
-    },
-    "git": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-git",
-        "--repository",
-        "/workspace"
-      ]
-    },
-    "sqlite": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sqlite",
-        "--db-path",
-        "/workspace/data.db"
-      ]
-    },
-    "brave-search": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-brave-search"
-      ],
-      "env": {
-        "BRAVE_API_KEY": ""
-      }
-    },
-    "postgres": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-postgres"
-      ],
-      "env": {
-        "POSTGRES_CONNECTION_STRING": "postgresql://user:password@localhost:5432/dbname"
-      }
-    },
-    "puppeteer": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-puppeteer"
-      ]
-    },
-    "shadcn-ui": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-shadcn-ui"
-      ]
-    },
-    "slack": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-slack"
-      ],
-      "env": {
-        "SLACK_BOT_TOKEN": "",
-        "SLACK_APP_TOKEN": ""
-      }
-    },
-    "google-drive": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-google-drive"
-      ],
-      "env": {
-        "GOOGLE_CLIENT_ID": "",
-        "GOOGLE_CLIENT_SECRET": "",
-        "GOOGLE_REDIRECT_URI": "http://localhost:3000"
-      }
+    "mcp": {
+        "stdio_servers": [
+            {
+                "name": "memory",
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-memory"]
+            },
+            {
+                "name": "sequential-thinking",
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+            },
+            {
+                "name": "everything",
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-everything"]
+            },
+            {
+                "name": "fetch",
+                "command": "python",
+                "args": ["-m", "mcp_server_fetch"]
+            },
+            {
+                "name": "filesystem",
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspace"]
+            },
+            {
+                "name": "git",
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/workspace"]
+            },
+            {
+                "name": "sqlite",
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-sqlite", "--db-path", "/workspace/data.db"]
+            },
+            {
+                "name": "puppeteer",
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+            },
+            {
+                "name": "shadcn-ui",
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-shadcn-ui"]
+            }
+        ],
+        "sse_servers": [
+            {
+                "url": "https://mcp.deepwiki.com/mcp",
+                "name": "deepwiki"
+            }
+        ],
+        "shttp_servers": [
+            {
+                "url": "https://api.example.com/mcp/shttp",
+                "timeout": 300
+            }
+        ]
     }
-  },
-  "inputs": []
 }
