@@ -47,6 +47,14 @@ services:
     depends_on:
       ollama:
         condition: service_started
+    deploy:
+      resources:
+        limits:
+          memory: "2g"
+          cpus: "1.5"
+        reservations:
+          memory: "1g"
+          cpus: "1"
 
   ollama:
     image: ollama/ollama:latest
@@ -93,8 +101,8 @@ services:
     deploy:
       resources:
         limits:
-          memory: "4g" # Reduzido para 4GB total
-          cpus: "1.5" # Reduzido para 1.5 cores
+          memory: "16g" # Reduzido para 16GB total
+          cpus: "2" # Reduzido para 2 cores
         reservations:
           devices:
             - driver: nvidia
