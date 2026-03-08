@@ -1,0 +1,503 @@
+[
+  // ╔═══════════════════════════════════════════════════════════════════════╗
+  // ║  VS Code — Keybindings Otimizadas para DevTools IA + Continue          ║
+  // ║  C#/.NET Development · AI Integration · Productivity Shortcuts        ║
+  // ╚═══════════════════════════════════════════════════════════════════════╝
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // CONTINUE IA — Primary Shortcuts
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+l",
+    "command": "continue.quickChat",
+    "when": "!inlineChatFocused"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "continue.editWithInput",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "ctrl+shift+\\",
+    "command": "continue.focusContinueInput",
+    "when": "!inlineChatFocused"
+  },
+  {
+    "key": "ctrl+shift+/",
+    "command": "continue.slashCommand",
+    "when": "!inlineChatFocused"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // C#/.NET DEVELOPMENT — Core Shortcuts
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+shift+c",
+    "command": "dotnet.generateAsync",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "dotnet.test.runTestsInContext",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+d",
+    "command": "dotnet.test.debugTestsInContext",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "dotnet.refactor",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "dotnet.generateClass",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+i",
+    "command": "dotnet.generateInterface",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "dotnet.addMissingUsings",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+u",
+    "command": "dotnet.removeUnusedUsings",
+    "when": "editorLangId == 'csharp'"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // EDITOR — Formatting & Navigation
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+shift+f",
+    "command": "editor.action.formatDocument",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+o",
+    "command": "workbench.action.gotoSymbol",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+s",
+    "command": "workbench.action.files.saveAll",
+    "when": "!inDebugMode"
+  },
+  {
+    "key": "ctrl+shift+g",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
+  {
+    "key": "ctrl+shift+b",
+    "command": "editor.action.goToImplementation",
+    "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+shift+p",
+    "command": "workbench.action.showCommands"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // TERMINAL — Quick Access
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.terminal.toggle"
+  },
+  {
+    "key": "ctrl+shift+`",
+    "command": "workbench.action.terminal.split"
+  },
+  {
+    "key": "ctrl+alt+t",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalProcessSupported || terminalWebExtensionContributed"
+  },
+  {
+    "key": "ctrl+shift+enter",
+    "command": "workbench.action.terminal.runSelectedText",
+    "when": "editorTextFocus && editorHasSelection"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // DEBUG — Enhanced Shortcuts
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "f5",
+    "command": "workbench.action.debug.start",
+    "when": "!inDebugMode && debuggersAvailable"
+  },
+  {
+    "key": "f5",
+    "command": "workbench.action.debug.continue",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "shift+f5",
+    "command": "workbench.action.debug.stop",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+f5",
+    "command": "workbench.action.debug.run",
+    "when": "!inDebugMode"
+  },
+  {
+    "key": "f9",
+    "command": "editor.debug.action.toggleBreakpoint",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+f9",
+    "command": "debug.toggleInlineBreakpoint",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "f10",
+    "command": "workbench.action.debug.stepOver",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "f11",
+    "command": "workbench.action.debug.stepInto",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "shift+f11",
+    "command": "workbench.action.debug.stepOut",
+    "when": "inDebugMode"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // TESTING — Quick Test Actions
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+shift+1",
+    "command": "dotnet.test.runAllTests",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+2",
+    "command": "dotnet.test.runTestsInFile",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+3",
+    "command": "dotnet.test.runTestAtCursor",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+4",
+    "command": "dotnet.test.debugTestAtCursor",
+    "when": "editorLangId == 'csharp'"
+  },
+  {
+    "key": "ctrl+shift+5",
+    "command": "dotnet.test.coverage",
+    "when": "editorLangId == 'csharp'"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // GIT — Enhanced Git Shortcuts
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+shift+g",
+    "command": "workbench.view.scm",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "alt+down",
+    "command": "workbench.action.compareEditor.nextChange",
+    "when": "editorTextFocus && !diffEditorOriginal"
+  },
+  {
+    "key": "alt+up",
+    "command": "workbench.action.compareEditor.previousChange",
+    "when": "editorTextFocus && !diffEditorOriginal"
+  },
+  {
+    "key": "ctrl+shift+h",
+    "command": "git.stageSelectedRanges",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+u",
+    "command": "git.unstageSelectedRanges",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // EXPLORER & FILES — Quick Navigation
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+shift+n",
+    "command": "workbench.action.files.newUntitledFile"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "workbench.action.files.closeAll"
+  },
+  {
+    "key": "ctrl+shift+d",
+    "command": "workbench.action.files.duplicateFile",
+    "when": "explorerResourceIsFolder || explorerResourceIsRoot"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "workbench.action.files.renameFile",
+    "when": "explorerResourceIsFolder || explorerResourceIsRoot"
+  },
+  {
+    "key": "ctrl+shift+delete",
+    "command": "workbench.action.files.deleteFile",
+    "when": "explorerResourceIsFolder || explorerResourceIsRoot"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // WINDOW & PANELS — Panel Management
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+\\",
+    "command": "workbench.action.splitEditor"
+  },
+  {
+    "key": "ctrl+alt+\\",
+    "command": "workbench.action.splitEditorOrthogonal"
+  },
+  {
+    "key": "ctrl+1",
+    "command": "workbench.action.focusFirstEditorGroup"
+  },
+  {
+    "key": "ctrl+2",
+    "command": "workbench.action.focusSecondEditorGroup"
+  },
+  {
+    "key": "ctrl+3",
+    "command": "workbench.action.focusThirdEditorGroup"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // SEARCH & NAVIGATION — Enhanced Search
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+shift+f",
+    "command": "workbench.action.findInFiles",
+    "when": "!explorerResourceIsFolder && !explorerResourceIsRoot"
+  },
+  {
+    "key": "ctrl+shift+h",
+    "command": "workbench.action.replaceInFiles",
+    "when": "!explorerResourceIsFolder && !explorerResourceIsRoot"
+  },
+  {
+    "key": "ctrl+f1",
+    "command": "workbench.action.findInFilesWithSelectedText",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "ctrl+shift+o",
+    "command": "workbench.action.gotoSymbol",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "editor.action.gotoSymbolInWorkspace",
+    "when": "editorTextFocus"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // BOOKMARKS & MARKERS — Quick Navigation
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+alt+k",
+    "command": "bookmarks.toggle",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+l",
+    "command": "bookmarks.list",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+j",
+    "command": "bookmarks.jumpToPrevious",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+;",
+    "command": "bookmarks.jumpToNext",
+    "when": "editorTextFocus"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASKS & BUILD — Quick Build Actions
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+shift+b",
+    "command": "workbench.action.tasks.build",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "workbench.action.tasks.test",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "workbench.action.tasks.runTask",
+    "when": "!terminalFocus"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // CONTINUE IA — Advanced Commands
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+alt+c",
+    "command": "continue.clearContext",
+    "when": "!inlineChatFocused"
+  },
+  {
+    "key": "ctrl+alt+m",
+    "command": "continue.switchModel",
+    "when": "!inlineChatFocused"
+  },
+  {
+    "key": "ctrl+alt+s",
+    "command": "continue.saveConversation",
+    "when": "!inlineChatFocused"
+  },
+  {
+    "key": "ctrl+alt+h",
+    "command": "continue.showHistory",
+    "when": "!inlineChatFocused"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // OLLAMA & LOCAL AI — Quick Management
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+alt+o",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "ollama list\n"
+    },
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+alt+1",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "ollama stop qwen2.5-coder:7b-instruct-q4_K_M\n"
+    },
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+alt+2",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "ollama run qwen2.5-coder:7b-instruct-q4_K_M\n"
+    },
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+alt+v",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "nvidia-smi\n"
+    },
+    "when": "terminalFocus"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // EMERGENCY & SAFETY — Quick Escape
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "escape",
+    "command": "workbench.action.closeQuickOpen",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "escape",
+    "command": "inlineChat.close",
+    "when": "inlineChatFocused"
+  },
+  {
+    "key": "escape",
+    "command": "cancel",
+    "when": "commandPaletteVisible"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // QUICK FIXES & CODE ACTIONS
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+.",
+    "command": "editor.action.quickFix",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !inDebugMode"
+  },
+  {
+    "key": "ctrl+shift+.",
+    "command": "editor.action.refactor",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !inDebugMode"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "editor.action.rename",
+    "when": "editorHasRenameProvider && editorTextFocus && !inDebugMode"
+  },
+  {
+    "key": "f2",
+    "command": "editor.action.rename",
+    "when": "editorHasRenameProvider && editorTextFocus && !inDebugMode"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // MULTIPLE CURSORS & SELECTION
+  // ═══════════════════════════════════════════════════════════════════════
+  {
+    "key": "ctrl+d",
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "editor.action.selectHighlights",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+up",
+    "command": "editor.action.moveLinesUp",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+down",
+    "command": "editor.action.moveLinesDown",
+    "when": "editorTextFocus && !editorReadonly"
+  }
+]

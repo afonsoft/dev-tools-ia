@@ -1,6 +1,6 @@
-# 🚀 Dev Tools IA - RTX 2050 Optimized
+# 🚀 Dev Tools IA - NVIDIA Optimized
 
-Ambiente de desenvolvimento IA local otimizado para RTX 2050 com Qwen 2.5 Coder 7B, focado em desenvolvimento C#/.NET profissional.
+Ambiente de desenvolvimento IA local otimizado para NVIDIA RTX com Qwen 2.5 Coder 7B, focado em desenvolvimento C#/.NET profissional.
 
 ## 🎯 Foco Principal
 - **RTX 2050 (4GB VRAM)**: Setup otimizado para máxima performance
@@ -10,12 +10,12 @@ Ambiente de desenvolvimento IA local otimizado para RTX 2050 com Qwen 2.5 Coder 
 
 ## 📋 Descrição do Projeto
 
-Este projeto transforma seu RTX 2050 em uma poderosa estação de desenvolvimento IA local, com foco específico em C# e .NET. Utiliza o Qwen 2.5 Coder 7B, um modelo especializado em código que se encaixa perfeitamente nos 4GB de VRAM da RTX 2050.
+Este projeto transforma seu NVIDIA RTX em uma poderosa estação de desenvolvimento IA local, com foco específico em C# e .NET. Utiliza o Qwen 2.5 Coder 7B, um modelo especializado em código que se encaixa perfeitamente nos 4GB de VRAM da RTX.
 
 ### 🎯 Visão de Negócio
 - Produtividade máxima com IA local sem custos de API
 - Segurança total com processamento 100% local
-- Setup otimizado para hardware específico (RTX 2050)
+- Setup otimizado para hardware específico (NVIDIA RTX)
 - Foco em C#/.NET Enterprise development
 
 ### 🔧 Visão Técnica
@@ -28,19 +28,122 @@ Este projeto transforma seu RTX 2050 em uma poderosa estação de desenvolviment
 
 ```
 .
-├── openhands/           # Configurações do OpenHands AI
-│   └── settings.json    # Configurações específicas da IA
-├── docker-compose.yml   # OpenHands + Ollama (sem runtime customizado)
-├── vscode-continue-config.json  # Config VS Code + Continue
-├── SETUP-VSCODE.md      # Guia completo VS Code + Continue
-├── setup-rtx2050.sh     # Script automatizado de setup
-├── configure.sh         # Script avançado de configuração
-├── start.sh            # Script de deploy inteligente
-├── start-low-memory.sh # Script de deploy para sistemas com pouca memória
-└── README.md           # Este arquivo
+├── openhands/           # 🤖 Configurações do OpenHands AI
+│   ├── settings.json    # Configurações específicas da IA
+│   └── README.md        # 📚 Documentação completa
+├── ollama/              # 🤖 Armazenamento de modelos LLM
+│   └── README.md        # 📚 Guia de modelos e configurações
+├── open-webui/          # 🌐 Interface web para Ollama
+│   └── README.md        # 📚 Configuração e uso da interface
+├── workspace/           # 📁 Área de trabalho compartilhada
+│   └── README.md        # 📚 Estrutura e organização
+├── vscode/              # 💻 Configurações do VS Code
+│   ├── settings.json    # Configurações otimizadas para NVIDIA RTX
+│   ├── config.json      # Continue + Ollama integration
+│   ├── keybindings.json # Atalhos C#/.NET personalizados
+│   ├── extensions.json  # Extensões recomendadas
+│   ├── install-extensions.sh # Script Linux/macOS
+│   ├── install-extensions.bat # Script Windows
+│   └── README.md        # 📚 Setup completo do VS Code
+├── docker-compose.yml   # 🐳 Configuração Docker com otimizações
+├── README-OPTIMIZACAO.md # 📊 Guia completo de otimizações
+├── configure.sh         # 🔧 Script avançado de configuração
+├── start.sh            # 🚀 Script de deploy inteligente
+└── README.md           # 📖 Este arquivo
 ```
 
-## Setup Rápido para RTX 2050
+## 📁 Diretórios e Documentação
+
+### 🤖 [OpenHands](./openhands/README.md)
+Ambiente de IA autônomo para tarefas complexas de desenvolvimento.
+- **Configurações**: `settings.json` com parâmetros do LLM
+- **Dados**: Conversas, workspaces e ferramentas
+- **Logs**: Monitoramento e troubleshooting
+- **Acesso**: http://localhost:3000
+
+### 🤖 [Ollama](./ollama/README.md)
+Serviço local de LLMs com modelos otimizados para RTX 2050.
+- **Modelos**: Qwen 2.5 Coder 7B (4.8GB)
+- **Storage**: Persistência de modelos e configurações
+- **API**: Endpoint para outros serviços
+- **Gerenciamento**: Comandos de administração
+
+### 🌐 [Open WebUI](./open-webui/README.md)
+Interface web amigável para interação com modelos Ollama.
+- **Interface**: Chat intuitivo e gestão de modelos
+- **Usuários**: Sistema multi-usuário com autenticação
+- **Uploads**: Suporte para análise de documentos
+- **Acesso**: http://localhost:8080
+
+### 📁 [Workspace](./workspace/README.md)
+Área de trabalho compartilhada entre todos os containers.
+- **Projetos**: Estrutura para desenvolvimento C#/.NET
+- **Compartilhado**: Acessível por OpenHands, Ollama e WebUI
+- **Persistência**: Dados sobrevivem a reinicializações
+- **Organização**: Templates e scripts reutilizáveis
+
+### 💻 [VS Code](./vscode/README.md) | [Setup Guide](./SETUP-VSCODE.md)
+Configurações otimizadas para desenvolvimento com IA local.
+- **Settings**: Configurações globais e keybindings
+- **Extensões**: Lista recomendada para C#/.NET + IA
+- **Continue IA**: Integração completa com Ollama
+- **Scripts**: Instalação automática cross-platform
+- **Setup Completo**: Veja [SETUP-VSCODE.md](./SETUP-VSCODE.md) para instalação detalhada
+
+## 🔄 Integração entre Serviços
+
+### Fluxo de Trabalho Típico:
+
+1. **Ollama** serve os modelos LLM localmente
+2. **OpenHands** usa Ollama para tarefas de desenvolvimento
+3. **WebUI** oferece interface amigável para interação
+4. **Workspace** compartilha arquivos entre todos
+5. **VS Code** integra com Continue para desenvolvimento local
+
+### Configuração de Volumes:
+
+```yaml
+# OpenHands
+volumes:
+  - ./workspace:/workspace      # Área de trabalho
+  - ./openhands:/openhands      # Configurações e dados
+
+# Ollama  
+volumes:
+  - ./ollama:/root/.ollama      # Modelos e configurações
+  - ./workspace:/workspace      # Compartilhamento de arquivos
+  - ./vscode:/vscode            # Configurações VS Code
+
+# WebUI
+volumes:
+  - ./open-webui:/app/backend/data  # Dados da aplicação
+  - ./workspace:/workspace         # Acesso aos projetos
+  - ./vscode:/vscode               # Configurações compartilhadas
+```
+
+## 📊 Uso de Recursos por Diretório
+
+| Diretório | Uso Principal | Tamanho Estimado | Backup |
+|-----------|---------------|------------------|---------|
+| `ollama/` | Modelos LLM | ~5GB por modelo | ✅ Essencial |
+| `open-webui/` | Dados WebUI | ~100MB | ✅ Importante |
+| `openhands/` | Configurações IA | ~50MB | ✅ Importante |
+| `workspace/` | Projetos | Variável | ✅ Essencial |
+| `vscode/` | Configurações Editor | ~10MB | ⚠️ Opcional |
+
+## 📚 Documentação Completa
+
+Para informações detalhadas sobre cada componente:
+
+- **[Setup VS Code + Continue](./SETUP-VSCODE.md)**: Guia completo de instalação e configuração
+- **[Otimizações de Memória](./README-OPTIMIZACAO.md)**: Guia completo para sistemas com pouca memória
+- **[Setup VS Code](./vscode/README.md)**: Configuração completa do ambiente de desenvolvimento
+- **[OpenHands](./openhands/README.md)**: Configurações avançadas do agente IA
+- **[Ollama](./ollama/README.md)**: Gerenciamento de modelos e configurações
+- **[WebUI](./open-webui/README.md)**: Interface web e administração
+- **[Workspace](./workspace/README.md)**: Organização de projetos e colaboração
+
+## Setup Rápido para NVIDIA RTX
 
 ### Pré-requisitos
 - Docker Desktop instalado
@@ -49,8 +152,6 @@ Este projeto transforma seu RTX 2050 em uma poderosa estação de desenvolviment
 
 ### Inicialização
 ```bash
-# Para sistemas com pouca memória (8GB RAM)
-./start-low-memory.sh
 
 # Para sistemas com memória adequada (16GB+ RAM)
 ./start.sh
@@ -65,7 +166,7 @@ Este projeto transforma seu RTX 2050 em uma poderosa estação de desenvolviment
 ### URLs de Acesso
 - OpenHands: http://localhost:3000
 - Web UI: http://localhost:8080
-- VS Code + Continue: Configurar com `vscode-continue-config.json`
+- VS Code + Continue: Veja [SETUP-VSCODE.md](./SETUP-VSCODE.md) para configuração completa
 
 ## 🔧 Configurações Avançadas
 
