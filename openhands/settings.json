@@ -25,48 +25,7 @@
                 "name": "deepwiki"
             }
         ],
-        "stdio_servers": [
-            {
-                "name": "memory",
-                "command": "python",
-                "args": [
-                    "-c",
-                    "import sys; print('Memory server not installed - install with: pip install mcp-server-memory')"
-                ]
-            },
-            {
-                "name": "fetch",
-                "command": "python",
-                "args": [
-                    "-c",
-                    "import sys; print('Fetch server not installed - install with: pip install mcp-server-fetch')"
-                ]
-            },
-            {
-                "name": "filesystem",
-                "command": "python",
-                "args": [
-                    "-c",
-                    "import sys; print('Filesystem server not installed - install with: npm install -g @modelcontextprotocol/server-filesystem')"
-                ]
-            },
-            {
-                "name": "git",
-                "command": "python",
-                "args": [
-                    "-c",
-                    "import sys; print('Git server not installed - install with: npm install -g @modelcontextprotocol/server-git')"
-                ]
-            },
-            {
-                "name": "sqlite",
-                "command": "python",
-                "args": [
-                    "-c",
-                    "import sys; print('SQLite server not installed - install with: npm install -g @modelcontextprotocol/server-sqlite')"
-                ]
-            }
-        ],
+        "stdio_servers": [],
         "shttp_servers": []
     },
     "search_api_key": "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",
