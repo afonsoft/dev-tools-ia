@@ -38,6 +38,7 @@ services:
       - "3000:3000"
     volumes:
       - ./workspace:/workspace
+      - ./openhands:/openhands
     networks:
       - openhands-net
     extra_hosts:
@@ -74,6 +75,7 @@ services:
     volumes:
       - ./ollama:/root/.ollama
       - ./workspace:/workspace
+      - ./vscode:/vscode
     restart: unless-stopped
     entrypoint: ["/bin/sh", "-c"]
     command:
@@ -106,6 +108,7 @@ services:
     volumes:
       - ./open-webui:/app/backend/data
       - ./workspace:/workspace
+      - ./vscode:/vscode
     environment:
       OLLAMA_BASE_URL: http://ollama:11434
       OPENWEBUI_USERNAME: admin@admin.com
