@@ -52,3 +52,12 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Open WebUI
+open-webui/cache/*
+open-webui/vector_db/*
+open-webui/webui.db
+
+# Ollama Models
+ollama/models/*
+ollama/id_*
