@@ -6,7 +6,7 @@
     "confirmation_mode": false,
     "llm_model": "ollama/qwen2.5-coder:7b-instruct-q4_K_M",
     "llm_api_key": "local-llm",
-    "llm_base_url": "http://ollama:11434",
+    "llm_base_url": "http://host.docker.internal:11434",
     "llm_context_window": 32768,
     "llm_temperature": 0.7,
     "llm_top_p": 0.9,

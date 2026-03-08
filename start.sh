@@ -197,11 +197,41 @@ echo "======================================"
 echo "🌐 URLs dos Serviços"
 echo "======================================"
 echo "OpenHands:   http://localhost:3000"
-echo "Open-WebUI:  http://localhost:8080"
+echo "Open-WebUI:  http://localhost:8000"
 echo "Ollama API:  http://localhost:11434"
 
-# Aguarda serviços ficarem prontos
-wait_for_service "Ollama" 11434
+echo ""
+print_status "Verificando se Ollama está respondendo..."
+max_ollama_attempts=5
+ollama_attempt=1
+
+while [ $ollama_attempt -le $max_ollama_attempts ]; do
+    if curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
+        print_success "Ollama está funcionando corretamente!"
+        break
+    else
+        print_warning "Tentativa $ollama_attempt/$max_ollama_attempts: Ollama não está respondendo..."
+        if [ $ollama_attempt -eq $max_ollama_attempts ]; then
+            print_error "Ollama não respondeu após $max_ollama_attempts tentativas."
+            echo ""
+            echo "Verifique os logs com: docker logs ollama-ai"
+            echo "Ou continue sem Ollama (OpenHands pode não funcionar corretamente)."
+            echo ""
+            echo "Deseja continuar sem Ollama? (s/N)"
+            read -r response
+            if [[ ! "$response" =~ ^[Ss]$ ]]; then
+                print_error "Cancelando setup..."
+                exit 1
+            else
+                print_warning "Continuando sem Ollama - OpenHands pode ter funcionalidade limitada."
+                break
+            fi
+        fi
+        sleep 3
+        ollama_attempt=$((ollama_attempt + 1))
+    fi
+done
+
 wait_for_service "OpenHands" 3000
 
 echo ""
@@ -220,16 +250,16 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Comando para Linux
     if command -v xdg-open &> /dev/null; then
         xdg-open http://localhost:3000 2>/dev/null &
-        xdg-open http://localhost:8080 2>/dev/null &
+        xdg-open http://localhost:8000 2>/dev/null &
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Comando para macOS
     open http://localhost:3000 2>/dev/null &
-    open http://localhost:8080 2>/dev/null &
+    open http://localhost:8000 2>/dev/null &
 elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "cygwin" ]] || [[ -n "$WINDIR" ]]; then
     # Comando para Windows
     start http://localhost:3000 2>/dev/null
-    start http://localhost:8080 2>/dev/null
+    start http://localhost:8000 2>/dev/null
 else
     print_warning "Não foi possível detectar o sistema operacional para abrir URLs automaticamente."
 fi
