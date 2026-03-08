@@ -10,6 +10,8 @@ services:
       LOG_ALL_EVENTS: "false"
       PYTHONUNBUFFERED: "1"
       PYTHONDONTWRITEBYTECODE: "1"
+      AGENT_SERVER_IMAGE_REPOSITORY: "ghcr.io/openhands/agent-server"
+      AGENT_SERVER_IMAGE_TAG: "1.11.4-python"
       # Configurações do LLM otimizadas para RTX 2050 + Qwen 2.5 Coder 7B
       OPENHANDS_LLM_PROVIDER: ollama
       OPENHANDS_LLM_MODEL: qwen2.5-coder:7b-instruct-q4_K_M
