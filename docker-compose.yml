@@ -5,35 +5,37 @@ services:
     image: docker.openhands.dev/openhands/openhands:1.4
     container_name: openhands-hands-app
     pull_policy: always
+    init: true
     environment:
-      LOG_ALL_EVENTS: "true"
+      LOG_ALL_EVENTS: "false"
+      PYTHONUNBUFFERED: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
       # Configurações do LLM otimizadas para RTX 2050 + Qwen 2.5 Coder 7B
       OPENHANDS_LLM_PROVIDER: ollama
       OPENHANDS_LLM_MODEL: qwen2.5-coder:7b-instruct-q4_K_M
       OPENHANDS_LLM_ENDPOINT: http://host.docker.internal:11434
-      OPENHANDS_LLM_TEMPERATURE: 0.1 # Mais determinístico para código
+      OPENHANDS_LLM_TEMPERATURE: 0.1
       OPENHANDS_LLM_TOP_P: 0.9
-      OPENHANDS_MAX_ITERATIONS: 30 # Reduzido para economizar VRAM
-      OPENHANDS_ENABLE_AUTO_LINT: true # Auto-lint do código
-      # Configurações de Workspace (sem runtime customizado)
+      OPENHANDS_MAX_ITERATIONS: 25
+      OPENHANDS_ENABLE_AUTO_LINT: true
+      # Configurações de Workspace
       WORKSPACE_MOUNT_PATH: /workspace
       WORKSPACE_BASE: /workspace
       # Otimizações para RTX 2050 4GB VRAM
-      OPENHANDS_LLM_GPU_LAYERS: 35 # Ajustado para 4GB VRAM
-      OPENHANDS_LLM_CTX_SIZE: 4096 # Reduzido para não sobrecarregar
-      OPENHANDS_LOAD_TIMEOUT: 600 # Timeout aumentado
-      OPENHANDS_MAX_PARALLEL_REQUESTS: 1 # Sequencial para economizar VRAM
-      OPENHANDS_MEMORY_BUDGET: 4294967296 # 4GB total memory budget
+      OPENHANDS_LLM_GPU_LAYERS: 33
+      OPENHANDS_LLM_CTX_SIZE: 3072
+      OPENHANDS_LOAD_TIMEOUT: 300
+      OPENHANDS_MAX_PARALLEL_REQUESTS: 1
+      OPENHANDS_MEMORY_BUDGET: 3435973836
       # Performance
       CUDA_VISIBLE_DEVICES: 0
-      # Otimizações de memória para low-resource systems
-      SANDBOX_TIMEOUT: 300 # 5 minutos timeout para sandbox
-      SANDBOX_USER_ID: "0" # Root user para compatibilidade
-      SANDBOX_MEMORY_LIMIT: "16g" # Limite de memória do sandbox
-      SANDBOX_CPU_LIMIT: "2.0" # 2 CPU core para sandbox
-      # Configurações de workspace otimizadas
-      WORKSPACE_TIMEOUT: 600 # 10 minutos para operações
-      MAX_WORKSPACE_SIZE: "10g" # 10GB max workspace
+      # Otimizações de memória
+      SANDBOX_TIMEOUT: 180
+      SANDBOX_USER_ID: "0"
+      SANDBOX_MEMORY_LIMIT: "12g"
+      SANDBOX_CPU_LIMIT: "2.0"
+      WORKSPACE_TIMEOUT: 300
+      MAX_WORKSPACE_SIZE: "8g"
     ports:
       - "3000:3000"
     volumes:
@@ -50,35 +52,43 @@ services:
     deploy:
       resources:
         limits:
-          memory: "2g"
-          cpus: "1.5"
+          memory: "1.5g"
+          cpus: "1.2"
         reservations:
-          memory: "1g"
-          cpus: "1"
+          memory: "768m"
+          cpus: "0.8"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   ollama:
     image: ollama/ollama:latest
     container_name: ollama-ai
+    init: true
     environment:
       # Configurações otimizadas para RTX 2050 + Qwen 2.5 Coder 7B
-      - OLLAMA_CONTEXT_LENGTH=4096 # Reduzido para 4GB VRAM
+      - OLLAMA_CONTEXT_LENGTH=3072
       - OLLAMA_HOST=0.0.0.0:11434
       - OLLAMA_MAX_LOADED_MODELS=1
       - OLLAMA_MODEL=qwen2.5-coder:7b-instruct-q4_K_M
-      - OLLAMA_GPU_LAYERS=35 # Ajustado para RTX 2050
+      - OLLAMA_GPU_LAYERS=33
       - OLLAMA_NUM_PARALLEL=1
       - OLLAMA_KEEP_ALIVE=-1
       # Otimizações de performance
       - OLLAMA_FLASH_ATTENTION=1
-      - OLLAMA_LOAD_TIMEOUT=600
-      - OLLAMA_GPU_OVERHEAD=1073741824 # 1GB overhead
-      - OLLAMA_BATCH_SIZE=256 # Reduzido para economizar VRAM
+      - OLLAMA_LOAD_TIMEOUT=300
+      - OLLAMA_GPU_OVERHEAD=939524096
+      - OLLAMA_BATCH_SIZE=128
       - OLLAMA_F16=1
       - OLLAMA_PRELOAD=1
       - OLLAMA_TEMPERATURE=0.1
       - OLLAMA_TOP_K=40
       - OLLAMA_TOP_P=0.9
       - OLLAMA_REPEAT_PENALTY=1.1
+      - OLLAMA_NUM_THREAD=2
     ports:
       - "11434:11434"
     volumes:
@@ -101,33 +111,50 @@ services:
     deploy:
       resources:
         limits:
-          memory: "16g" # Reduzido para 16GB total
-          cpus: "2" # Reduzido para 2 cores
+          memory: "12g"
+          cpus: "2"
         reservations:
+          memory: "8g"
+          cpus: "1.5"
           devices:
             - driver: nvidia
               count: all
               capabilities: [gpu]
     runtime: nvidia
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
+    init: true
     ports:
       - "8000:8080"
     volumes:
       - ./open-webui:/app/backend/data
       - ./ollama:/root/.ollama
-      - ./workspace:/workspace
-      - ./vscode:/vscode
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: always
     environment:
-      # Otimizações para baixa memória
       WEBUI_NAME: "OpenHands Lite"
-      DEFAULT_MODELS: "qwen2.5-coder:7b-instruct-q4_K_M"
       OLLAMA_BASE_URL: http://host.docker.internal:11434
+      USE_CUDA_DOCKER: false
+      WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY:-openhands-secret-key-change-me}
+      DEFAULT_USER_ROLE: "admin"
+      ENABLE_SIGNUP: "false"
+      WEBUI_AUTH: "false"
+      VECTOR_DB: "chroma"
+      CHROMA_HTTP_HOST: "0.0.0.0"
+      CHROMA_HTTP_PORT: "8001"
+      CHROMA_SERVER_HOST: "0.0.0.0"
+      CHROMA_SERVER_PORT: "8001"
+      RAG_ENABLED: "false"
+      WEBUI_SEARCH_ENABLED: "false"
     networks:
       - openhands-net
     depends_on:
@@ -135,12 +162,23 @@ services:
     deploy:
       resources:
         limits:
-          memory: "1g"
-          cpus: "1.0"
+          memory: "768m"
+          cpus: "0.8"
         reservations:
           memory: "512m"
           cpus: "0.5"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
 networks:
   openhands-net:
     name: openhands-net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
