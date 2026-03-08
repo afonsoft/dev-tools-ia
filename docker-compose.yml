@@ -112,14 +112,16 @@ services:
       - ./ollama:/root/.ollama
       - ./workspace:/workspace
       - ./vscode:/vscode
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always
     environment:
       # Otimizações para baixa memória
       WEBUI_NAME: "OpenHands Lite"
       DEFAULT_MODELS: "qwen2.5-coder:7b-instruct-q4_K_M"
+      OLLAMA_BASE_URL: http://ollama:11434
     networks:
       - openhands-net
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     depends_on:
       - ollama
     deploy:
