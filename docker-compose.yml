@@ -103,7 +103,7 @@ services:
     runtime: nvidia
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:ollama
+    image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
     ports:
       - "3000:8080"
@@ -113,21 +113,9 @@ services:
       - ./workspace:/workspace
       - ./vscode:/vscode
     environment:
-      OLLAMA_BASE_URL: http://ollama:11434
-      OPENWEBUI_USERNAME: admin@admin.com
-      OPENWEBUI_PASSWORD: admin
-      ENABLE_MODEL_FILTER: true
-      ENABLE_SIGNUP: true
       # Otimizações para baixa memória
       WEBUI_NAME: "OpenHands Lite"
       DEFAULT_MODELS: "qwen2.5-coder:7b-instruct-q4_K_M"
-      ENABLE_RAG_WEB_SEARCH: true
-      ENABLE_IMAGE_GENERATION: true
-      # Forçar modo backend
-      USE_CUDA_DOCKER: false
-      WEBUI_SECRET_KEY: "dev-tools-ia-secret-key-2024"
-      # Criar usuário admin automaticamente
-      DEFAULT_USER_ROLE: "admin"
     networks:
       - openhands-net
     extra_hosts:
