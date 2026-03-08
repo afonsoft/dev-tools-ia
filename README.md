@@ -1,6 +1,6 @@
-# 🚀 Dev Tools IA - RTX 2050 Optimized
+# 🚀 Dev Tools IA - NVIDIA Optimized
 
-Ambiente de desenvolvimento IA local otimizado para RTX 2050 com Qwen 2.5 Coder 7B, focado em desenvolvimento C#/.NET profissional.
+Ambiente de desenvolvimento IA local otimizado para NVIDIA RTX com Qwen 2.5 Coder 7B, focado em desenvolvimento C#/.NET profissional.
 
 ## 🎯 Foco Principal
 - **RTX 2050 (4GB VRAM)**: Setup otimizado para máxima performance
@@ -10,12 +10,12 @@ Ambiente de desenvolvimento IA local otimizado para RTX 2050 com Qwen 2.5 Coder 
 
 ## 📋 Descrição do Projeto
 
-Este projeto transforma seu RTX 2050 em uma poderosa estação de desenvolvimento IA local, com foco específico em C# e .NET. Utiliza o Qwen 2.5 Coder 7B, um modelo especializado em código que se encaixa perfeitamente nos 4GB de VRAM da RTX 2050.
+Este projeto transforma seu NVIDIA RTX em uma poderosa estação de desenvolvimento IA local, com foco específico em C# e .NET. Utiliza o Qwen 2.5 Coder 7B, um modelo especializado em código que se encaixa perfeitamente nos 4GB de VRAM da RTX.
 
 ### 🎯 Visão de Negócio
 - Produtividade máxima com IA local sem custos de API
 - Segurança total com processamento 100% local
-- Setup otimizado para hardware específico (RTX 2050)
+- Setup otimizado para hardware específico (NVIDIA RTX)
 - Foco em C#/.NET Enterprise development
 
 ### 🔧 Visão Técnica
@@ -38,7 +38,7 @@ Este projeto transforma seu RTX 2050 em uma poderosa estação de desenvolviment
 ├── workspace/           # 📁 Área de trabalho compartilhada
 │   └── README.md        # 📚 Estrutura e organização
 ├── vscode/              # 💻 Configurações do VS Code
-│   ├── settings.json    # Configurações otimizadas para RTX 2050
+│   ├── settings.json    # Configurações otimizadas para NVIDIA RTX
 │   ├── config.json      # Continue + Ollama integration
 │   ├── keybindings.json # Atalhos C#/.NET personalizados
 │   ├── extensions.json  # Extensões recomendadas
@@ -131,28 +131,6 @@ volumes:
 | `workspace/` | Projetos | Variável | ✅ Essencial |
 | `vscode/` | Configurações Editor | ~10MB | ⚠️ Opcional |
 
-## 🛠️ Administração dos Diretórios
-
-### Scripts de Manutenção:
-
-```bash
-# Backup completo
-./scripts/backup-all.sh
-
-# Limpeza automática  
-./scripts/cleanup-directories.sh
-
-# Monitoramento de espaço
-./scripts/monitor-storage.sh
-```
-
-### Boas Práticas:
-
-- **Backup Regular**: Implementar backup automático semanal
-- **Limpeza**: Remover arquivos temporários e logs antigos
-- **Monitoramento**: Verificar uso de espaço e performance
-- **Segurança**: Revisar permissões e acessos regularmente
-
 ## 📚 Documentação Completa
 
 Para informações detalhadas sobre cada componente:
@@ -165,7 +143,7 @@ Para informações detalhadas sobre cada componente:
 - **[WebUI](./open-webui/README.md)**: Interface web e administração
 - **[Workspace](./workspace/README.md)**: Organização de projetos e colaboração
 
-## Setup Rápido para RTX 2050
+## Setup Rápido para NVIDIA RTX
 
 ### Pré-requisitos
 - Docker Desktop instalado
@@ -174,8 +152,6 @@ Para informações detalhadas sobre cada componente:
 
 ### Inicialização
 ```bash
-# Para sistemas com pouca memória (8GB RAM)
-./start-low-memory.sh
 
 # Para sistemas com memória adequada (16GB+ RAM)
 ./start.sh
