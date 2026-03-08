@@ -61,3 +61,6 @@ open-webui/webui.db
 # Ollama Models
 ollama/models/*
 ollama/id_*
+#openhands Token
+openhands/.jwt_secret
+openhands/sessions/*
