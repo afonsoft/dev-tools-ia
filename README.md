@@ -23,6 +23,7 @@ Este projeto transforma seu NVIDIA RTX em uma poderosa estação de desenvolvime
 - **Modelo Especializado**: Qwen 2.5 Coder treinado para código
 - **VS Code Integration**: Continue extension para workflow nativo
 - **Docker Opcional**: OpenHands para tarefas complexas
+- **MCP Integration**: Model Context Protocol para extensibilidade
 
 ## 📁 Estrutura do Repositório
 
@@ -99,6 +100,7 @@ Configurações otimizadas para desenvolvimento com IA local.
 3. **WebUI** oferece interface amigável com recursos mínimos
 4. **Workspace** compartilha arquivos entre todos (8GB max)
 5. **VS Code** integra com Continue para desenvolvimento local
+6. **MCP Servers** extendem capacidades com ferramentas especializadas
 
 ### Configuração de Volumes Otimizada:
 
@@ -106,7 +108,8 @@ Configurações otimizadas para desenvolvimento com IA local.
 # OpenHands (memória reduzida)
 volumes:
   - ./workspace:/workspace      # Área de trabalho (8GB max)
-  - ./openhands:/openhands      # Configurações e dados
+  - ./openhands:/.openhands    # Configurações e dados
+  - ./mcp-config.json:/openhands/mcp-config.json  # MCP config
 
 # Ollama (12GB limit)
 volumes:
@@ -120,7 +123,22 @@ volumes:
   - ./ollama:/root/.ollama        # Acesso aos modelos
 ```
 
-## 📊 Uso de Recursos por Diretório
+### � **MCP Integration**
+
+#### **Stdio Servers** (Alta Performance)
+- **memory**: Memória persistente e contexto
+- **filesystem**: Acesso otimizado a arquivos
+- **git**: Operações Git automatizadas
+- **sqlite**: Banco de dados leve
+- **fetch**: Requisições HTTP
+
+#### **SSE Servers** (Alta Confiabilidade)
+- **deepwiki**: Documentação técnica
+
+#### **SHTTP Servers** (Timeout Configurável)
+- **API externa**: Processamento pesado
+
+## �📊 Uso de Recursos por Diretório
 
 | Diretório | Uso Principal | Tamanho Estimado | Backup |
 |-----------|---------------|------------------|---------|
@@ -169,56 +187,101 @@ Para informações detalhadas sobre cada componente:
 - **[WebUI](./open-webui/README.md)**: Interface web e administração
 - **[Workspace](./workspace/README.md)**: Organização de projetos e colaboração
 
-## Setup Rápido para NVIDIA RTX
+## 🔄 Métodos de Execução OpenHands
 
-### Pré-requisitos
-- Docker Desktop instalado
-- NVIDIA Driver 525+
-- 8GB+ RAM recomendado
-
-### Inicialização
+### 🚀 **Opção 1: CLI Launcher com UV (Recomendado)**
 ```bash
+# Instalar OpenHands com UV
+uv tool install openhands --python 3.12
 
-# Para sistemas com memória adequada (16GB+ RAM)
-./start.sh
+# Iniciar servidor GUI
+openhands serve
 
-# Para configuração avançada
-./configure.sh --rtx2050 qwen2.5-coder:7b-instruct-q4_K_M
+# Com suporte GPU (requer nvidia-docker)
+openhands serve --gpu
 
-# Para ver modelos disponíveis
-./configure.sh --list
+# Com diretório atual montado
+openhands serve --mount-cwd
 ```
 
-### URLs de Acesso
-- OpenHands: http://localhost:3000
-- Web UI: http://localhost:8080
-- VS Code + Continue: Veja [SETUP-VSCODE.md](./SETUP-VSCODE.md) para configuração completa
+### 🐳 **Opção 2: Docker Direto**
+```bash
+docker run -it --rm --pull=always \
+  -e AGENT_SERVER_IMAGE_REPOSITORY=ghcr.io/openhands/agent-server \
+  -e AGENT_SERVER_IMAGE_TAG=1.11.4-python \
+  -e LOG_ALL_EVENTS=true \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v ~/.openhands:/.openhands \
+  -p 3000:3000 \
+  --add-host host.docker.internal:host-gateway \
+  --name openhands-app \
+  docker.openhands.dev/openhands/openhands:1.4
+```
+
+### 🐳 **Opção 3: Docker Compose (Este Projeto)**
+```bash
+# Iniciar ambiente completo
+./start.sh
+
+# Ou manualmente
+docker-compose up -d
+
+# Acessar OpenHands
+http://localhost:3000
+```
 
 ## 🔧 Configurações Avançadas
 
-### Opções do configure.sh
+### **OpenHands Configuration**
 ```bash
-# Configuração ultra-leve (8GB RAM)
-./configure.sh --low-memory qwen2.5-coder:7b-instruct-q4_K_M
+# Iniciar ambiente completo
+docker-compose up -d
 
-# Configuração RTX 2050 otimizada
-./configure.sh --rtx2050 qwen2.5-coder:7b-instruct-q4_K_M
+# Verificar logs
+docker-compose logs openhands
 
-# Configuração para outras placas RTX
-./configure.sh --rtx3050 qwen2.5-coder:7b-instruct-q4_K_M
-./configure.sh --rtx4050 qwen2.5-coder:7b-instruct-q4_K_M
-./configure.sh --rtx4060 qwen2.5-coder:7b-instruct-q4_K_M
-./configure.sh --rtx4070 qwen2.5-coder:7b-instruct-q4_K_M
-
-# Modo CPU-only
-./configure.sh --cpu-only phi:latest
+# Configurar modelo específico
+# Acessar http://localhost:3000 e configurar LLM
 ```
 
-### Arquivos de Configuração
-- `docker-compose.yml`: Configuração padrão otimizada
-- `docker-compose.low-memory.yml`: Configuração ultra-leve
-- `openhands/settings.json`: Configurações do OpenHands AI
-- `vscode-continue-config.json`: Configuração VS Code + Continue
+### **LLM Configuration (Ollama)**
+```bash
+# Context size mínimo para OpenHands
+OLLAMA_CONTEXT_LENGTH=32768
+OLLAMA_HOST=0.0.0.0:11434
+OLLAMA_KEEP_ALIVE=-1
+
+# Iniciar Ollama
+ollama serve &
+ollama pull qwen2.5-coder:7b-instruct-q4_K_M
+```
+
+### **VS Code + Continue**
+Edite `~/.continue/config.json`:
+```json
+{
+  "models": [
+    {
+      "title": "Qwen 2.5 Coder 7B - RTX 2050",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b-instruct-q4_K_M",
+      "apiBase": "http://localhost:11434"
+    }
+  ]
+}
+```
+
+### **MCP Configuration**
+```bash
+# Instalar servidores MCP
+./install-mcp-servers.bat
+
+# Verificar configuração
+cat mcp-config.json
+
+# Reiniciar OpenHands
+docker-compose restart openhands
+```
 
 ## 📊 Comparação de Recursos
 
@@ -252,6 +315,13 @@ Para informações detalhadas sobre cada componente:
 
 - [README-OPTIMIZACAO.md](README-OPTIMIZACAO.md): Guia completo de otimizações
 - [SETUP-VSCODE.md](SETUP-VSCODE.md): Configuração VS Code + Continue
+
+## 🚀 URLs de Acesso
+
+- **OpenHands**: http://localhost:3000
+- **Web UI**: http://localhost:8080
+- **Ollama API**: http://localhost:11434
+- **VS Code + Continue**: Veja [SETUP-VSCODE.md](./SETUP-VSCODE.md)
 
 ## 🚀 Transforme sua RTX 2050!
 
@@ -310,6 +380,38 @@ Create RESTful API endpoints with proper validation and error handling
 - **Max Iterations**: 25 (reduzido de 30)
 - **Health Check**: Monitoramento automático
 
+## 🎮 Sandbox Options
+
+### **Docker Sandbox (Recomendado)**
+```bash
+# Default no docker-compose.yml
+RUNTIME=docker
+
+# Isolamento completa do host
+# Segurança máxima
+# Recursos limitados
+```
+
+### **Process Sandbox (Rápido, mas inseguro)**
+```bash
+# Para desenvolvimento rápido
+RUNTIME=process
+
+# Sem isolamento de container
+# Performance máxima
+# Risco de segurança
+```
+
+### **Remote Sandbox**
+```bash
+# Para deployments gerenciados
+RUNTIME=remote
+
+# Ambiente remoto
+# Deploy na nuvem
+# Multi-tenant
+```
+
 ## 🎮 Otimizações RTX 2050
 
 ### VRAM Management (Atualizado)
@@ -320,11 +422,24 @@ Create RESTful API endpoints with proper validation and error handling
 - **Memory Budget**: 3.2GB (reduzido de 4GB)
 - **GPU Overhead**: 896MB (reduzido de 1GB)
 
+### ⚠️ **Context Size Warning**
+OpenHands requer context size grande:
+- **Mínimo**: 22000 tokens
+- **Recomendado**: 32768 tokens
+- **Default Ollama**: 4096 (insuficiente)
+
+```bash
+# Configurar Ollama corretamente
+OLLAMA_CONTEXT_LENGTH=32768
+OLLAMA_HOST=0.0.0.0:11434
+```
+
 ### Performance Tips
 - Feche navegadores durante uso intenso
 - Use `ollama stop` para liberar VRAM quando necessário
 - Monitore com `nvidia-smi`
 - **Novo**: Health checks automáticos evitam travamentos
+- Use context size adequado (32768 tokens)
 
 ### Comandos Úteis
 ```bash
@@ -340,39 +455,14 @@ ollama run qwen2.5-coder:7b-instruct-q4_K_M
 # Verificar modelos
 ollama list
 
-# Verificar status dos containers (novo)
+# Verificar status dos containers
 docker-compose ps
 
-# Verificar health checks (novo)
+# Verificar health checks
 docker-compose exec openhands curl -f http://localhost:3000/health
-```
 
-## 🔧 Configuração Avançada
-
-### OpenHands (Opcional)
-```bash
-# Iniciar ambiente completo
-./start.sh
-
-# Configurar modelo específico
-./configure.sh qwen2.5-coder:7b-instruct-q4_K_M
-
-# Verificar configuração atual
-./configure.sh --check
-```
-
-### VS Code + Continue
-Edite `~/.continue/config.json`:
-```json
-{
-  "models": [
-    {
-      "title": "Qwen 2.5 Coder 7B - RTX 2050",
-      "provider": "ollama",
-      "model": "qwen2.5-coder:7b-instruct-q4_K_M"
-    }
-  ]
-}
+# Verificar logs MCP
+docker-compose logs openhands | grep -i mcp
 ```
 
 ## 📊 Performance
@@ -384,6 +474,7 @@ Edite `~/.continue/config.json`:
 - **CPU Usage**: Mínimo durante geração
 - **Memory Total**: 14.3GB (25% economia)
 - **Startup Time**: 40% mais rápido com otimizações
+- **Context Processing**: 32768 tokens (recomendado)
 
 ### Comparação
 | Feature | RTX 2050 + Qwen 2.5 Coder | Cloud API (GPT-4) |
@@ -393,6 +484,8 @@ Edite `~/.continue/config.json`:
 | Privacidade | 100% Local | Parcial |
 | C# Especialização | ✅ Excelente | ❌ Genérico |
 | Customização | ✅ Total | ❌ Limitada |
+| MCP Extensibility | ✅ Sim | ❌ Não |
+| Sandbox Control | ✅ Docker | ❌ Não |
 
 ## 🚨 Troubleshooting
 
