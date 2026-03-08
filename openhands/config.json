@@ -1,0 +1,10 @@
+{
+  "llm": {
+    "provider": "ollama",
+    "base_url": "http://ollama:11434",
+    "model": "qwen2.5-coder:7b-instruct-q4_K_M"
+  },
+  "editor": {
+    "default_path": "/workspace"
+  }
+}

@@ -1,91 +1,72 @@
 version: "3.9"
 
 services:
-  runtime:
-    build:
-      context: ./runtime
-      dockerfile: Dockerfile
-    image: openhands-runtime-dotnet
-    container_name: openhands-runtime
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./workspace:/workspace
-    networks:
-      - openhands-net
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
   openhands:
-    image: docker.openhands.dev/openhands/openhands:1.1
+    image: docker.openhands.dev/openhands/openhands:1.4
     container_name: openhands-hands-app
     pull_policy: always
     environment:
       LOG_ALL_EVENTS: "true"
-      # Configurações do LLM
+      # Configurações do LLM otimizadas para RTX 2050 + Qwen 2.5 Coder 7B
       OPENHANDS_LLM_PROVIDER: ollama
-      OPENHANDS_LLM_MODEL: devstral:24b
+      OPENHANDS_LLM_MODEL: qwen2.5-coder:7b-instruct-q4_K_M
       OPENHANDS_LLM_ENDPOINT: http://ollama:11434
       OPENHANDS_LLM_TEMPERATURE: 0.1 # Mais determinístico para código
       OPENHANDS_LLM_TOP_P: 0.9
-      OPENHANDS_MAX_ITERATIONS: 50 # Limite de iterações
+      OPENHANDS_MAX_ITERATIONS: 30 # Reduzido para economizar VRAM
       OPENHANDS_ENABLE_AUTO_LINT: true # Auto-lint do código
-      # Otimizações GPU/CPU
-      CUDA_VISIBLE_DEVICES: 0
-      OPENHANDS_LLM_GPU_LAYERS: 35
-      OPENHANDS_LLM_CTX_SIZE: 32768 # Aumentado para match com Ollama
+      # Configurações de Workspace (sem runtime customizado)
+      WORKSPACE_MOUNT_PATH: /workspace
+      WORKSPACE_BASE: /workspace
+      # Otimizações para RTX 2050 4GB VRAM
+      OPENHANDS_LLM_GPU_LAYERS: 35 # Ajustado para 4GB VRAM
+      OPENHANDS_LLM_CTX_SIZE: 4096 # Reduzido para não sobrecarregar
+      OPENHANDS_LOAD_TIMEOUT: 600 # Timeout aumentado
+      OPENHANDS_MAX_PARALLEL_REQUESTS: 1 # Sequencial para economizar VRAM
+      OPENHANDS_MEMORY_BUDGET: 4294967296 # 4GB total memory budget
       # Performance
-      OPENHANDS_LOAD_TIMEOUT: 900
-      OPENHANDS_MAX_PARALLEL_REQUESTS: 1 # Reduzido para economizar memória
-      OPENHANDS_MEMORY_BUDGET: 8589934592 # 8GB total memory budget
-      SANDBOX_RUNTIME_CONTAINER_IMAGE: openhands-runtime-dotnet
+      CUDA_VISIBLE_DEVICES: 0
+      # Otimizações de memória para low-resource systems
+      SANDBOX_TIMEOUT: 300 # 5 minutos timeout para sandbox
+      SANDBOX_USER_ID: "0" # Root user para compatibilidade
+      SANDBOX_MEMORY_LIMIT: "2g" # Limite de memória do sandbox
+      SANDBOX_CPU_LIMIT: "1.0" # 1 CPU core para sandbox
+      # Configurações de workspace otimizadas
+      WORKSPACE_TIMEOUT: 600 # 10 minutos para operações
+      MAX_WORKSPACE_SIZE: "5g" # 5GB max workspace
     ports:
       - "3000:3000"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./openhands:/.openhands
       - ./workspace:/workspace
+      - ./openhands:/openhands
+    networks:
+      - openhands-net
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
-      runtime:
-        condition: service_started
       ollama:
         condition: service_started
-    networks:
-      - openhands-net
-    deploy:
-      resources:
-        limits:
-          memory: 6g
-          cpus: "4.0"
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-    runtime: nvidia
 
   ollama:
     image: ollama/ollama:latest
     container_name: ollama-ai
     environment:
-      # Configurações críticas para performance
-      - OLLAMA_CONTEXT_LENGTH=32768 # Mínimo recomendado pela OpenHands
+      # Configurações otimizadas para RTX 2050 + Qwen 2.5 Coder 7B
+      - OLLAMA_CONTEXT_LENGTH=4096 # Reduzido para 4GB VRAM
       - OLLAMA_HOST=0.0.0.0:11434
-      - OLLAMA_MAX_LOADED_MODELS=1 # Otimizado para 8GB VRAM
-      - OLLAMA_MODEL=devstral:24b
-      - OLLAMA_GPU_LAYERS=35 # Ajustado para RTX 8GB
-      - OLLAMA_NUM_PARALLEL=1 # Reduzido para economizar memória
+      - OLLAMA_MAX_LOADED_MODELS=1
+      - OLLAMA_MODEL=qwen2.5-coder:7b-instruct-q4_K_M
+      - OLLAMA_GPU_LAYERS=35 # Ajustado para RTX 2050
+      - OLLAMA_NUM_PARALLEL=1
       - OLLAMA_KEEP_ALIVE=-1
       # Otimizações de performance
-      - OLLAMA_FLASH_ATTENTION=1 # Acelera processamento
-      - OLLAMA_LOAD_TIMEOUT=900
-      - OLLAMA_GPU_OVERHEAD=1073741824 # 1GB para overhead (metade do anterior)
-      - OLLAMA_BATCH_SIZE=512 # Batch size otimizado
-      - OLLAMA_F16=1 # Usar FP16 para economia de VRAM
-      - OLLAMA_PRELOAD=1 # Preload do modelo
-      - OLLAMA_TEMPERATURE=0.1 # Mais determinístico
+      - OLLAMA_FLASH_ATTENTION=1
+      - OLLAMA_LOAD_TIMEOUT=600
+      - OLLAMA_GPU_OVERHEAD=1073741824 # 1GB overhead
+      - OLLAMA_BATCH_SIZE=256 # Reduzido para economizar VRAM
+      - OLLAMA_F16=1
+      - OLLAMA_PRELOAD=1
+      - OLLAMA_TEMPERATURE=0.1
       - OLLAMA_TOP_K=40
       - OLLAMA_TOP_P=0.9
       - OLLAMA_REPEAT_PENALTY=1.1
@@ -94,13 +75,14 @@ services:
     volumes:
       - ./ollama:/root/.ollama
       - ./workspace:/workspace
+      - ./vscode:/vscode
     restart: unless-stopped
     entrypoint: ["/bin/sh", "-c"]
     command:
       - >
         ollama serve &
         sleep 5 &&
-        ollama pull devstral:24b &&
+        ollama pull qwen2.5-coder:7b-instruct-q4_K_M &&
         wait
     networks:
       - openhands-net
@@ -108,6 +90,9 @@ services:
       - "host.docker.internal:host-gateway"
     deploy:
       resources:
+        limits:
+          memory: "4g" # Reduzido para 4GB total
+          cpus: "1.5" # Reduzido para 1.5 cores
         reservations:
           devices:
             - driver: nvidia
@@ -123,12 +108,18 @@ services:
     volumes:
       - ./open-webui:/app/backend/data
       - ./workspace:/workspace
+      - ./vscode:/vscode
     environment:
       OLLAMA_BASE_URL: http://ollama:11434
       OPENWEBUI_USERNAME: admin@admin.com
       OPENWEBUI_PASSWORD: admin
       ENABLE_MODEL_FILTER: true
       ENABLE_SIGNUP: false
+      # Otimizações para baixa memória
+      WEBUI_NAME: "OpenHands Lite"
+      DEFAULT_MODELS: "qwen2.5-coder:7b-instruct-q4_K_M"
+      ENABLE_RAG_WEB_SEARCH: true
+      ENABLE_IMAGE_GENERATION: true
     networks:
       - openhands-net
     extra_hosts:
@@ -138,10 +129,10 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2g
+          memory: "1g"
           cpus: "1.0"
         reservations:
-          memory: 512m
+          memory: "512m"
           cpus: "0.5"
 
 networks:

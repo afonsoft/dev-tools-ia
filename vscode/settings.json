@@ -1,0 +1,344 @@
+{
+  // ╔═══════════════════════════════════════════════════════════════════════╗
+  // ║  VS Code — Settings Otimizadas para DevTools IA + RTX 2050              ║
+  // ║  Performance · Memória · AI Agent · C#/.NET · Ollama Integration    ║
+  // ║  GPUs: NVIDIA GeForce RTX 2050 (4GB VRAM) · 16GB+ RAM                ║
+  // ╚═══════════════════════════════════════════════════════════════════════╝
+  // ═══════════════════════════════════════════════════════════════════════
+  // 1. EDITOR — Rendering & Performance
+  // ═══════════════════════════════════════════════════════════════════════
+  "editor.defaultFormatter": "ms-dotnettools.csharp",
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.indentation": true,
+  "editor.accessibilitySupport": "off",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.hover.delay": 300,
+  "editor.largeFileOptimizations": true,
+  "editor.maxTokenizationLineLength": 20000,
+  "editor.minimap.enabled": true,
+  "editor.renderControlCharacters": false,
+  "editor.renderWhitespace": "boundary",
+  "editor.smoothScrolling": true,
+  "editor.stickyScroll.enabled": true,
+  "editor.suggest.localityBonus": true,
+  "editor.tabLimit": {
+    "enabled": true,
+    "value": 15
+  },
+  "editor.wordBasedSuggestions": "matchingDocuments",
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 2. EDITOR — Language-Specific Overrides
+  // ═══════════════════════════════════════════════════════════════════════
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
+    "editor.semanticTokenColorCustomizations": {
+      "enabled": true,
+      "rules": {
+        "*.method": "#FFB86C",
+        "*.type": "#8BE9FD",
+        "*.namespace": "#BD93F9"
+      }
+    },
+    "editor.suggest.insertMode": "replace"
+  },
+  "[dockercompose]": {
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.insertSpaces": true,
+    "editor.quickSuggestions": {
+      "comments": false,
+      "other": true,
+      "strings": true
+    },
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 3. FILES — Watchers, Exclude & Search
+  // ═══════════════════════════════════════════════════════════════════════
+  "files.eol": "auto",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.vs": true,
+    "**/bin": true,
+    "**/obj": true,
+    "**/node_modules": true,
+    "**/packages": true,
+    "**/.angular": true,
+    "**/.nx": true,
+    "**/.terraform": true
+  },
+  "files.watcherExclude": {
+    "**/.git/**": true,
+    "**/.vs/**": true,
+    "**/bin/**": true,
+    "**/obj/**": true,
+    "**/node_modules/**": true,
+    "**/packages/**": true,
+    "**/coverage/**": true,
+    "**/dist/**": true,
+    "**/TestResults/**": true,
+    "**/tmp/**": true,
+    "**/.angular/**": true,
+    "**/.nx/**": true,
+    "**/.terraform/**": true,
+    "**/.venv/**": true
+  },
+  "search.exclude": {
+    "**/.git": true,
+    "**/.vs": true,
+    "**/bin": true,
+    "**/obj": true,
+    "**/node_modules": true,
+    "**/packages": true,
+    "**/coverage": true,
+    "**/dist": true,
+    "**/TestResults": true,
+    "**/.angular": true,
+    "**/.nx": true,
+    "**/.terraform": true,
+    "**/.venv": true
+  },
+  "search.followSymlinks": false,
+  "search.maxResults": 10000,
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 4. FILES — Memory & Limits (16GB RAM Optimization)
+  // ═══════════════════════════════════════════════════════════════════════
+  "files.maxMemoryForLargeFilesMB": 2048,
+  "files.restoreUndoStack": true,
+  "files.simpleDialog.enable": true,
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 5. GIT & DIFF
+  // ═══════════════════════════════════════════════════════════════════════
+  "diffEditor.ignoreTrimWhitespace": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.replaceTagsWhenPull": true,
+  "git.showInlineOpenFileAction": false,
+  "git.suggestSmartCommit": false,
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 6. TERMINAL
+  // ═══════════════════════════════════════════════════════════════════════
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Git Bash": {
+      "icon": "git-branch",
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "args": ["-l"]
+    }
+  },
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.rightClickBehavior": "default",
+  "terminal.integrated.scrollback": 3000,
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "terminal.integrated.shellIntegration.enabled": true,
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 7. LINGUAGENS — .NET, C#, Python, YAML
+  // ═══════════════════════════════════════════════════════════════════════
+  "dotnet.preferCSharpExtension": true,
+  "dotnet.server.maxProjectCountForBackgroundAnalysis": 2,
+  "dotnet.server.useDotnetServer": true,
+  "dotnet.server.useOmnisharp": false,
+  "csharp.semanticHighlighting.enabled": true,
+  "csharp.format.enable": true,
+  "csharp.inlayHints.parameters.enabled": true,
+  "csharp.inlayHints.parameters.forLiteralParameters": true,
+  "csharp.inlayHints.parameters.forIndexerParameters": true,
+  "csharp.inlayHints.parameters.forObjectCreationParameters": true,
+  "csharp.inlayHints.parameters.forOtherParameters": true,
+  "csharp.inlayHints.types.enabled": true,
+  "csharp.inlayHints.types.forImplicitVariableTypes": true,
+  "csharp.inlayHints.types.forLambdaParameterTypes": true,
+  "csharp.inlayHints.types.forMethodParameterTypes": true,
+  
+  "python.analysis.typeCheckingMode": "basic",
+  "javascript.suggest.autoImports": true,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "yaml.maxItemsComputed": 5000,
+  "terraform.languageServer.enable": true,
+  "terraform.languageServer.experimentalFeatures.validateOnSave": false,
+  "markdown.preview.openByDefault": false,
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 8. WORKBENCH — Performance & UI
+  // ═══════════════════════════════════════════════════════════════════════
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
+  "workbench.editor.showTabs": true,
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 15,
+  "workbench.list.smoothScrolling": true,
+  "workbench.reduceMotion": "off",
+  "workbench.tips.enabled": false,
+  "workbench.settings.showAISearchToggle": false,
+  "window.restoreWindows": "one",
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 9. EXTENSIONS — Performance & Updates
+  // ═══════════════════════════════════════════════════════════════════════
+  "extensions.autoCheckUpdates": false,
+  "extensions.autoUpdate": false,
+  "extensions.verifySignature": false,
+  "extensions.experimental.affinity": {
+    "continue.continue": 1,
+    "ms-dotnettools.csharp": 2
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 10. CONTINUE IA — Local LLM Integration
+  // ═══════════════════════════════════════════════════════════════════════
+  "continue.model": "qwen2.5-coder:7b-instruct-q4_K_M",
+  "continue.provider": "ollama",
+  "continue.apiBase": "http://localhost:11434",
+  "continue.contextLength": 4096,
+  "continue.temperature": 0.1,
+  "continue.enableCodeCompletion": true,
+  "continue.enableTabAutocomplete": true,
+  "continue.enableCodeLens": true,
+  "continue.enableInlineComments": true,
+  "continue.enableSlashCommands": true,
+  "continue.enableWebSearch": false,
+  "continue.tabAutocompleteModel": {
+    "title": "Qwen 2.5 Coder 7B - Autocomplete",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:7b-instruct-q4_K_M",
+    "apiBase": "http://localhost:11434",
+    "contextLength": 2048,
+    "temperature": 0.0
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 11. DEBUG & TESTING
+  // ═══════════════════════════════════════════════════════════════════════
+  "debug.console.fontSize": 14,
+  "debug.internalConsoleOptions": "neverOpen",
+  "debug.allowBreakpointsEverywhere": true,
+  "debug.inlineValues": "on",
+  "debug.showBreakpointsInOverviewRuler": true,
+  "testing.automaticallyOpenPeekView": "never",
+  "testing.followRunningTest": true,
+  "testing.openTesting": "openOnTestStart",
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 12. SECURITY & PRIVACY
+  // ═══════════════════════════════════════════════════════════════════════
+  "security.workspace.trust.untrustedFiles": "open",
+  "security.workspace.trust.enabled": true,
+  "telemetry.enableTelemetry": false,
+  "redhat.telemetry.enabled": false,
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 13. DOCKER & CONTAINERS
+  // ═══════════════════════════════════════════════════════════════════════
+  "docker.extension.enableComposeLanguageServer": true,
+  "docker.images.defaultRegistry": "docker.io",
+  "docker.scanImages": "off",
+  "docker.cleanup": "on",
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 14. PERFORMANCE OPTIMIZATIONS
+  // ═══════════════════════════════════════════════════════════════════════
+  "explorer.autoReveal": false,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.csproj": "$(capture).cs,$(capture).csproj,$(capture).Designer.cs,$(capture).resx,$(capture).Resources.Designer.cs,$(capture).settings.Designer.cs,$(capture).Editor.cs,$(capture).AssemblyInfo.cs,$(capture).xaml,$(capture).xaml.cs,$(capture).g.cs,$(capture).g.i.cs",
+    "*.sln": "$(capture).sln,$(capture).DotSettings,$(capture).DotSettings.user",
+    "*.config": "$(capture).config,$(capture).Debug.config,$(capture).Release.config"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 15. NETWORK & TIMEOUTS
+  // ═══════════════════════════════════════════════════════════════════════
+  "http.experimental.systemCertificatesV2": true,
+  "http.timeout": 60000,
+  "remote.SSH.connectTimeout": 60,
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 16. AI & CHAT SETTINGS
+  // ═══════════════════════════════════════════════════════════════════════
+  "chat.detectParticipant.enabled": true,
+  "chat.checkpoints.enabled": false,
+  "chat.editRequests": "inline",
+  "chat.editing.autoAcceptDelay": 0,
+  "chat.notifyWindowOnConfirmation": false,
+  "chat.notifyWindowOnResponseReceived": false,
+  "chat.math.enabled": true,
+  "chat.sendElementsToChat.enabled": false,
+  "chat.emptyState.history.enabled": false,
+  "chat.tools.terminal.autoReplyToPrompts": false,
+  "chat.tools.global.autoApprove": false,
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 17. CUSTOM KEYBINDINGS & SHORTCUTS
+  // ═══════════════════════════════════════════════════════════════════════
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "on",
+    "other": "on"
+  },
+  "editor.suggest.showStatusBar": true,
+  "editor.suggest.preview": true,
+  "editor.suggestSelection": "first",
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.parameterHints.enabled": true,
+  "editor.hover.enabled": true,
+  "editor.lightbulb.enabled": true,
+  "editor.codeLens": true,
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 18. DEVTOOLS IA SPECIFIC
+  // ═══════════════════════════════════════════════════════════════════════
+  "files.associations": {
+    "*.dockerfile": "dockerfile",
+    "Dockerfile*": "dockerfile",
+    "docker-compose*.yml": "dockercompose",
+    "docker-compose*.yaml": "dockercompose"
+  },
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 19. WORKSPACE CONFIGURATION
+  // ═══════════════════════════════════════════════════════════════════════
+  "update.mode": "manual",
+  "workbench.enableExperiments": false,
+  "npm.enableScriptExplorer": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  
+  // ═══════════════════════════════════════════════════════════════════════
+  // 20. FINAL OPTIMIZATIONS
+  // ═══════════════════════════════════════════════════════════════════════
+  "emmet.includeLanguages": {
+    "razor": "html",
+    "cshtml": "html"
+  },
+  "razor.languageServer.debug": false,
+  "razor.languageServer.deferCompletionRequest": true
+}
