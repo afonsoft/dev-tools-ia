@@ -64,3 +64,4 @@ ollama/id_*
 #openhands Token
 openhands/.jwt_secret
 openhands/sessions/*
+openhands/secrets.json
