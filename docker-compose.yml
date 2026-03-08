@@ -77,6 +77,7 @@ services:
       - ./ollama:/root/.ollama
       - ./workspace:/workspace
       - ./vscode:/vscode
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     entrypoint: ["/bin/sh", "-c"]
     command:
@@ -102,12 +103,13 @@ services:
     runtime: nvidia
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:main
+    image: ghcr.io/open-webui/open-webui:ollama
     container_name: open-webui
     ports:
-      - "8080:8080"
+      - "3000:8080"
     volumes:
       - ./open-webui:/app/backend/data
+      - ./ollama:/root/.ollama
       - ./workspace:/workspace
       - ./vscode:/vscode
     environment:
