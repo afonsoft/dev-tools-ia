@@ -62,8 +62,8 @@ check_system_resources() {
     if command -v nvidia-smi &> /dev/null; then
         GPU_MEMORY=$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits | head -1)
         print_status "GPU NVIDIA detectada: ${GPU_MEMORY}MB VRAM"
-        if [ "$GPU_MEMORY" -lt 8000 ]; then
-            print_warning "VRAM limitada (< 8GB). Considere usar modelo menor"
+        if [ "$GPU_MEMORY" -lt 4000 ]; then
+            print_warning "VRAM limitada (< 4GB)."
         fi
     else
         print_warning "Nenhuma GPU NVIDIA detectada. Usando CPU-only"
