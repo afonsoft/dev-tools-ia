@@ -18,7 +18,27 @@ agents/
 │   ├── blazor-components/
 │   ├── design-patterns/
 │   ├── security-jwt/
-│   └── performance-optimization/
+│   ├── performance-optimization/
+│   ├── angular-component/
+│   ├── angular-di/
+│   ├── angular-directives/
+│   ├── angular-forms/
+│   ├── angular-http/
+│   ├── angular-routing/
+│   ├── angular-signals/
+│   ├── angular-ssr/
+│   ├── angular-testing/
+│   ├── angular-tooling/
+│   ├── csharp-concurrency-patterns/
+│   ├── csharp-developer/
+│   ├── dotnet-10-csharp-14/
+│   ├── dotnet-architect/
+│   ├── dotnet-backend-patterns/
+│   ├── dotnet-core-expert/
+│   ├── dotnet-project-structure/
+│   ├── efcore-patterns/
+│   ├── find-skills/
+│   └── modern-csharp-coding-standards/
 └── rules/                       # Project-specific instructions
     ├── csharp-coding-standards.md
     ├── dotnet-project-structure.md
@@ -40,6 +60,8 @@ Self-contained folders with `SKILL.md` files that provide reusable capabilities 
 - `csharp-async-patterns`: Best practices for asynchronous programming in C#
 - `design-patterns`: Implementation of SOLID principles and Gang of Four patterns
 - `entity-framework-core`: EF Core best practices and optimization techniques
+- `efcore-patterns`: Advanced Entity Framework Core patterns and practices
+- `modern-csharp-coding-standards`: Modern C# coding standards and conventions
 
 **🌐 Web Development Skills**
 - `aspnet-core-api`: RESTful API development with ASP.NET Core
@@ -52,6 +74,31 @@ Self-contained folders with `SKILL.md` files that provide reusable capabilities 
 - `integration-testing`: Integration testing strategies
 - `performance-optimization`: Performance profiling and optimization
 - `code-review-automation`: Automated code review patterns
+
+**🎨 Angular Development Skills**
+- `angular-component`: Modern Angular standalone components with v20+ best practices
+- `angular-di`: Dependency injection in Angular v20+ using inject() and providers
+- `angular-directives`: Custom directives for DOM manipulation and behavior extension
+- `angular-forms`: Signal-based forms in Angular v21+ with automatic two-way binding
+- `angular-http`: HTTP data fetching using resource(), httpResource(), and HttpClient
+- `angular-routing`: Routing with lazy loading, functional guards, and route parameters
+- `angular-signals`: Signal-based reactive state management in Angular v20+
+- `angular-ssr`: Server-side rendering and hydration with @angular/ssr
+- `angular-testing`: Unit and integration tests with Vitest/Jasmine and TestBed
+- `angular-tooling`: Angular CLI, code generation, build, and development tools
+
+**⚡ Advanced .NET Skills**
+- `csharp-concurrency-patterns`: Choosing the right concurrency abstraction in .NET
+- `csharp-developer`: Building C# applications with .NET 8+, ASP.NET Core APIs, and Blazor
+- `dotnet-10-csharp-14`: .NET 10 and C# 14 development with minimal APIs and modern patterns
+- `dotnet-architect`: Expert .NET backend architect specializing in C#, ASP.NET Core, and EF Core
+- `dotnet-backend-patterns`: Master C#/.NET backend development patterns for robust APIs
+- `dotnet-core-expert`: .NET 8 applications with minimal APIs, clean architecture, and cloud-native
+- `dotnet-project-structure`: Modern .NET project structure with .slnx and central package management
+- `find-skills`: Helps users discover and install agent skills when needed
+
+**🔧 Utility Skills**
+- `find-skills`: Discover and install available agent skills for enhanced capabilities
 
 ### 2. Rules (`.github/instructions/`)
 
@@ -73,6 +120,25 @@ Context-specific instructions that Copilot reads when working on matching files.
 - `git-workflow.md`: Git branching and commit conventions
 - `ci-cd-pipelines.md`: Azure DevOps/GitHub Actions patterns
 - `documentation-standards.md`: XML documentation and README standards
+
+## 📊 Skill Statistics
+
+**Total Skills Available**: 33 specialized skills
+
+**By Category:**
+- **Core Development**: 6 skills
+- **Web Development**: 4 skills  
+- **Testing & Quality**: 4 skills
+- **Angular Development**: 10 skills
+- **Advanced .NET**: 8 skills
+- **Utility**: 1 skill
+
+**By Technology:**
+- **.NET/C#**: 18 skills
+- **Angular**: 10 skills
+- **Testing**: 4 skills
+- **Architecture**: 6 skills
+- **Performance**: 2 skills
 
 ## 🎯 Usage Instructions
 
@@ -152,6 +218,10 @@ Ensure these settings are in your `settings.json`:
 3. **API Architect**: RESTful API design and implementation
 4. **Database Expert**: EF Core and database design
 5. **Testing Specialist**: Unit and integration testing strategies
+6. **Angular Expert**: Modern Angular development with standalone components
+7. **Frontend Architect**: Web frontend architecture and optimization
+8. **DevOps Engineer**: CI/CD pipelines and deployment automation
+9. **Security Specialist**: Application security and authentication patterns
 
 ### Agent Configuration
 
@@ -161,7 +231,7 @@ Agents are defined in `.github/agents/*.agent.md` files:
 ---
 name: C#/.NET Expert
 description: Expert in modern C#/.NET development with Gemini API integration
-model: gpt-4
+model: gemini-1.5-flash
 tools: ["editor", "terminal", "git"]
 mcp-servers:
   - name: filesystem
@@ -224,61 +294,56 @@ Generate a complete Repository pattern implementation with:
 2. **Rules not applying**: Verify glob patterns and file matching
 3. **Agent not responding**: Check MCP server configuration
 4. **Performance issues**: Optimize prompts and context usage
+5. **Angular skills not working**: Ensure Angular CLI is installed and project is Angular v20+
+6. **.NET 10 skills not available**: Verify .NET 10 SDK is installed
+7. **Gemini API rate limits**: Check API key quota and usage
 
 ### Debug Tools
 
-1. **Copilot logs**: Check VS Code developer tools
-2. **Skill testing**: Use command palette to test skills
-3. **Rule validation**: Verify rule syntax and patterns
-4. **Agent diagnostics**: Check agent configuration and tools
+1. **Copilot Chat Debug**: Enable developer mode in VS Code settings
+2. **Skill Discovery**: Use `Ctrl+Shift+P` → "Copilot: List Available Skills"
+3. **Rule Application**: Check `.github/instructions/` folder for active rules
+4. **Agent Logs**: Review agent execution logs in VS Code output panel
 
-## 📚 References
+## 📚 Additional Resources
 
-### Official Documentation
+### Documentation
 - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
-- [GitHub Copilot Chat](https://docs.github.com/en/copilot/copilot-chat)
-- [GitHub Copilot Agents](https://docs.github.com/en/copilot/working-with-copilot/copilot-agents)
+- [Gemini API Documentation](https://ai.google.dev/docs)
+- [Angular v20+ Documentation](https://angular.dev/)
+- [.NET 10 Documentation](https://learn.microsoft.com/en-us/dotnet/)
+- [Entity Framework Core Documentation](https://learn.microsoft.com/en-us/ef/core/)
 
-### Community Resources
-- [Awesome Copilot](https://github.com/github/awesome-copilot)
-- [Copilot Cookbook](https://github.com/copilot-cookbook/cookbook)
-- [Copilot Skills Marketplace](https://github.com/marketplace?type=skills)
+### Community & Support
+- [GitHub Copilot Community](httpsgithub.com/github/copilot/discussions)
+- [Stack Overflow .NET Tag](https://stackoverflow.com/questions/tagged/.net)
+- [Angular Community](https://discord.gg/angular)
+- [Microsoft Q&A](https://learn.microsoft.com/en-us/answers/)
 
-### .NET Specific Resources
-- [.NET Documentation](https://docs.microsoft.com/en-us/dotnet/)
-- [C# Programming Guide](https://docs.microsoft.com/en-us/dotnet/csharp/)
-- [ASP.NET Core Documentation](https://docs.microsoft.com/en-us/aspnet/core/)
+### Best Practices
+- Follow semantic versioning for skill updates
+- Use descriptive commit messages for skill changes
+- Test skills in isolated environments before deployment
+- Document skill dependencies and prerequisites
+- Provide migration guides for breaking changes
 
-## 🔄 Maintenance
+## 🔄 Updates & Maintenance
 
-### Regular Updates
+### Regular Tasks
+- **Monthly**: Review and update skills based on new framework releases
+- **Quarterly**: Audit skill usage and remove deprecated skills
+- **Bi-annually**: Major refactoring and architecture updates
+- **As needed**: Bug fixes and security updates
 
-1. **Review skills**: Update with latest .NET features
-2. **Validate rules**: Ensure patterns still apply
-3. **Test agents**: Verify agent performance and accuracy
-4. **Update documentation**: Keep this guide current
-
-### Community Contributions
-
-1. **Share skills**: Contribute to the community
-2. **Report issues**: Help improve existing skills
-3. **Suggest improvements**: Provide feedback and ideas
-4. **Document patterns**: Share successful implementations
-
----
-
-## 🎉 Getting Started
-
-1. **Clone this repository** to your workspace
-2. **Configure Gemini API** in your VS Code settings
-3. **Explore skills** in the `agents/skills/` directory
-4. **Apply rules** to your projects
-5. **Create custom agents** for your specific needs
-
-**Happy coding with Gemini AI and GitHub Copilot!** 🚀
+### Version Control
+- Use semantic versioning for skill releases
+- Tag releases with descriptive names
+- Maintain CHANGELOG.md for each skill
+- Use feature branches for major changes
 
 ---
 
-*Last updated: 2026-03-17*  
-*Version: 1.0.0*  
-*Compatible with: GitHub Copilot Chat, VS Code, Windsurf*
+**Last Updated**: 2026-03-18  
+**Version**: 2.1.0  
+**Total Skills**: 33 specialized skills  
+**Supported Technologies**: .NET 8+, .NET 10, Angular v20+, C# 12+, Entity Framework Core, Gemini API
