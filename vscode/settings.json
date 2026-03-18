@@ -1,50 +1,70 @@
 {
   // ╔═══════════════════════════════════════════════════════════════════════╗
-  // ║  VS Code — Settings Otimizadas para DevTools IA + RTX 2050              ║
-  // ║  Performance · Memória · AI Agent · C#/.NET · Ollama Integration    ║
-  // ║  GPUs: NVIDIA GeForce RTX 2050 (4GB VRAM) · 16GB+ RAM                ║
+  // ║  VS Code / Windsurf — Settings Otimizadas                             ║
+  // ║  Performance · Memória · AI Agent · Detected: 16 cores · 25.4 GB RAM  ║
+  // ║  GPUs: Intel Iris Xe; NVIDIA GeForce RTX 2050                         ║
   // ╚═══════════════════════════════════════════════════════════════════════╝
   // ═══════════════════════════════════════════════════════════════════════
   // 1. EDITOR — Rendering & Performance
   // ═══════════════════════════════════════════════════════════════════════
+  // Formatter padrão para arquivos sem override de linguagem
   "editor.defaultFormatter": "ms-dotnettools.csharp",
+  // Formata o arquivo automaticamente ao salvar (Ctrl+S)
   "editor.formatOnSave": true,
+  // [CPU] Mostra linhas-guia ligando pares de { } — ajuda na leitura
+  // Com CPU fraca: false (economiza processamento de renderização)
   "editor.guides.bracketPairs": true,
+  // Mostra linhas verticais de indentação
   "editor.guides.indentation": true,
+  // [CPU] Desliga listeners de acessibilidade (screen readers)
+  // Economiza CPU constante. Ligar apenas se usar leitor de tela
   "editor.accessibilitySupport": "off",
+  // [CPU][RAM] Colore pares de { } com cores diferentes por nível
+  // Com CPU/RAM baixa: false (evita tokenização extra)
   "editor.bracketPairColorization.enabled": true,
+  // [GPU] Tipo de animação do cursor. "blink" é leve
+  // Com GPU dedicada: pode usar "smooth" ou "expand" (mais bonito)
   "editor.cursorBlinking": "smooth",
+  // [GPU] Animação suave do cursor ao digitar
+  // Com GPU dedicada: "on" (cursor desliza suavemente)
   "editor.cursorSmoothCaretAnimation": "on",
+  // [CPU] Tempo (ms) antes de mostrar tooltip ao passar o mouse
+  // Com CPU forte: 200-300 (mais responsivo). Com CPU fraca: 600+
   "editor.hover.delay": 300,
+  // [CPU][RAM] Ativa otimizações automáticas para arquivos grandes
+  // Sempre true — desliga features pesadas em arquivos >2MB
   "editor.largeFileOptimizations": true,
+  // [CPU] Limite de caracteres por linha para colorização de sintaxe
+  // Com CPU forte: 20000 (padrão). Com CPU fraca: 5000-10000
   "editor.maxTokenizationLineLength": 20000,
+  // [GPU][RAM] Minimap (preview lateral do arquivo)
+  // Com GPU dedicada + RAM sobrando: true (visão geral do arquivo)
   "editor.minimap.enabled": true,
+  // Mostra caracteres de controle invisíveis (tab, etc)
   "editor.renderControlCharacters": false,
+  // Mostra espaços em branco apenas nas bordas das palavras
   "editor.renderWhitespace": "boundary",
+  // [GPU] Scroll suave com animação no editor
+  // Com GPU dedicada: true (scroll interpolado bonito)
   "editor.smoothScrolling": true,
+  // [CPU][RAM] Sticky scroll — fixa cabeçalhos de funções/classes no topo
+  // Com CPU/RAM baixa: false (reprocessa a cada scroll)
   "editor.stickyScroll.enabled": true,
+  // Prioriza sugestões de código próximas ao cursor
   "editor.suggest.localityBonus": true,
+  // [RAM] Limite máximo de abas/tabs abertas simultaneamente
+  // Com mais RAM: aumente (20-30). Com pouca RAM: 8-12
   "editor.tabLimit": {
     "enabled": true,
-    "value": 15
+    "value": 20
   },
+  // [CPU] Sugestões baseadas em palavras do workspace inteiro
+  // Com CPU forte: "currentDocument" ou "matchingDocuments"
+  // Desligado evita varredura pesada de todos os arquivos abertos
   "editor.wordBasedSuggestions": "matchingDocuments",
-  
   // ═══════════════════════════════════════════════════════════════════════
   // 2. EDITOR — Language-Specific Overrides
   // ═══════════════════════════════════════════════════════════════════════
-  "[csharp]": {
-    "editor.defaultFormatter": "ms-dotnettools.csharp",
-    "editor.semanticTokenColorCustomizations": {
-      "enabled": true,
-      "rules": {
-        "*.method": "#FFB86C",
-        "*.type": "#8BE9FD",
-        "*.namespace": "#BD93F9"
-      }
-    },
-    "editor.suggest.insertMode": "replace"
-  },
   "[dockercompose]": {
     "editor.autoIndent": "advanced",
     "editor.defaultFormatter": "redhat.vscode-yaml",
@@ -56,289 +76,631 @@
     },
     "editor.tabSize": 2
   },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.wordWrap": "on"
-  },
-  "[yaml]": {
+  "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // 3. FILES — Watchers, Exclude & Search
   // ═══════════════════════════════════════════════════════════════════════
+  // Fim de linha automático conforme o OS (LF no Linux, CRLF no Windows)
   "files.eol": "auto",
+  // Pastas escondidas do Explorer lateral (não aparecem na árvore)
   "files.exclude": {
+    "**/.angular": true,
     "**/.git": true,
+    "**/.nx": true,
+    "**/.terraform": true,
     "**/.vs": true,
     "**/bin": true,
-    "**/obj": true,
-    "**/node_modules": true,
-    "**/packages": true,
-    "**/.angular": true,
-    "**/.nx": true,
-    "**/.terraform": true
+    "**/obj": true
   },
+  // [CPU][DISK] Pastas que o VS Code NÃO monitora por mudanças
+  // Quanto mais pastas excluídas, menos I/O e CPU o watcher consome
   "files.watcherExclude": {
-    "**/.git/**": true,
-    "**/.vs/**": true,
-    "**/bin/**": true,
-    "**/obj/**": true,
-    "**/node_modules/**": true,
-    "**/packages/**": true,
-    "**/coverage/**": true,
-    "**/dist/**": true,
-    "**/TestResults/**": true,
-    "**/tmp/**": true,
     "**/.angular/**": true,
+    "**/.git/**": true,
     "**/.nx/**": true,
     "**/.terraform/**": true,
-    "**/.venv/**": true
+    "**/.venv/**": true,
+    "**/.vs/**": true,
+    "**/bin/**": true,
+    "**/coverage/**": true,
+    "**/dist/**": true,
+    "**/node_modules/**": true,
+    "**/obj/**": true,
+    "**/packages/**": true,
+    "**/TestResults/**": true,
+    "**/tmp/**": true
   },
+  // Pastas excluídas da busca (Ctrl+Shift+F)
   "search.exclude": {
-    "**/.git": true,
-    "**/.vs": true,
-    "**/bin": true,
-    "**/obj": true,
-    "**/node_modules": true,
-    "**/packages": true,
-    "**/coverage": true,
-    "**/dist": true,
-    "**/TestResults": true,
     "**/.angular": true,
     "**/.nx": true,
     "**/.terraform": true,
-    "**/.venv": true
+    "**/.venv": true,
+    "**/bin": true,
+    "**/coverage": true,
+    "**/dist": true,
+    "**/node_modules": true,
+    "**/obj": true,
+    "**/packages": true,
+    "**/TestResults": true
   },
+  // [CPU] Não seguir symlinks na busca (evita loops e leitura duplicada)
   "search.followSymlinks": false,
-  "search.maxResults": 10000,
-  
+  // [RAM] Máximo de resultados retornados numa busca
+  // Com mais RAM: 10000-20000. Com pouca: 3000-5000
+  "search.maxResults": 15000,
   // ═══════════════════════════════════════════════════════════════════════
-  // 4. FILES — Memory & Limits (16GB RAM Optimization)
+  // 3b. FILES — Memory & Limits (24 GB RAM)
   // ═══════════════════════════════════════════════════════════════════════
-  "files.maxMemoryForLargeFilesMB": 2048,
+  // [RAM] Memória máxima (MB) que o VS Code aloca para abrir arquivos grandes
+  // 8 GB RAM → 512 | 16 GB → 1024 | 32+ GB → 2048-4096
+  "files.maxMemoryForLargeFilesMB": 3072,
+  // [RAM] Restaura o histórico de Ctrl+Z ao reabrir um arquivo
+  // Com pouca RAM: false (cada arquivo guarda ~5-50 MB de undo)
   "files.restoreUndoStack": true,
+  // Usa diálogos nativos do OS (mais leves que os do VS Code)
   "files.simpleDialog.enable": true,
-  
   // ═══════════════════════════════════════════════════════════════════════
-  // 5. GIT & DIFF
+  // 4. GIT & DIFF
   // ═══════════════════════════════════════════════════════════════════════
+  // Ignora diferenças de espaços no início/fim de linhas no diff
   "diffEditor.ignoreTrimWhitespace": true,
+  // [CPU][REDE] Não faz fetch automático do remote em background
+  // Com CPU sobrando: true (mantém branch atualizado automaticamente)
   "git.autofetch": true,
+  // Não pede confirmação ao fazer git sync (push+pull)
   "git.confirmSync": false,
+  // Permite commit direto sem staging (git add + commit junto)
   "git.enableSmartCommit": true,
+  // Atualiza tags locais ao fazer pull
   "git.replaceTagsWhenPull": true,
-  "git.showInlineOpenFileAction": false,
-  "git.suggestSmartCommit": false,
-  
+  // Mostra worktrees do Windsurf no Git
+  "git.showWindsurfWorktrees": true,
   // ═══════════════════════════════════════════════════════════════════════
-  // 6. TERMINAL
+  // 5. TERMINAL
   // ═══════════════════════════════════════════════════════════════════════
   "terminal.integrated.defaultProfile.windows": "PowerShell",
   "terminal.integrated.profiles.windows": {
+    "Command Prompt": {
+      "path": "cmd.exe",
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "icon": "git-branch",
+      "path": "C:\\PROGRA~1\\Git\\bin\\bash.exe",
+      "args": [
+        "-l"
+      ]
+    },
     "PowerShell": {
       "source": "PowerShell",
       "icon": "terminal-powershell"
     },
-    "Git Bash": {
-      "icon": "git-branch",
-      "path": "C:\\Program Files\\Git\\bin\\bash.exe",
-      "args": ["-l"]
+    "Ubuntu (WSL)": {
+      "path": "wsl.exe",
+      "args": [
+        "-d",
+        "Ubuntu",
+        "--",
+        "bash",
+        "-l"
+      ],
+      "icon": "terminal-linux"
     }
   },
+  // [GPU] Aceleração de GPU no terminal
+  // GPU integrada: "auto" | GPU dedicada: "on" | Problemas visuais: "off"
   "terminal.integrated.gpuAcceleration": "on",
+  // Garante que o terminal use o shell correto
+  "terminal.integrated.automationProfile.windows": {
+    "path": "PowerShell",
+    "source": "PowerShell"
+  },
+  // Comportamento do clique direito no terminal
   "terminal.integrated.rightClickBehavior": "default",
-  "terminal.integrated.scrollback": 3000,
+  // [RAM] Linhas de histórico mantidas no buffer do terminal
+  // Cada 1000 linhas ≈ 2 MB por terminal. Com pouca RAM: 1000-3000
+  "terminal.integrated.scrollback": 5000,
+  // Envia atalhos de teclado direto pro shell
   "terminal.integrated.sendKeybindingsToShell": true,
+  // Integração do shell com VS Code (mostra comando, status, etc)
   "terminal.integrated.shellIntegration.enabled": true,
-  
   // ═══════════════════════════════════════════════════════════════════════
-  // 7. LINGUAGENS — .NET, C#, Python, YAML
+  // 6. LINGUAGENS — .NET, Python, TypeScript, YAML, Terraform
   // ═══════════════════════════════════════════════════════════════════════
+  // .NET / C#
+  // Usa a extensão C# moderna ao invés do DevKit completo
   "dotnet.preferCSharpExtension": true,
-  "dotnet.server.maxProjectCountForBackgroundAnalysis": 2,
+  // [CPU][RAM] Quantos projetos o .NET analisa em background
+  // Com mais CPU/RAM: 3-5 (melhor IntelliSense em solutions grandes)
+  "dotnet.server.maxProjectCountForBackgroundAnalysis": 3,
+  // Usa o language server novo do .NET (mais leve que o Omnisharp)
   "dotnet.server.useDotnetServer": true,
+  // Desliga Omnisharp (antigo, mais pesado)
   "dotnet.server.useOmnisharp": false,
-  "csharp.semanticHighlighting.enabled": true,
-  "csharp.format.enable": true,
-  "csharp.inlayHints.parameters.enabled": true,
-  "csharp.inlayHints.parameters.forLiteralParameters": true,
-  "csharp.inlayHints.parameters.forIndexerParameters": true,
-  "csharp.inlayHints.parameters.forObjectCreationParameters": true,
-  "csharp.inlayHints.parameters.forOtherParameters": true,
-  "csharp.inlayHints.types.enabled": true,
-  "csharp.inlayHints.types.forImplicitVariableTypes": true,
-  "csharp.inlayHints.types.forLambdaParameterTypes": true,
-  "csharp.inlayHints.types.forMethodParameterTypes": true,
-  
+  // Proxy corporativo para download do SDK .NET
+  // "dotnetAcquisitionExtension.proxyUrl": "http://proxynew.itau:8080",
+  // Python — nível de checagem de tipos (off | basic | standard | strict)
   "python.analysis.typeCheckingMode": "basic",
+  // [CPU] Desliga auto-import de JavaScript (evita varredura de módulos)
+  // Com CPU forte: true (sugere imports automaticamente)
   "javascript.suggest.autoImports": true,
+  // [CPU][REDE] Desliga download automático de typings do DefinitelyTyped
   "typescript.disableAutomaticTypeAcquisition": true,
-  "yaml.maxItemsComputed": 5000,
+  // [CPU] Máximo de itens computados pelo YAML language server
+  // Com CPU forte: 10000+. Baixo evita travamento em YAML grandes
+  "yaml.maxItemsComputed": 10000,
+  // Ativa o language server do Terraform (IntelliSense, validação)
   "terraform.languageServer.enable": true,
-  "terraform.languageServer.experimentalFeatures.validateOnSave": false,
+  // [CPU] Não valida Terraform ao salvar (validação sob demanda)
+  // Com CPU forte: true (valida automaticamente a cada save)
+  "terraform.languageServer.experimentalFeatures.validateOnSave": true,
+  // Não abre preview de Markdown automaticamente
   "markdown.preview.openByDefault": false,
-  
   // ═══════════════════════════════════════════════════════════════════════
-  // 8. WORKBENCH — Performance & UI
+  // 7. KUBERNETES
   // ═══════════════════════════════════════════════════════════════════════
-  "workbench.colorTheme": "Default Dark+",
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.startupEditor": "none",
-  "workbench.editor.showTabs": true,
-  "workbench.editor.limit.enabled": true,
-  "workbench.editor.limit.value": 15,
-  "workbench.list.smoothScrolling": true,
-  "workbench.reduceMotion": "off",
-  "workbench.tips.enabled": false,
-  "workbench.settings.showAISearchToggle": false,
-  "window.restoreWindows": "one",
-  
-  // ═══════════════════════════════════════════════════════════════════════
-  // 9. EXTENSIONS — Performance & Updates
-  // ═══════════════════════════════════════════════════════════════════════
-  "extensions.autoCheckUpdates": false,
-  "extensions.autoUpdate": false,
-  "extensions.verifySignature": false,
-  "extensions.experimental.affinity": {
-    "continue.continue": 1,
-    "ms-dotnettools.csharp": 2
+  // Autocompletar CRDs (Custom Resource Definitions) em YAML do K8s
+  // Caminho local do kubectl para a extensão Kubernetes
+  "vs-kubernetes": {
+    "vs-kubernetes.crd-code-completion": "enabled",
+    "vscode-kubernetes.kubectl-path-windows": "C:\\Users\\adnsasp\\.vs-kubernetes\\tools\\kubectl\\kubectl.exe"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
-  // 10. CONTINUE IA — Local LLM Integration
+  // 8. REDE — SSL & Timeout
   // ═══════════════════════════════════════════════════════════════════════
-  "continue.model": "qwen2.5-coder:7b-instruct-q4_K_M",
-  "continue.provider": "ollama",
-  "continue.apiBase": "http://localhost:11434",
-  "continue.contextLength": 4096,
-  "continue.temperature": 0.1,
-  "continue.enableCodeCompletion": true,
-  "continue.enableTabAutocomplete": true,
-  "continue.enableCodeLens": true,
-  "continue.enableInlineComments": true,
-  "continue.enableSlashCommands": true,
-  "continue.enableWebSearch": false,
-  "continue.tabAutocompleteModel": {
-    "title": "Qwen 2.5 Coder 7B - Autocomplete",
-    "provider": "ollama",
-    "model": "qwen2.5-coder:7b-instruct-q4_K_M",
-    "apiBase": "http://localhost:11434",
-    "contextLength": 2048,
-    "temperature": 0.0
-  },
-  
-  // ═══════════════════════════════════════════════════════════════════════
-  // 11. DEBUG & TESTING
-  // ═══════════════════════════════════════════════════════════════════════
-  "debug.console.fontSize": 14,
-  "debug.internalConsoleOptions": "neverOpen",
-  "debug.allowBreakpointsEverywhere": true,
-  "debug.inlineValues": "on",
-  "debug.showBreakpointsInOverviewRuler": true,
-  "testing.automaticallyOpenPeekView": "never",
-  "testing.followRunningTest": true,
-  "testing.openTesting": "openOnTestStart",
-  
-  // ═══════════════════════════════════════════════════════════════════════
-  // 12. SECURITY & PRIVACY
-  // ═══════════════════════════════════════════════════════════════════════
-  "security.workspace.trust.untrustedFiles": "open",
-  "security.workspace.trust.enabled": true,
-  "telemetry.enableTelemetry": false,
-  "redhat.telemetry.enabled": false,
-  
-  // ═══════════════════════════════════════════════════════════════════════
-  // 13. DOCKER & CONTAINERS
-  // ═══════════════════════════════════════════════════════════════════════
-  "docker.extension.enableComposeLanguageServer": true,
-  "docker.images.defaultRegistry": "docker.io",
-  "docker.scanImages": "off",
-  "docker.cleanup": "on",
-  
-  // ═══════════════════════════════════════════════════════════════════════
-  // 14. PERFORMANCE OPTIMIZATIONS
-  // ═══════════════════════════════════════════════════════════════════════
-  "explorer.autoReveal": false,
-  "explorer.fileNesting.enabled": true,
-  "explorer.fileNesting.patterns": {
-    "*.csproj": "$(capture).cs,$(capture).csproj,$(capture).Designer.cs,$(capture).resx,$(capture).Resources.Designer.cs,$(capture).settings.Designer.cs,$(capture).Editor.cs,$(capture).AssemblyInfo.cs,$(capture).xaml,$(capture).xaml.cs,$(capture).g.cs,$(capture).g.i.cs",
-    "*.sln": "$(capture).sln,$(capture).DotSettings,$(capture).DotSettings.user",
-    "*.config": "$(capture).config,$(capture).Debug.config,$(capture).Release.config"
-  },
-  
-  // ═══════════════════════════════════════════════════════════════════════
-  // 15. NETWORK & TIMEOUTS
-  // ═══════════════════════════════════════════════════════════════════════
+  // Usa certificados do sistema (Windows cert store) — resolve erros SSL
   "http.experimental.systemCertificatesV2": true,
-  "http.timeout": 60000,
-  "remote.SSH.connectTimeout": 60,
-  
+  // [REDE] Timeout geral de requisições HTTP (ms). 120s = 2 min
+  // Rede lenta: 180000+ | Rede rápida: 60000
+  "http.timeout": 120000,
+  // Mostra toggle de busca semântica AI na view de settings
+  "workbench.settings.showAISearchToggle": true,
+  // Ao usar "Ask Copilot" na Command Palette, abre no painel de chat
+  "workbench.commandPalette.experimental.askChatLocation": "chatView",
+  // Busca semântica no workspace — ativação manual (evita custo CPU contínuo)
+  "search.searchView.semanticSearchBehavior": "manual",
+  // Desliga sugestões de keywords na busca (reduz ruído)
+  "search.searchView.keywordSuggestions": false,
+  // Ao reabrir o VS Code, restaura apenas a última janela
+  "window.restoreWindows": "one",
+  // [RAM] Limita o número máximo de editores abertos
+  // 8 GB RAM → 8-10 | 16 GB → 12-15 | 32+ GB → 20-30
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 20,
+  // [GPU] Scroll suave nas listas laterais (explorer, search, etc)
+  // Com GPU dedicada: true
+  "workbench.list.smoothScrolling": true,
+  // [GPU] Reduz todas as animações do VS Code (transições, fades, etc)
+  // Com GPU dedicada: "off" (animações completas)
+  "workbench.reduceMotion": "off",
+  // Desliga dicas/tips do VS Code na inicialização
+  "workbench.tips.enabled": false,
   // ═══════════════════════════════════════════════════════════════════════
-  // 16. AI & CHAT SETTINGS
+  // 10. EXTENSÕES — Afinidade de Processos
   // ═══════════════════════════════════════════════════════════════════════
+  // [CPU] Distribui extensões pesadas em processos separados
+  // Cada número = um processo isolado. Evita que uma trave as outras
+  "extensions.experimental.affinity": {
+    "github.copilot-chat": 1,
+    "stackspotai.stackspotai": 2
+  },
+  // [REDE][DISK] Não verifica atualizações de extensões automaticamente
+  // Com boa rede: true (mantém extensões atualizadas)
+  "extensions.autoCheckUpdates": true,
+  // [DISK] Não baixa atualizações automaticamente
+  // Controle manual evita cache duplicado no disco
+  "extensions.autoUpdate": true,
+  // Não verifica assinatura digital das extensões
+  "extensions.verifySignature": false,
+  // ═══════════════════════════════════════════════════════════════════════
+  // 11. QUALIDADE — SonarLint
+  // ═══════════════════════════════════════════════════════════════════════
+  // [REDE] Conexão com servidor SonarQube corporativo (análise de código)
+  "sonarlint.connectedMode.connections.sonarqube": [
+    {
+      "connectionId": "https-sonaropen-prod-aws-cloud-ihf",
+      "serverUrl": "https://sonaropen.prod.aws.cloud.ihf"
+    }
+  ],
+  // Foca análise apenas em código novo/alterado (ignora dívida técnica antiga)
+  "sonarlint.focusOnNewCode": true,
+  // Caminho do Node.js usado pelo SonarLint (precisa do Node para rodar)
+  "sonarlint.pathToNodeExecutable": "C:\\Users\\afons\\AppData\\Local\\nvm\\v20.19.5\\node.exe",
+  // ═══════════════════════════════════════════════════════════════════════
+  // 12. CLOUD — AWS, Azure, Datadog
+  // ═══════════════════════════════════════════════════════════════════════
+  // Telemetria do AWS CloudFormation (envia dados de uso para AWS)
+  "aws.cloudformation.telemetry.enabled": true,
+  // Survey da extensão Azure Terraform (pode ignorar)
+  "azureTerraform.survey": {
+    "surveyPromptDate": "2026-07-19T13:13:58.433Z",
+    "surveyPromptIgnoredCount": 0
+  },
+  // Domínio do Datadog para monitoramento (ambiente dev Itaú)
+  "datadog.connection.oauth.setup.domain": "itau-dev.datadoghq.com",
+  // Suprime aviso de configuração do MCP Server do Datadog
+  "datadog.mcp.notification.suppressMcpAccessSettingWarning": true,
+  // ═══════════════════════════════════════════════════════════════════════
+  // 13. TELEMETRY, DOCKER & EXPLORER
+  // ═══════════════════════════════════════════════════════════════════════
+  // [CPU][RAM] Language server do docker-compose (validação de YAML)
+  // Com CPU/RAM sobrando: true (IntelliSense em docker-compose)
+  "docker.extension.enableComposeLanguageServer": true,
+  // [CPU] Não rola a árvore do Explorer até o arquivo ativo
+  // Com CPU sobrando: true (sempre mostra o arquivo aberto na árvore)
+  "explorer.autoReveal": false,
+  // [REDE] Desliga telemetria da Red Hat (enviava dados em background)
+  "redhat.telemetry.enabled": false,
+  // ═══════════════════════════════════════════════════════════════════════
+  // 14. SSH / REMOTE
+  // ═══════════════════════════════════════════════════════════════════════
+  // [REDE] Timeout (segundos) para conexão SSH remota
+  // Rede lenta/VPN: 120-180 | Rede rápida: 30-60
+  "remote.SSH.connectTimeout": 120,
+  // ═══════════════════════════════════════════════════════════════════════
+  // 15. GITHUB COPILOT — Core
+  // ═══════════════════════════════════════════════════════════════════════
+  // Configurações avançadas do Copilot (vazio = usa padrões)
+  "github.copilot.advanced": {},
+  // Ativa/desativa Copilot por tipo de arquivo
+  // "*": true = ligado para tudo; plaintext/scminput: off (evita sugestões inúteis)
+  "github.copilot.enable": {
+    "*": true,
+    "markdown": true,
+    "plaintext": false,
+    "scminput": false
+  },
+  // Ativa Code Actions do Copilot (quick fixes, refactorings sugeridos)
+  "github.copilot.editor.enableCodeActions": true,
+  // Sugere nomes automaticamente ao renomear símbolos (F2)
+  "github.copilot.renameSuggestions.triggerAutomatically": true,
+  // [CPU] NES — sugestão de próxima edição (prevê o que você vai editar)
+  // Usa CPU para análise preditiva. Desativar se CPU estiver saturada
+  "github.copilot.nextEditSuggestions.enabled": true,
+  // NES também sugere correções de erros inline
+  "github.copilot.nextEditSuggestions.fixes": true,
+  // Permite que sugestões inline desloquem código para mostrar a edição
+  "editor.inlineSuggest.edits.allowCodeShifting": "always",
+  // Renderiza sugestões de edição lado a lado quando há espaço
+  "editor.inlineSuggest.edits.renderSideBySide": "auto",
+  // Delay mínimo (ms) para mostrar sugestão inline — 0 = instantâneo
+  "editor.inlineSuggest.minShowDelay": 0,
+  // Syntax highlighting nas sugestões inline (mais legível)
+  "editor.inlineSuggest.syntaxHighlightingEnabled": true,
+  // ═══════════════════════════════════════════════════════════════════════
+  // 16. GITHUB COPILOT — Chat & Agent
+  // ═══════════════════════════════════════════════════════════════════════
+  // Agent corrige erros automaticamente após editar código
+  "github.copilot.chat.agent.autoFix": true,
+  // Ativa "pensamento" visível do modelo (chain-of-thought)
+  "github.copilot.chat.agent.thinkingTool": true,
+  // Habilita edição de código via Anthropic Claude no chat
+  "github.copilot.chat.anthropic.contextEditing.enabled": true,
+  // Permite busca na web durante chat com Claude
+  "github.copilot.chat.anthropic.tools.websearch.enabled": true,
+  // Usa API antiga do Anthropic (compatibilidade)
+  "github.copilot.chat.anthropic.useMessagesApi": false,
+  // Shell usado quando o modelo Claude Sonnet 4.5 executa comandos
+  "github.copilot.chat.claudeSonnet45AlternatePrompt": "Ubuntu (WSL)",
+  // Usa templates de projeto ao criar workspaces via chat
+  "github.copilot.chat.useProjectTemplates": true,
+  // Chat no terminal abre no painel de chat (mantém contexto unificado)
+  "github.copilot.chat.terminalChatLocation": "chatView",
+  // Detecta automaticamente o participante/@agent correto para a pergunta
   "chat.detectParticipant.enabled": true,
-  "chat.checkpoints.enabled": false,
+  // [RAM] Habilita checkpoints no chat (salva estado para rollback)
+  "chat.checkpoints.enabled": true,
+  // Mostra mudanças de arquivos em cada checkpoint
+  "chat.checkpoints.showFileChanges": true,
+  // Edições do chat aparecem inline no editor (não em diff separado)
   "chat.editRequests": "inline",
+  // Pede confirmação ao remover uma request de edição do chat
+  "chat.editing.confirmEditRequestRemoval": true,
+  // Pede confirmação ao retentar uma request de edição
+  "chat.editing.confirmEditRequestRetry": true,
+  // Delay (s) para auto-aceitar edições — 0 = aceite manual obrigatório
   "chat.editing.autoAcceptDelay": 0,
-  "chat.notifyWindowOnConfirmation": false,
-  "chat.notifyWindowOnResponseReceived": false,
-  "chat.math.enabled": true,
-  "chat.sendElementsToChat.enabled": false,
-  "chat.emptyState.history.enabled": false,
+  // Notifica a janela quando o chat precisa de confirmação do usuário
+  "chat.notifyWindowOnConfirmation": true,
+  // Notifica quando o chat termina de responder (útil se trocar de janela)
+  "chat.notifyWindowOnResponseReceived": true,
+  // Não responde automaticamente a prompts do terminal (segurança)
   "chat.tools.terminal.autoReplyToPrompts": false,
+  // Habilita renderização de equações KaTeX no chat
+  "chat.math.enabled": true,
+  // Mostra histórico de conversas na tela inicial do chat
+  "chat.emptyState.history.enabled": true,
+  // Permite enviar elementos da UI (screenshots, seleções) para o chat
+  "chat.sendElementsToChat.enabled": true,
+  // Sugere arquivos relacionados baseado no histórico do Git
+  "github.copilot.chat.edits.suggestRelatedFilesFromGitHistory": true,
+  // Busca semântica no código durante chat (encontra funções por descrição)
+  "github.copilot.chat.codesearch.enabled": true,
+  // [RAM] Memória do Copilot — lembra preferências entre sessões
+  "github.copilot.chat.copilotMemory.enabled": true,
+  // Usa arquivos editados recentemente como contexto para sugestões
+  "github.copilot.chat.editor.temporalContext.enabled": true,
+  "github.copilot.chat.edits.temporalContext.enabled": true,
+  // Permite executar prompts/comandos diretamente pelo chat
+  "github.copilot.chat.executePrompt.enabled": true,
+  // ── Inline Chat ──
+  // Não finaliza inline chat ao começar a digitar (mantém o painel)
+  "inlineChat.finishOnType": false,
+  // Dica visual em linhas vazias para usar inline chat
+  "inlineChat.lineEmptyHint": true,
+  // Dica visual para linguagem natural em inline chat
+  "inlineChat.lineNaturalLanguageHint": true,
+  // ── Code Review ──
+  // Habilita revisão de seleção de código pelo Copilot
+  "github.copilot.chat.reviewSelection.enabled": true,
+  // Instruções customizadas para code review (ex: "verifique SQL injection")
+  "github.copilot.chat.reviewSelection.instructions": [],
+  // ── Debugging ──
+  // Permite iniciar debugging diretamente pelo chat
+  "github.copilot.chat.startDebugging.enabled": true,
+  // Habilita comando /debug do Copilot
+  "github.copilot.chat.copilotDebugCommand.enabled": true,
+  // ── Testing ──
+  // Mostra CodeLens "Generate Tests" acima de funções
+  "github.copilot.chat.generateTests.codeLens": true,
+  // Habilita setup automático de frameworks de teste
+  "github.copilot.chat.setupTests.enabled": true,
+  // ── Notebooks ──
+  // Geração experimental de notebooks via chat
+  "notebook.experimental.generate": true,
+  // Permite criar novos notebooks via edições do chat
+  "github.copilot.chat.edits.newNotebook.enabled": true,
+  // Acompanha execução de células no notebook
+  "github.copilot.chat.notebook.followCellExecution.enabled": true,
+  // Ativa MCP Server do GitHub (acesso a issues, PRs, repos via chat)
+  "github.copilot.chat.githubMcpServer.enabled": true,
+  // Shell para modelos GPT-5 e Grok quando executam comandos
+  "github.copilot.chat.gpt5AlternatePrompt": "Ubuntu (WSL)",
+  "github.copilot.chat.grokCodeAlternatePrompt": "Ubuntu (WSL)",
+  // Contexto de linguagem TypeScript para fixes e inline suggestions
+  "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+  "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+  "github.copilot.chat.languageContext.typescript.enabled": true,
+  // Inclui documentação do TS no contexto (melhora sugestões)
+  "github.copilot.chat.languageContext.typescript.includeDocumentation": true,
+  // [REDE] Timeout de requisição do chat (ms). 120s = 2 min
+  // Rede lenta: 180000 | Rede rápida: 60000
+  "github.copilot.chat.requestTimeout": 120000,
+  // Permite selecionar escopo (workspace, arquivo) ao iniciar chat
+  "github.copilot.chat.scopeSelection": true,
+  // Permite trocar entre agentes durante uma conversa
+  "github.copilot.chat.switchAgent.enabled": true,
+  // ═══════════════════════════════════════════════════════════════════════
+  // 17. COPILOT — Instruction Files
+  // ═══════════════════════════════════════════════════════════════════════
+  // Usa arquivos .instructions.md do repo para guiar geração de código
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  // Pastas onde buscar arquivos de instrução para o Copilot
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true,
+    "~/.claude/rules": true
+  },
+  // Instruções customizadas para geração de commit messages
+  // Adicione regras como: "Use conventional commits (feat:, fix:, chore:)"
+  "github.copilot.chat.commitMessageGeneration.instructions": [],
+  // Instruções customizadas para geração de descrições de PR
+  "github.copilot.chat.pullRequestDescriptionGeneration.instructions": [],
+  // Habilita arquivos .prompt.md reutilizáveis para tarefas repetitivas
+  "chat.promptFiles": true,
+  // Pastas onde buscar prompt files (.prompt.md)
+  "chat.promptFilesLocations": {
+    ".github/prompts": true
+  },
+  // Pastas para custom agents (.chatmode.md / agents)
+  "chat.modeFilesLocations": {
+    ".github/agents": true
+  },
+  // Usa arquivos agents.md para definir agentes disponíveis
+  "chat.useAgentsMdFile": true,
+  // Suporta agents.md aninhados em subpastas
+  "chat.useNestedAgentsMdFiles": true,
+  // ═══════════════════════════════════════════════════════════════════════
+  // 18. COPILOT — GitHub PRs
+  // ═══════════════════════════════════════════════════════════════════════
+  // Pede confirmação antes do Copilot Coding Agent criar PRs
+  "githubPullRequests.codingAgent.promptForConfirmation": true,
+  // Pergunta se quer fazer pull ao mudar de branch
+  "githubPullRequests.pullBranch": "prompt",
+  // ═══════════════════════════════════════════════════════════════════════
+  // 19. COPILOT CHAT — Agent, Skills & MCP
+  // ═══════════════════════════════════════════════════════════════════════
+  // Caminho das skills customizadas do AI Agent
+  "aiAgent.skillsPath": "~/.agents/skills",
+  // [REDE] Máximo de requisições que o agent pode fazer por sessão
+  "chat.agent.maxRequests": 5000,
+  // Pastas onde buscar skills do agent
+  "chat.agentFilesLocations": {
+    "~/.agents/skills": true
+  },
+  // Permite acesso anônimo ao chat (sem login GitHub)
+  "chat.allowAnonymousAccess": true,
+  // Mostra ações alternativas de ferramentas no chat
+  "chat.alternativeToolAction.enabled": true,
+  // Permite agents customizados dentro de subagents
+  "chat.customAgentInSubagent.enabled": true,
+  // Explica mudanças feitas pelo chat antes de aplicar
+  "chat.editing.explainChanges.enabled": true,
+  // [REDE] Timeout do editor de chat (ms). 120s = 2 min
+  "chat.editor.requestTimeout": 120000,
+  // Acesso a todos os MCP servers disponíveis
+  "chat.mcp.access": "all",
+  // Não inicia MCP servers automaticamente (economia de RAM/CPU)
+  // Com máquina potente: "newAndOutdated" (servers sempre prontos)
+  "chat.mcp.autostart": "newAndOutdated",
+  // Habilita o agent mode (execução autônoma de tarefas)
+  "chat.agent.enabled": true,
+  // Estilo de exibição do "pensamento" do agent (scroll fixo = menos pulo)
+  "chat.agent.thinkingStyle": "fixedScrolling",
+  // Posição da lista de tarefas do agent na UI
+  "chat.agent.todoList.position": "default",
+  // Desliga auto-approve global de ferramentas (segurança — aprovar uma a uma)
   "chat.tools.global.autoApprove": false,
-  
-  // ═══════════════════════════════════════════════════════════════════════
-  // 17. CUSTOM KEYBINDINGS & SHORTCUTS
-  // ═══════════════════════════════════════════════════════════════════════
-  "editor.quickSuggestions": {
-    "comments": "on",
-    "strings": "on",
-    "other": "on"
+  // Habilita criação de workspaces via chat
+  "github.copilot.chat.newWorkspaceCreation.enabled": true,
+  // [CPU] Threshold para virtual tools (ferramentas carregadas sob demanda)
+  // Valores menores = mais rápido mas menos ferramentas. 128 = bom balanço
+  "github.copilot.chat.virtualTools.threshold": 128,
+  // Habilita MCP server discovery (descobre servers disponíveis na rede)
+  "chat.mcp.discovery.enabled": {
+    "claude-desktop": true,
+    "windsurf": true,
+    "cursor-global": true,
+    "cursor-workspace": true
   },
-  "editor.suggest.showStatusBar": true,
-  "editor.suggest.preview": true,
-  "editor.suggestSelection": "first",
-  "editor.acceptSuggestionOnCommitCharacter": true,
-  "editor.acceptSuggestionOnEnter": "on",
-  "editor.suggest.snippetsPreventQuickSuggestions": false,
-  "editor.parameterHints.enabled": true,
-  "editor.hover.enabled": true,
-  "editor.lightbulb.enabled": true,
-  "editor.codeLens": true,
-  
-  // ═══════════════════════════════════════════════════════════════════════
-  // 18. DEVTOOLS IA SPECIFIC
-  // ═══════════════════════════════════════════════════════════════════════
-  "files.associations": {
-    "*.dockerfile": "dockerfile",
-    "Dockerfile*": "dockerfile",
-    "docker-compose*.yml": "dockercompose",
-    "docker-compose*.yaml": "dockercompose"
+  // Mostra galeria de MCP servers disponíveis
+  "chat.mcp.gallery.enabled": true,
+  // Configura quais modelos o Datadog MCP pode usar via sampling
+  "chat.mcp.serverSampling": {
+    "Datadog MCP Server Registry: datadog": {
+      "allowedModels": [
+        "copilot/auto",
+        "copilot/claude-opus-4.6",
+        "copilot/claude-sonnet-4.6"
+      ]
+    }
   },
-  
+  // Ativa skills do agent (terraform, docker, etc)
+  "chat.useAgentSkills": true,
+  // Layout das sessões de chat (stacked = empilhadas)
+  "chat.viewSessions.orientation": "stacked",
   // ═══════════════════════════════════════════════════════════════════════
-  // 19. WORKSPACE CONFIGURATION
+  // 20. COPILOT CHAT — Terminal Auto-Approve
+  // Comandos que o Copilot pode executar SEM pedir confirmação
+  // Adicione apenas comandos seguros (sem rm -rf, drop, etc)
   // ═══════════════════════════════════════════════════════════════════════
-  "update.mode": "manual",
-  "workbench.enableExperiments": false,
-  "npm.enableScriptExplorer": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  
-  // ═══════════════════════════════════════════════════════════════════════
-  // 20. FINAL OPTIMIZATIONS
-  // ═══════════════════════════════════════════════════════════════════════
-  "emmet.includeLanguages": {
-    "razor": "html",
-    "cshtml": "html"
+  "chat.tools.terminal.autoApprove": {
+    "awk": true,
+    "code --list-extensions": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "copy": true,
+    "cp": true,
+    "dir": true,
+    "dotnet build": true,
+    "dotnet clean": true,
+    "dotnet reportgenerator": true,
+    "dotnet restore": true,
+    "dotnet run": true,
+    "dotnet test": true,
+    "dotnet tool": true,
+    "git add": true,
+    "git commit": true,
+    "git push": true,
+    "git reset": true,
+    "git tag": true,
+    "markdownlint-cli2": true,
+    "mkdir": true,
+    "mv": true,
+    "npm install": true,
+    "npm run test:coverage": true,
+    "npm run test:unit": true,
+    "npm test": true,
+    "npx": true,
+    "reportgenerator": true,
+    "rmdir": true,
+    "sed": true,
+    "uniq": true,
+    "rm": false,
+    "rm -rf": false,
+    "del": false,
+    "kill": false,
+    "curl": false,
+    "wget": false,
+    "eval": false,
+    "chmod": false,
+    "chown": false,
+    "/^Remove-Item\\b/i": false
   },
-  "razor.languageServer.debug": false,
-  "razor.languageServer.deferCompletionRequest": true
+  // Shell usado pelo Copilot Chat para executar comandos no Windows
+  "chat.tools.terminal.terminalProfile.windows": {
+    "path": "wsl.exe",
+    "args": [
+      "-d",
+      "Ubuntu"
+    ]
+  },
+  // URLs que o Copilot pode acessar sem pedir confirmação
+  "chat.tools.urls.autoApprove": {
+    "https://code.visualstudio.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://docs.microsoft.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://learn.microsoft.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://developer.mozilla.org": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://developer.chrome.google": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://stackoverflow.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://github.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://www.npmjs.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://pkg.go.dev": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://pypi.org": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://docs.python.org": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://react.dev": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://angular.io": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://nodejs.org": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://www.typescriptlang.org": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://dotnet.microsoft.com": {
+      "approveRequest": true,
+      "approveResponse": true
+    },
+    "https://learn.microsoft.com/en-us/dotnet": {
+      "approveRequest": true,
+      "approveResponse": true
+    }
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "terminal.integrated.showCommandHint": false
 }

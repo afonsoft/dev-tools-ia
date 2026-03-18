@@ -1,38 +1,58 @@
 {
   "recommendations": [
-    "continue.continue",
+    // 🚀 AI & Code Completion
     "github.copilot",
     "github.copilot-chat",
     "ms-vscode.intellicode-api-usage-examples",
     "ms-vscode.intellicode",
+    "visualstudioexptteam.vscodeintellicode",
+
+    // 💻 C# / .NET Development
     "ms-dotnettools.csharp",
     "ms-dotnettools.csdevkit",
     "ms-dotnettools.blazor",
     "ms-dotnettools.dotnet-interactive-vscode",
     "ms-dotnettools.vscode-dotnet-runtime",
-    "k--kato.docrunner",
-    "formulahendry.dotnet-test-explorer",
     "ms-vscode.dotnet-runtime",
     "jchannon.csharpextensions",
     "formulahendry.dotnet-core-snippets",
     "ms-dotnettools.vscode-dotnet-pack",
+    "dotnet-exception-snippets.exception-snippets",
+    "boundarystudio.csharp-extentions-pack",
+
+    // 🧪 Testing & Quality
+    "k--kato.docrunner",
+    "formulahendry.dotnet-test-explorer",
     "hbenl.vscode-test-explorer",
     "ms-vscode.test-adapter-converter",
-    "dotnet-exception-snippets.exception-snippets",
-    "ms-vscode.vscode-json",
-    "redhat.vscode-xml",
+
+    // 🌐 Web Development (Angular & Frontend)
+    "angular.ng-template",
+    "johnpapa.angular2",
     "ms-vscode.vscode-html-css-pack",
     "bradlc.vscode-tailwindcss",
     "formulahendry.auto-rename-tag",
     "formulahendry.auto-close-tag",
-    "ritwickdey.liveserver",
-    "yzhang.markdown-all-in-one",
-    "shd101wyy.markdown-preview-enhanced",
+    "ms-vscode.live-server",
+    "gformat.html-formatter",
+
+    // 📝 Languages & Frameworks
+    "ms-vscode.vscode-json",
+    "redhat.vscode-xml",
+    "redhat.vscode-yaml",
+    "ms-vscode.vscode-yaml",
+    "ms-vscode.vscode-typescript-next",
+    "ms-vscode.vscode-jest",
+    "xabikos.javascriptsnippets",
+    "richie5um2.scss-class-completion",
+    "syler.sass-indented",
+
+    // 🐳 Docker & Containers
     "ms-azuretools.vscode-docker",
     "ms-vscode-remote.remote-containers",
     "formulahendry.docker-extension-pack",
-    "ms-vscode.vscode-yaml",
-    "redhat.vscode-yaml",
+
+    // 🔧 Git & Version Control
     "eamodio.gitlens",
     "github.vscode-pull-request-github",
     "github.vscode-github-actions",
@@ -40,22 +60,39 @@
     "mhutchie.git-graph",
     "codezombiech.gitignore",
     "waderyan.gitblame",
+    "donjayamanne.githistory",
+
+    // 🗄️ Database & Data
     "ms-mssql.mssql",
     "ms-vscode.vscode-sql-tools",
     "cweijan.vscode-redis-client",
     "ms-azuretools.vscode-cosmosdb",
     "humao.rest-client",
+
+    // 🎨 Code Quality & Formatting
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "editorconfig.editorconfig",
+    "davidanson.vscode-markdownlint",
     "streetsidesoftware.code-spell-checker",
     "streetsidesoftware.code-spell-checker-portuguese",
     "streetsidesoftware.code-spell-checker-spanish",
+
+    // 📋 Productivity & Utilities
     "gruntfuggly.todo-tree",
     "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "alefragnani.bookmarks",
+    "coenraadf.bracket-pair-colorizer-2",
+    "oderwat.indent-rainbow",
+    "mechatroner.rainbow-csv",
+
+    // 🖥️ Terminal & Shell
     "ms-vscode.vscode-powershell",
-    "ms-vscode.vscode-typescript-next",
-    "ms-vscode.vscode-jest",
+    "runemula.vscode-git-bash",
+    "tyriar.shell-launcher",
+
+    // 🎨 Themes & Icons
     "pkief.material-icon-theme",
     "ms-vscode.theme-tomorrow-night-blue",
     "zhuangtongfa.material-theme",
@@ -63,68 +100,66 @@
     "sainnhe.gruvbox-material",
     "whizark.workbench-monokai",
     "akamud.vscode-theme-onedark",
-    "ms-vscode.live-server",
-    "humao.rest-client",
-    "ms-vscode.vscode-xml",
-    "ms-vscode.hexeditor",
-    "redhat.vscode-commons",
-    "alefragnani.bookmarks",
-    "christian-kohler.npm-intellisense",
-    "wakatime.vscode-wakatime",
-    "ms-vscode-remote.remote-ssh",
-    "ms-vscode-remote.remote-wsl",
-    "ms-vscode.remote-explorer",
-    "ms-vscode.js-debug",
-    "ms-vscode.js-debug-companion",
-    "ms-vscode.vscode-codeql",
-    "ms-vscode.azure-account",
-    "ms-vscode.azurecli",
-    "ms-azuretools.vscode-azurefunctions",
-    "ms-azuretools.vscode-azureresourcegroups",
-    "ms-azuretools.vscode-azurestorage",
-    "ms-python.python",
-    "ms-python.vscode-pylance",
-    "ms-python.black-formatter",
-    "ms-python.isort",
-    "ms-python.flake8",
-    "rebornix.ruby",
-    "golang.go",
-    "rust-lang.rust-analyzer",
-    "scala-lang.scala",
-    "redhat.java",
-    "vscjava.vscode-java-pack",
-    "davidanson.vscode-markdownlint",
+    "vscode-icons-team.vscode-icons",
+    "johnpapa.vscode-peacock",
+    "johnpapa.winteriscoming",
+
+    // 📖 Documentation & Markdown
+    "yzhang.markdown-all-in-one",
+    "shd101wyy.markdown-preview-enhanced",
     "mushanshit.vscode-markdown-image",
     "hugonode.paste-json-as-markdown",
     "bierner.markdown-mermaid",
     "bierner.markdown-footnotes",
     "bierner.markdown-checkbox",
     "bierner.markdown-yaml-preamble",
-    "xabikos.javascriptsnippets",
-    "visualstudioexptteam.vscodeintellicode",
-    "coenraadf.bracket-pair-colorizer-2",
-    "oderwat.indent-rainbow",
-    "richie5um2.scss-class-completion",
-    "syler.sass-indented",
-    "tyriar.shell-launcher",
-    "runemula.vscode-git-bash",
-    "genepiot.ollama-vscode",
-    "mechatroner.rainbow-csv",
-    "angular.ng-template",
-    "boundarystudio.csharp-extentions-pack",
-    "donjayamanne.githistory",
-    "gformat.html-formatter",
-    "johnpapa.angular2",
-    "johnpapa.vscode-peacock",
-    "johnpapa.winteriscoming",
-    "vscode-icons-team.vscode-icons"
+
+    // 🔍 Search & Navigation
+    "ms-vscode.hexeditor",
+    "redhat.vscode-commons",
+
+    // 🌐 Remote Development
+    "ms-vscode-remote.remote-ssh",
+    "ms-vscode-remote.remote-wsl",
+    "ms-vscode.remote-explorer",
+
+    // 🐍 Python (para scripts e automação)
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.black-formatter",
+    "ms-python.isort",
+    "ms-python.flake8",
+
+    // 🌟 Other Languages
+    "golang.go",
+    "rust-lang.rust-analyzer",
+    "scala-lang.scala",
+    "redhat.java",
+    "vscjava.vscode-java-pack",
+    "rebornix.ruby",
+
+    // ⏱️ Time Tracking
+    "wakatime.vscode-wakatime",
+
+    // 🔧 JavaScript Debugging
+    "ms-vscode.js-debug",
+    "ms-vscode.js-debug-companion",
+
+    // 🛡️ Security & Analysis
+    "ms-vscode.vscode-codeql",
+
+    // ☁️ Azure & Cloud
+    "ms-vscode.azure-account",
+    "ms-vscode.azurecli",
+    "ms-azuretools.vscode-azurefunctions",
+    "ms-azuretools.vscode-azureresourcegroups",
+    "ms-azuretools.vscode-azurestorage"
   ],
   "unwantedRecommendations": [
     "ms-vscode.csharp",
     "ms-vscode.cpptools",
-    "ms-python.python",
     "ms-vscode.node-azure",
-    "ms-vscode.azurecli",
-    "ms-vscode.vscode-typescript-next"
+    "continue.continue",
+    "genepiot.ollama-vscode"
   ]
 }
