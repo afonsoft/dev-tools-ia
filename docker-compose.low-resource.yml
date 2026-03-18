@@ -1,7 +1,7 @@
 services:
   openhands:
     image: docker.openhands.dev/openhands/openhands:1.4
-    container_name: openhands-hands-app
+    container_name: openhands-hands-app-low
     pull_policy: always
     init: true
     environment:
@@ -14,25 +14,22 @@ services:
       OPENHANDS_LLM_MODEL: gemini-1.5-flash
       OPENHANDS_LLM_TEMPERATURE: 0.2
       OPENHANDS_LLM_TOP_P: 0.95
-      OPENHANDS_MAX_ITERATIONS: 25
+      OPENHANDS_MAX_ITERATIONS: 15
       OPENHANDS_ENABLE_AUTO_LINT: true
-      # Configurações de Workspace
       WORKSPACE_MOUNT_PATH: /workspace
       WORKSPACE_BASE: /workspace
-      OPENHANDS_LLM_GPU_LAYERS: 33
-      OPENHANDS_LLM_CTX_SIZE: 3072
-      OPENHANDS_LOAD_TIMEOUT: 300
+      OPENHANDS_LLM_GPU_LAYERS: 0
+      OPENHANDS_LLM_CTX_SIZE: 1024
+      OPENHANDS_LOAD_TIMEOUT: 180
       OPENHANDS_MAX_PARALLEL_REQUESTS: 1
-      OPENHANDS_MEMORY_BUDGET: 3435973836
-      # Performance
-      CUDA_VISIBLE_DEVICES: 0
-      # Otimizações de memória
-      SANDBOX_TIMEOUT: 180
+      OPENHANDS_MEMORY_BUDGET: 1073741824
+      CUDA_VISIBLE_DEVICES: ""
+      SANDBOX_TIMEOUT: 120
       SANDBOX_USER_ID: "0"
-      SANDBOX_MEMORY_LIMIT: "16g"
-      SANDBOX_CPU_LIMIT: "2.0"
-      WORKSPACE_TIMEOUT: 300
-      MAX_WORKSPACE_SIZE: "8g"
+      SANDBOX_MEMORY_LIMIT: "2g"
+      SANDBOX_CPU_LIMIT: "0.5"
+      WORKSPACE_TIMEOUT: 180
+      MAX_WORKSPACE_SIZE: "2g"
     ports:
       - "3000:3000"
     volumes:
@@ -43,19 +40,16 @@ services:
       - openhands-net
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    # Ajustes para Windows
     tty: true
     stdin_open: true
-    # Removido devices, runtime nvidia e healthcheck para compatibilidade local
     deploy:
       resources:
         limits:
-          memory: "1.5g"
-          cpus: "1.2"
+          memory: "512m"
+          cpus: "0.5"
         reservations:
-          memory: "768m"
-          cpus: "0.8"
-# Definição da rede
+          memory: "256m"
+          cpus: "0.2"
 networks:
   openhands-net:
     name: openhands-net

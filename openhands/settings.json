@@ -2,14 +2,12 @@
     "language": "pt",
     "agent": "CodeActAgent",
     "max_iterations": null,
-    "security_analyzer": null,
+    "security_analyzer": "llm",
     "confirmation_mode": false,
-    "llm_model": "ollama/qwen2.5-coder:7b-instruct-q4_K_M",
-    "llm_api_key": "local-llm",
-    "llm_base_url": "http://host.docker.internal:11434",
-    "llm_context_window": 32768,
-    "llm_temperature": 0.7,
-    "llm_top_p": 0.9,
+    "llm_model": "gemini/gemini-1.5-flash",
+    "llm_api_key": "YOUR_API_KEY_HERE",
+    "llm_base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+    "user_version": null,
     "remote_runtime_resource_factor": 1,
     "secrets_store": {
         "provider_tokens": {}
@@ -17,12 +15,15 @@
     "enable_default_condenser": true,
     "enable_sound_notifications": true,
     "enable_proactive_conversation_starters": true,
+    "enable_solvability_analysis": true,
     "user_consents_to_analytics": true,
+    "sandbox_base_container_image": null,
+    "sandbox_runtime_container_image": null,
     "mcp_config": {
         "sse_servers": [
             {
                 "url": "https://mcp.deepwiki.com/mcp",
-                "name": "deepwiki"
+                "api_key": null
             }
         ],
         "stdio_servers": [],
@@ -31,6 +32,10 @@
     "search_api_key": "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",
     "sandbox_api_key": null,
     "max_budget_per_task": null,
-    "email": null,
-    "email_verified": null
+    "condenser_max_size": 240,
+    "email": "",
+    "email_verified": null,
+    "git_user_name": "openhands",
+    "git_user_email": "openhands@all-hands.dev",
+    "v1_enabled": true
 }
