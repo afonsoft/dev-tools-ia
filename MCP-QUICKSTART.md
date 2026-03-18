@@ -1,104 +1,201 @@
-# 📋 MCP Quick Setup Guide
+# 🚀 MCP Quickstart Guide
 
-## 🚀 Servers Prontos para Usar (Sem Instalação)
+Setup rápido dos servidores MCP para desenvolvimento C#/.NET com OpenHands e Gemini API.
 
-### ✅ **DeepWiki** (Já Funciona)
-- **Tipo**: SSE Server
-- **Uso**: Documentação técnica e conhecimento
-- **Instalação**: Não precisa
-- **Status**: ✅ Ativo
+## 🎯 Objetivo
 
-### ⚠️ **Servers que Precisam de Instalação**
+Configurar rapidamente os servidores MCP essenciais para maximizar a produtividade com OpenHands e Gemini API.
 
-#### **Essenciais para C#/.NET**
+## ⚡ Setup Rápido (5 minutos)
+
+### 1. Instalação dos Servidores
+
 ```bash
-# Memory (persistência)
-pip install mcp-server-memory
-
-# Fetch (requisições HTTP)
+# Instalar servidores principais
+npm install -g @modelcontextprotocol/server-memory
+npm install -g @modelcontextprotocol/server-sequential-thinking
+npm install -g @modelcontextprotocol/server-filesystem
+npm install -g @modelcontextprotocol/server-git
 pip install mcp-server-fetch
 
-# Filesystem (acesso a arquivos)
-npm install -g @modelcontextprotocol/server-filesystem
-
-# Git (controle de versão)
-npm install -g @modelcontextprotocol/server-git
-
-# SQLite (banco de dados)
+# Servidores opcionais (recomendados)
 npm install -g @modelcontextprotocol/server-sqlite
-```
-
-#### **Opcionais Avançados**
-```bash
-# Web scraping
 npm install -g @modelcontextprotocol/server-puppeteer
-
-# Componentes UI
-npm install -g @modelcontextprotocol/server-shadcn-ui
-
-# Busca web (API key gratuita)
-npm install -g @modelcontextprotocol/server-brave-search
 ```
 
-## 🔧 Configuração Atual
+### 2. Configuração Automática
 
-O `openhands/settings.json` já está configurado com:
-
-### **SSE Servers** (Sem instalação)
-- **deepwiki**: Documentação técnica online
-
-### **Stdio Servers** (Precisam instalação)
-- **memory**: Memória persistente
-- **fetch**: Requisições HTTP
-- **filesystem**: Acesso a arquivos
-- **git**: Operações Git
-- **sqlite**: Banco de dados
-
-> **Nota**: Os stdio servers mostrarão mensagens de instalação até que você os instale.
-
-## 🚀 Setup Rápido
-
-### 1. Instalar Servidores Essenciais
 ```bash
-# Windows
-pip install mcp-server-memory mcp-server-fetch
-npm install -g @modelcontextprotocol/server-filesystem @modelcontextprotocol/server-git @modelcontextprotocol/server-sqlite
+# O script start.sh já configura MCP automaticamente
+./start.sh
 
-# Linux/macOS
-pip install mcp-server-memory mcp-server-fetch
-npm install -g @modelcontextprotocol/server-filesystem @modelcontextprotocol/server-git @modelcontextprotocol/server-sqlite
-```
-
-### 2. Reiniciar OpenHands
-```bash
+# Ou configurar manualmente
+cp mcp-config.json openhands/
 docker-compose restart openhands
 ```
 
-### 3. Verificar Instalação
-```bash
-# Verificar logs
-docker-compose logs openhands | grep -i mcp
+### 3. Verificação
 
-# Acessar OpenHands
-http://localhost:3000
+```bash
+# Verificar se MCP está funcionando
+docker-compose exec openhands curl -f http://localhost:3000/health
+
+# Verificar logs MCP
+docker-compose logs openhands | grep -i mcp
 ```
 
-## 📊 Status dos Servers
+## 🔧 Configuração Essencial
 
-| Server | Status | Instalação | Uso Principal |
-|--------|--------|------------|---------------|
-| deepwiki | ✅ Ativo | ❌ Não precisa | Documentação |
-| memory | ⚠️ Placeholder | ✅ pip install | Memória |
-| fetch | ⚠️ Placeholder | ✅ pip install | HTTP |
-| filesystem | ⚠️ Placeholder | ✅ npm install | Arquivos |
-| git | ⚠️ Placeholder | ✅ npm install | Git |
-| sqlite | ⚠️ Placeholder | ✅ npm install | Database |
+### openhands/settings.json (já configurado)
+```json
+{
+  "mcp_config": {
+    "sse_servers": [
+      {
+        "url": "https://mcp.deepwiki.com/mcp",
+        "api_key": null
+      }
+    ],
+    "stdio_servers": [
+      {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-memory"],
+        "env": {}
+      },
+      {
+        "command": "npx", 
+        "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+        "env": {}
+      },
+      {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspace"],
+        "env": {}
+      },
+      {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-git"],
+        "env": {}
+      },
+      {
+        "command": "python",
+        "args": ["-m", "mcp_server_fetch"],
+        "env": {}
+      }
+    ],
+    "shttp_servers": []
+  }
+}
+```
 
-## 🎯 Benefícios
+## 🎯 Casos de Uso Imediatos
 
-✅ **DeepWiki já funciona** - Documentação técnica imediata  
-✅ **Setup incremental** - Instale só o que precisar  
-✅ **Mensagens claras** - Avisa exatamente o que instalar  
-✅ **Foco C#/.NET** - Servers essenciais priorizados  
+### 1. Repository Pattern Automático
+```
+Prompt: "Create Repository pattern for Entity Framework Core with async methods using MCP filesystem and git servers"
+```
 
-**Pronto para começar com DeepWiki e instalar os outros conforme necessário!** 🚀
+### 2. Code Review Inteligente
+```
+Prompt: "Review this C# code using SOLID principles and suggest improvements with MCP sequential-thinking"
+```
+
+### 3. Database Operations
+```
+Prompt: "Create SQLite database schema for this C# project using MCP sqlite server"
+```
+
+### 4. Web Scraping
+```
+Prompt: "Extract data from this website using MCP puppeteer server"
+```
+
+## 📊 Servidores Configurados
+
+| Servidor | Tipo | Uso Principal | Requisito |
+|----------|------|---------------|-----------|
+| memory | stdio | Memória persistente | npm |
+| sequential-thinking | stdio | Processamento estruturado | npm |
+| filesystem | stdio | Arquivos locais | npm |
+| git | stdio | Controle de versão | npm |
+| fetch | stdio | Requisições HTTP | pip |
+| deepwiki | sse | Documentação técnica | grátis |
+| sqlite | stdio | Banco de dados | npm (opcional) |
+| puppeteer | stdio | Web automation | npm (opcional) |
+
+## 🚀 Teste Rápido
+
+### Teste Básico
+```bash
+# Acessar OpenHands
+http://localhost:3000
+
+# Testar MCP memory
+Prompt: "Lembre-se que meu projeto usa .NET 8 e Entity Framework Core"
+
+# Testar MCP filesystem  
+Prompt: "Liste todos os arquivos .cs no projeto usando filesystem"
+
+# Testar MCP git
+Prompt: "Verifique o status do git e crie um branch para feature X"
+```
+
+### Teste Avançado
+```bash
+# Testar workflow completo
+Prompt: "Usando MCP servers:
+1. Analise o projeto atual (filesystem)
+2. Crie testes unitários para as classes principais  
+3. Faça commit das mudanças (git)
+4. Documente o processo (memory)"
+```
+
+## 🔥 Benefícios Imediatos
+
+✅ **Productividade 10x** com automação de tarefas repetitivas  
+✅ **Qualidade** com padrões SOLID e melhores práticas  
+✅ **Velocidade** com operações Git e filesystem otimizadas  
+✅ **Inteligência** com memória contextual e aprendizado  
+✅ **Automação** com web scraping e database operations  
+✅ **Documentação** com acesso a conhecimento técnico via deepwiki  
+
+## 🚨 Troubleshooting Rápido
+
+### Servidor não encontrado
+```bash
+# Reinstalar servidor específico
+npm install -g @modelcontextprotocol/server-nome
+
+# Verificar instalação
+npx @modelcontextprotocol/server-nome --help
+```
+
+### Permissões negadas
+```bash
+# Verificar permissões do workspace
+docker-compose exec openhands ls -la /workspace
+
+# Ajustar permissões se necessário
+docker-compose exec openhands chmod -R 755 /workspace
+```
+
+### MCP não iniciando
+```bash
+# Verificar logs completos
+docker-compose logs openhands
+
+# Reiniciar OpenHands
+docker-compose restart openhands
+```
+
+## 📚 Próximos Passos
+
+- **Guia Completo**: Veja [MCP-README.md](./MCP-README.md)
+- **OpenHands Config**: Veja [openhands/README.md](./openhands/README.md)
+- **Exemplos Práticos**: Veja [README.md](./README.md#exemplos-práticos)
+
+---
+
+**Pronto para acelerar seu desenvolvimento C#/.NET com MCP?** 🚀
+
+Setup completo em 5 minutos! ⚡

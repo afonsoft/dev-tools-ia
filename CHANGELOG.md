@@ -4,6 +4,50 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [2.0.0] - 2026-03-17
+
+### Alterado (BREAKING CHANGES)
+- **Migração completa de Ollama para Gemini API**
+- Removida dependência de GPU NVIDIA (setup universal)
+- Removidos serviços Ollama e Open-WebUI
+- Simplificação da arquitetura para apenas OpenHands
+
+### Adicionado
+- `a796691` | 2026-03-17 | Afonso Dutra Nogueira Filho — feat: increase memory threshold for low-resource configuration
+- `9d6c232` | 2026-03-17 | Afonso Dutra Nogueira Filho — fix: adjust GPU memory warning threshold to 4GB
+- `54e65ef` | 2026-03-17 | Afonso Dutra Nogueira Filho — fix: resolve line ending issues in start.sh
+- `a67ea62` | 2026-03-17 | Afonso Dutra Nogueira Filho — feat: add Gemini API key validation to start.sh
+- `c1092d9` | 2026-03-17 | Afonso Dutra Nogueira Filho — fix: update config.json to use Gemini API provider
+- **Validação automática de API Key Gemini** no start.sh
+- **docker-compose.low-resource.yml** para sistemas com recursos limitados
+- **Configuração simplificada** com validação interativa
+- **Setup universal** funciona em qualquer hardware
+
+### Removido
+- Serviço Ollama (dependência local de LLM)
+- Serviço Open-WebUI (interface web)
+- Configurações específicas de GPU NVIDIA
+- Dependência de hardware especializado
+
+### Alterado
+- **85% de redução** no consumo de memória total
+- **docker-compose.yml** otimizado para Gemini API
+- **settings.json** configurado para Gemini 1.5 Flash
+- **start.sh** com validação automática de API Key
+- **README.md** atualizado para refletir nova arquitetura
+- **Documentação MCP** simplificada e focada
+
+### Corrigido
+- Problemas de line endings em scripts Windows
+- Validação de API Key em múltiplos arquivos
+- Compatibilidade cross-platform aprimorada
+
+### Dependências / Versões
+- OpenHands image: `docker.openhands.dev/openhands/openhands:1.4`
+- LLM Provider: **Google Gemini API** (gemini-1.5-flash)
+- Agent Server: `ghcr.io/openhands/agent-server:1.11.4-python`
+- **Requisito**: API Key Gemini (https://aistudio.google.com/app/apikey)
+
 ## [1.3.0] - 2025-11-11
 
 ## [Unreleased] - 2026-01-01

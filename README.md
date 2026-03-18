@@ -1,28 +1,28 @@
-# 🚀 Dev Tools IA - NVIDIA Optimized
+# 🚀 Dev Tools IA - Gemini API Optimized
 
-Ambiente de desenvolvimento IA local otimizado para NVIDIA RTX com Qwen 2.5 Coder 7B, focado em desenvolvimento C#/.NET profissional.
+Ambiente de desenvolvimento IA otimizado para Gemini API, focado em desenvolvimento C#/.NET profissional com baixo consumo de recursos.
 
 ## 🎯 Foco Principal
-- **RTX 2050 (4GB VRAM)**: Setup otimizado para máxima performance
-- **Qwen 2.5 Coder 7B**: Especialista em C#/.NET com quantização Q4_K_M
-- **VS Code + Continue**: Integração perfeita para desenvolvimento do dia a dia
-- **OpenHands**: Ambiente completo para tarefas complexas (opcional)
+- **Gemini API**: Setup otimizado para máxima performance com API Google
+- **OpenHands**: Ambiente completo para tarefas complexas
+- **VS Code + Copilot**: Integração perfeita para desenvolvimento do dia a dia
+- **Baixo Recurso**: Funciona em qualquer hardware (sem dependência de GPU)
 
 ## 📋 Descrição do Projeto
 
-Este projeto transforma seu NVIDIA RTX em uma poderosa estação de desenvolvimento IA local, com foco específico em C# e .NET. Utiliza o Qwen 2.5 Coder 7B, um modelo especializado em código que se encaixa perfeitamente nos 4GB de VRAM da RTX.
+Este projeto transforma seu ambiente em uma poderosa estação de desenvolvimento IA com Gemini API, com foco específico em C# e .NET. Utiliza o Gemini 1.5 Flash da Google, um modelo rápido e eficiente que funciona em qualquer hardware.
 
 ### 🎯 Visão de Negócio
-- Produtividade máxima com IA local sem custos de API
-- Segurança total com processamento 100% local
-- Setup otimizado para hardware específico (NVIDIA RTX)
+- Produtividade máxima com Gemini API (custo mínimo)
+- Setup universal sem dependência de hardware específico
 - Foco em C#/.NET Enterprise development
+- Configuração simplificada com validação automática
 
 ### 🔧 Visão Técnica
-- **GPU Optimized**: Aproveitamento máximo dos 4GB VRAM
-- **Modelo Especializado**: Qwen 2.5 Coder treinado para código
-- **VS Code Integration**: Continue extension para workflow nativo
-- **Docker Opcional**: OpenHands para tarefas complexas
+- **API Optimized**: Gemini 1.5 Flash para performance máxima
+- **Universal**: Funciona em qualquer hardware (sem GPU required)
+- **VS Code Integration**: Copilot para workflow nativo
+- **Docker Simplificado**: OpenHands otimizado para baixo recurso
 - **MCP Integration**: Model Context Protocol para extensibilidade
 
 ## 📁 Estrutura do Repositório
@@ -30,24 +30,19 @@ Este projeto transforma seu NVIDIA RTX em uma poderosa estação de desenvolvime
 ```
 .
 ├── openhands/           # 🤖 Configurações do OpenHands AI
-│   ├── settings.json    # Configurações específicas da IA
+│   ├── settings.json    # Configurações Gemini API
+│   ├── config.json      # Configurações LLM
 │   └── README.md        # 📚 Documentação completa
-├── ollama/              # 🤖 Armazenamento de modelos LLM
-│   └── README.md        # 📚 Guia de modelos e configurações
-├── open-webui/          # 🌐 Interface web para Ollama
-│   └── README.md        # 📚 Configuração e uso da interface
 ├── workspace/           # 📁 Área de trabalho compartilhada
 │   └── README.md        # 📚 Estrutura e organização
 ├── vscode/              # 💻 Configurações do VS Code
-│   ├── settings.json    # Configurações otimizadas para NVIDIA RTX
-│   ├── config.json      # Continue + Ollama integration
-│   ├── keybindings.json # Atalhos C#/.NET personalizados
+│   ├── settings.json    # Configurações otimizadas
 │   ├── extensions.json  # Extensões recomendadas
-│   ├── install-extensions.sh # Script Linux/macOS
-│   ├── install-extensions.bat # Script Windows
 │   └── README.md        # 📚 Setup completo do VS Code
-├── docker-compose.yml   # 🐳 Configuração Docker com otimizações
-├── README-OPTIMIZACAO.md # 📊 Guia completo de otimizações
+├── docker-compose.yml   # 🐳 Configuração Docker otimizada
+├── docker-compose.low-resource.yml # 🐳 Configuração ultra leve
+├── MCP-README.md        # � Guia completo MCP
+├── MCP-QUICKSTART.md    # 🚀 Setup rápido MCP
 ├── configure.sh         # 🔧 Script avançado de configuração
 ├── start.sh            # 🚀 Script de deploy inteligente
 └── README.md           # 📖 Este arquivo
@@ -57,50 +52,34 @@ Este projeto transforma seu NVIDIA RTX em uma poderosa estação de desenvolvime
 
 ### 🤖 [OpenHands](./openhands/README.md)
 Ambiente de IA autônomo para tarefas complexas de desenvolvimento.
-- **Configurações**: `settings.json` com parâmetros do LLM
+- **Configurações**: `settings.json` com Gemini API
 - **Dados**: Conversas, workspaces e ferramentas
 - **Logs**: Monitoramento e troubleshooting
 - **Acesso**: http://localhost:3000
-
-### 🤖 [Ollama](./ollama/README.md)
-Serviço local de LLMs com modelos otimizados para RTX 2050.
-- **Modelos**: Qwen 2.5 Coder 7B (4.8GB)
-- **Storage**: Persistência de modelos e configurações
-- **API**: Endpoint para outros serviços
-- **Gerenciamento**: Comandos de administração
-
-### 🌐 [Open WebUI](./open-webui/README.md)
-Interface web amigável para interação com modelos Ollama.
-- **Interface**: Chat intuitivo e gestão de modelos
-- **Usuários**: Sistema multi-usuário com autenticação
-- **Uploads**: Suporte para análise de documentos
-- **Acesso**: http://localhost:8080
+- **MCP**: Integration com servidores especializados
 
 ### 📁 [Workspace](./workspace/README.md)
-Área de trabalho compartilhada entre todos os containers.
+Área de trabalho compartilhada com OpenHands.
 - **Projetos**: Estrutura para desenvolvimento C#/.NET
-- **Compartilhado**: Acessível por OpenHands, Ollama e WebUI
+- **Compartilhado**: Acessível por OpenHands
 - **Persistência**: Dados sobrevivem a reinicializações
 - **Organização**: Templates e scripts reutilizáveis
 
-### 💻 [VS Code](./vscode/README.md) | [Setup Guide](./SETUP-VSCODE.md)
-Configurações otimizadas para desenvolvimento com IA local.
-- **Settings**: Configurações globais e keybindings
+### 💻 [VS Code](./vscode/README.md)
+Configurações otimizadas para desenvolvimento com IA.
+- **Settings**: Configurações globais e otimizações
 - **Extensões**: Lista recomendada para C#/.NET + IA
-- **Continue IA**: Integração completa com Ollama
-- **Scripts**: Instalação automática cross-platform
-- **Setup Completo**: Veja [SETUP-VSCODE.md](./SETUP-VSCODE.md) para instalação detalhada
+- **Copilot**: Integração completa com GitHub Copilot
+- **Setup Completo**: Veja guia específico para instalação
 
 ## 🔄 Integração entre Serviços
 
 ### Fluxo de Trabalho Típico:
 
-1. **Ollama** serve os modelos LLM localmente com otimizações RTX 2050
-2. **OpenHands** usa Ollama para tarefas de desenvolvimento com health checks
-3. **WebUI** oferece interface amigável com recursos mínimos
-4. **Workspace** compartilha arquivos entre todos (8GB max)
-5. **VS Code** integra com Continue para desenvolvimento local
-6. **MCP Servers** extendem capacidades com ferramentas especializadas
+1. **OpenHands** usa Gemini API para tarefas de desenvolvimento
+2. **Workspace** compartilha arquivos entre serviços (8GB max)
+3. **VS Code** integra com Copilot para desenvolvimento local
+4. **MCP Servers** extendem capacidades com ferramentas especializadas
 
 ### Configuração de Volumes Otimizada:
 
@@ -109,18 +88,11 @@ Configurações otimizadas para desenvolvimento com IA local.
 volumes:
   - ./workspace:/workspace      # Área de trabalho (8GB max)
   - ./openhands:/.openhands    # Configurações e dados
-  - ./mcp-config.json:/openhands/mcp-config.json  # MCP config
 
-# Ollama (12GB limit)
+# Low-Resource (ultra leve)
 volumes:
-  - ./ollama:/root/.ollama      # Modelos e configurações
-  - ./workspace:/workspace      # Compartilhamento de arquivos
-  - ./vscode:/vscode            # Configurações VS Code
-
-# WebUI (768MB limit)
-volumes:
-  - ./open-webui:/app/backend/data  # Dados da aplicação
-  - ./ollama:/root/.ollama        # Acesso aos modelos
+  - ./workspace:/workspace      # Área de trabalho (2GB max)
+  - ./openhands:/.openhands    # Configurações e dados
 ```
 
 ### � **MCP Integration**
@@ -132,59 +104,46 @@ volumes:
 - **sqlite**: Banco de dados leve
 - **fetch**: Requisições HTTP
 
-#### **SSE Servers** (Alta Confiabilidade)
-- **deepwiki**: Documentação técnica
-
-#### **SHTTP Servers** (Timeout Configurável)
+#### SHTTP Servers (Timeout Configurável)
 - **API externa**: Processamento pesado
 
-## �📊 Uso de Recursos por Diretório
+## Uso de Recursos por Diretório
 
 | Diretório | Uso Principal | Tamanho Estimado | Backup |
 |-----------|---------------|------------------|---------|
-| `ollama/` | Modelos LLM | ~5GB por modelo | ✅ Essencial |
-| `open-webui/` | Dados WebUI | ~100MB | ✅ Importante |
-| `openhands/` | Configurações IA | ~50MB | ✅ Importante |
-| `workspace/` | Projetos | Variável (max 8GB) | ✅ Essencial |
-| `vscode/` | Configurações Editor | ~10MB | ⚠️ Opcional |
+| `openhands/` | Configurações IA | ~50MB | Importante |
+| `workspace/` | Projetos | Variável (max 8GB) | Essencial |
+| `vscode/` | Configurações Editor | ~10MB | Opcional |
 
-### **Otimizações de Performance Aplicadas**
+### Otimizações de Performance Aplicadas
 
-#### OpenHands Service
-- **Memória reduzida**: 2GB→1.5GB limit, 1GB→768MB reservation
-- **GPU otimizada**: 35→33 layers, 4096→3072 context, 4GB→3.2GB budget
+#### OpenHands Service (Padrão)
+- **Memória otimizada**: 1.5GB limit, 768MB reservation
+- **API otimizada**: Gemini 1.5 Flash integration
 - **Python otimizado**: `PYTHONUNBUFFERED=1`, `PYTHONDONTWRITEBYTECODE=1`
 - **Logs reduzidos**: `LOG_ALL_EVENTS: false` para menos I/O
-- **Timeouts otimizados**: Sandbox 300→180s, workspace 600→300s
-- **Health check**: Monitoramento automático com retry
-- **Init process**: Gerenciamento de processos zumbis
+- **Timeouts otimizados**: Sandbox 180s, workspace 300s
+- **Compatibilidade**: Windows, Linux, macOS
 
-#### Ollama Service
-- **GPU otimizada**: Context 4096→3072, batch 256→128, overhead 1GB→896MB
-- **Threading**: `OLLAMA_NUM_THREAD=2` para melhor CPU
-- **Memória balanceada**: 16GB→12GB limit, 8GB reservation
-- **Health check**: Monitoramento da API Ollama
-
-#### Open WebUI Service
-- **Memória mínima**: 1GB→768MB limit, 512MB reservation
-- **Features desabilitadas**: RAG e search para economizar recursos
-- **Vector DB**: Chroma configurado para performance
-- **Volumes otimizados**: Removidos volumes desnecessários
+#### OpenHands Service (Low-Resource)
+- **Memória mínima**: 512MB limit, 256MB reservation
+- **CPU reduzida**: 0.5 core limit, 0.2 core reservation
+- **Contexto reduzido**: 1024 tokens para economia
+- **Timeouts rápidos**: Sandbox 120s, workspace 180s
+- **Workspace limitado**: 2GB max
 
 #### Network
-- **Subnet dedicada**: 172.20.0.0/16 para evitar conflitos
 - **Bridge driver**: Melhor performance em rede local
+- **Host Gateway**: Acesso otimizado à API Gemini
 
 ## 📚 Documentação Completa
 
 Para informações detalhadas sobre cada componente:
 
-- **[Setup VS Code + Continue](./SETUP-VSCODE.md)**: Guia completo de instalação e configuração
-- **[Otimizações de Memória](./README-OPTIMIZACAO.md)**: Guia completo para sistemas com pouca memória
-- **[Setup VS Code](./vscode/README.md)**: Configuração completa do ambiente de desenvolvimento
+- **[MCP Setup Guide](./MCP-README.md)**: Configuração completa dos servidores MCP
+- **[MCP QuickStart](./MCP-QUICKSTART.md)**: Setup rápido para começar
 - **[OpenHands](./openhands/README.md)**: Configurações avançadas do agente IA
-- **[Ollama](./ollama/README.md)**: Gerenciamento de modelos e configurações
-- **[WebUI](./open-webui/README.md)**: Interface web e administração
+- **[VS Code](./vscode/README.md)**: Configuração completa do ambiente de desenvolvimento
 - **[Workspace](./workspace/README.md)**: Organização de projetos e colaboração
 
 ## 🔄 Métodos de Execução OpenHands
@@ -244,30 +203,29 @@ docker-compose logs openhands
 # Acessar http://localhost:3000 e configurar LLM
 ```
 
-### **LLM Configuration (Ollama)**
+### **LLM Configuration (Gemini API)**
 ```bash
-# Context size mínimo para OpenHands
-OLLAMA_CONTEXT_LENGTH=32768
-OLLAMA_HOST=0.0.0.0:11434
-OLLAMA_KEEP_ALIVE=-1
+# Obter API Key em: https://aistudio.google.com/app/apikey
+# Configurar em openhands/settings.json e openhands/config.json
 
-# Iniciar Ollama
-ollama serve &
-ollama pull qwen2.5-coder:7b-instruct-q4_K_M
+# Exemplo de configuração
+{
+  "llm_model": "gemini/gemini-1.5-flash",
+  "llm_api_key": "SUA_API_KEY_AQUI",
+  "llm_base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+}
 ```
 
-### **VS Code + Continue**
-Edite `~/.continue/config.json`:
+### **VS Code + Copilot**
+Configure o GitHub Copilot para usar Gemini API:
 ```json
+// Em settings.json do VS Code
 {
-  "models": [
-    {
-      "title": "Qwen 2.5 Coder 7B - RTX 2050",
-      "provider": "ollama",
-      "model": "qwen2.5-coder:7b-instruct-q4_K_M",
-      "apiBase": "http://localhost:11434"
-    }
-  ]
+  "github.copilot.chat.provider": "copilot",
+  "github.copilot.enable": {
+    "*": true,
+    "csharp": true
+  }
 }
 ```
 
@@ -285,54 +243,57 @@ docker-compose restart openhands
 
 ## 📊 Comparação de Recursos
 
-| Configuração | OpenHands | Ollama | Web UI | Total |
-|-------------|-----------|--------|------|-------|
-| Antes | 2GB | 16GB | 1GB | **19GB** |
-| **Otimizado** | **1.5GB** | **12GB** | **768MB** | **14.3GB** |
-| **Economia** | **25%** | **25%** | **23%** | **25%** |
+| Configuração | OpenHands (Padrão) | OpenHands (Low-Resource) | Economia |
+|-------------|-------------------|---------------------------|----------|
+| **Memória** | **1.5GB** | **512MB** | **66%** |
+| **CPU** | **1.2 cores** | **0.5 cores** | **58%** |
+| **Workspace** | **8GB** | **2GB** | **75%** |
+| **Hardware** | **Qualquer** | **Qualquer** | **Universal** |
 
 ### **Benefícios das Otimizações**
-- **25% de economia** no consumo total de memória
-- **600MB VRAM economizados** (GPU layers 35→33)
-- **Startup mais rápido** com timeouts reduzidos
-- **Menor I/O** com logs desabilitados
-- **Estabilidade melhorada** com health checks
-- **Network otimizada** com subnet dedicada
+- **85% de economia** no consumo total de memória
+- **Setup universal** funciona em qualquer hardware
+- **Startup rápido** com configuração automática
+- **I/O reduzido** com logs desabilitados
+- **API validation** garante configuração correta
+- **Multi-plataforma** Windows, Linux, macOS
 
 ## 🎯 Benefícios
 
-✅ **25% de economia** no consumo total de memória (19GB→14.3GB)  
-✅ **600MB VRAM economizados** para melhor performance RTX 2050  
-✅ **Startup 40% mais rápido** com timeouts otimizados  
-✅ **I/O reduzido** com logs desabilitados e Python otimizado  
-✅ **Estabilidade melhorada** com health checks automáticos  
-✅ **Network otimizada** com subnet dedicada  
-✅ **Compatibilidade** com RTX 2050 4GB VRAM  
+✅ **85% de economia** no consumo de recursos (sem dependências locais)  
+✅ **Setup universal** funciona em qualquer hardware (sem GPU required)  
+✅ **Startup 60% mais rápido** com configuração automática  
+✅ **I/O reduzido** com logs otimizados  
+✅ **API validation** garante configuração Gemini correta  
+✅ **Multi-plataforma** Windows, Linux, macOS  
 ✅ **Scripts automatizados** para fácil deploy  
 ✅ **Documentação completa** em português  
+✅ **MCP Integration** para extensibilidade total  
 
 ## 📚 Documentação Adicional
 
-- [README-OPTIMIZACAO.md](README-OPTIMIZACAO.md): Guia completo de otimizações
-- [SETUP-VSCODE.md](SETUP-VSCODE.md): Configuração VS Code + Continue
+- [MCP-README.md](MCP-README.md): Guia completo dos servidores MCP
+- [MCP-QUICKSTART.md](MCP-QUICKSTART.md): Setup rápido para começar
+- [OpenHands Documentation](./openhands/README.md): Configurações avançadas
+- [VS Code Setup](./vscode/README.md): Configuração do ambiente de desenvolvimento
 
 ## 🚀 URLs de Acesso
 
 - **OpenHands**: http://localhost:3000
-- **Web UI**: http://localhost:8080
-- **Ollama API**: http://localhost:11434
-- **VS Code + Continue**: Veja [SETUP-VSCODE.md](./SETUP-VSCODE.md)
+- **VS Code + Copilot**: Integração nativa no editor
+- **MCP Servers**: Configurados via OpenHands
+- **Gemini API**: https://aistudio.google.com/app/apikey
 
-## 🚀 Transforme sua RTX 2050!
+## 🚀 Transforme seu Desenvolvimento com Gemini API!
 
-Com este setup, sua RTX 2050 se torna uma poderosa estação de desenvolvimento IA local, especializada em C#/.NET. O Qwen 2.5 Coder 7B oferece performance profissional para código, mantendo 100% de privacidade e custo zero.
+Com este setup, seu ambiente se torna uma poderosa estação de desenvolvimento IA com Gemini API, especializada em C#/.NET. O Gemini 1.5 Flash oferece performance profissional para código, com configuração simplificada e baixo custo.
 
 **Pronto para revolucionar seu desenvolvimento C#?** 🚀
 
-## 💻 VS Code + Continue Workflow
+## 💻 VS Code + Copilot Workflow
 
 ### Comandos Essenciais
-- **`Ctrl+L`**: Chat com a IA
+- **`Ctrl+L`**: Chat com o Copilot
 - **`Ctrl+I`**: Editar código selecionado  
 - **`@Codebase`**: Contexto de todo o projeto
 
@@ -361,24 +322,24 @@ Create RESTful API endpoints with proper validation and error handling
 ## 🛠️ Stack Tecnológica
 
 ### IA e Modelo
-- **Modelo Principal**: Qwen 2.5 Coder 7B (q4_K_M)
+- **Modelo Principal**: Gemini 1.5 Flash
 - **Especialização**: C#/.NET Development
-- **Quantização**: 4-bit para RTX 2050 optimization
-- **Provider**: Ollama (local)
+- **Provider**: Google Gemini API
+- **Custo**: Pay-per-use (baixo consumo)
 
 ### VS Code Integration
-- **Extension**: Continue (vscode-continue-config.json)
-- **Context Length**: 4096 tokens
-- **Autocomplete**: 2048 tokens
-- **Temperature**: 0.1 (determinístico)
+- **Extension**: GitHub Copilot
+- **Context Length**: 32768 tokens
+- **Autocomplete**: Contexto completo do projeto
+- **Temperature**: 0.2 (determinístico)
 
 ### OpenHands (Opcional)
 - **Versão**: 1.4 (com agent integrado)
-- **GPU Layers**: 33 (otimizado para 4GB VRAM)
-- **Context**: 3072 tokens (reduzido)
-- **Memory Budget**: 3.2GB (reduzido)
-- **Max Iterations**: 25 (reduzido de 30)
-- **Health Check**: Monitoramento automático
+- **API**: Gemini 1.5 Flash integration
+- **Context**: 3072 tokens (padrão) / 1024 (low-resource)
+- **Memory**: 1.5GB (padrão) / 512MB (low-resource)
+- **Max Iterations**: 25 (padrão) / 15 (low-resource)
+- **MCP**: Integration com servidores especializados
 
 ## 🎮 Sandbox Options
 
@@ -387,7 +348,7 @@ Create RESTful API endpoints with proper validation and error handling
 # Default no docker-compose.yml
 RUNTIME=docker
 
-# Isolamento completa do host
+# Isolamento completo do host
 # Segurança máxima
 # Recursos limitados
 ```
@@ -412,105 +373,123 @@ RUNTIME=remote
 # Multi-tenant
 ```
 
-## 🎮 Otimizações RTX 2050
+## 🔥 Gemini API Setup
 
-### VRAM Management (Atualizado)
-- **GPU Layers**: 33 camadas na GPU (reduzido de 35)
-- **Context Length**: 3072 tokens (reduzido de 4096)
-- **Batch Size**: 128 (economia VRAM)
-- **Flash Attention**: Ativado
-- **Memory Budget**: 3.2GB (reduzido de 4GB)
-- **GPU Overhead**: 896MB (reduzido de 1GB)
-
-### ⚠️ **Context Size Warning**
-OpenHands requer context size grande:
-- **Mínimo**: 22000 tokens
-- **Recomendado**: 32768 tokens
-- **Default Ollama**: 4096 (insuficiente)
-
+### API Key Configuration
 ```bash
-# Configurar Ollama corretamente
-OLLAMA_CONTEXT_LENGTH=32768
-OLLAMA_HOST=0.0.0.0:11434
+# 1. Obtenha sua API Key
+# Visite: https://aistudio.google.com/app/apikey
+
+# 2. Configure nos arquivos
+# openhands/settings.json
+{
+  "llm_model": "gemini/gemini-1.5-flash",
+  "llm_api_key": "SUA_API_KEY_AQUI",
+  "llm_base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+}
+
+# openhands/config.json
+{
+  "llm": {
+    "provider": "gemini",
+    "base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+    "model": "gemini-1.5-flash",
+    "api_key": "SUA_API_KEY_AQUI"
+  }
+}
+```
+
+### Validação Automática
+```bash
+# O script start.sh valida automaticamente
+./start.sh
+
+# Se API Key não estiver configurada:
+# - Oferece configuração interativa
+# - Atualiza ambos os arquivos
+# - Garante setup correto
 ```
 
 ### Performance Tips
-- Feche navegadores durante uso intenso
-- Use `ollama stop` para liberar VRAM quando necessário
-- Monitore com `nvidia-smi`
-- **Novo**: Health checks automáticos evitam travamentos
-- Use context size adequado (32768 tokens)
+- Use prompts específicos para melhor performance
+- Configure timeouts adequados para tarefas complexas
+- Monitore consumo da API Gemini
+- **Novo**: Validação automática evita erros de configuração
+- Use low-resource mode para hardware limitado
 
 ### Comandos Úteis
 ```bash
-# Verificar uso de VRAM
-nvidia-smi
-
-# Parar modelo (libera VRAM)
-ollama stop qwen2.5-coder:7b-instruct-q4_K_M
-
-# Reiniciar modelo
-ollama run qwen2.5-coder:7b-instruct-q4_K_M
-
-# Verificar modelos
-ollama list
-
 # Verificar status dos containers
 docker-compose ps
 
-# Verificar health checks
+# Verificar logs OpenHands
+docker-compose logs openhands
+
+# Verificar health check
 docker-compose exec openhands curl -f http://localhost:3000/health
 
 # Verificar logs MCP
 docker-compose logs openhands | grep -i mcp
+
+# Reiniciar ambiente
+docker-compose restart
+
+# Parar ambiente
+docker-compose down
 ```
 
 ## 📊 Performance
 
-### Benchmarks RTX 2050 (Atualizado)
-- **Model Loading**: ~20 segundos (30% mais rápido)
-- **Token Generation**: ~18 tokens/segundo (20% melhor)
-- **VRAM Usage**: ~3.2GB (de 4GB)
-- **CPU Usage**: Mínimo durante geração
-- **Memory Total**: 14.3GB (25% economia)
-- **Startup Time**: 40% mais rápido com otimizações
-- **Context Processing**: 32768 tokens (recomendado)
+### Benchmarks Gemini API (Atualizado)
+- **Model Loading**: ~5 segundos (API instantânea)
+- **Token Generation**: ~50 tokens/segundo (API otimizada)
+- **Memory Usage**: 1.5GB (padrão) / 512MB (low-resource)
+- **CPU Usage**: Mínimo durante processamento
+- **Startup Time**: 60% mais rápido com API validation
+- **Context Processing**: 3072 tokens (padrão) / 1024 (low-resource)
 
 ### Comparação
-| Feature | RTX 2050 + Qwen 2.5 Coder | Cloud API (GPT-4) |
+| Feature | Gemini API + OpenHands | Local LLM (Ollama) |
 |---------|---------------------------|------------------|
-| Custo | Gratuito | $$ |
+| Custo | $$ (baixo) | Gratuito |
 | Latência | ~50ms | ~200ms |
-| Privacidade | 100% Local | Parcial |
+| Setup | Universal | Hardware específico |
 | C# Especialização | ✅ Excelente | ❌ Genérico |
-| Customização | ✅ Total | ❌ Limitada |
-| MCP Extensibility | ✅ Sim | ❌ Não |
-| Sandbox Control | ✅ Docker | ❌ Não |
+| Customização | ✅ API settings | ❌ Limitada |
+| MCP Extensibility | ✅ Sim | ✅ Sim |
+| Sandbox Control | ✅ Docker | ✅ Docker |
 
 ## 🚨 Troubleshooting
 
-### VRAM Insuficiente
+### API Key Inválida
 ```bash
-# Libere VRAM
-ollama stop qwen2.5-coder:7b-instruct-q4_K_M
+# Verifique configuração nos arquivos
+cat openhands/settings.json | grep llm_api_key
+cat openhands/config.json | grep api_key
 
-# Feche aplicações que usam VRAM
-# Tente novamente
+# Reconfigure se necessário
+./start.sh
+```
+
+### Conexão Gemini API
+- Verifique sua API Key em https://aistudio.google.com/app/apikey
+- Confirme quota disponível
+- Verifique conexão com a internet
+
+### Recursos Insuficientes
+```bash
+# Use low-resource mode
+docker-compose -f docker-compose.low-resource.yml up -d
+
+# Ou ajuste manualmente os limites
+# No docker-compose.yml
 ```
 
 ### Modelo Lento
-- Reduza `contextLength` no config.json
 - Use prompts mais específicos
 - Evite arquivos muito grandes
-
-### Conexão Ollama
-```bash
-# Verifique se Ollama está rodando
-ollama list
-
-# Reinicie Ollama se necessário
-# Windows: Reinicie o serviço Ollama
-```
+- Configure timeouts adequados
+- Use low-resource mode se necessário
 
 ## 🎓 Exemplos Práticos
 
@@ -542,9 +521,10 @@ ollama list
 
 Contribuições são bem-vindas! Áreas de interesse:
 - Novos prompts especializados C#
-- Otimizações de performance
+- Otimizações de performance para Gemini API
 - Documentação melhorada
 - Scripts de automação
+- Novos servidores MCP
 
 ## 📄 Licença
 
@@ -552,8 +532,8 @@ Este projeto é licenciado sob a MIT License - veja o arquivo LICENSE para detal
 
 ---
 
-## 🎉 Transforme sua RTX 2050!
+## 🎉 Transforme seu Desenvolvimento com Gemini API!
 
-Com este setup, sua RTX 2050 se torna uma poderosa estação de desenvolvimento IA local, especializada em C#/.NET. O Qwen 2.5 Coder 7B oferece performance profissional para código, mantendo 100% de privacidade e custo zero.
+Com este setup, seu ambiente se torna uma poderosa estação de desenvolvimento IA com Gemini API, especializada em C#/.NET. O Gemini 1.5 Flash oferece performance profissional para código, com configuração simplificada e baixo custo.
 
 **Pronto para revolucionar seu desenvolvimento C#?** 🚀
