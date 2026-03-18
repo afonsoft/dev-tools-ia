@@ -14,8 +14,8 @@ agents/
 │   ├── csharp-async-patterns/
 │   ├── entity-framework-core/
 │   ├── aspnet-core-api/
-│   ├── blazor-components/
 │   ├── testing-xunit/
+│   ├── blazor-components/
 │   ├── design-patterns/
 │   ├── security-jwt/
 │   └── performance-optimization/
