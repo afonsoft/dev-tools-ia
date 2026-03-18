@@ -1,8 +1,9 @@
 {
   "llm": {
-    "provider": "ollama",
-    "base_url": "http://ollama:11434",
-    "model": "qwen2.5-coder:7b-instruct-q4_K_M"
+    "provider": "gemini",
+    "base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+    "model": "gemini-1.5-flash",
+    "api_key": "YOUR_API_KEY_HERE"
   },
   "editor": {
     "default_path": "/workspace"
