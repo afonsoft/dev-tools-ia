@@ -10,12 +10,15 @@ NC='\033[0m' # No Color
 print_status() {
     echo -e "${BLUE}[INFO]${NC} $1"
 }
+
 print_success() {
     echo -e "${GREEN}[SUCCESS]${NC} $1"
 }
+
 print_warning() {
     echo -e "${YELLOW}[WARNING]${NC} $1"
 }
+
 print_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
@@ -162,8 +165,9 @@ configure_gemini_api_key() {
             jq --arg api_key "$api_key" '.llm_api_key = $api_key' openhands/settings.json > temp_settings.json && mv temp_settings.json openhands/settings.json
         else
             # Fallback para sed se jq não estiver disponível
-            sed -i "s/\"llm_api_key\":[[:space:]]*\"YOUR_API_KEY_HERE\"/\"llm_api_key\": \"$api_key\"/g" openhands/settings.json
-            sed -i "s/\"llm_api_key\":[[:space:]]*\"\"/\"llm_api_key\": \"$api_key\"/g" openhands/settings.json
+            sed -i.bak "s/\"llm_api_key\":[[:space:]]*\"YOUR_API_KEY_HERE\"/\"llm_api_key\": \"$api_key\"/g" openhands/settings.json
+            sed -i.bak "s/\"llm_api_key\":[[:space:]]*\"\"/\"llm_api_key\": \"$api_key\"/g" openhands/settings.json
+            rm -f openhands/settings.json.bak
         fi
         print_success "settings.json atualizado!"
     fi
@@ -175,8 +179,9 @@ configure_gemini_api_key() {
             jq --arg api_key "$api_key" '.llm.api_key = $api_key' openhands/config.json > temp_config.json && mv temp_config.json openhands/config.json
         else
             # Fallback para sed se jq não estiver disponível
-            sed -i "s/\"api_key\":[[:space:]]*\"YOUR_API_KEY_HERE\"/\"api_key\": \"$api_key\"/g" openhands/config.json
-            sed -i "s/\"api_key\":[[:space:]]*\"\"/\"api_key\": \"$api_key\"/g" openhands/config.json
+            sed -i.bak "s/\"api_key\":[[:space:]]*\"YOUR_API_KEY_HERE\"/\"api_key\": \"$api_key\"/g" openhands/config.json
+            sed -i.bak "s/\"api_key\":[[:space:]]*\"\"/\"api_key\": \"$api_key\"/g" openhands/config.json
+            rm -f openhands/config.json.bak
         fi
         print_success "config.json atualizado!"
     fi
