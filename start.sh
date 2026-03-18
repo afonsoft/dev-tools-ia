@@ -48,8 +48,8 @@ check_system_resources() {
     if command -v free &> /dev/null; then
         TOTAL_MEM=$(free -g | awk '/^Mem:/{print $2}')
         print_status "Memória total: ${TOTAL_MEM}GB"
-        if [ "$TOTAL_MEM" -lt 8 ]; then
-            print_warning "Memória baixa detectada (< 8GB). Considere usar docker-compose.low-resource.yml"
+        if [ "$TOTAL_MEM" -lt 12 ]; then
+            print_warning "Memória baixa detectada (< 12GB). Considere usar docker-compose.low-resource.yml"
         fi
     fi
     if command -v nproc &> /dev/null; then
@@ -217,7 +217,7 @@ check_system_resources
 COMPOSE_FILE="docker-compose.yml"
 if command -v free &> /dev/null; then
     TOTAL_MEM=$(free -g | awk '/^Mem:/{print $2}')
-    if [ "$TOTAL_MEM" -lt 8 ]; then
+    if [ "$TOTAL_MEM" -lt 12 ]; then
         COMPOSE_FILE="docker-compose.low-resource.yml"
         print_warning "Usando configuração low-resource devido à memória limitada"
     fi
