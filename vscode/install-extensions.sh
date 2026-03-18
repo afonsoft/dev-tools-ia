@@ -1,12 +1,12 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 # ╔═══════════════════════════════════════════════════════════════════════╗
-# ║  VS Code — Install Extensions Script (Cross-Platform)                  ║
-# ║  Instala extensões essenciais para DevTools IA + RTX 2050             ║
+# ║  VS Code / Windsurf — Install Extensions Script (Cross-Platform)      ║
+# ║  Instala extensões essenciais para C#/.NET + Angular + Gemini API     ║
 # ╚═══════════════════════════════════════════════════════════════════════╝
 
-echo "🚀 VS Code Extensions Installer - DevTools IA + RTX 2050"
-echo "======================================================"
+echo "🚀 VS Code Extensions Installer - Modern C#/.NET + Angular Development"
+echo "====================================================================="
 
 # Detectar sistema operacional
 detect_os() {
@@ -19,12 +19,15 @@ detect_os() {
     echo "📱 Sistema detectado: $OS"
 }
 
-# Verificar VS Code instalado
+# Verificar VS Code/Windsurf instalado
 check_vscode() {
-    echo "🔍 Verificando VS Code..."
+    echo "🔍 Verificando VS Code/Windsurf..."
     if command -v code &> /dev/null; then
         echo "✅ VS Code encontrado"
         CODE_CMD="code"
+    elif command -v windsurf &> /dev/null; then
+        echo "✅ Windsurf encontrado"
+        CODE_CMD="windsurf"
     elif command -v code-server &> /dev/null; then
         echo "✅ Code Server encontrado"
         CODE_CMD="code-server"
@@ -32,55 +35,66 @@ check_vscode() {
         echo "✅ VS Code encontrado (Windows)"
         CODE_CMD="code.cmd"
     else
-        echo "❌ VS Code não encontrado. Instale VS Code primeiro."
+        echo "❌ VS Code/Windsurf não encontrado. Instale VS Code ou Windsurf primeiro."
         exit 1
     fi
 }
 
-# Lista de extensões para instalar
+# Lista de extensões para instalar (baseado no extensions.json atualizado)
 declare -a EXTENSIONS=(
-    # AI & Code Completion
-    "continue.continue"
+    # 🚀 AI & Code Completion
     "github.copilot"
     "github.copilot-chat"
     "ms-vscode.intellicode-api-usage-examples"
     "ms-vscode.intellicode"
+    "visualstudioexptteam.vscodeintellicode"
     
-    # C# / .NET Development
+    # 💻 C# / .NET Development
     "ms-dotnettools.csharp"
     "ms-dotnettools.csdevkit"
     "ms-dotnettools.blazor"
     "ms-dotnettools.dotnet-interactive-vscode"
     "ms-dotnettools.vscode-dotnet-runtime"
-    "k--kato.docrunner"
-    "formulahendry.dotnet-test-explorer"
     "ms-vscode.dotnet-runtime"
     "jchannon.csharpextensions"
     "formulahendry.dotnet-core-snippets"
     "ms-dotnettools.vscode-dotnet-pack"
+    "dotnet-exception-snippets.exception-snippets"
+    "boundarystudio.csharp-extentions-pack"
     
-    # Testing & Quality
+    # 🧪 Testing & Quality
+    "k--kato.docrunner"
+    "formulahendry.dotnet-test-explorer"
     "hbenl.vscode-test-explorer"
     "ms-vscode.test-adapter-converter"
-    "dotnet-exception-snippets.exception-snippets"
     
-    # Web Development
+    # 🌐 Web Development (Angular & Frontend)
+    "angular.ng-template"
+    "johnpapa.angular2"
     "ms-vscode.vscode-html-css-pack"
     "bradlc.vscode-tailwindcss"
     "formulahendry.auto-rename-tag"
     "formulahendry.auto-close-tag"
-    "ritwickdey.liveserver"
-    "yzhang.markdown-all-in-one"
-    "shd101wyy.markdown-preview-enhanced"
+    "ms-vscode.vscode-typescript-next"
+    "ms-vscode.vscode-jest"
+    "xabikos.javascriptsnippets"
+    "richie5um2.scss-class-completion"
+    "syler.sass-indented"
+    "ms-vscode.live-server"
+    "gformat.html-formatter"
     
-    # Docker & Containers
+    # 📝 Languages & Frameworks
+    "ms-vscode.vscode-json"
+    "redhat.vscode-xml"
+    "redhat.vscode-yaml"
+    "ms-vscode.vscode-yaml"
+    
+    # 🐳 Docker & Containers
     "ms-azuretools.vscode-docker"
     "ms-vscode-remote.remote-containers"
     "formulahendry.docker-extension-pack"
-    "ms-vscode.vscode-yaml"
-    "redhat.vscode-yaml"
     
-    # Git & Version Control
+    # 🔧 Git & Version Control
     "eamodio.gitlens"
     "github.vscode-pull-request-github"
     "github.vscode-github-actions"
@@ -90,83 +104,98 @@ declare -a EXTENSIONS=(
     "waderyan.gitblame"
     "donjayamanne.githistory"
     
-    # Database & Data
+    # 🗄️ Database & Data
     "ms-mssql.mssql"
     "ms-vscode.vscode-sql-tools"
     "cweijan.vscode-redis-client"
     "ms-azuretools.vscode-cosmosdb"
     "humao.rest-client"
     
-    # Productivity & Editor Enhancements
+    # 🎨 Code Quality & Formatting
     "esbenp.prettier-vscode"
     "dbaeumer.vscode-eslint"
     "editorconfig.editorconfig"
+    "davidanson.vscode-markdownlint"
     "streetsidesoftware.code-spell-checker"
     "streetsidesoftware.code-spell-checker-portuguese"
     "streetsidesoftware.code-spell-checker-spanish"
+    
+    # 📋 Productivity & Utilities
     "gruntfuggly.todo-tree"
     "christian-kohler.path-intellisense"
-    "ms-vscode.vscode-powershell"
+    "christian-kohler.npm-intellisense"
+    "alefragnani.bookmarks"
+    "coenraadf.bracket-pair-colorizer-2"
+    "oderwat.indent-rainbow"
+    "mechatroner.rainbow-csv"
     
-    # Themes & Icons
+    # 🖥️ Terminal & Shell
+    "ms-vscode.vscode-powershell"
+    "runemula.vscode-git-bash"
+    "tyriar.shell-launcher"
+    
+    # 🎨 Themes & Icons
     "pkief.material-icon-theme"
     "ms-vscode.theme-tomorrow-night-blue"
     "zhuangtongfa.material-theme"
     "dracula-theme.theme-dracula"
     "sainnhe.gruvbox-material"
+    "whizark.workbench-monokai"
+    "akamud.vscode-theme-onedark"
     "vscode-icons-team.vscode-icons"
+    "johnpapa.vscode-peacock"
+    "johnpapa.winteriscoming"
     
-    # Utilities & Tools
-    "ms-vscode.live-server"
-    "ms-vscode.hexeditor"
-    "alefragnani.bookmarks"
-    "wakatime.vscode-wakatime"
-    
-    # Remote Development
-    "ms-vscode-remote.remote-ssh"
-    "ms-vscode-remote.remote-wsl"
-    "ms-vscode.remote-explorer"
-    
-    # Language Support
-    "ms-python.python"
-    "ms-python.vscode-pylance"
-    "ms-python.black-formatter"
-    "ms-python.isort"
-    "ms-python.flake8"
-    "golang.go"
-    "rust-lang.rust-analyzer"
-    "redhat.java"
-    "vscjava.vscode-java-pack"
-    
-    # Markdown & Documentation
-    "davidanson.vscode-markdownlint"
+    # 📖 Documentation & Markdown
+    "yzhang.markdown-all-in-one"
+    "shd101wyy.markdown-preview-enhanced"
     "mushanshit.vscode-markdown-image"
     "hugonode.paste-json-as-markdown"
     "bierner.markdown-mermaid"
     "bierner.markdown-footnotes"
     "bierner.markdown-checkbox"
+    "bierner.markdown-yaml-preamble"
     
-    # Snippets & Code Generation
-    "xabikos.javascriptsnippets"
-    "visualstudioexptteam.vscodeintellicode"
+    # 🔍 Search & Navigation
+    "ms-vscode.hexeditor"
+    "redhat.vscode-commons"
     
-    # Performance & Monitoring
-    "coenraadf.bracket-pair-colorizer-2"
-    "oderwat.indent-rainbow"
+    # 🌐 Remote Development
+    "ms-vscode-remote.remote-ssh"
+    "ms-vscode-remote.remote-wsl"
+    "ms-vscode.remote-explorer"
     
-    # Terminal & Shell
-    "tyriar.shell-launcher"
-    "runemula.vscode-git-bash"
+    # 🐍 Python (para scripts e automação)
+    "ms-python.python"
+    "ms-python.vscode-pylance"
+    "ms-python.black-formatter"
+    "ms-python.isort"
+    "ms-python.flake8"
     
-    # Additional Extensions
-    "genepiot.ollama-vscode"
-    "mechatroner.rainbow-csv"
-    "angular.ng-template"
-    "boundarystudio.csharp-extentions-pack"
-    "gformat.html-formatter"
-    "johnpapa.angular2"
-    "johnpapa.vscode-peacock"
-    "johnpapa.winteriscoming"
+    # 🌟 Other Languages
+    "golang.go"
+    "rust-lang.rust-analyzer"
+    "scala-lang.scala"
+    "redhat.java"
+    "vscjava.vscode-java-pack"
+    "rebornix.ruby"
+    
+    # ⏱️ Time Tracking
+    "wakatime.vscode-wakatime"
+    
+    # 🔧 JavaScript Debugging
+    "ms-vscode.js-debug"
+    "ms-vscode.js-debug-companion"
+    
+    # 🛡️ Security & Analysis
+    "ms-vscode.vscode-codeql"
+    
+    # ☁️ Azure & Cloud
+    "ms-vscode.azure-account"
+    "ms-vscode.azurecli"
+    "ms-azuretools.vscode-azurefunctions"
+    "ms-azuretools.vscode-azureresourcegroups"
+    "ms-azuretools.vscode-azurestorage"
 )
 
 # Instalar extensões
@@ -225,14 +254,14 @@ show_info() {
     echo "• Para atualizar extensões: $CODE_CMD --update-extensions"
     echo ""
     echo "⚡ Extensões principais instaladas:"
-    echo "• Continue (IA local com Ollama)"
-    echo "• GitHub Copilot"
-    echo "• C# Dev Kit"
-    echo "• Docker"
-    echo "• GitLens"
-    echo "• Material Icon Theme"
+    echo "• GitHub Copilot (AI code completion)"
+    echo "• C# Dev Kit (.NET development)"
+    echo "• Angular Extension (Frontend framework)"
+    echo "• Docker (Container development)"
+    echo "• GitLens (Git superpowers)"
+    echo "• Material Icon Theme (Modern icons)"
     echo ""
-    echo "🚀 VS Code está pronto para DevTools IA + RTX 2050!"
+    echo "🚀 VS Code/Windsurf está pronto para desenvolvimento moderno!"
 }
 
 # Função principal
