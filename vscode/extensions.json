@@ -138,10 +138,6 @@
   "unwantedRecommendations": [
     "ms-vscode.csharp",
     "ms-vscode.cpptools",
-    "ms-vscode.node-azure",
-    "continue.continue",
-    "genepiot.ollama-vscode",
-    "ms-vscode.vscode-ollama",
-    "ollama.ollama-vscode"
+    "ms-vscode.node-azure"
   ]
 }
