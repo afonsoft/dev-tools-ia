@@ -221,7 +221,6 @@
   // Desliga Omnisharp (antigo, mais pesado)
   "dotnet.server.useOmnisharp": false,
   // Proxy corporativo para download do SDK .NET
-  // "dotnetAcquisitionExtension.proxyUrl": "http://proxynew.itau:8080",
   // Python — nível de checagem de tipos (off | basic | standard | strict)
   "python.analysis.typeCheckingMode": "basic",
   // [CPU] Desliga auto-import de JavaScript (evita varredura de módulos)
@@ -245,8 +244,7 @@
   // Autocompletar CRDs (Custom Resource Definitions) em YAML do K8s
   // Caminho local do kubectl para a extensão Kubernetes
   "vs-kubernetes": {
-    "vs-kubernetes.crd-code-completion": "enabled",
-    "vscode-kubernetes.kubectl-path-windows": "C:\\Users\\adnsasp\\.vs-kubernetes\\tools\\kubectl\\kubectl.exe"
+    "vs-kubernetes.crd-code-completion": "enabled"
   },
   // ═══════════════════════════════════════════════════════════════════════
   // 8. REDE — SSL & Timeout
@@ -299,16 +297,9 @@
   // 11. QUALIDADE — SonarLint
   // ═══════════════════════════════════════════════════════════════════════
   // [REDE] Conexão com servidor SonarQube corporativo (análise de código)
-  "sonarlint.connectedMode.connections.sonarqube": [
-    {
-      "connectionId": "https-sonaropen-prod-aws-cloud-ihf",
-      "serverUrl": "https://sonaropen.prod.aws.cloud.ihf"
-    }
-  ],
   // Foca análise apenas em código novo/alterado (ignora dívida técnica antiga)
   "sonarlint.focusOnNewCode": true,
   // Caminho do Node.js usado pelo SonarLint (precisa do Node para rodar)
-  "sonarlint.pathToNodeExecutable": "C:\\Users\\afons\\AppData\\Local\\nvm\\v20.19.5\\node.exe",
   // ═══════════════════════════════════════════════════════════════════════
   // 12. CLOUD — AWS, Azure, Datadog
   // ═══════════════════════════════════════════════════════════════════════
@@ -319,8 +310,6 @@
     "surveyPromptDate": "2026-07-19T13:13:58.433Z",
     "surveyPromptIgnoredCount": 0
   },
-  // Domínio do Datadog para monitoramento (ambiente dev Itaú)
-  "datadog.connection.oauth.setup.domain": "itau-dev.datadoghq.com",
   // Suprime aviso de configuração do MCP Server do Datadog
   "datadog.mcp.notification.suppressMcpAccessSettingWarning": true,
   // ═══════════════════════════════════════════════════════════════════════
@@ -382,7 +371,7 @@
   // Permite busca na web durante chat com Claude
   "github.copilot.chat.anthropic.tools.websearch.enabled": true,
   // Usa API antiga do Anthropic (compatibilidade)
-  "github.copilot.chat.anthropic.useMessagesApi": false,
+  "github.copilot.chat.anthropic.useMessagesApi": true,
   // Shell usado quando o modelo Claude Sonnet 4.5 executa comandos
   "github.copilot.chat.claudeSonnet45AlternatePrompt": "Ubuntu (WSL)",
   // Usa templates de projeto ao criar workspaces via chat
@@ -408,7 +397,7 @@
   // Notifica quando o chat termina de responder (útil se trocar de janela)
   "chat.notifyWindowOnResponseReceived": true,
   // Não responde automaticamente a prompts do terminal (segurança)
-  "chat.tools.terminal.autoReplyToPrompts": false,
+  "chat.tools.terminal.autoReplyToPrompts": true,
   // Habilita renderização de equações KaTeX no chat
   "chat.math.enabled": true,
   // Mostra histórico de conversas na tela inicial do chat
@@ -542,7 +531,7 @@
   // Posição da lista de tarefas do agent na UI
   "chat.agent.todoList.position": "default",
   // Desliga auto-approve global de ferramentas (segurança — aprovar uma a uma)
-  "chat.tools.global.autoApprove": false,
+  "chat.tools.global.autoApprove": true,
   // Habilita criação de workspaces via chat
   "github.copilot.chat.newWorkspaceCreation.enabled": true,
   // [CPU] Threshold para virtual tools (ferramentas carregadas sob demanda)
@@ -702,5 +691,5 @@
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "terminal.integrated.showCommandHint": false
+  "terminal.integrated.showCommandHint": true
 }
