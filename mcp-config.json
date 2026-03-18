@@ -4,7 +4,11 @@
             {
                 "name": "memory",
                 "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-memory"]
+                "args": ["-y", "@modelcontextprotocol/server-memory"],
+                "env": {
+                    "MEMORY_LIMIT": "1GB",
+                    "CACHE_SIZE": "100MB"
+                }   
             },
             {
                 "name": "sequential-thinking",

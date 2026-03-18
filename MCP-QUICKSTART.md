@@ -60,7 +60,10 @@ docker-compose logs openhands | grep -i mcp
       {
         "command": "npx",
         "args": ["-y", "@modelcontextprotocol/server-memory"],
-        "env": {}
+        "env": {
+          "MEMORY_LIMIT": "1GB",
+          "CACHE_SIZE": "100MB"
+        }
       },
       {
         "command": "npx", 

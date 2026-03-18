@@ -34,44 +34,11 @@ deploy:
       cpus: "1.0"     # 1 CPU core
 ```
 
-### 2. Ollama - Configuração Ultra-Leve
-
-#### Otimizações de VRAM
-```yaml
-OLLAMA_GPU_LAYERS: 25              # Reduzido para RTX 2050
-OLLAMA_CONTEXT_LENGTH: 2048        # Contexto mínimo funcional
-OLLAMA_GPU_OVERHEAD: 536870912     # 512MB overhead
-OLLAMA_BATCH_SIZE: 128             # Batch reduzido
-OLLAMA_PRELOAD: 0                   # Sem preload
-```
-
-#### Recursos Docker
-```yaml
-deploy:
-  resources:
-    limits:
-      memory: "3g"    # 3GB para Ollama
-      cpus: "1.0"     # 1 CPU core
-```
-
-### 3. Web UI - Minimalista
-
-```yaml
-deploy:
-  resources:
-    limits:
-      memory: "512m"   # 512MB apenas
-      cpus: "0.5"     # Meio CPU core
-```
-
 ## 📊 Comparação de Consumo
 
 | Componente | Padrão | Otimizado | Economia |
 |------------|--------|-----------|----------|
 | OpenHands | 4GB RAM | 2GB RAM | 50% |
-| Ollama | 6GB RAM | 3GB RAM | 50% |
-| Web UI | 1GB RAM | 512MB RAM | 50% |
-| **Total** | **11GB** | **5.5GB** | **50%** |
 
 ## 🎯 Recomendações por Hardware
 
