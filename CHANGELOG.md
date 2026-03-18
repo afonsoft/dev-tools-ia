@@ -4,6 +4,35 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [2.1.0] - 2026-03-18
+
+### Adicionado
+- `3a8b4c6` | 2026-03-18 | Afonso Dutra Nogueira Filho — feat: update README with GitHub Copilot agents configuration guide
+- **GitHub Copilot Agents** com 9 skills especializadas .NET
+- **Guia completo de configuração** para VS Code e Windsurf
+- **Integração OpenHands** com agents no workspace
+- **Exemplos práticos** de uso com prompts especializados
+- **Documentação atualizada** com referências removidas ao Ollama
+
+### Alterado
+- **SETUP-VSCODE.md** migrado de Ollama/Continue para GitHub Copilot
+- **workspace/README.md** removidas referências ao Ollama
+- **README-OPTIMIZACAO.md** atualizado para Gemini API
+- **openhands/README.md** configurado para Gemini API
+- **Documentação completa** sem dependências de Ollama
+- **Links e referências** atualizadas para nova arquitetura
+
+### Removido
+- Todas as referências ao **Ollama** da documentação
+- Configurações de **Continue** e Qwen 2.5 Coder
+- Dependências de **GPU NVIDIA** nos guias de setup
+- Links quebrados para serviços removidos
+
+### Corrigido
+- Remoção completa de menções a `ollama` em todos os arquivos
+- Atualização de comandos e exemplos para Gemini API
+- Consistência na documentação sem referências obsoletas
+
 ## [2.0.0] - 2026-03-17
 
 ### Alterado (BREAKING CHANGES)

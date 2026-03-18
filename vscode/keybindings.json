@@ -1,33 +1,31 @@
 [
   // ╔═══════════════════════════════════════════════════════════════════════╗
-  // ║  VS Code — Keybindings Otimizadas para DevTools IA + Continue          ║
+  // ║  VS Code — Keybindings Otimizadas para DevTools IA + GitHub Copilot ║
   // ║  C#/.NET Development · AI Integration · Productivity Shortcuts        ║
   // ╚═══════════════════════════════════════════════════════════════════════╝
-  
   // ═══════════════════════════════════════════════════════════════════════
-  // CONTINUE IA — Primary Shortcuts
+  // GITHUB COPILOT — Primary Shortcuts
   // ═══════════════════════════════════════════════════════════════════════
   {
     "key": "ctrl+l",
-    "command": "continue.quickChat",
+    "command": "github.copilot.sendToChat",
     "when": "!inlineChatFocused"
   },
   {
     "key": "ctrl+i",
-    "command": "continue.editWithInput",
+    "command": "github.copilot.sendToInlineChat",
     "when": "editorHasSelection"
   },
   {
     "key": "ctrl+shift+\\",
-    "command": "continue.focusContinueInput",
+    "command": "github.copilot.focusChat",
     "when": "!inlineChatFocused"
   },
   {
     "key": "ctrl+shift+/",
-    "command": "continue.slashCommand",
+    "command": "github.copilot.openSettings",
     "when": "!inlineChatFocused"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // C#/.NET DEVELOPMENT — Core Shortcuts
   // ═══════════════════════════════════════════════════════════════════════
@@ -71,7 +69,6 @@
     "command": "dotnet.removeUnusedUsings",
     "when": "editorLangId == 'csharp'"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // EDITOR — Formatting & Navigation
   // ═══════════════════════════════════════════════════════════════════════
@@ -108,7 +105,6 @@
     "key": "ctrl+shift+p",
     "command": "workbench.action.showCommands"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // TERMINAL — Quick Access
   // ═══════════════════════════════════════════════════════════════════════
@@ -130,7 +126,6 @@
     "command": "workbench.action.terminal.runSelectedText",
     "when": "editorTextFocus && editorHasSelection"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // DEBUG — Enhanced Shortcuts
   // ═══════════════════════════════════════════════════════════════════════
@@ -179,7 +174,6 @@
     "command": "workbench.action.debug.stepOut",
     "when": "inDebugMode"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // TESTING — Quick Test Actions
   // ═══════════════════════════════════════════════════════════════════════
@@ -208,7 +202,6 @@
     "command": "dotnet.test.coverage",
     "when": "editorLangId == 'csharp'"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // GIT — Enhanced Git Shortcuts
   // ═══════════════════════════════════════════════════════════════════════
@@ -237,7 +230,6 @@
     "command": "git.unstageSelectedRanges",
     "when": "editorTextFocus && !editorReadonly"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // EXPLORER & FILES — Quick Navigation
   // ═══════════════════════════════════════════════════════════════════════
@@ -264,7 +256,6 @@
     "command": "workbench.action.files.deleteFile",
     "when": "explorerResourceIsFolder || explorerResourceIsRoot"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // WINDOW & PANELS — Panel Management
   // ═══════════════════════════════════════════════════════════════════════
@@ -296,7 +287,6 @@
     "key": "ctrl+shift+m",
     "command": "workbench.action.toggleMaximizedPanel"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // SEARCH & NAVIGATION — Enhanced Search
   // ═══════════════════════════════════════════════════════════════════════
@@ -325,7 +315,6 @@
     "command": "editor.action.gotoSymbolInWorkspace",
     "when": "editorTextFocus"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // BOOKMARKS & MARKERS — Quick Navigation
   // ═══════════════════════════════════════════════════════════════════════
@@ -349,7 +338,6 @@
     "command": "bookmarks.jumpToNext",
     "when": "editorTextFocus"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // TASKS & BUILD — Quick Build Actions
   // ═══════════════════════════════════════════════════════════════════════
@@ -368,67 +356,48 @@
     "command": "workbench.action.tasks.runTask",
     "when": "!terminalFocus"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
-  // CONTINUE IA — Advanced Commands
+  // GITHUB COPILOT — Advanced Commands
   // ═══════════════════════════════════════════════════════════════════════
   {
     "key": "ctrl+alt+c",
-    "command": "continue.clearContext",
+    "command": "github.copilot.clearContext",
     "when": "!inlineChatFocused"
   },
   {
     "key": "ctrl+alt+m",
-    "command": "continue.switchModel",
+    "command": "github.copilot.switchModel",
     "when": "!inlineChatFocused"
   },
   {
     "key": "ctrl+alt+s",
-    "command": "continue.saveConversation",
+    "command": "github.copilot.saveConversation",
     "when": "!inlineChatFocused"
   },
   {
     "key": "ctrl+alt+h",
-    "command": "continue.showHistory",
+    "command": "github.copilot.showHistory",
     "when": "!inlineChatFocused"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
-  // OLLAMA & LOCAL AI — Quick Management
+  // GEMINI API & AI TOOLS — Quick Management
   // ═══════════════════════════════════════════════════════════════════════
   {
-    "key": "ctrl+alt+o",
+    "key": "ctrl+alt+g",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "ollama list\n"
+      "text": "curl -H \"Content-Type: application/json\" -d '{\"contents\":[{\"parts\":[{\"text\":\"Hello\"}]}]}' \"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$GEMINI_API_KEY\"\n"
     },
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+alt+1",
+    "key": "ctrl+alt+k",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "ollama stop qwen2.5-coder:7b-instruct-q4_K_M\n"
+      "text": "echo $GEMINI_API_KEY\n"
     },
     "when": "terminalFocus"
   },
-  {
-    "key": "ctrl+alt+2",
-    "command": "workbench.action.terminal.sendSequence",
-    "args": {
-      "text": "ollama run qwen2.5-coder:7b-instruct-q4_K_M\n"
-    },
-    "when": "terminalFocus"
-  },
-  {
-    "key": "ctrl+alt+v",
-    "command": "workbench.action.terminal.sendSequence",
-    "args": {
-      "text": "nvidia-smi\n"
-    },
-    "when": "terminalFocus"
-  },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // EMERGENCY & SAFETY — Quick Escape
   // ═══════════════════════════════════════════════════════════════════════
@@ -452,7 +421,6 @@
     "command": "workbench.action.terminal.kill",
     "when": "terminalFocus"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // QUICK FIXES & CODE ACTIONS
   // ═══════════════════════════════════════════════════════════════════════
@@ -476,7 +444,6 @@
     "command": "editor.action.rename",
     "when": "editorHasRenameProvider && editorTextFocus && !inDebugMode"
   },
-  
   // ═══════════════════════════════════════════════════════════════════════
   // MULTIPLE CURSORS & SELECTION
   // ═══════════════════════════════════════════════════════════════════════

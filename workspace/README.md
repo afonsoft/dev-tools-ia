@@ -26,7 +26,6 @@ workspace/
 │   └── cache/                 # Cache compartilhado
 └── logs/                       # Logs compartilhados
     ├── openhands/             # Logs do OpenHands
-    ├── ollama/                # Logs do Ollama
     └── webui/                 # Logs do WebUI
 ```
 
@@ -57,10 +56,6 @@ services:
     volumes:
       - ./workspace:/workspace
   
-  ollama:
-    volumes:
-      - ./workspace:/workspace
-  
   open-webui:
     volumes:
       - ./workspace:/workspace
@@ -68,7 +63,6 @@ services:
 
 Isso garante que:
 - OpenHands possa acessar e modificar arquivos de projeto
-- Ollama possa processar arquivos do workspace
 - WebUI possa exibir e gerenciar arquivos compartilhados
 - Todos os serviços vejam a mesma estrutura de arquivos
 
@@ -90,14 +84,14 @@ dotnet sln add src/MeuProjeto
 # Acesse http://localhost:3000 e use o workspace
 ```
 
-### 2. Análise de Código
+### 2. Análise de Código com OpenHands
 
 ```bash
 # Colocar código para análise
 cp /path/to/your/code.cs workspace/projects/analysis/
 
-# Usar Ollama para análise
-docker exec ollama-ai ollama run qwen2.5-coder:7b-instruct-q4_K_M "Analise o código em /workspace/projects/analysis/"
+# Usar OpenHands para análise
+# Acesse http://localhost:3000 e peça para analisar o código em /workspace/projects/analysis/
 ```
 
 ### 3. Documentação
@@ -146,7 +140,7 @@ mkdir -p workspace/{projects,shared,temp,logs}
 mkdir -p workspace/projects/{sample-csharp,documentation,templates}
 mkdir -p workspace/shared/{configs,scripts,resources}
 mkdir -p workspace/temp/{uploads,downloads,cache}
-mkdir -p workspace/logs/{openhands,ollama,webui}
+mkdir -p workspace/logs/{openhands,webui}
 
 # Criar projeto exemplo
 if [ ! -d "workspace/projects/sample-csharp" ]; then
@@ -257,25 +251,9 @@ Isso permite que o OpenHands:
 - Tenha acesso a todo o código fonte
 - Mantenha o estado entre sessões
 
-### Ollama:
-
-Ollama pode acessar arquivos do workspace para:
-
-```bash
-# Analisar código
-docker exec ollama-ai ollama run qwen2.5-coder:7b-instruct-q4_K_M "Analise o arquivo /workspace/projects/meu-projeto/src/Program.cs"
-
-# Gerar código
-docker exec ollama-ai ollama run qwen2.5-coder:7b-instruct-q4_K_M "Crie uma classe Controller em /workspace/projects/meu-projeto/src/Controllers/"
-
-# Revisar código
-docker exec ollama-ai ollama run qwen2.5-coder:7b-instruct-q4_K_M "Revise o código em /workspace/projects/meu-projeto/"
-```
-
 ### WebUI:
 
 WebUI pode:
-
 - Exibir e editar arquivos do workspace
 - Fazer upload de novos arquivos
 - Organizar projetos
@@ -402,17 +380,17 @@ dotnet sln add src/MinhaAPI
 # Acesse http://localhost:3000 e peça para desenvolver endpoints
 ```
 
-### Exemplo 2: Análise de Código
+### Exemplo 2: Análise de Código com OpenHands
 
 ```bash
 # Copiar código para análise
 cp -r /path/to/existing/code workspace/projects/analysis/
 
-# Usar Ollama para análise
-docker exec ollama-ai ollama run qwen2.5-coder:7b-instruct-q4_K_M "Analise o código em /workspace/projects/analysis/ e sugira melhorias"
+# Usar OpenHands para análise
+# Acesse http://localhost:3000 e peça para analisar o código em /workspace/projects/analysis/ e sugerir melhorias
 
-# Gerar documentação
-docker exec ollama-ai ollama run qwen2.5-coder:7b-instruct-q4_K_M "Crie documentação para o código em /workspace/projects/analysis/"
+# Gerar documentação com OpenHands
+# Peça para criar documentação para o código em /workspace/projects/analysis/
 ```
 
 ### Exemplo 3: Template Reutilizável
@@ -433,9 +411,9 @@ cd workspace/projects/novo-projeto
 ## 📚 Documentação Adicional
 
 - [Guia do OpenHands](../README.md)
-- [Configuração do Ollama](../ollama/README.md)
-- [WebUI Interface](../open-webui/README.md)
+- [WebUI Interface](../openhands/README.md)
 - [Docker Compose](../docker-compose.yml)
+- [GitHub Copilot Agents](../agents/GEMINI.md)
 
 ---
 

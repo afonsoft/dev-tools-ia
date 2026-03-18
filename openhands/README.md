@@ -52,9 +52,9 @@ openhands/
 ```json
 {
   "llm": {
-    "provider": "ollama",
-    "base_url": "http://ollama:11434",
-    "model": "qwen2.5-coder:7b-instruct-q4_K_M",
+    "provider": "gemini",
+    "base_url": "https://generativelanguage.googleapis.com",
+    "model": "gemini-1.5-flash",
     "temperature": 0.1,
     "max_tokens": 4096,
     "context_window": 4096,
@@ -64,8 +64,7 @@ openhands/
     "max_iterations": 30,
     "max_parallel_requests": 1,
     "enable_auto_lint": true,
-    "memory_budget": 4294967296,
-    "gpu_layers": 35
+    "memory_budget": 4294967296
   },
   "sandbox": {
     "timeout": 300,
@@ -318,20 +317,20 @@ echo "✅ Limpeza concluída"
 ```json
 {
   "llm": {
-    "provider": "ollama",
+    "provider": "gemini",
     "models": {
       "coding": {
-        "model": "qwen2.5-coder:7b-instruct-q4_K_M",
+        "model": "gemini-1.5-flash",
         "temperature": 0.1,
         "max_tokens": 4096
       },
       "analysis": {
-        "model": "qwen2.5:7b-instruct",
+        "model": "gemini-1.5-flash",
         "temperature": 0.2,
         "max_tokens": 8192
       },
       "creative": {
-        "model": "mistral:7b",
+        "model": "gemini-1.5-flash",
         "temperature": 0.7,
         "max_tokens": 2048
       }
@@ -441,14 +440,13 @@ module.exports = CSharpAnalyzer;
    docker restart openhands-hands-app
    ```
 
-2. **Conexão com Ollama falha**
+2. **Conexão com Gemini API falha**
    ```bash
    # Testar conexão
-   docker exec openhands-hands-app curl http://ollama:11434/api/tags
+   docker exec openhands-hands-app curl -H "Content-Type: application/json" -d '{"contents":[{"parts":[{"text":"Hello"}]}]}' "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=YOUR_API_KEY"
    
-   # Verificar rede
-   docker network ls
-   docker network inspect dev-tools-ia_openhands-net
+   # Verificar configuração da API Key
+   cat openhands/settings.json | grep api_key
    ```
 
 3. **Performance lenta**
@@ -473,11 +471,12 @@ module.exports = CSharpAnalyzer;
 
 ## 📚 Integração com Outros Serviços
 
-### Ollama
+### Gemini API
 
-- **Endpoint**: `http://ollama:11434`
-- **Modelos**: Compartilha modelos com outros serviços
+- **Endpoint**: `https://generativelanguage.googleapis.com`
+- **Modelos**: `gemini-1.5-flash` principal
 - **API**: Comunicação via REST API
+- **Autenticação**: API Key configurada em settings.json
 
 ### Workspace
 
@@ -485,11 +484,11 @@ module.exports = CSharpAnalyzer;
 - **Persistência**: Arquivos mantidos entre sessões
 - **Acesso**: Acesso completo ao sistema de arquivos
 
-### VS Code + Continue
+### GitHub Copilot
 
-- **Alternativa**: Continue pode ser usado como alternativa
-- **Configuração**: Ambos usam o mesmo endpoint Ollama
-- **Uso**: Continue para desenvolvimento rápido, OpenHands para tarefas complexas
+- **Integração**: Agents disponíveis no workspace
+- **Configuração**: Skills e rules para .NET development
+- **Uso**: Copilot para desenvolvimento rápido, OpenHands para tarefas complexas
 
 ## 🔄 Roadmap
 
@@ -508,13 +507,13 @@ module.exports = CSharpAnalyzer;
 ## 📝 Notas de Versão
 
 ### v1.4.0 (Atual)
-- Configuração otimizada para RTX 2050
-- Suporte a Qwen 2.5 Coder 7B
+- Configuração otimizada para Gemini API
+- Suporte a GitHub Copilot Agents
 - Melhorias de memória e performance
 - Interface em português
 
 ### v1.3.0
-- Integração com Ollama
+- Integração com Gemini API
 - Sandbox melhorado
 - Mais ferramentas disponíveis
 

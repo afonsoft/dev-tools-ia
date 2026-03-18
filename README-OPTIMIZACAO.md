@@ -89,8 +89,8 @@ sudo swapon /swapfile
 
 ### Erro: "Out of Memory"
 - Reduza `OPENHANDS_LLM_GPU_LAYERS` para 20
-- Diminua `OLLAMA_CONTEXT_LENGTH` para 1024
-- Use modelo menor: `phi:latest` ou `qwen2.5:1.5b`
+- Diminua `GEMINI_CONTEXT_LENGTH` para 1024
+- Use modelo menor: `gemini-1.5-flash` (mais leve)
 
 ### Erro: "Container Killed"
 - Verifique logs: `docker logs openhands-hands-app`
@@ -98,9 +98,9 @@ sudo swapon /swapfile
 - Aumente timeout para operações longas
 
 ### Performance Lenta
-- Aumente `OLLAMA_BATCH_SIZE` gradualmente
-- Habilite `OLLAMA_FLASH_ATTENTION=1`
-- Considere quantização `q3_K_M` (mais leve)
+- Aumente `GEMINI_BATCH_SIZE` gradualmente
+- Habilite cache de respostas
+- Considere usar `gemini-1.5-flash` (mais rápido)
 
 ## 📚 Referências
 
