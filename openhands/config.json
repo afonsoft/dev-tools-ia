@@ -2,7 +2,7 @@
   "llm": {
     "provider": "gemini",
     "base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
-    "model": "gemini-1.5-flash",
+    "model": "gemini/gemini-1.5-flash",
     "api_key": "YOUR_API_KEY_HERE"
   },
   "editor": {
