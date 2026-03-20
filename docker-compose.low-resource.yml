@@ -20,8 +20,7 @@ services:
       WORKSPACE_BASE: /workspace
       OPENHANDS_LLM_GPU_LAYERS: 0
       # Low-resource config: user requested larger context; ensure runtime/model supports this.
-      OPENHANDS_LLM_CTX_SIZE: 32768
-      OLLAMA_CONTEXT_LENGTH: 32768
+      ALLOW_SHORT_CONTEXT_WINDOWS: true
       OPENHANDS_LOAD_TIMEOUT: 180
       OPENHANDS_MAX_PARALLEL_REQUESTS: 1
       OPENHANDS_MEMORY_BUDGET: 1073741824
