@@ -20,7 +20,11 @@ services:
       WORKSPACE_MOUNT_PATH: /workspace
       WORKSPACE_BASE: /workspace
       OPENHANDS_LLM_GPU_LAYERS: 33
-      OPENHANDS_LLM_CTX_SIZE: 3072
+      # OpenHands: set context window to 32768 tokens (adjust if your LLM supports more).
+      # To override the OpenHands check (not recommended), set ALLOW_SHORT_CONTEXT_WINDOWS=true.
+      OPENHANDS_LLM_CTX_SIZE: 128000
+      # For local runtimes like Ollama, set the runtime context env accordingly.
+      OLLAMA_CONTEXT_LENGTH: 128000
       OPENHANDS_LOAD_TIMEOUT: 300
       OPENHANDS_MAX_PARALLEL_REQUESTS: 1
       OPENHANDS_MEMORY_BUDGET: 3435973836
