@@ -193,14 +193,14 @@ openhands serve --mount-cwd
 ```bash
 docker run -it --rm --pull=always \
   -e AGENT_SERVER_IMAGE_REPOSITORY=ghcr.io/openhands/agent-server \
-  -e AGENT_SERVER_IMAGE_TAG=1.11.4-python \
+  -e AGENT_SERVER_IMAGE_TAG=1.12.0-python \
   -e LOG_ALL_EVENTS=true \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v ~/.openhands:/.openhands \
   -p 3000:3000 \
   --add-host host.docker.internal:host-gateway \
   --name openhands-app \
-  docker.openhands.dev/openhands/openhands:1.4
+  docker.openhands.dev/openhands/openhands:1.5
 ```
 
 ### 🐳 **Opção 3: Docker Compose (Este Projeto)**
@@ -502,7 +502,7 @@ Use the performance-optimization skill to optimize this code for better performa
 - **Agents Integration**: Skills e rules especializadas .NET
 
 ### OpenHands (Opcional)
-- **Versão**: 1.4 (com agent integrado)
+- **Versão**: 1.5 (com agent integrado)
 - **API**: Gemini 1.5 Flash integration
 - **Context**: 3072 tokens (padrão) / 1024 (low-resource)
 - **Memory**: 1.5GB (padrão) / 512MB (low-resource)

@@ -1,6 +1,6 @@
 services:
   openhands:
-    image: docker.openhands.dev/openhands/openhands:1.4
+    image: docker.openhands.dev/openhands/openhands:1.5
     container_name: openhands-hands-app
     pull_policy: always
     init: true
@@ -9,7 +9,7 @@ services:
       PYTHONUNBUFFERED: "1"
       PYTHONDONTWRITEBYTECODE: "1"
       AGENT_SERVER_IMAGE_REPOSITORY: "ghcr.io/openhands/agent-server"
-      AGENT_SERVER_IMAGE_TAG: "1.11.4-python"
+      AGENT_SERVER_IMAGE_TAG: "1.12.0-python"
       OPENHANDS_LLM_PROVIDER: gemini
       OPENHANDS_LLM_MODEL: gemini-1.5-flash
       OPENHANDS_LLM_TEMPERATURE: 0.2
