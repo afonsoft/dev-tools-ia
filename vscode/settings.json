@@ -161,7 +161,7 @@
   // ═══════════════════════════════════════════════════════════════════════
   // 5. TERMINAL
   // ═══════════════════════════════════════════════════════════════════════
-  "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+  "terminal.integrated.defaultProfile.windows": "git-branch",
   "terminal.integrated.profiles.windows": {
     "Command Prompt": {
       "path": "cmd.exe",
@@ -182,10 +182,7 @@
       "path": "wsl.exe",
       "args": [
         "-d",
-        "Ubuntu",
-        "--",
-        "bash",
-        "-l"
+        "Ubuntu"
       ],
       "icon": "terminal-linux"
     }
@@ -369,7 +366,7 @@
   // Usa API antiga do Anthropic (compatibilidade)
   "github.copilot.chat.anthropic.useMessagesApi": true,
   // Shell usado quando o modelo Claude Sonnet 4.5 executa comandos
-  "github.copilot.chat.claudeSonnet45AlternatePrompt": "Ubuntu (WSL)",
+  "github.copilot.chat.claudeSonnet45AlternatePrompt": "git-branch",
   // Usa templates de projeto ao criar workspaces via chat
   "github.copilot.chat.useProjectTemplates": true,
   // Chat no terminal abre no painel de chat (mantém contexto unificado)
@@ -443,8 +440,8 @@
   // Ativa MCP Server do GitHub (acesso a issues, PRs, repos via chat)
   "github.copilot.chat.githubMcpServer.enabled": true,
   // Shell para modelos GPT-5 e Grok quando executam comandos
-  "github.copilot.chat.gpt5AlternatePrompt": "Ubuntu (WSL)",
-  "github.copilot.chat.grokCodeAlternatePrompt": "Ubuntu (WSL)",
+  "github.copilot.chat.gpt5AlternatePrompt": "git-branch",
+  "github.copilot.chat.grokCodeAlternatePrompt": "git-branch",
   // Contexto de linguagem TypeScript para fixes e inline suggestions
   "github.copilot.chat.languageContext.fix.typescript.enabled": true,
   "github.copilot.chat.languageContext.inline.typescript.enabled": true,
