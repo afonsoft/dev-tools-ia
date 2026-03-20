@@ -1,5 +1,5 @@
 # Alternative: Using .NET SDK base image (smaller)
-FROM mcr.microsoft.com/dotnet/sdk:10.0.201-bookworm-slim
+FROM mcr.microsoft.com/dotnet/sdk:10.0
 
 # Set environment variables for OpenHands
 ENV NODE_VERSION=20
