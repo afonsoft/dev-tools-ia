@@ -231,7 +231,7 @@ Agents are defined in `.github/agents/*.agent.md` files:
 ---
 name: C#/.NET Expert
 description: Expert in modern C#/.NET development with Gemini API integration
-model: gemini-1.5-flash
+model: gemini-2.5-flash
 tools: ["editor", "terminal", "git"]
 mcp-servers:
   - name: filesystem

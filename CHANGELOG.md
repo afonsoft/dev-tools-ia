@@ -61,7 +61,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 ### Alterado
 - **85% de redução** no consumo de memória total
 - **docker-compose.yml** otimizado para Gemini API
-- **settings.json** configurado para Gemini 1.5 Flash
+ - **settings.json** configurado para Gemini 2.5 Flash
 - **start.sh** com validação automática de API Key
 - **README.md** atualizado para refletir nova arquitetura
 - **Documentação MCP** simplificada e focada
@@ -73,7 +73,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ### Dependências / Versões
 - OpenHands image: `docker.openhands.dev/openhands/openhands:1.5`
-- LLM Provider: **Google Gemini API** (gemini-1.5-flash)
+ - LLM Provider: **Google Gemini API** (gemini-2.5-flash)
 - Agent Server: `ghcr.io/openhands/agent-server:1.12.0-python`
 - **Requisito**: API Key Gemini (https://aistudio.google.com/app/apikey)
 

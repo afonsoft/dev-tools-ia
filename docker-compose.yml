@@ -11,7 +11,7 @@ services:
       AGENT_SERVER_IMAGE_REPOSITORY: "ghcr.io/openhands/agent-server"
       AGENT_SERVER_IMAGE_TAG: "1.12.0-python"
       OPENHANDS_LLM_PROVIDER: gemini
-      OPENHANDS_LLM_MODEL: gemini/gemini-1.5-flash
+      OPENHANDS_LLM_MODEL: gemini/gemini-2.5-flash
       OPENHANDS_LLM_TEMPERATURE: 0.2
       OPENHANDS_LLM_TOP_P: 0.95
       OPENHANDS_MAX_ITERATIONS: 25

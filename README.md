@@ -10,7 +10,7 @@ Ambiente de desenvolvimento IA otimizado para Gemini API, focado em desenvolvime
 
 ## 📋 Descrição do Projeto
 
-Este projeto transforma seu ambiente em uma poderosa estação de desenvolvimento IA com Gemini API, com foco específico em C# e .NET. Utiliza o Gemini 1.5 Flash da Google, um modelo rápido e eficiente que funciona em qualquer hardware.
+Este projeto transforma seu ambiente em uma poderosa estação de desenvolvimento IA com Gemini API, com foco específico em C# e .NET. Utiliza o Gemini 2.5 Flash da Google, um modelo rápido e eficiente que funciona em qualquer hardware.
 
 ### 🎯 Visão de Negócio
 - Produtividade máxima com Gemini API (custo mínimo)
@@ -19,7 +19,7 @@ Este projeto transforma seu ambiente em uma poderosa estação de desenvolviment
 - Configuração simplificada com validação automática
 
 ### 🔧 Visão Técnica
-- **API Optimized**: Gemini 1.5 Flash para performance máxima
+- **API Optimized**: Gemini 2.5 Flash para performance máxima
 - **Universal**: Funciona em qualquer hardware (sem GPU required)
 - **VS Code Integration**: Copilot para workflow nativo
 - **Docker Simplificado**: OpenHands otimizado para baixo recurso
@@ -144,7 +144,7 @@ volumes:
 
 #### OpenHands Service (Padrão)
 - **Memória otimizada**: 1.5GB limit, 768MB reservation
-- **API otimizada**: Gemini 1.5 Flash integration
+- **API otimizada**: Gemini 2.5 Flash integration
 - **Python otimizado**: `PYTHONUNBUFFERED=1`, `PYTHONDONTWRITEBYTECODE=1`
 - **Logs reduzidos**: `LOG_ALL_EVENTS: false` para menos I/O
 - **Timeouts otimizados**: Sandbox 180s, workspace 300s
@@ -236,9 +236,9 @@ docker-compose logs openhands
 
 # Exemplo de configuração
 {
-  "llm_model": "gemini/gemini-1.5-flash",
+  "llm_model": "gemini/gemini-2.5-flash",
   "llm_api_key": "SUA_API_KEY_AQUI",
-  "llm_base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+  "llm_base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
 }
 ```
 
@@ -314,7 +314,7 @@ docker-compose restart openhands
 
 ## 🚀 Transforme seu Desenvolvimento com Gemini API!
 
-Com este setup, seu ambiente se torna uma poderosa estação de desenvolvimento IA com Gemini API, especializada em C#/.NET. O Gemini 1.5 Flash oferece performance profissional para código, com configuração simplificada e baixo custo.
+Com este setup, seu ambiente se torna uma poderosa estação de desenvolvimento IA com Gemini API, especializada em C#/.NET. O Gemini 2.5 Flash oferece performance profissional para código, com configuração simplificada e baixo custo.
 
 **Pronto para revolucionar seu desenvolvimento C#?** 🚀
 
@@ -489,7 +489,7 @@ Use the performance-optimization skill to optimize this code for better performa
 ## 🛠️ Stack Tecnológica
 
 ### IA e Modelo
-- **Modelo Principal**: Gemini 1.5 Flash
+- **Modelo Principal**: Gemini 2.5 Flash
 - **Especialização**: C#/.NET Development
 - **Provider**: Google Gemini API
 - **Custo**: Pay-per-use (baixo consumo)
@@ -503,7 +503,7 @@ Use the performance-optimization skill to optimize this code for better performa
 
 ### OpenHands (Opcional)
 - **Versão**: 1.5 (com agent integrado)
-- **API**: Gemini 1.5 Flash integration
+- **API**: Gemini 2.5 Flash integration
 - **Context**: 3072 tokens (padrão) / 1024 (low-resource)
 - **Memory**: 1.5GB (padrão) / 512MB (low-resource)
 - **Max Iterations**: 25 (padrão) / 15 (low-resource)
@@ -552,17 +552,17 @@ RUNTIME=remote
 # 2. Configure nos arquivos
 # openhands/settings.json
 {
-  "llm_model": "gemini/gemini-1.5-flash",
+  "llm_model": "gemini/gemini-2.5-flash",
   "llm_api_key": "SUA_API_KEY_AQUI",
-  "llm_base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+  "llm_base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
 }
 
 # openhands/config.json
 {
   "llm": {
     "provider": "gemini",
-    "base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
-    "model": "gemini-1.5-flash",
+    "base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+    "model": "gemini-2.5-flash",
     "api_key": "SUA_API_KEY_AQUI"
   }
 }
@@ -703,7 +703,7 @@ Este projeto é licenciado sob a MIT License - veja o arquivo LICENSE para detal
 
 ## 🎉 Transforme seu Desenvolvimento com Gemini API!
 
-Com este setup, seu ambiente se torna uma poderosa estação de desenvolvimento IA com Gemini API, especializada em C#/.NET. O Gemini 1.5 Flash oferece performance profissional para código, com configuração simplificada e baixo custo.
+Com este setup, seu ambiente se torna uma poderosa estação de desenvolvimento IA com Gemini API, especializada em C#/.NET. O Gemini 2.5 Flash oferece performance profissional para código, com configuração simplificada e baixo custo.
 
 **Com os GitHub Copilot Agents, você tem:**
 - 🎯 **9 skills especializadas** para desenvolvimento .NET moderno
