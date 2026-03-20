@@ -1,9 +1,11 @@
 # Alternative: Using .NET SDK base image (smaller)
 FROM mcr.microsoft.com/dotnet/sdk:10.0-bookworm-slim
 
-# Set environment variables
+# Set environment variables for OpenHands
 ENV NODE_VERSION=20
 ENV NVM_DIR=/root/.nvm
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
 
 # Install dependencies for NVM and Python
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -16,8 +18,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libbz2-dev \
     libreadline-dev \
     libsqlite3-dev \
-    wget \
-    curl \
     llvm \
     libncurses5-dev \
     libncursesw5-dev \
@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     liblzma-dev \
     python3-openssl \
     git \
+    sudo \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
@@ -43,7 +44,7 @@ RUN wget https://www.python.org/ftp/python/3.12.7/Python-3.12.7.tgz \
     && update-alternatives --install /usr/bin/python python /usr/local/bin/python3.12 1 \
     && update-alternatives --install /usr/bin/pip3 pip3 /usr/local/bin/pip3.12 1
 
-# Install OpenHands agent
+# Install OpenHands agent and dependencies
 RUN pip3.12 install --no-cache-dir openhands-agent
 
 # Install NVM (Node Version Manager)
@@ -55,8 +56,11 @@ ENV PATH="$NVM_DIR/versions/node/v${NODE_VERSION}/bin:$PATH"
 # Install Node.js 20 as default
 RUN bash -c '. $NVM_DIR/nvm.sh && nvm install ${NODE_VERSION} && nvm use ${NODE_VERSION} && nvm alias default ${NODE_VERSION}'
 
+# Create workspace directory
+RUN mkdir -p /workspace && chmod 777 /workspace
+
 # Set working directory
-WORKDIR /app
+WORKDIR /workspace
 
 # Verify installations
 RUN dotnet --version && \
