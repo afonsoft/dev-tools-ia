@@ -161,7 +161,7 @@
   // ═══════════════════════════════════════════════════════════════════════
   // 5. TERMINAL
   // ═══════════════════════════════════════════════════════════════════════
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
   "terminal.integrated.profiles.windows": {
     "Command Prompt": {
       "path": "cmd.exe",
@@ -220,7 +220,6 @@
   "dotnet.server.useDotnetServer": true,
   // Desliga Omnisharp (antigo, mais pesado)
   "dotnet.server.useOmnisharp": false,
-  // Proxy corporativo para download do SDK .NET
   // Python — nível de checagem de tipos (off | basic | standard | strict)
   "python.analysis.typeCheckingMode": "basic",
   // [CPU] Desliga auto-import de JavaScript (evita varredura de módulos)
@@ -259,7 +258,7 @@
   // Ao usar "Ask Copilot" na Command Palette, abre no painel de chat
   "workbench.commandPalette.experimental.askChatLocation": "chatView",
   // Busca semântica no workspace — ativação manual (evita custo CPU contínuo)
-  "search.searchView.semanticSearchBehavior": "manual",
+  "search.searchView.semanticSearchBehavior": "auto",
   // Desliga sugestões de keywords na busca (reduz ruído)
   "search.searchView.keywordSuggestions": false,
   // Ao reabrir o VS Code, restaura apenas a última janela
@@ -282,8 +281,7 @@
   // [CPU] Distribui extensões pesadas em processos separados
   // Cada número = um processo isolado. Evita que uma trave as outras
   "extensions.experimental.affinity": {
-    "github.copilot-chat": 1,
-    "stackspotai.stackspotai": 2
+    "github.copilot-chat": 1
   },
   // [REDE][DISK] Não verifica atualizações de extensões automaticamente
   // Com boa rede: true (mantém extensões atualizadas)
@@ -296,10 +294,8 @@
   // ═══════════════════════════════════════════════════════════════════════
   // 11. QUALIDADE — SonarLint
   // ═══════════════════════════════════════════════════════════════════════
-  // [REDE] Conexão com servidor SonarQube corporativo (análise de código)
   // Foca análise apenas em código novo/alterado (ignora dívida técnica antiga)
   "sonarlint.focusOnNewCode": true,
-  // Caminho do Node.js usado pelo SonarLint (precisa do Node para rodar)
   // ═══════════════════════════════════════════════════════════════════════
   // 12. CLOUD — AWS, Azure, Datadog
   // ═══════════════════════════════════════════════════════════════════════
@@ -320,7 +316,7 @@
   "docker.extension.enableComposeLanguageServer": true,
   // [CPU] Não rola a árvore do Explorer até o arquivo ativo
   // Com CPU sobrando: true (sempre mostra o arquivo aberto na árvore)
-  "explorer.autoReveal": false,
+  "explorer.autoReveal": true,
   // [REDE] Desliga telemetria da Red Hat (enviava dados em background)
   "redhat.telemetry.enabled": false,
   // ═══════════════════════════════════════════════════════════════════════
@@ -393,9 +389,9 @@
   // Delay (s) para auto-aceitar edições — 0 = aceite manual obrigatório
   "chat.editing.autoAcceptDelay": 0,
   // Notifica a janela quando o chat precisa de confirmação do usuário
-  "chat.notifyWindowOnConfirmation": true,
+  "chat.notifyWindowOnConfirmation": "windowNotFocused",
   // Notifica quando o chat termina de responder (útil se trocar de janela)
-  "chat.notifyWindowOnResponseReceived": true,
+  "chat.notifyWindowOnResponseReceived": "windowNotFocused",
   // Não responde automaticamente a prompts do terminal (segurança)
   "chat.tools.terminal.autoReplyToPrompts": true,
   // Habilita renderização de equações KaTeX no chat
@@ -417,7 +413,7 @@
   "github.copilot.chat.executePrompt.enabled": true,
   // ── Inline Chat ──
   // Não finaliza inline chat ao começar a digitar (mantém o painel)
-  "inlineChat.finishOnType": false,
+  "inlineChat.finishOnType": true,
   // Dica visual em linhas vazias para usar inline chat
   "inlineChat.lineEmptyHint": true,
   // Dica visual para linguagem natural em inline chat
@@ -550,9 +546,7 @@
   "chat.mcp.serverSampling": {
     "Datadog MCP Server Registry: datadog": {
       "allowedModels": [
-        "copilot/auto",
-        "copilot/claude-opus-4.6",
-        "copilot/claude-sonnet-4.6"
+        "copilot/auto"
       ]
     }
   },
@@ -597,17 +591,7 @@
     "reportgenerator": true,
     "rmdir": true,
     "sed": true,
-    "uniq": true,
-    "rm": false,
-    "rm -rf": false,
-    "del": false,
-    "kill": false,
-    "curl": false,
-    "wget": false,
-    "eval": false,
-    "chmod": false,
-    "chown": false,
-    "/^Remove-Item\\b/i": false
+    "uniq": true
   },
   // Shell usado pelo Copilot Chat para executar comandos no Windows
   "chat.tools.terminal.terminalProfile.windows": {
