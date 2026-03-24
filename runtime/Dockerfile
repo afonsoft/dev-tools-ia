@@ -44,8 +44,9 @@ RUN wget https://www.python.org/ftp/python/3.12.7/Python-3.12.7.tgz \
     && update-alternatives --install /usr/bin/python python /usr/local/bin/python3.12 1 \
     && update-alternatives --install /usr/bin/pip3 pip3 /usr/local/bin/pip3.12 1
 
-# Skip OpenHands agent installation - will be provided by main container
-# The runtime container provides the development environment, not the agent
+# Install uv and OpenHands CLI
+RUN pip3.12 install --no-cache-dir uv && \
+    uv tool install openhands --python 3.12
 
 # Install NVM (Node Version Manager)
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -66,7 +67,8 @@ WORKDIR /workspace
 RUN dotnet --version && \
     bash -c '. $NVM_DIR/nvm.sh && node --version && npm --version' && \
     python3.12 --version && \
-    pip3.12 --version
+    pip3.12 --version && \
+    openhands --version
 
 # Add NVM initialization to bash profile
 RUN echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc && \
