@@ -45,8 +45,8 @@ RUN wget https://www.python.org/ftp/python/3.12.7/Python-3.12.7.tgz \
     && update-alternatives --install /usr/bin/pip3 pip3 /usr/local/bin/pip3.12 1
 
 # Install uv and OpenHands CLI
-RUN pip3.12 install --no-cache-dir uv && \
-    uv tool install openhands --python 3.12
+# RUN pip3.12 install --no-cache-dir uv && \
+#     uv tool install openhands --python 3.12
 
 # Install NVM (Node Version Manager)
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -67,8 +67,7 @@ WORKDIR /workspace
 RUN dotnet --version && \
     bash -c '. $NVM_DIR/nvm.sh && node --version && npm --version' && \
     python3.12 --version && \
-    pip3.12 --version && \
-    openhands --version
+    pip3.12 --version 
 
 # Add NVM initialization to bash profile
 RUN echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc && \
