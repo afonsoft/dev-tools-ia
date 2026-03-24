@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0
 
 # Set environment variables for OpenHands
-ENV NODE_VERSION=20
+ENV NODE_VERSION=22
 ENV NVM_DIR=/root/.nvm
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
