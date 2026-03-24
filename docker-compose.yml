@@ -11,8 +11,8 @@ services:
       # Use custom runtime image instead of default
       SANDBOX_BASE_CONTAINER_IMAGE: "dev-dotnet-tools-runtime:latest"
       # Keep these as fallback
-      #AGENT_SERVER_IMAGE_REPOSITORY: "ghcr.io/openhands/agent-server"
-      #AGENT_SERVER_IMAGE_TAG: "1.12.0-python"
+      AGENT_SERVER_IMAGE_REPOSITORY: "ghcr.io/openhands/agent-server"
+      AGENT_SERVER_IMAGE_TAG: "1.12.0-python"
       OPENHANDS_LLM_PROVIDER: gemini
       OPENHANDS_LLM_MODEL: gemini/gemini-2.5-flash
       OPENHANDS_LLM_TEMPERATURE: 0.2
@@ -59,18 +59,18 @@ services:
           cpus: "0.8"
   # Definição da rede
 
-  runtime:
-    build:
-      context: ./runtime
-      dockerfile: Dockerfile
-    image: dev-dotnet-tools-runtime:latest
-    container_name: openhands-runtime
-    stdin_open: true
-    tty: true
-    networks:
-      - openhands-net
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+  # runtime:
+  #   build:
+  #     context: ./runtime
+  #     dockerfile: Dockerfile
+  #   image: dev-dotnet-tools-runtime:latest
+  #   container_name: openhands-runtime
+  #   stdin_open: true
+  #   tty: true
+  #   networks:
+  #     - openhands-net
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
 
 networks:
   openhands-net:
