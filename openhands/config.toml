@@ -4,7 +4,7 @@
 
 # Network Configuration
 network_mode = "bridge"
-max_num_sandboxes = 5
+max_num_sandboxes = 1
 
 # Resource Limits
 memory_limit = "16g"
@@ -24,7 +24,7 @@ user_id = "0"
 workspace_size = "8g"
 
 # Advanced Settings
-use_host_network = false
+use_host_network = true
 enable_gpu_acceleration = true
 
 [llm]
