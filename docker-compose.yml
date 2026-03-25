@@ -36,9 +36,7 @@ services:
       SANDBOX_USE_HOST_NETWORK: true
       WORKSPACE_TIMEOUT: 400
       MAX_WORKSPACE_SIZE: "8g"
-      SANDBOX_MAX_NUM_SANDBOXES: 1
-      SANDBOX_NETWORK_MODE: "bridge"
-      DOCKER_HOST_ADDR: "127.0.0.1"
+      SANDBOX_MAX_NUM_SANDBOXES: 5
     ports:
       - "3000:3000"
     volumes:
@@ -46,8 +44,6 @@ services:
       - ./openhands:/.openhands
       - ./openhands/config.toml:/config.toml:ro
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - openhands-net
     extra_hosts:
       - "host.docker.internal:host-gateway"
     # Ajustes para Windows
@@ -67,8 +63,3 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-
-networks:
-  openhands-net:
-    name: openhands-net
-    driver: bridge
