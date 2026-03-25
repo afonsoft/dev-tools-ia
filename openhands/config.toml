@@ -1,6 +1,5 @@
 [core]
 workspace_base = "./workspace"
-main_config_path = "config.toml"
 
 [sandbox]
 timeout = 240
