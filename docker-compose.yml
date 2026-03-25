@@ -49,7 +49,8 @@ services:
     # Ajustes para Windows
     tty: true
     stdin_open: true
-    # Removido devices, runtime nvidia e healthcheck para compatibilidade local
+    # Suporte GPU NVIDIA
+    runtime: nvidia
     deploy:
       resources:
         limits:
@@ -58,6 +59,10 @@ services:
         reservations:
           memory: "1g"
           cpus: "1.0"
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
   # Definição da rede
 
   # runtime:
