@@ -1,8 +1,9 @@
-# 🚀 Setup VS Code + GitHub Copilot para Desenvolvimento .NET
+# 🚀 Setup VS Code + GitHub Copilot + OpenHands para Desenvolvimento .NET
 
 ## 📋 Requisitos
 - VS Code instalado
 - GitHub Copilot ativado
+- OpenHands configurado com Gemini 2.5 Flash
 - Extensões recomendadas para .NET
 
 ## ⚙️ Passo 1: Configurar VS Code + GitHub Copilot
@@ -29,6 +30,40 @@
   "github.copilot.editor.enableCodeActions": true
 }
 ```
+
+## 🤖 Passo 2: Configurar OpenHands com Gemini 2.5 Flash
+
+### 2.1 Configurar Variáveis de Ambiente
+Defina sua API key do Google Gemini:
+
+**Windows (PowerShell):**
+```powershell
+$env:GEMINI_API_KEY = "sua-api-key-aqui"
+```
+
+**Linux/macOS:**
+```bash
+export GEMINI_API_KEY="sua-api-key-aqui"
+```
+
+### 2.2 Iniciar OpenHands
+**Para máxima performance:**
+```bash
+docker-compose up -d openhands
+```
+
+**Para recursos limitados:**
+```bash
+docker-compose -f docker-compose.low-resource.yml up -d openhands
+```
+
+### 2.3 Configurações Otimizadas
+O OpenHands está configurado com:
+- **Modelo**: Gemini 2.5 Flash
+- **Temperatura**: 0.35 (performance) / 0.3 (low-resource)
+- **Paralelismo**: 3 (performance) / 2 (low-resource)
+- **Memory Budget**: 4GB (performance) / 2GB (low-resource)
+- **Timeouts**: Otimizados para respostas rápidas
 
 ### 1.3 Copiar Arquivos de Configuração
 Copie os arquivos da pasta `vscode/` deste repositório:
@@ -124,7 +159,7 @@ code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-vscode.vscode-json
 ```
 
-## 🎯 Passo 2: Configurar GitHub Copilot Agents
+## 🎯 Passo 3: Configurar GitHub Copilot Agents
 
 ### 2.1 Copiar Agents para o Projeto
 ```bash
@@ -154,76 +189,94 @@ git push origin main
 }
 ```
 
-## 💻 Passo 3: Workflow C#/.NET com Agents
+## 💻 Passo 4: Workflow C#/.NET com Agents + OpenHands
 
-### 3.1 Chat Básico (`Ctrl+L`)
+### 4.1 Chat Básico (`Ctrl+L`)
 Selecione código e use prompts especializados com agents:
 
 ```
-Use the design-patterns skill to refactor this method following SOLID principles and LINQ
+Use design-patterns skill to refactor this method following SOLID principles and LINQ
 ```
 
 ```
-Use the entity-framework-core skill to create a Repository pattern for this DbContext
+Use entity-framework-core skill to create a Repository pattern for this DbContext
 ```
 
 ```
-Use the testing-xunit skill to add comprehensive unit tests for this class
+Use testing-xunit skill to add comprehensive unit tests for this class
 ```
 
-### 3.2 Edit Direto (`Ctrl+I`)
+### 4.2 Usando OpenHands com Gemini
+Para tarefas complexas, use OpenHands em `http://localhost:3000`:
+
+**Para debugging e análise:**
+```
+Analise este código .NET e identifique possíveis problemas de performance e segurança
+```
+
+**Para refatoração complexa:**
+```
+Refatore este código aplicando padrões de projeto SOLID e melhores práticas .NET
+```
+
+**Para criação de APIs:**
+```
+Crie uma Web API RESTful completa com Entity Framework, validação e Swagger
+```
+
+### 4.3 Edit Direto (`Ctrl+I`)
 Escreva comentários e deixe a IA gerar:
 
 ```csharp
-// TODO: Use the security-jwt skill to implement JWT authentication
-// TODO: Apply the aspnet-core-api skill for proper validation
-// TODO: Use the performance-optimization skill for async handling
+// TODO: Use security-jwt skill to implement JWT authentication
+// TODO: Apply aspnet-core-api skill for proper validation
+// TODO: Use performance-optimization skill for async handling
 ```
 
-### 3.3 Contexto Local (`@Codebase`)
+### 4.4 Contexto Local (`@Codebase`)
 Use `@Codebase` no chat para referenciar todo o projeto:
 
 ```
-@Codebase Use the dotnet-best-practices skill to create a service layer following Dependency Injection principles
+@Codebase Use dotnet-best-practices skill to create a service layer following Dependency Injection principles
 ```
 
-### 3.4 Prompts Especializados C# com Agents
+### 4.5 Prompts Especializados C# com Agents
 
 #### Para Entity Framework Core:
 ```
-Use the entity-framework-core skill to generate a Repository pattern implementation for this DbContext with async methods, proper error handling, and unit testing support.
+Use entity-framework-core skill to generate a Repository pattern implementation for this DbContext with async methods, proper error handling, and unit testing support.
 ```
 
 #### Para Web API:
 ```
-Use the aspnet-core-api skill to create RESTful API endpoints with proper HTTP verbs, status codes, validation, and Swagger documentation.
+Use aspnet-core-api skill to create RESTful API endpoints with proper HTTP verbs, status codes, validation, and Swagger documentation.
 ```
 
 #### Para Testes Unitários:
 ```
-Use the testing-xunit skill to generate comprehensive xUnit tests for this class using Arrange-Act-Assert pattern, mocking dependencies with Moq.
+Use testing-xunit skill to generate comprehensive xUnit tests for this class using Arrange-Act-Assert pattern, mocking dependencies with Moq.
 ```
 
 #### Para Blazor:
 ```
-Use the blazor-components skill to create reusable Blazor components with proper state management and accessibility features.
+Use blazor-components skill to create reusable Blazor components with proper state management and accessibility features.
 ```
 
 #### Para Performance:
 ```
-Use the performance-optimization skill to optimize this code for better performance and memory usage.
+Use performance-optimization skill to optimize this code for better performance and memory usage.
 ```
 
-## 🔍 Passo 4: Comandos Úteis
+## 🔍 Passo 5: Comandos Úteis
 
-### 4.1 Atalhos VS Code + Copilot
+### 5.1 Atalhos VS Code + Copilot
 - `Ctrl+L`: Abrir chat Copilot
 - `Ctrl+I`: Editar código selecionado
 - `Ctrl+Shift+\`: Focar input Copilot
 - `Ctrl+Shift+/`: Comandos slash Copilot
 - `Ctrl+Shift+P`: "Copilot: " para comandos especiais
 
-### 4.2 Atalhos Personalizados C#/.NET
+### 5.2 Atalhos Personalizados C#/.NET
 - `Ctrl+Shift+C`: Gerar código async
 - `Ctrl+Shift+T`: Rodar testes no contexto
 - `Ctrl+Shift+R`: Refatorar código
@@ -232,12 +285,40 @@ Use the performance-optimization skill to optimize this code for better performa
 
 ## 🚨 Dicas Profissionais
 
-### Performance com Agents
+### Performance com Agents + OpenHands
 1. **Context menor = Mais rápido**: Use skills específicas
 2. **Evite arquivos >1000 linhas**: Divida em classes menores
 3. **Use prompts diretos**: Seja específico na skill desejada
+4. **OpenHands para tarefas complexas**: Use para debugging e refatoração pesada
+5. **Copilot para tarefas rápidas**: Autocomplete e pequenas edições
+
+### Configuração MCP Servers
+O projeto inclui configuração MCP com:
+- **Memory**: Armazenamento persistente (1GB)
+- **Sequential Thinking**: Raciocínio estruturado
+- **Fetch**: Acesso à web
+- **Filesystem**: Operações de arquivo
+- **Git**: Controle de versão
+- **SQLite**: Banco de dados local
+- **Puppeteer**: Automação web
+- **Shadcn UI**: Componentes UI
+- **DeepWiki**: Documentação GitHub
 
 ### Troubleshooting
+
+**OpenHands não inicia:**
+```bash
+# Verificar se Docker está rodando
+docker ps
+
+# Verificar logs
+docker-compose logs openhands
+```
+
+**Gemini API key não funciona:**
+1. Verifique se a API key está correta
+2. Confirme se a API Gemini está ativada
+3. Verifique variável de ambiente
 
 **Arquivos não encontrados:**
 ```bash
@@ -267,19 +348,32 @@ ls -la ~/.config/Code/User
 2. Confirme o `agentsPath` no settings.json
 3. Reinicie VS Code para carregar os agents
 
-## 🎉 Exemplo Completo: Gerar Testes xUnit com Agents
+## 🎉 Exemplo Completo: Gerar Testes xUnit com Agents + OpenHands
 
+### Usando GitHub Copilot:
 1. Selecione uma classe C#
 2. `Ctrl+L` para abrir chat
 3. Prompt com agent:
 ```
-@Codebase Use the testing-xunit skill to generate comprehensive xUnit tests for this repository class following these requirements:
+@Codebase Use testing-xunit skill to generate comprehensive xUnit tests for this repository class following these requirements:
 - Use Arrange-Act-Assert pattern
 - Mock dependencies with Moq
 - Test all public methods
 - Include edge cases and error scenarios
 - Use meaningful test names
 - Add Theory tests for parameter validation
+```
+
+### Usando OpenHands para análise complexa:
+1. Abra `http://localhost:3000`
+2. Cole o código completo
+3. Prompt:
+```
+Analise esta classe .NET e gere:
+1. Testes unitários completos com xUnit e Moq
+2. Análise de coverage de código
+3. Sugestões de refatoração para melhorar testabilidade
+4. Identificação de code smells e anti-padrões
 ```
 
 ## ✅ Verificação Final
@@ -298,10 +392,22 @@ Após seguir todos os passos, verifique:
 - [ ] Autocomplete funcionando
 - [ ] Comandos slash disponíveis
 
+### ✅ OpenHands com Gemini Configurado
+- [ ] API key do Gemini configurada
+- [ ] OpenHands rodando em localhost:3000
+- [ ] Gemini 2.5 Flash respondendo
+- [ ] Configurações de performance aplicadas
+
 ### ✅ Agents Configurados
 - [ ] Pasta `agents/` copiada para o projeto
 - [ ] Skills disponíveis no chat
 - [ ] Contexto `@Codebase` funcionando com agents
 - [ ] Prompts especializados respondendo
 
-O GitHub Copilot com Agents especializados entenderá perfeitamente o contexto C#/.NET e gerará código profissional com as melhores práticas! 🚀
+### ✅ MCP Servers Funcionando
+- [ ] Servidores MCP configurados
+- [ ] Memory server ativo
+- [ ] Fetch e filesystem funcionando
+- [ ] Integração com OpenHands operacional
+
+Agora você tem um ambiente completo com GitHub Copilot para desenvolvimento rápido e OpenHands com Gemini para tarefas complexas! 🚀
