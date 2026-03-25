@@ -9,31 +9,31 @@ services:
       PYTHONUNBUFFERED: "1"
       PYTHONDONTWRITEBYTECODE: "1"
       # Use custom runtime image instead of default
-      SANDBOX_BASE_CONTAINER_IMAGE: "dev-dotnet-tools-runtime:latest"
+      # SANDBOX_BASE_CONTAINER_IMAGE: "dev-dotnet-tools-runtime:latest"
       # Keep these as fallback
       AGENT_SERVER_IMAGE_REPOSITORY: "ghcr.io/openhands/agent-server"
       AGENT_SERVER_IMAGE_TAG: "1.12.0-python"
       OPENHANDS_LLM_PROVIDER: gemini
       OPENHANDS_LLM_MODEL: gemini/gemini-2.5-flash
-      OPENHANDS_LLM_TEMPERATURE: 0.2
+      OPENHANDS_LLM_TEMPERATURE: 0.35
       OPENHANDS_LLM_TOP_P: 0.95
-      OPENHANDS_MAX_ITERATIONS: 25
+      OPENHANDS_MAX_ITERATIONS: 30
       OPENHANDS_ENABLE_AUTO_LINT: true
       # Configurações de Workspace
       WORKSPACE_MOUNT_PATH: /workspace
       WORKSPACE_BASE: /workspace
       OPENHANDS_LLM_GPU_LAYERS: 33
-      OPENHANDS_LOAD_TIMEOUT: 300
-      OPENHANDS_MAX_PARALLEL_REQUESTS: 1
-      OPENHANDS_MEMORY_BUDGET: 3435973836
+      OPENHANDS_LOAD_TIMEOUT: 400
+      OPENHANDS_MAX_PARALLEL_REQUESTS: 3
+      OPENHANDS_MEMORY_BUDGET: 4294967296
       # Performance
       CUDA_VISIBLE_DEVICES: 0
       # Otimizações de memória
-      SANDBOX_TIMEOUT: 180
+      SANDBOX_TIMEOUT: 240
       SANDBOX_USER_ID: "0"
       SANDBOX_MEMORY_LIMIT: "16g"
       SANDBOX_CPU_LIMIT: "2.0"
-      WORKSPACE_TIMEOUT: 300
+      WORKSPACE_TIMEOUT: 400
       MAX_WORKSPACE_SIZE: "8g"
     ports:
       - "3000:3000"
@@ -52,11 +52,11 @@ services:
     deploy:
       resources:
         limits:
-          memory: "1.5g"
-          cpus: "1.2"
+          memory: "2g"
+          cpus: "1.5"
         reservations:
-          memory: "768m"
-          cpus: "0.8"
+          memory: "1g"
+          cpus: "1.0"
   # Definição da rede
 
   # runtime:
