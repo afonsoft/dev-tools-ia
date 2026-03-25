@@ -5,7 +5,7 @@ services:
     pull_policy: always
     init: true
     environment:
-      LOG_ALL_EVENTS: "false"
+      LOG_ALL_EVENTS: "true"
       PYTHONUNBUFFERED: "1"
       PYTHONDONTWRITEBYTECODE: "1"
       # Use custom runtime image instead of default
