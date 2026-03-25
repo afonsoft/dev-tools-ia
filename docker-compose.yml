@@ -33,6 +33,7 @@ services:
       SANDBOX_USER_ID: "0"
       SANDBOX_MEMORY_LIMIT: "16g"
       SANDBOX_CPU_LIMIT: "2.0"
+      SANDBOX_USE_HOST_NETWORK: true
       WORKSPACE_TIMEOUT: 400
       MAX_WORKSPACE_SIZE: "8g"
     ports:

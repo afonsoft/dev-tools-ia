@@ -19,6 +19,7 @@
     "user_consents_to_analytics": true,
     "sandbox_base_container_image": null,
     "sandbox_runtime_container_image": null,
+    "sandbox_use_host_network": true,
     "mcp_config": {
         "sse_servers": [
             {
