@@ -36,16 +36,15 @@ services:
       SANDBOX_USE_HOST_NETWORK: true
       WORKSPACE_TIMEOUT: 400
       MAX_WORKSPACE_SIZE: "8g"
-      SANDBOX_MAX_NUM_SANDBOXES: 5
+      SANDBOX_MAX_NUM_SANDBOXES: 1
       SANDBOX_NETWORK_MODE: "bridge"
+      DOCKER_HOST_ADDR: "127.0.0.1"
     ports:
       - "3000:3000"
     volumes:
       - ./workspace:/workspace
       - ./openhands:/.openhands
       - ./openhands/config.toml:/config.toml:ro
-      - ./openhands/config.toml:/.openhands/config.toml:ro
-      - ./openhands/config.toml:/workspace/config.toml:ro
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - openhands-net
