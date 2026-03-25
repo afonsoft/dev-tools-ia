@@ -24,7 +24,6 @@ user_id = "0"
 workspace_size = "8g"
 
 # Advanced Settings
-use_host_network = true
 enable_gpu_acceleration = true
 
 [llm]
