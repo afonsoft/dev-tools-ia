@@ -22,6 +22,7 @@ services:
       # Configurações de Workspace
       WORKSPACE_MOUNT_PATH: /workspace
       WORKSPACE_BASE: /workspace
+      WORKSPACE_TIMEOUT: 400
       OPENHANDS_LLM_GPU_LAYERS: 33
       OPENHANDS_LOAD_TIMEOUT: 400
       OPENHANDS_MAX_PARALLEL_REQUESTS: 3
@@ -36,10 +37,9 @@ services:
       SANDBOX_CPU_LIMIT: "2.0"
       SANDBOX_USE_HOST_NETWORK: true
       SANDBOX_DOCKER_RUNTIME: nvidia
-      WORKSPACE_TIMEOUT: 400
-      MAX_WORKSPACE_SIZE: "8g"
       SANDBOX_MAX_NUM_SANDBOXES: 1
       SANDBOX_NETWORK_MODE: "bridge"
+      SANDBOX_ADDITIONAL_NETWORKS: "['openhands-net']"
     ports:
       - "3000:3000"
     volumes:
@@ -47,6 +47,8 @@ services:
       - ./openhands:/.openhands
       - ./openhands/config.toml:/app/config.toml:ro
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - openhands-net
     extra_hosts:
       - "host.docker.internal:host-gateway"
     # Ajustes para Windows
@@ -66,3 +68,8 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
+
+networks:
+  openhands-net:
+    name: openhands-net
+    driver: bridge
