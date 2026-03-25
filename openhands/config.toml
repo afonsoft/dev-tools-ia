@@ -1,0 +1,51 @@
+[sandbox]
+# Sandbox Configuration for OpenHands
+# Optimized for GPU performance and multiple instances
+
+# Network Configuration
+network_mode = "bridge"
+max_num_sandboxes = 5
+
+# Resource Limits
+memory_limit = "16g"
+cpu_limit = "2.0"
+memory_reservation = "1g"
+cpu_reservation = "1.0"
+
+# GPU Configuration
+[devices]
+driver = "nvidia"
+count = "all"
+capabilities = ["gpu"]
+
+# Performance Settings
+timeout = 240
+user_id = "0"
+workspace_size = "8g"
+
+# Advanced Settings
+use_host_network = false
+enable_gpu_acceleration = true
+
+[llm]
+# LLM Configuration for Gemini
+provider = "gemini"
+model = "gemini/gemini-2.5-flash"
+temperature = 0.35
+top_p = 0.95
+max_iterations = 30
+max_parallel_requests = 3
+memory_budget = 4294967296
+gpu_layers = 33
+
+[workspace]
+# Workspace Configuration
+mount_path = "/workspace"
+base = "/workspace"
+timeout = 400
+
+[performance]
+# Performance Optimizations
+load_timeout = 400
+enable_auto_lint = true
+cuda_visible_devices = "0"

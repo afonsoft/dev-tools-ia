@@ -43,6 +43,7 @@ services:
     volumes:
       - ./workspace:/workspace
       - ./openhands:/.openhands
+      - ./openhands/config.toml:/.openhands/config.toml:ro
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - openhands-net
