@@ -8,8 +8,6 @@ services:
       LOG_ALL_EVENTS: "true"
       PYTHONUNBUFFERED: "1"
       PYTHONDONTWRITEBYTECODE: "1"
-      # Use custom runtime image instead of default
-      # SANDBOX_BASE_CONTAINER_IMAGE: "dev-dotnet-tools-runtime:latest"
       # Keep these as fallback
       AGENT_SERVER_IMAGE_REPOSITORY: "ghcr.io/openhands/agent-server"
       AGENT_SERVER_IMAGE_TAG: "1.12.0-python"
