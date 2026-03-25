@@ -34,6 +34,8 @@ services:
       SANDBOX_CPU_LIMIT: "0.5"
       WORKSPACE_TIMEOUT: 240
       MAX_WORKSPACE_SIZE: "2g"
+      SANDBOX_MAX_NUM_SANDBOXES: 3
+      SANDBOX_NETWORK_MODE: "bridge"
     ports:
       - "3000:3000"
     volumes:
