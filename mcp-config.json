@@ -56,12 +56,6 @@
                 "url": "https://mcp.deepwiki.com/mcp",
                 "name": "deepwiki"
             }
-        ],
-        "shttp_servers": [
-            {
-                "url": "https://api.example.com/mcp/shttp",
-                "timeout": 300
-            }
         ]
     }
 }
