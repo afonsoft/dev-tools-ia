@@ -27,16 +27,19 @@ services:
       OPENHANDS_MAX_PARALLEL_REQUESTS: 3
       OPENHANDS_MEMORY_BUDGET: 4294967296
       # Performance
-      CUDA_VISIBLE_DEVICES: 0
+      CUDA_VISIBLE_DEVICES: all
       NVIDIA_VISIBLE_DEVICES: all
       # Otimizações de memória
       SANDBOX_TIMEOUT: 240
       SANDBOX_USER_ID: "0"
       SANDBOX_MEMORY_LIMIT: "16g"
       SANDBOX_CPU_LIMIT: "2.0"
+      SANDBOX_USE_HOST_NETWORK: true
       SANDBOX_DOCKER_RUNTIME: nvidia
       WORKSPACE_TIMEOUT: 400
       MAX_WORKSPACE_SIZE: "8g"
+      SANDBOX_MAX_NUM_SANDBOXES: 1
+      SANDBOX_NETWORK_MODE: "bridge"
     ports:
       - "3000:3000"
     volumes:
