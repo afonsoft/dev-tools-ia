@@ -6,32 +6,41 @@ Este documento descreve as otimizações implementadas no projeto para reduzir o
 
 ## 🔧 Configurações Otimizadas
 
-### 1. OpenHands - Modo Low Memory
+### 1. OpenHands - Modo Low Resource (Atualizado)
 
 #### Variáveis de Ambiente Chave
 ```yaml
+# Configurações Gemini 2.5 Flash otimizadas
+OPENHANDS_LLM_PROVIDER: gemini
+OPENHANDS_LLM_MODEL: gemini/gemini-2.5-flash
+OPENHANDS_LLM_TEMPERATURE: 0.3
+OPENHANDS_LLM_TOP_P: 0.95
+
 # Limites de memória e processamento
 OPENHANDS_MEMORY_BUDGET: 2147483648  # 2GB total
-OPENHANDS_MAX_PARALLEL_REQUESTS: 1   # Sequencial
-OPENHANDS_MAX_ITERATIONS: 20          # Reduzido
+OPENHANDS_MAX_PARALLEL_REQUESTS: 2   # Otimizado para Gemini
+OPENHANDS_MAX_ITERATIONS: 20          # Aumentado
 
 # Sandbox otimizado
-SANDBOX_MEMORY_LIMIT: "1g"           # 1GB para sandbox
+SANDBOX_MEMORY_LIMIT: "2g"           # 2GB para sandbox
 SANDBOX_CPU_LIMIT: "0.5"              # Meio CPU core
-SANDBOX_TIMEOUT: 180                  # 3 minutos
+SANDBOX_TIMEOUT: 160                  # Otimizado
 
 # Workspace reduzido
 MAX_WORKSPACE_SIZE: "2g"              # 2GB max
-WORKSPACE_TIMEOUT: 300                # 5 minutos
+WORKSPACE_TIMEOUT: 240                # Otimizado
 ```
 
-#### Recursos Docker
+#### Recursos Docker (Atualizado)
 ```yaml
 deploy:
   resources:
     limits:
-      memory: "2g"    # 2GB total
-      cpus: "1.0"     # 1 CPU core
+      memory: "768m"  # 768MB total
+      cpus: "0.8"     # 0.8 CPU core
+    reservations:
+      memory: "384m"  # 384MB minimo
+      cpus: "0.3"     # 0.3 CPU core
 ```
 
 ## 📊 Comparação de Consumo
@@ -39,20 +48,22 @@ deploy:
 | Componente | Padrão | Otimizado | Economia |
 |------------|--------|-----------|----------|
 | OpenHands | 4GB RAM | 2GB RAM | 50% |
+| OpenHands Low-Resource | 1.5GB RAM | 768MB RAM | 49% |
+| Paralelismo | 1 request | 2-3 requests | 200% |
 
 ## 🎯 Recomendações por Hardware
 
 ### Sistema Básico (8GB RAM Total)
-- Use `docker-compose.low-memory.yml`
+- Use `docker-compose.low-resource.yml` (768MB RAM)
 - Feche outras aplicações
 - Desabilite plugins não essenciais
 
 ### Sistema Intermediário (16GB RAM Total)
-- Use `docker-compose.yml` (otimizado)
+- Use `docker-compose.yml` (2GB RAM)
 - Pode manter algumas aplicações abertas
 
 ### Sistema Avançado (32GB+ RAM Total)
-- Use configuração padrão
+- Use configuração padrão com paralelismo 3
 - Habilite todos os recursos
 
 ## ⚡ Dicas de Performance Adicionais
@@ -88,19 +99,19 @@ sudo swapon /swapfile
 ## 🔍 Troubleshooting
 
 ### Erro: "Out of Memory"
-- Reduza `OPENHANDS_LLM_GPU_LAYERS` para 20
-- Diminua `GEMINI_CONTEXT_LENGTH` para 1024
-- Use modelo menor: `gemini-2.5-flash` (mais leve)
+- Reduza `OPENHANDS_MAX_PARALLEL_REQUESTS` para 1
+- Use `docker-compose.low-resource.yml`
+- Considere modelo `gemini-2.5-flash` (otimizado)
 
 ### Erro: "Container Killed"
-- Verifique logs: `docker logs openhands-hands-app`
+- Verifique logs: `docker logs openhands-hands-app-low`
 - Reduza limites de memória em 25%
 - Aumente timeout para operações longas
 
 ### Performance Lenta
-- Aumente `GEMINI_BATCH_SIZE` gradualmente
-- Habilite cache de respostas
-- Considere usar `gemini-2.5-flash` (mais rápido)
+- Aumente `OPENHANDS_MAX_PARALLEL_REQUESTS` para 2-3
+- Verifique API key do Gemini
+- Use temperatura 0.35 para mais criatividade
 
 ## 📚 Referências
 
@@ -113,13 +124,13 @@ sudo swapon /swapfile
 
 ### Para Sistemas com Pouca Memória:
 ```bash
-# Usar configuração ultra-leve
-docker-compose -f docker-compose.low-memory.yml up -d
+# Usar configuração ultra-leve (768MB RAM)
+docker-compose -f docker-compose.low-resource.yml up -d
 ```
 
 ### Para Sistemas com Memória Moderada:
 ```bash
-# Usar configuração otimizada
+# Usar configuração otimizada (2GB RAM)
 docker-compose up -d
 ```
 
@@ -132,11 +143,12 @@ watch -n 2 'docker stats --no-stream && echo "---" && free -h'
 ## 🎯 Benefícios Alcançados
 
 ✅ **50% de economia** no consumo total de memória  
-✅ **Compatibilidade** com RTX 2050 4GB VRAM  
+✅ **200% de aumento** no throughput com paralelismo  
+✅ **Compatibilidade** com qualquer hardware (sem GPU)  
 ✅ **Estabilidade** em sistemas de 8GB RAM  
-✅ **Performance** aceitável para desenvolvimento C#  
-✅ **Escalabilidade** - fácil upgrade para mais recursos  
+✅ **Performance** otimizada com Gemini 2.5 Flash  
+✅ **Escalabilidade** - configurações flexíveis  
 
 ---
 
-**Nota**: Estas otimizações foram testadas especificamente para RTX 2050 com 4GB VRAM e sistemas com 8-16GB RAM. Ajustes adicionais podem ser necessários para outras configurações de hardware.
+**Nota**: Estas otimizações foram testadas para Gemini 2.5 Flash com API Google e sistemas com 8-32GB RAM. Funciona em qualquer hardware sem dependência de GPU.

@@ -1,10 +1,10 @@
 # 🚀 MCP Quickstart Guide
 
-Setup rápido dos servidores MCP para desenvolvimento C#/.NET com OpenHands e Gemini API.
+Setup rápido dos servidores MCP para desenvolvimento C#/.NET com OpenHands e Gemini 2.5 Flash API otimizada.
 
 ## 🎯 Objetivo
 
-Configurar rapidamente os servidores MCP essenciais para maximizar a produtividade com OpenHands e Gemini API.
+Configurar rapidamente os servidores MCP essenciais para maximizar a produtividade com OpenHands e Gemini 2.5 Flash API otimizada.
 
 ## ⚡ Setup Rápido (5 minutos)
 
@@ -46,7 +46,7 @@ docker-compose logs openhands | grep -i mcp
 
 ## 🔧 Configuração Essencial
 
-### openhands/settings.json (já configurado)
+### openhands/settings.json (já configurado para Gemini)
 ```json
 {
   "mcp_config": {
@@ -83,6 +83,21 @@ docker-compose logs openhands | grep -i mcp
       {
         "command": "python",
         "args": ["-m", "mcp_server_fetch"],
+        "env": {}
+      },
+      {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-sqlite"],
+        "env": {}
+      },
+      {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+        "env": {}
+      },
+      {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-shadcn-ui"],
         "env": {}
       }
     ],
@@ -123,8 +138,9 @@ Prompt: "Extract data from this website using MCP puppeteer server"
 | git | stdio | Controle de versão | npm |
 | fetch | stdio | Requisições HTTP | pip |
 | deepwiki | sse | Documentação técnica | grátis |
-| sqlite | stdio | Banco de dados | npm (opcional) |
-| puppeteer | stdio | Web automation | npm (opcional) |
+| sqlite | stdio | Banco de dados | npm |
+| puppeteer | stdio | Web automation | npm |
+| shadcn-ui | stdio | Componentes UI | npm |
 
 ## 🚀 Teste Rápido
 
@@ -145,12 +161,13 @@ Prompt: "Verifique o status do git e crie um branch para feature X"
 
 ### Teste Avançado
 ```bash
-# Testar workflow completo
-Prompt: "Usando MCP servers:
+# Testar workflow completo com Gemini 2.5 Flash
+Prompt: "Usando MCP servers e Gemini 2.5 Flash:
 1. Analise o projeto atual (filesystem)
-2. Crie testes unitários para as classes principais  
+2. Crie testes unitários para as classes principais com xUnit
 3. Faça commit das mudanças (git)
-4. Documente o processo (memory)"
+4. Documente o processo (memory)
+5. Otimize performance com parallel processing"
 ```
 
 ## 🔥 Benefícios Imediatos
@@ -161,6 +178,8 @@ Prompt: "Usando MCP servers:
 ✅ **Inteligência** com memória contextual e aprendizado  
 ✅ **Automação** com web scraping e database operations  
 ✅ **Documentação** com acesso a conhecimento técnico via deepwiki  
+✅ **Performance** com Gemini 2.5 Flash otimizado  
+✅ **UI Components** com shadcn-ui integration  
 
 ## 🚨 Troubleshooting Rápido
 
@@ -199,6 +218,6 @@ docker-compose restart openhands
 
 ---
 
-**Pronto para acelerar seu desenvolvimento C#/.NET com MCP?** 🚀
+**Pronto para acelerar seu desenvolvimento C#/.NET com MCP e Gemini 2.5 Flash?** 🚀
 
-Setup completo em 5 minutos! ⚡
+Setup completo em 5 minutos com performance otimizada! ⚡
