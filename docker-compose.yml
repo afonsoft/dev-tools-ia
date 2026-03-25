@@ -44,6 +44,8 @@ services:
       - ./workspace:/workspace
       - ./openhands:/.openhands
       - ./openhands/config.toml:/config.toml:ro
+      - ./openhands/config.toml:/.openhands/config.toml:ro
+      - ./openhands/config.toml:/workspace/config.toml:ro
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - openhands-net
