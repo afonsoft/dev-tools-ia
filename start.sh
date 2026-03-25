@@ -122,8 +122,16 @@ check_gemini_api_key() {
         config_key=$(grep -o '"api_key":[[:space:]]*"[^"]*"' openhands/config.json | sed 's/.*"api_key":[[:space:]]*"\([^"]*\)".*/\1/')
     fi
     
+    # Verificar config.toml
+    local toml_key=""
+    if [ -f "openhands/config.toml" ]; then
+        toml_key=$(grep "api_key" openhands/config.toml | sed 's/.*api_key[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/')
+    fi
+    
     # Verificar se algum dos arquivos tem a API key configurada
-    if [[ "$settings_key" == "YOUR_API_KEY_HERE" || "$settings_key" == "" || "$config_key" == "YOUR_API_KEY_HERE" || "$config_key" == "" ]]; then
+    if [[ "$settings_key" == "YOUR_API_KEY_HERE" || "$settings_key" == "" || \
+          "$config_key" == "YOUR_API_KEY_HERE" || "$config_key" == "" || \
+          "$toml_key" == "SUA_CHAVE_AQUI" || "$toml_key" == "" ]]; then
         print_error "API Key do Gemini não configurada!"
         echo ""
         echo "Para usar o Dev Tools IA com Gemini API, você precisa:"
@@ -131,6 +139,7 @@ check_gemini_api_key() {
         echo "2. Configurar a API Key nos arquivos:"
         echo "   - openhands/settings.json (campo llm_api_key)"
         echo "   - openhands/config.json (campo api_key)"
+        echo "   - openhands/config.toml (campo api_key)"
         echo ""
         echo -n "Deseja configurar a API Key agora? (s/N): "
         read -r response
@@ -186,7 +195,17 @@ configure_gemini_api_key() {
         print_success "config.json atualizado!"
     fi
     
-    print_success "API Key configurada com sucesso!"
+    # Atualizar config.toml
+    if [ -f "openhands/config.toml" ]; then
+        print_status "Atualizando openhands/config.toml..."
+        # Usar sed para substituir a API key no config.toml
+        sed -i.bak "s/api_key[[:space:]]*=[[:space:]]*\"SUA_CHAVE_AQUI\"/api_key = \"$api_key\"/g" openhands/config.toml
+        sed -i.bak "s/api_key[[:space:]]*=[[:space:]]*\"\"/api_key = \"$api_key\"/g" openhands/config.toml
+        rm -f openhands/config.toml.bak
+        print_success "config.toml atualizado!"
+    fi
+    
+    print_success "API Key configurada com sucesso em todos os arquivos!"
 }
 
 # Detecta o sistema operacional
