@@ -36,6 +36,8 @@ services:
       SANDBOX_USE_HOST_NETWORK: true
       WORKSPACE_TIMEOUT: 400
       MAX_WORKSPACE_SIZE: "8g"
+      SANDBOX_MAX_NUM_SANDBOXES: 5
+      SANDBOX_NETWORK_MODE: "bridge"
     ports:
       - "3000:3000"
     volumes:
@@ -63,20 +65,6 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-  # Definição da rede
-
-  # runtime:
-  #   build:
-  #     context: ./runtime
-  #     dockerfile: Dockerfile
-  #   image: dev-dotnet-tools-runtime:latest
-  #   container_name: openhands-runtime
-  #   stdin_open: true
-  #   tty: true
-  #   networks:
-  #     - openhands-net
-  #   extra_hosts:
-  #     - "host.docker.internal:host-gateway"
 
 networks:
   openhands-net:
