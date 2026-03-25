@@ -1,25 +1,14 @@
-# OpenHands Configuration File
-# Versão simplificada e compatível com schema oficial
-
 [core]
-# Core configuration
 workspace_base = "./workspace"
 main_config_path = "config.toml"
 
 [sandbox]
-# Resource Limits
-memory_limit = 16384
 timeout = 240
 user_id = "0"
 
 [llm]
-# LLM Configuration - Gemini API
-provider = "google"
-model = "gemini-2.5-flash"
-api_key = "SUA_CHAVE_AQUI"
 temperature = 0.35
 top_p = 0.95
 max_iterations = 30
 max_parallel_requests = 3
 memory_budget = 4294967296
-
