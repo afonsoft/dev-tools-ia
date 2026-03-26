@@ -1,19 +1,19 @@
 {
-    "language": "pt",
+    "language": "en",
     "agent": "CodeActAgent",
     "max_iterations": null,
     "security_analyzer": "llm",
     "confirmation_mode": false,
-    "llm_model": "gemini/gemini-2.5-flash",
+    "llm_model": "gemini/gemini-2.5-flash-lite",
     "llm_api_key": "YOUR_API_KEY_HERE",
-    "llm_base_url": "https://generativelanguage.googleapis.com/v1beta",
+    "llm_base_url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent",
     "user_version": null,
-    "remote_runtime_resource_factor": 1,
+    "remote_runtime_resource_factor": null,
     "secrets_store": {
         "provider_tokens": {}
     },
     "enable_default_condenser": true,
-    "enable_sound_notifications": true,
+    "enable_sound_notifications": false,
     "enable_proactive_conversation_starters": true,
     "enable_solvability_analysis": true,
     "user_consents_to_analytics": true,
@@ -23,7 +23,7 @@
         "sse_servers": [
             {
                 "url": "https://mcp.deepwiki.com/mcp",
-                "timeout": 300
+                "api_key": null
             }
         ],
         "stdio_servers": [],
