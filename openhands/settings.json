@@ -22,8 +22,7 @@
     "mcp_config": {
         "sse_servers": [
             {
-                "url": "https://mcp.deepwiki.com/sse",
-                "api_key": null,
+                "url": "https://mcp.deepwiki.com/mcp",
                 "timeout": 300
             }
         ],
