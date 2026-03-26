@@ -1,5 +1,8 @@
 [core]
-workspace_base = "./workspace"
+runtime_extra_deps = """
+pip install numpy pandas
+apt-get update && apt-get install -y ffmpeg
+"""
 
 [sandbox]
 timeout = 240
@@ -7,7 +10,6 @@ user_id = "0"
 
 [llm]
 temperature = 0.35
-top_p = 0.95
 max_iterations = 30
 max_parallel_requests = 3
 memory_budget = 4294967296

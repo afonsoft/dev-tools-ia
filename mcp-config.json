@@ -8,17 +8,20 @@
                 "env": {
                     "MEMORY_LIMIT": "1GB",
                     "CACHE_SIZE": "100MB"
-                }   
+                }   ,
+                "timeout": 300 
             },
             {
                 "name": "sequential-thinking",
                 "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+                "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+                "timeout": 300 
             },
             {
                 "name": "everything",
                 "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-everything"]
+                "args": ["-y", "@modelcontextprotocol/server-everything"],
+                "timeout": 300 
             },
             {
                 "name": "fetch",
@@ -28,33 +31,39 @@
             {
                 "name": "filesystem",
                 "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspace"]
+                "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspace"],
+                "timeout": 300 
             },
             {
                 "name": "git",
                 "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/workspace"]
+                "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/workspace"],
+                "timeout": 300 
             },
             {
                 "name": "sqlite",
                 "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-sqlite", "--db-path", "/workspace/data.db"]
+                "args": ["-y", "@modelcontextprotocol/server-sqlite", "--db-path", "/workspace/data.db"],
+                "timeout": 300 
             },
             {
                 "name": "puppeteer",
                 "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+                "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+                "timeout": 300 
             },
             {
                 "name": "shadcn-ui",
                 "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-shadcn-ui"]
+                "args": ["-y", "@modelcontextprotocol/server-shadcn-ui"],
+                "timeout": 300 
             }
         ],
         "sse_servers": [
             {
                 "url": "https://mcp.deepwiki.com/mcp",
-                "name": "deepwiki"
+                "name": "deepwiki",
+                "timeout": 300 
             }
         ]
     }
