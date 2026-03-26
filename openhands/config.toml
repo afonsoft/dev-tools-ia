@@ -1,4 +1,6 @@
 [core]
+# Adicionei o timeout de carregamento para evitar o erro de 30s do MCP
+load_timeout = 600
 runtime_extra_deps = """
 pip install numpy pandas
 apt-get update && apt-get install -y ffmpeg
@@ -7,9 +9,15 @@ apt-get update && apt-get install -y ffmpeg
 [sandbox]
 timeout = 240
 user_id = "0"
+# Garanta que a sandbox use a GPU para processamento de vídeo/IA
+browser_use_enabled = true
 
 [llm]
+model = "gemini/gemini-2.5-flash"
 temperature = 0.35
 max_iterations = 30
 max_parallel_requests = 3
+# 4GB para a gestão de contexto da LLM
 memory_budget = 4294967296
+# Força o uso do backend do Gemini corretamente
+native_tool_calling = true
