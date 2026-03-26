@@ -6,14 +6,8 @@ apt-get update && apt-get install -y ffmpeg
 """
 
 [sandbox]
-# O user_id precisa ser um número inteiro, sem aspas.
 user_id = 0
-timeout = 240
+timeout = 600
 
 [llm]
 model = "gemini/gemini-2.5-flash"
-temperature = 0.35
-max_iterations = 30
-max_parallel_requests = 3
-# Remova as aspas se houver, deve ser um número puro
-memory_budget = 4294967296
