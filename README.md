@@ -6,7 +6,8 @@ Ambiente de desenvolvimento IA otimizado para Gemini API, focado em desenvolvime
 - **Gemini API**: Setup otimizado para máxima performance com API Google
 - **OpenHands**: Ambiente completo para tarefas complexas
 - **VS Code + Copilot**: Integração perfeita para desenvolvimento do dia a dia
-- **Baixo Recurso**: Funciona em qualquer hardware (sem dependência de GPU)
+- **GPU Support**: Suporte completo para NVIDIA GPU com otimizações
+- **Configuração TOML**: Suporte para OpenHands V1 com config.toml
 
 ## 📋 Descrição do Projeto
 
@@ -14,15 +15,17 @@ Este projeto transforma seu ambiente em uma poderosa estação de desenvolviment
 
 ### 🎯 Visão de Negócio
 - Produtividade máxima com Gemini API (custo mínimo)
-- Setup universal sem dependência de hardware específico
+- Setup universal com suporte GPU opcional
 - Foco em C#/.NET Enterprise development
 - Configuração simplificada com validação automática
+- Multi-arquitetura: CPU-only ou GPU-accelerated
 
 ### 🔧 Visão Técnica
 - **API Optimized**: Gemini 2.5 Flash para performance máxima
-- **Universal**: Funciona em qualquer hardware (sem GPU required)
+- **GPU Acceleration**: Suporte NVIDIA com runtime otimizado
+- **Universal**: Funciona em qualquer hardware (CPU ou GPU)
 - **VS Code Integration**: Copilot para workflow nativo
-- **Docker Simplificado**: OpenHands otimizado para baixo recurso
+- **Docker Simplificado**: OpenHands otimizado com config.toml
 - **MCP Integration**: Model Context Protocol para extensibilidade
 
 ## Estrutura do Repositório
@@ -48,8 +51,9 @@ Este projeto transforma seu ambiente em uma poderosa estação de desenvolviment
 │       ├── database-conventions.md       # Database design e EF Core
 │       └── git-workflow.md               # Git workflow e version control
 ├── openhands/           # Configurações do OpenHands AI
-│   ├── settings.json    # Configurações Gemini API
-│   ├── config.json      # Configurações LLM
+│   ├── settings.json    # Configurações Gemini API (JSON)
+│   ├── config.json      # Configurações LLM (JSON)
+│   ├── config.toml      # Configurações OpenHands V1 (TOML)
 │   └── README.md        # Documentação completa
 ├── workspace/           # Área de trabalho compartilhada
 │   └── README.md        # Estrutura e organização
@@ -57,8 +61,8 @@ Este projeto transforma seu ambiente em uma poderosa estação de desenvolviment
 │   ├── settings.json    # Configurações otimizadas
 │   ├── extensions.json  # Extensões recomendadas
 │   └── README.md        # Setup completo do VS Code
-├── docker-compose.yml   # Configuração Docker otimizada
-├── docker-compose.low-resource.yml # Configuração ultra leve
+├── docker-compose.yml   # Configuração Docker otimizada (GPU)
+├── docker-compose.low-resource.yml # Configuração CPU-only
 ├── MCP-README.md        # Guia completo MCP
 ├── MCP-QUICKSTART.md    # Setup rápido MCP
 ├── configure.sh         # Script avançado de configuração
@@ -174,45 +178,52 @@ Para informações detalhadas sobre cada componente:
 
 ## 🔄 Métodos de Execução OpenHands
 
-### 🚀 **Opção 1: CLI Launcher com UV (Recomendado)**
+### 🚀 **Opção 1: Script Inteligente (Recomendado)**
 ```bash
-# Instalar OpenHands com UV
-uv tool install openhands --python 3.12
+# Executar script completo com validação automática
+./start.sh
 
-# Iniciar servidor GUI
-openhands serve
-
-# Com suporte GPU (requer nvidia-docker)
-openhands serve --gpu
-
-# Com diretório atual montado
-openhands serve --mount-cwd
+# Script verifica:
+# - Docker e docker-compose
+# - API Key Gemini (configura automaticamente)
+# - Recursos do sistema (memória, CPU, GPU)
+# - Escolhe configuração adequada (padrão vs low-resource)
 ```
 
-### 🐳 **Opção 2: Docker Direto**
+### 🐳 **Opção 2: Docker Compose Manual**
+```bash
+# Configuração completa com GPU
+docker-compose up -d
+
+# Configuração low-resource (para hardware limitado)
+docker-compose -f docker-compose.low-resource.yml up -d
+
+# Acessar OpenHands
+http://localhost:3000
+```
+
+### 🐳 **Opção 3: Docker Direto (Equivalente ao Comando Oficial)**
 ```bash
 docker run -it --rm --pull=always \
   -e AGENT_SERVER_IMAGE_REPOSITORY=ghcr.io/openhands/agent-server \
   -e AGENT_SERVER_IMAGE_TAG=1.12.0-python \
   -e LOG_ALL_EVENTS=true \
+  -e OPENHANDS_LLM_PROVIDER=gemini \
+  -e OPENHANDS_LLM_MODEL=gemini/gemini-2.5-flash \
+  -e OPENHANDS_LLM_TEMPERATURE=0.35 \
+  -e OPENHANDS_LLM_TOP_P=0.95 \
+  -e OPENHANDS_MAX_ITERATIONS=30 \
+  -e OPENHANDS_ENABLE_AUTO_LINT=true \
+  -e CUDA_VISIBLE_DEVICES=all \
+  -e NVIDIA_VISIBLE_DEVICES=all \
+  -e SANDBOX_DOCKER_RUNTIME=nvidia \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v ~/.openhands:/.openhands \
   -p 3000:3000 \
   --add-host host.docker.internal:host-gateway \
   --name openhands-app \
+  --runtime nvidia \
   docker.openhands.dev/openhands/openhands:1.5
-```
-
-### 🐳 **Opção 3: Docker Compose (Este Projeto)**
-```bash
-# Iniciar ambiente completo
-./start.sh
-
-# Ou manualmente
-docker-compose up -d
-
-# Acessar OpenHands
-http://localhost:3000
 ```
 
 ## 🔧 Configurações Avançadas
@@ -225,9 +236,11 @@ docker-compose up -d
 # Verificar logs
 docker-compose logs openhands
 
-# Configurar API key Gemini
-# Definir variável de ambiente: GEMINI_API_KEY
-# Acessar http://localhost:3000 e configurar LLM
+# Verificar status dos containers
+docker-compose ps
+
+# Configurar API key Gemini (automático via start.sh)
+# Ou manualmente em: openhands/settings.json, config.json, config.toml
 ```
 
 ### **LLM Configuration (Gemini 2.5 Flash API)**
@@ -237,7 +250,7 @@ docker-compose logs openhands
 export GEMINI_API_KEY="sua-api-key-aqui"
 
 # Configuração automática nos arquivos:
-# openhands/settings.json e openhands/config.json
+# openhands/settings.json, openhands/config.json, openhands/config.toml
 
 # Exemplo de configuração (já aplicada)
 {
@@ -245,6 +258,14 @@ export GEMINI_API_KEY="sua-api-key-aqui"
   "llm_api_key": "${GEMINI_API_KEY}",
   "llm_base_url": "https://generativelanguage.googleapis.com/v1beta"
 }
+
+# Configuração TOML (para OpenHands V1)
+[llm]
+provider = "google"
+model = "gemini-2.5-flash"
+api_key = "sua-api-key-aqui"
+temperature = 0.35
+max_iterations = 30
 ```
 
 ### **VS Code + Copilot**
