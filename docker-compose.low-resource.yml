@@ -7,10 +7,10 @@ services:
       LOG_ALL_EVENTS: "true"
       PYTHONUNBUFFERED: "1"
       PYTHONDONTWRITEBYTECODE: "1"
-      # OpenHands Agent Server Configuration
+      # OpenHands Agent Server
       AGENT_SERVER_IMAGE_REPOSITORY: "ghcr.io/openhands/agent-server"
       AGENT_SERVER_IMAGE_TAG: "1.12.0-python"
-      # Gemini LLM Configuration
+      # Gemini LLM
       OPENHANDS_LLM_PROVIDER: "gemini"
       OPENHANDS_LLM_MODEL: "gemini/gemini-2.5-flash"
       OPENHANDS_LLM_TEMPERATURE: 0.30
@@ -21,10 +21,7 @@ services:
       OPENHANDS_LOAD_TIMEOUT: 240
       OPENHANDS_MAX_PARALLEL_REQUESTS: 2
       OPENHANDS_MEMORY_BUDGET: 2147483648
-      # GPU Configuration (desabilitado para low-resource)
-      CUDA_VISIBLE_DEVICES: ""
-      NVIDIA_VISIBLE_DEVICES: ""
-      # Sandbox Configuration
+      # Sandbox
       SANDBOX_TIMEOUT: 160
       SANDBOX_USER_ID: "0"
       SANDBOX_MEMORY_LIMIT: "2g"
@@ -32,7 +29,6 @@ services:
       SANDBOX_DOCKER_RUNTIME: ""
       SANDBOX_MAX_NUM_SANDBOXES: 3
       SANDBOX_NETWORK_MODE: "bridge"
-      SANDBOX_ADDITIONAL_NETWORKS: "['openhands-net']"
       WORKSPACE_TIMEOUT: 240
     ports:
       - "3000:3000"
