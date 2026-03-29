@@ -3,7 +3,6 @@ services:
     image: docker.openhands.dev/openhands/openhands:1.5
     container_name: openhands-app
     pull_policy: always
-    init: true
     environment:
       LOG_ALL_EVENTS: "true"
       PYTHONUNBUFFERED: "1"
@@ -18,9 +17,6 @@ services:
       OPENHANDS_LLM_TOP_P: 0.95
       OPENHANDS_MAX_ITERATIONS: 30
       OPENHANDS_ENABLE_AUTO_LINT: true
-      # Workspace Configuration
-      WORKSPACE_MOUNT_PATH: "/workspace"
-      WORKSPACE_BASE: "/workspace"
       OPENHANDS_LLM_GPU_LAYERS: 33
       OPENHANDS_LOAD_TIMEOUT: 400
       OPENHANDS_MAX_PARALLEL_REQUESTS: 3
@@ -38,19 +34,13 @@ services:
       SANDBOX_NETWORK_MODE: "bridge"
       SANDBOX_ADDITIONAL_NETWORKS: "['openhands-net']"
       WORKSPACE_TIMEOUT: 400
-      MAX_WORKSPACE_SIZE: "8g"
     ports:
       - "3000:3000"
     volumes:
-      - ./workspace:/workspace
       - ./openhands:/.openhands
-      - ./openhands/config.toml:/app/config.toml:ro
       - /var/run/docker.sock:/var/run/docker.sock
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    # Ajustes para Windows
-    tty: true
-    stdin_open: true
     # Suporte GPU NVIDIA
     runtime: nvidia
     deploy:

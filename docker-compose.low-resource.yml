@@ -1,75 +1,56 @@
 services:
   openhands:
     image: docker.openhands.dev/openhands/openhands:1.5
-    container_name: openhands-hands-app-low
+    container_name: openhands-app
     pull_policy: always
-    init: true
     environment:
-      LOG_ALL_EVENTS: "false"
+      LOG_ALL_EVENTS: "true"
       PYTHONUNBUFFERED: "1"
       PYTHONDONTWRITEBYTECODE: "1"
-      # Use custom runtime image instead of default
-      # SANDBOX_BASE_CONTAINER_IMAGE: "dev-dotnet-tools-runtime:latest"
-      # Keep these as fallback
+      # OpenHands Agent Server Configuration
       AGENT_SERVER_IMAGE_REPOSITORY: "ghcr.io/openhands/agent-server"
       AGENT_SERVER_IMAGE_TAG: "1.12.0-python"
-      OPENHANDS_LLM_PROVIDER: gemini
-      OPENHANDS_LLM_MODEL: gemini/gemini-2.5-flash
-      OPENHANDS_LLM_TEMPERATURE: 0.3
+      # Gemini LLM Configuration
+      OPENHANDS_LLM_PROVIDER: "gemini"
+      OPENHANDS_LLM_MODEL: "gemini/gemini-2.5-flash"
+      OPENHANDS_LLM_TEMPERATURE: 0.30
       OPENHANDS_LLM_TOP_P: 0.95
       OPENHANDS_MAX_ITERATIONS: 20
       OPENHANDS_ENABLE_AUTO_LINT: true
-      WORKSPACE_MOUNT_PATH: /workspace
-      WORKSPACE_BASE: /workspace
       OPENHANDS_LLM_GPU_LAYERS: 0
-      # Low-resource config: user requested larger context; ensure runtime/model supports this.
-      ALLOW_SHORT_CONTEXT_WINDOWS: true
       OPENHANDS_LOAD_TIMEOUT: 240
       OPENHANDS_MAX_PARALLEL_REQUESTS: 2
       OPENHANDS_MEMORY_BUDGET: 2147483648
+      # GPU Configuration (desabilitado para low-resource)
       CUDA_VISIBLE_DEVICES: ""
+      NVIDIA_VISIBLE_DEVICES: ""
+      # Sandbox Configuration
       SANDBOX_TIMEOUT: 160
       SANDBOX_USER_ID: "0"
       SANDBOX_MEMORY_LIMIT: "2g"
       SANDBOX_CPU_LIMIT: "0.5"
-      WORKSPACE_TIMEOUT: 240
-      MAX_WORKSPACE_SIZE: "2g"
+      SANDBOX_DOCKER_RUNTIME: ""
       SANDBOX_MAX_NUM_SANDBOXES: 3
       SANDBOX_NETWORK_MODE: "bridge"
+      SANDBOX_ADDITIONAL_NETWORKS: "['openhands-net']"
+      WORKSPACE_TIMEOUT: 240
     ports:
       - "3000:3000"
     volumes:
-      - ./workspace:/workspace
       - ./openhands:/.openhands
-      - ./openhands/config.toml:/app/config.toml:ro
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - openhands-net
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    tty: true
-    stdin_open: true
     deploy:
       resources:
         limits:
           memory: "768m"
           cpus: "0.8"
         reservations:
-          memory: "384m"
-          cpus: "0.3"
-
-  # runtime:
-  #   build:
-  #     context: ./runtime
-  #     dockerfile: Dockerfile
-  #   image: dev-dotnet-tools-runtime:latest
-  #   container_name: openhands-runtime
-  #   stdin_open: true
-  #   tty: true
-  #   networks:
-  #     - openhands-net
-  #   extra_hosts:
-  #     - "host.docker.internal:host-gateway"
+          memory: "512m"
+          cpus: "0.5"
+    networks:
+      - openhands-net
 
 networks:
   openhands-net:
