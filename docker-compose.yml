@@ -1,43 +1,44 @@
 services:
   openhands:
     image: docker.openhands.dev/openhands/openhands:1.5
-    container_name: openhands-hands-app
+    container_name: openhands-app
     pull_policy: always
     init: true
     environment:
       LOG_ALL_EVENTS: "true"
       PYTHONUNBUFFERED: "1"
       PYTHONDONTWRITEBYTECODE: "1"
-      # Keep these as fallback
-      MCP_TIMEOUT: 120
+      # OpenHands Agent Server Configuration
       AGENT_SERVER_IMAGE_REPOSITORY: "ghcr.io/openhands/agent-server"
       AGENT_SERVER_IMAGE_TAG: "1.12.0-python"
-      OPENHANDS_LLM_PROVIDER: gemini
-      OPENHANDS_LLM_MODEL: gemini/gemini-2.5-flash
+      # Gemini LLM Configuration
+      OPENHANDS_LLM_PROVIDER: "gemini"
+      OPENHANDS_LLM_MODEL: "gemini/gemini-2.5-flash"
       OPENHANDS_LLM_TEMPERATURE: 0.35
       OPENHANDS_LLM_TOP_P: 0.95
       OPENHANDS_MAX_ITERATIONS: 30
       OPENHANDS_ENABLE_AUTO_LINT: true
-      # Configurações de Workspace
-      WORKSPACE_MOUNT_PATH: /workspace
-      WORKSPACE_BASE: /workspace
-      WORKSPACE_TIMEOUT: 600
+      # Workspace Configuration
+      WORKSPACE_MOUNT_PATH: "/workspace"
+      WORKSPACE_BASE: "/workspace"
       OPENHANDS_LLM_GPU_LAYERS: 33
-      OPENHANDS_LOAD_TIMEOUT: 600
+      OPENHANDS_LOAD_TIMEOUT: 400
       OPENHANDS_MAX_PARALLEL_REQUESTS: 3
       OPENHANDS_MEMORY_BUDGET: 4294967296
-      # Performance
+      # GPU Configuration
       CUDA_VISIBLE_DEVICES: all
       NVIDIA_VISIBLE_DEVICES: all
-      # Otimizações de memória
+      # Sandbox Configuration
       SANDBOX_TIMEOUT: 240
       SANDBOX_USER_ID: "0"
       SANDBOX_MEMORY_LIMIT: "16g"
-      SANDBOX_CPU_LIMIT: "4.0"
+      SANDBOX_CPU_LIMIT: "2.0"
       SANDBOX_DOCKER_RUNTIME: nvidia
       SANDBOX_MAX_NUM_SANDBOXES: 1
       SANDBOX_NETWORK_MODE: "bridge"
       SANDBOX_ADDITIONAL_NETWORKS: "['openhands-net']"
+      WORKSPACE_TIMEOUT: 400
+      MAX_WORKSPACE_SIZE: "8g"
     ports:
       - "3000:3000"
     volumes:
@@ -45,8 +46,6 @@ services:
       - ./openhands:/.openhands
       - ./openhands/config.toml:/app/config.toml:ro
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - openhands-net
     extra_hosts:
       - "host.docker.internal:host-gateway"
     # Ajustes para Windows
@@ -57,15 +56,17 @@ services:
     deploy:
       resources:
         limits:
-          memory: "8g"
-          cpus: "2.0"
-        reservations:
           memory: "2g"
+          cpus: "1.5"
+        reservations:
+          memory: "1g"
           cpus: "1.0"
           devices:
             - driver: nvidia
               count: all
               capabilities: [gpu]
+    networks:
+      - openhands-net
 
 networks:
   openhands-net:
