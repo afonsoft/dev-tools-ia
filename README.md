@@ -1,73 +1,73 @@
 # 🚀 Dev Tools IA - Gemini API Optimized
 
-Ambiente de desenvolvimento IA otimizado para Gemini API, focado em desenvolvimento C#/.NET profissional com baixo consumo de recursos.
+AI development environment optimized for Gemini API, focused on professional C#/.NET development with low resource consumption.
 
-## 🎯 Foco Principal
-- **Gemini API**: Setup otimizado para máxima performance com API Google
-- **OpenHands**: Ambiente completo para tarefas complexas
-- **VS Code + Copilot**: Integração perfeita para desenvolvimento do dia a dia
-- **GPU Support**: Suporte completo para NVIDIA GPU com otimizações
-- **Configuração TOML**: Suporte para OpenHands V1 com config.toml
+## 🎯 Main Focus
+- **Gemini API**: Setup optimized for maximum performance with Google API
+- **OpenHands**: Complete environment for complex tasks
+- **VS Code + Copilot**: Perfect integration for day-to-day development
+- **GPU Support**: Complete NVIDIA GPU support with optimizations
+- **TOML Configuration**: Support for OpenHands V1 with config.toml
 
-## 📋 Descrição do Projeto
+## 📋 Project Description
 
-Este projeto transforma seu ambiente em uma poderosa estação de desenvolvimento IA com Gemini API, com foco específico em C# e .NET. Utiliza o Gemini 2.5 Flash da Google, um modelo rápido e eficiente que funciona em qualquer hardware.
+This project transforms your environment into a powerful AI development station with Gemini API, with specific focus on C# and .NET. Uses Google's Gemini 2.5 Flash, a fast and efficient model that works on any hardware.
 
-### 🎯 Visão de Negócio
-- Produtividade máxima com Gemini API (custo mínimo)
-- Setup universal com suporte GPU opcional
-- Foco em C#/.NET Enterprise development
-- Configuração simplificada com validação automática
-- Multi-arquitetura: CPU-only ou GPU-accelerated
+### 🎯 Business Vision
+- Maximum productivity with Gemini API (minimum cost)
+- Universal setup with optional GPU support
+- Focus on C#/.NET Enterprise development
+- Simplified configuration with automatic validation
+- Multi-architecture: CPU-only or GPU-accelerated
 
-### 🔧 Visão Técnica
-- **API Optimized**: Gemini 2.5 Flash para performance máxima
-- **GPU Acceleration**: Suporte NVIDIA com runtime otimizado
-- **Universal**: Funciona em qualquer hardware (CPU ou GPU)
-- **VS Code Integration**: Copilot para workflow nativo
-- **Docker Simplificado**: OpenHands otimizado com config.toml
-- **MCP Integration**: Model Context Protocol para extensibilidade
+### 🔧 Technical Vision
+- **API Optimized**: Gemini 2.5 Flash for maximum performance
+- **GPU Acceleration**: NVIDIA support with optimized runtime
+- **Universal**: Works on any hardware (CPU or GPU)
+- **VS Code Integration**: Copilot for native workflow
+- **Docker Simplified**: OpenHands optimized with config.toml
+- **MCP Integration**: Model Context Protocol for extensibility
 
-## Estrutura do Repositório
+## Repository Structure
 
 ```
 .
 ├── agents/              # GitHub Copilot Agents & Skills
-│   ├── GEMINI.md         # Guia mestre dos agents
-│   ├── skills/           # Skills especializadas .NET
+│   ├── GEMINI.md         # Master agents guide
+│   ├── skills/           # Specialized .NET skills
 │   │   ├── dotnet-best-practices/     # SOLID, modern C#, patterns
 │   │   ├── csharp-async-patterns/     # async/await, performance
-│   │   ├── entity-framework-core/     # EF Core, otimização, migrations
+│   │   ├── entity-framework-core/     # EF Core, optimization, migrations
 │   │   ├── aspnet-core-api/           # REST APIs, JWT, OpenAPI
 │   │   ├── testing-xunit/             # Unit testing, mocking, coverage
 │   │   ├── blazor-components/         # Blazor UI, state management
 │   │   ├── design-patterns/           # SOLID, GoF, architectural patterns
 │   │   ├── security-jwt/              # Authentication, authorization
 │   │   └── performance-optimization/  # Profiling, caching, optimization
-│   └── rules/            # Rules context-aware
-│       ├── csharp-coding-standards.md    # Convenções e formatação
-│       ├── dotnet-project-structure.md   # Arquitetura e organização
-│       ├── api-design-guidelines.md      # REST API design e HTTP
-│       ├── database-conventions.md       # Database design e EF Core
-│       └── git-workflow.md               # Git workflow e version control
-├── openhands/           # Configurações do OpenHands AI
-│   ├── settings.json    # Configurações Gemini API (JSON)
-│   ├── config.json      # Configurações LLM (JSON)
-│   ├── config.toml      # Configurações OpenHands V1 (TOML)
-│   └── README.md        # Documentação completa
-├── workspace/           # Área de trabalho compartilhada
-│   └── README.md        # Estrutura e organização
-├── vscode/              # Configurações do VS Code
-│   ├── settings.json    # Configurações otimizadas
-│   ├── extensions.json  # Extensões recomendadas
-│   └── README.md        # Setup completo do VS Code
-├── docker-compose.yml   # Configuração Docker otimizada (GPU)
-├── docker-compose.low-resource.yml # Configuração CPU-only
-├── MCP-README.md        # Guia completo MCP
-├── MCP-QUICKSTART.md    # Setup rápido MCP
-├── configure.sh         # Script avançado de configuração
-├── start.sh            # Script de deploy inteligente
-└── README.md           # Este arquivo
+│   └── rules/            # Context-aware rules
+│       ├── csharp-coding-standards.md    # Conventions and formatting
+│       ├── dotnet-project-structure.md   # Architecture and organization
+│       ├── api-design-guidelines.md      # REST API design and HTTP
+│       ├── database-conventions.md       # Database design and EF Core
+│       └── git-workflow.md               # Git workflow and version control
+├── openhands/           # OpenHands AI Configuration
+│   ├── settings.json    # Gemini API Configuration (JSON)
+│   ├── config.json      # LLM Configuration (JSON)
+│   ├── config.toml      # OpenHands V1 Configuration (TOML)
+│   └── README.md        # Complete documentation
+├── workspace/           # Shared workspace
+│   └── README.md        # Structure and organization
+├── vscode/              # VS Code Configuration
+│   ├── settings.json    # Optimized settings
+│   ├── extensions.json  # Recommended extensions
+│   └── README.md        # Complete VS Code setup
+├── docker-compose.yml   # Optimized Docker Configuration (GPU)
+├── docker-compose.low-resource.yml # CPU-only Configuration
+├── MCP-README.md        # Complete MCP Guide
+├── MCP-QUICKSTART.md    # MCP Quick Setup
+├── configure.sh         # Advanced configuration script
+├── start.sh            # Intelligent deployment script
+└── README.md           # This file
 ```
 
 ## 📁 Diretórios e Documentação

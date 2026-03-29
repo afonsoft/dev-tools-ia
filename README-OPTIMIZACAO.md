@@ -1,37 +1,37 @@
-# 🚀 Otimizações de Memória para OpenHands
+# 🚀 Memory Optimizations for OpenHands
 
-## 📋 Visão Geral
+## 📋 Overview
 
-Este documento descreve as otimizações implementadas no projeto para reduzir o consumo de memória e recursos, baseado nas melhores práticas da documentação oficial do OpenHands.
+This document describes the optimizations implemented in the project to reduce memory and resource consumption, based on best practices from the official OpenHands documentation.
 
-## 🔧 Configurações Otimizadas
+## 🔧 Optimized Configurations
 
-### 1. OpenHands - Modo Low Resource (Atualizado)
+### 1. OpenHands - Low Resource Mode (Updated)
 
-#### Variáveis de Ambiente Chave
+#### Key Environment Variables
 ```yaml
-# Configurações Gemini 2.5 Flash otimizadas
+# Gemini 2.5 Flash optimized settings
 OPENHANDS_LLM_PROVIDER: gemini
 OPENHANDS_LLM_MODEL: gemini/gemini-2.5-flash
 OPENHANDS_LLM_TEMPERATURE: 0.3
 OPENHANDS_LLM_TOP_P: 0.95
 
-# Limites de memória e processamento
+# Memory and processing limits
 OPENHANDS_MEMORY_BUDGET: 2147483648  # 2GB total
-OPENHANDS_MAX_PARALLEL_REQUESTS: 2   # Otimizado para Gemini
-OPENHANDS_MAX_ITERATIONS: 20          # Aumentado
+OPENHANDS_MAX_PARALLEL_REQUESTS: 2   # Optimized for Gemini
+OPENHANDS_MAX_ITERATIONS: 20          # Increased
 
-# Sandbox otimizado
-SANDBOX_MEMORY_LIMIT: "2g"           # 2GB para sandbox
-SANDBOX_CPU_LIMIT: "0.5"              # Meio CPU core
-SANDBOX_TIMEOUT: 160                  # Otimizado
+# Optimized sandbox
+SANDBOX_MEMORY_LIMIT: "2g"           # 2GB for sandbox
+SANDBOX_CPU_LIMIT: "0.5"              # Half CPU core
+SANDBOX_TIMEOUT: 160                  # Optimized
 
-# Workspace reduzido
+# Reduced workspace
 MAX_WORKSPACE_SIZE: "2g"              # 2GB max
-WORKSPACE_TIMEOUT: 240                # Otimizado
+WORKSPACE_TIMEOUT: 240                # Optimized
 ```
 
-#### Recursos Docker (Atualizado)
+#### Docker Resources (Updated)
 ```yaml
 deploy:
   resources:
@@ -39,56 +39,56 @@ deploy:
       memory: "768m"  # 768MB total
       cpus: "0.8"     # 0.8 CPU core
     reservations:
-      memory: "384m"  # 384MB minimo
+      memory: "384m"  # 384MB minimum
       cpus: "0.3"     # 0.3 CPU core
 ```
 
-## 📊 Comparação de Consumo
+## 📊 Resource Consumption Comparison
 
-| Componente | Padrão | Otimizado | Economia |
+| Component | Default | Optimized | Savings |
 |------------|--------|-----------|----------|
 | OpenHands | 4GB RAM | 2GB RAM | 50% |
 | OpenHands Low-Resource | 1.5GB RAM | 768MB RAM | 49% |
-| Paralelismo | 1 request | 2-3 requests | 200% |
+| Parallelism | 1 request | 2-3 requests | 200% |
 
-## 🎯 Recomendações por Hardware
+## 🎯 Hardware Recommendations
 
-### Sistema Básico (8GB RAM Total)
+### Basic System (8GB Total RAM)
 - Use `docker-compose.low-resource.yml` (768MB RAM)
-- Feche outras aplicações
-- Desabilite plugins não essenciais
+- Close other applications
+- Disable non-essential plugins
 
-### Sistema Intermediário (16GB RAM Total)
+### Intermediate System (16GB Total RAM)
 - Use `docker-compose.yml` (2GB RAM)
-- Pode manter algumas aplicações abertas
+- Can keep some applications open
 
-### Sistema Avançado (32GB+ RAM Total)
-- Use configuração padrão com paralelismo 3
-- Habilite todos os recursos
+### Advanced System (32GB+ Total RAM)
+- Use standard configuration with parallelism 3
+- Enable all features
 
-## ⚡ Dicas de Performance Adicionais
+## ⚡ Additional Performance Tips
 
-### 1. Monitoramento
+### 1. Monitoring
 ```bash
-# Monitorar uso de memória dos containers
+# Monitor container memory usage
 docker stats --no-stream
 
-# Monitorar VRAM da GPU
+# Monitor GPU VRAM
 nvidia-smi --query-gpu=memory.used,memory.total --format=csv
 ```
 
-### 2. Limpeza Automática
+### 2. Automatic Cleanup
 ```bash
-# Limpar containers parados
+# Clean stopped containers
 docker container prune -f
 
-# Limpar imagens não usadas
+# Clean unused images
 docker image prune -f
 ```
 
-### 3. Swap do Sistema
+### 3. System Swap
 ```bash
-# Aumentar swap (Linux)
+# Increase swap (Linux)
 sudo swapon --show
 sudo fallocate -l 4G /swapfile
 sudo chmod 600 /swapfile
@@ -98,57 +98,57 @@ sudo swapon /swapfile
 
 ## 🔍 Troubleshooting
 
-### Erro: "Out of Memory"
-- Reduza `OPENHANDS_MAX_PARALLEL_REQUESTS` para 1
+### Error: "Out of Memory"
+- Reduce `OPENHANDS_MAX_PARALLEL_REQUESTS` to 1
 - Use `docker-compose.low-resource.yml`
-- Considere modelo `gemini-2.5-flash` (otimizado)
+- Consider `gemini-2.5-flash` model (optimized)
 
-### Erro: "Container Killed"
-- Verifique logs: `docker logs openhands-hands-app-low`
-- Reduza limites de memória em 25%
-- Aumente timeout para operações longas
+### Error: "Container Killed"
+- Check logs: `docker logs openhands-hands-app-low`
+- Reduce memory limits by 25%
+- Increase timeout for long operations
 
-### Performance Lenta
-- Aumente `OPENHANDS_MAX_PARALLEL_REQUESTS` para 2-3
-- Verifique API key do Gemini
-- Use temperatura 0.35 para mais criatividade
+### Slow Performance
+- Increase `OPENHANDS_MAX_PARALLEL_REQUESTS` to 2-3
+- Check Gemini API key
+- Use temperature 0.35 for more creativity
 
-## 📚 Referências
+## 📚 References
 
 - [OpenHands Local Setup](https://docs.openhands.dev/openhands/usage/run-openhands/local-setup)
 - [Agent Server Resource Management](https://docs.openhands.dev/sdk/arch/agent-server)
 - [Local LLMs Guide](https://docs.openhands.dev/openhands/usage/llms/local-llms)
 - [Docker Sandbox Configuration](https://docs.openhands.dev/openhands/usage/sandboxes/docker)
 
-## 🔄 Como Usar
+## 🔄 How to Use
 
-### Para Sistemas com Pouca Memória:
+### For Low Memory Systems:
 ```bash
-# Usar configuração ultra-leve (768MB RAM)
+# Use ultra-lightweight configuration (768MB RAM)
 docker-compose -f docker-compose.low-resource.yml up -d
 ```
 
-### Para Sistemas com Memória Moderada:
+### For Moderate Memory Systems:
 ```bash
-# Usar configuração otimizada (2GB RAM)
+# Use optimized configuration (2GB RAM)
 docker-compose up -d
 ```
 
-### Monitoramento em Tempo Real:
+### Real-time Monitoring:
 ```bash
-# Script de monitoramento
+# Monitoring script
 watch -n 2 'docker stats --no-stream && echo "---" && free -h'
 ```
 
-## 🎯 Benefícios Alcançados
+## 🎯 Achieved Benefits
 
-✅ **50% de economia** no consumo total de memória  
-✅ **200% de aumento** no throughput com paralelismo  
-✅ **Compatibilidade** com qualquer hardware (sem GPU)  
-✅ **Estabilidade** em sistemas de 8GB RAM  
-✅ **Performance** otimizada com Gemini 2.5 Flash  
-✅ **Escalabilidade** - configurações flexíveis  
+✅ **50% memory savings** in total consumption  
+✅ **200% throughput increase** with parallelism  
+✅ **Compatibility** with any hardware (no GPU required)  
+✅ **Stability** on 8GB RAM systems  
+✅ **Performance** optimized with Gemini 2.5 Flash  
+✅ **Scalability** - flexible configurations  
 
 ---
 
-**Nota**: Estas otimizações foram testadas para Gemini 2.5 Flash com API Google e sistemas com 8-32GB RAM. Funciona em qualquer hardware sem dependência de GPU.
+**Note**: These optimizations have been tested for Gemini 2.5 Flash with Google API and systems with 8-32GB RAM. Works on any hardware without GPU dependency.

@@ -1,52 +1,52 @@
 # 🚀 MCP Quickstart Guide
 
-Setup rápido dos servidores MCP para desenvolvimento C#/.NET com OpenHands e Gemini 2.5 Flash API otimizada.
+Quick setup of MCP servers for C#/.NET development with OpenHands and optimized Gemini 2.5 Flash API.
 
-## 🎯 Objetivo
+## 🎯 Objective
 
-Configurar rapidamente os servidores MCP essenciais para maximizar a produtividade com OpenHands e Gemini 2.5 Flash API otimizada.
+Quickly configure essential MCP servers to maximize productivity with OpenHands and optimized Gemini 2.5 Flash API.
 
-## ⚡ Setup Rápido (5 minutos)
+## ⚡ Quick Setup (5 minutes)
 
-### 1. Instalação dos Servidores
+### 1. Server Installation
 
 ```bash
-# Instalar servidores principais
+# Install main servers
 npm install -g @modelcontextprotocol/server-memory
 npm install -g @modelcontextprotocol/server-sequential-thinking
 npm install -g @modelcontextprotocol/server-filesystem
 npm install -g @modelcontextprotocol/server-git
 pip install mcp-server-fetch
 
-# Servidores opcionais (recomendados)
+# Optional servers (recommended)
 npm install -g @modelcontextprotocol/server-sqlite
 npm install -g @modelcontextprotocol/server-puppeteer
 ```
 
-### 2. Configuração Automática
+### 2. Automatic Configuration
 
 ```bash
-# O script start.sh já configura MCP automaticamente
+# The start.sh script already configures MCP automatically
 ./start.sh
 
-# Ou configurar manualmente
+# Or configure manually
 cp mcp-config.json openhands/
 docker-compose restart openhands
 ```
 
-### 3. Verificação
+### 3. Verification
 
 ```bash
-# Verificar se MCP está funcionando
+# Check if MCP is working
 docker-compose exec openhands curl -f http://localhost:3000/health
 
-# Verificar logs MCP
+# Check MCP logs
 docker-compose logs openhands | grep -i mcp
 ```
 
-## 🔧 Configuração Essencial
+## 🔧 Essential Configuration
 
-### openhands/settings.json (já configurado para Gemini)
+### openhands/settings.json (already configured for Gemini)
 ```json
 {
   "mcp_config": {
@@ -106,14 +106,14 @@ docker-compose logs openhands | grep -i mcp
 }
 ```
 
-## 🎯 Casos de Uso Imediatos
+## 🎯 Immediate Use Cases
 
-### 1. Repository Pattern Automático
+### 1. Automatic Repository Pattern
 ```
 Prompt: "Create Repository pattern for Entity Framework Core with async methods using MCP filesystem and git servers"
 ```
 
-### 2. Code Review Inteligente
+### 2. Intelligent Code Review
 ```
 Prompt: "Review this C# code using SOLID principles and suggest improvements with MCP sequential-thinking"
 ```
@@ -128,96 +128,96 @@ Prompt: "Create SQLite database schema for this C# project using MCP sqlite serv
 Prompt: "Extract data from this website using MCP puppeteer server"
 ```
 
-## 📊 Servidores Configurados
+## 📊 Configured Servers
 
-| Servidor | Tipo | Uso Principal | Requisito |
-|----------|------|---------------|-----------|
-| memory | stdio | Memória persistente | npm |
-| sequential-thinking | stdio | Processamento estruturado | npm |
-| filesystem | stdio | Arquivos locais | npm |
-| git | stdio | Controle de versão | npm |
-| fetch | stdio | Requisições HTTP | pip |
-| deepwiki | sse | Documentação técnica | grátis |
-| sqlite | stdio | Banco de dados | npm |
+| Server | Type | Main Use | Requirement |
+|----------|------|----------|-------------|
+| memory | stdio | Persistent memory | npm |
+| sequential-thinking | stdio | Structured processing | npm |
+| filesystem | stdio | Local files | npm |
+| git | stdio | Version control | npm |
+| fetch | stdio | HTTP requests | pip |
+| deepwiki | sse | Technical documentation | free |
+| sqlite | stdio | Database | npm |
 | puppeteer | stdio | Web automation | npm |
-| shadcn-ui | stdio | Componentes UI | npm |
+| shadcn-ui | stdio | UI components | npm |
 
-## 🚀 Teste Rápido
+## 🚀 Quick Test
 
-### Teste Básico
+### Basic Test
 ```bash
-# Acessar OpenHands
+# Access OpenHands
 http://localhost:3000
 
-# Testar MCP memory
-Prompt: "Lembre-se que meu projeto usa .NET 8 e Entity Framework Core"
+# Test MCP memory
+Prompt: "Remember that my project uses .NET 8 and Entity Framework Core"
 
-# Testar MCP filesystem  
-Prompt: "Liste todos os arquivos .cs no projeto usando filesystem"
+# Test MCP filesystem  
+Prompt: "List all .cs files in the project using filesystem"
 
-# Testar MCP git
-Prompt: "Verifique o status do git e crie um branch para feature X"
+# Test MCP git
+Prompt: "Check git status and create a branch for feature X"
 ```
 
-### Teste Avançado
+### Advanced Test
 ```bash
-# Testar workflow completo com Gemini 2.5 Flash
-Prompt: "Usando MCP servers e Gemini 2.5 Flash:
-1. Analise o projeto atual (filesystem)
-2. Crie testes unitários para as classes principais com xUnit
-3. Faça commit das mudanças (git)
-4. Documente o processo (memory)
-5. Otimize performance com parallel processing"
+# Test complete workflow with Gemini 2.5 Flash
+Prompt: "Using MCP servers and Gemini 2.5 Flash:
+1. Analyze current project (filesystem)
+2. Create unit tests for main classes with xUnit
+3. Commit changes (git)
+4. Document the process (memory)
+5. Optimize performance with parallel processing"
 ```
 
-## 🔥 Benefícios Imediatos
+## 🔥 Immediate Benefits
 
-✅ **Productividade 10x** com automação de tarefas repetitivas  
-✅ **Qualidade** com padrões SOLID e melhores práticas  
-✅ **Velocidade** com operações Git e filesystem otimizadas  
-✅ **Inteligência** com memória contextual e aprendizado  
-✅ **Automação** com web scraping e database operations  
-✅ **Documentação** com acesso a conhecimento técnico via deepwiki  
-✅ **Performance** com Gemini 2.5 Flash otimizado  
-✅ **UI Components** com shadcn-ui integration  
+✅ **10x Productivity** with repetitive task automation  
+✅ **Quality** with SOLID principles and best practices  
+✅ **Speed** with optimized Git and filesystem operations  
+✅ **Intelligence** with contextual memory and learning  
+✅ **Automation** with web scraping and database operations  
+✅ **Documentation** with access to technical knowledge via deepwiki  
+✅ **Performance** with optimized Gemini 2.5 Flash  
+✅ **UI Components** with shadcn-ui integration  
 
-## 🚨 Troubleshooting Rápido
+## 🚨 Quick Troubleshooting
 
-### Servidor não encontrado
+### Server not found
 ```bash
-# Reinstalar servidor específico
-npm install -g @modelcontextprotocol/server-nome
+# Reinstall specific server
+npm install -g @modelcontextprotocol/server-name
 
-# Verificar instalação
-npx @modelcontextprotocol/server-nome --help
+# Check installation
+npx @modelcontextprotocol/server-name --help
 ```
 
-### Permissões negadas
+### Permission denied
 ```bash
-# Verificar permissões do workspace
+# Check workspace permissions
 docker-compose exec openhands ls -la /workspace
 
-# Ajustar permissões se necessário
+# Adjust permissions if needed
 docker-compose exec openhands chmod -R 755 /workspace
 ```
 
-### MCP não iniciando
+### MCP not starting
 ```bash
-# Verificar logs completos
+# Check complete logs
 docker-compose logs openhands
 
-# Reiniciar OpenHands
+# Restart OpenHands
 docker-compose restart openhands
 ```
 
-## 📚 Próximos Passos
+## 📚 Next Steps
 
-- **Guia Completo**: Veja [MCP-README.md](./MCP-README.md)
-- **OpenHands Config**: Veja [openhands/README.md](./openhands/README.md)
-- **Exemplos Práticos**: Veja [README.md](./README.md#exemplos-práticos)
+- **Complete Guide**: See [MCP-README.md](./MCP-README.md)
+- **OpenHands Config**: See [openhands/README.md](./openhands/README.md)
+- **Practical Examples**: See [README.md](./README.md#practical-examples)
 
 ---
 
-**Pronto para acelerar seu desenvolvimento C#/.NET com MCP e Gemini 2.5 Flash?** 🚀
+**Ready to accelerate your C#/.NET development with MCP and Gemini 2.5 Flash?** 🚀
 
-Setup completo em 5 minutos com performance otimizada! ⚡
+Complete setup in 5 minutes with optimized performance! ⚡
