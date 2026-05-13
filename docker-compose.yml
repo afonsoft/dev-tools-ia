@@ -13,7 +13,7 @@ services:
       - openhands-net
 
   openhands:
-    image: docker.openhands.dev/openhands/openhands:1.6
+    image: docker.openhands.dev/openhands/openhands:1.7
     container_name: openhands-app
     pull_policy: always
     environment:
@@ -33,7 +33,7 @@ services:
       # Agent Server Configuration (Official V1)
       # Commented out - using SANDBOX_RUNTIME_CONTAINER_IMAGE with custom build instead
       # AGENT_SERVER_IMAGE_REPOSITORY: ghcr.io/openhands/agent-server
-      # AGENT_SERVER_IMAGE_TAG: 1.15.0-python
+      # AGENT_SERVER_IMAGE_TAG: 1.19.1-python
 
       # Custom Sandbox Runtime Container Image
       # Uses locally built image with .NET SDK 10 support

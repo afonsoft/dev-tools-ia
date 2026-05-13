@@ -173,6 +173,8 @@ For detailed information about each component:
 - **[MCP Setup Guide](./MCP-README.md)**: Complete MCP server configuration
 - **[MCP QuickStart](./MCP-QUICKSTART.md)**: Quick setup to get started
 - **[OpenHands](./openhands/README.md)**: Advanced AI agent configuration
+  - **[OpenHands Repository](https://github.com/OpenHands/OpenHands)**: Official GitHub repository
+  - **[OpenHands Documentation](https://docs.openhands.dev/openhands/usage/run-openhands/local-setup)**: Official documentation
 - **[VS Code](./vscode/README.md)**: Complete development environment setup
 - **[Workspace](./workspace/README.md)**: Project organization and collaboration
 
